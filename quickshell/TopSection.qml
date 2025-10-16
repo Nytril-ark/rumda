@@ -1,0 +1,181 @@
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Io
+import Quickshell.Wayland
+import Quickshell.Hyprland
+import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
+import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
+import Qt5Compat.GraphicalEffects
+import 'bar' as Bar
+
+Rectangle {
+  property color backgroundColor: "#E4C198" //bar color
+  property color indicatorBGColor: "#AF8C65"
+  property color borderColor: "#D1AB86"
+  property color moduleBG: "#DAB08B"
+  property color accentColor: "#6F4732"
+  property color accent2Color: "#9F684C"
+  property color errorColor: "#9A4235"
+  property color backgroundTransparent: "#661e1e1e"
+  property color shadowColor: "#3A2D26"
+  property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
+  property string currentHours: Qt.formatDateTime(new Date(), "hh")
+  property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
+
+  Layout.fillWidth: true
+  Layout.preferredHeight: columnLayout.implicitHeight + 12
+  color: "transparent"
+
+  property real innerModulesRadius: 3
+
+  // System info properties
+  property real cpuUsage: 0.3
+  property real ramUsage: 0.6
+
+  Behavior on Layout.preferredHeight {
+    NumberAnimation {
+      duration: 1000
+      easing.type: Easing.InOutQuart
+    }
+  }
+
+  property string username: ""
+
+  Process {
+    command: ["whoami"]
+    running: true
+    stdout: SplitParser { onRead: name => username = name }
+  }
+
+  // CPU monitoring
+  Process {
+    id: cpuProcess
+    command: ["sh", "-c", "top -bn1 | grep '%Cpu(s):' | awk '{print $2}' | sed 's/%us,//'"]
+    running: true
+
+    stdout: SplitParser {
+      onRead: data => {
+        let usage = parseFloat(data.trim())
+        if (!isNaN(usage)) cpuUsage = Math.round(usage)
+      }
+    }
+  }
+
+  // RAM monitoring  
+  Process {
+    id: ramProcess
+    command: ["sh", "-c", "free | grep Mem: | awk '{printf \"%.0f\", ($2-$7)/$2*100}'"]
+  running: true
+
+    stdout: SplitParser {
+      onRead: data => {
+        let usage = parseInt(data.trim())
+        if (!isNaN(usage)) ramUsage = usage
+      }
+    }
+  }
+
+  Timer {
+    interval: 1000
+    running: true
+    repeat: true
+    onTriggered: {
+      cpuProcess.running = true
+      ramProcess.running = true
+    }
+  }
+
+
+  ColumnLayout {
+    id: columnLayout
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 29
+    spacing: 6
+    
+    // Time module
+   Timer {
+    interval: 1000
+    running: true
+    repeat: true
+    onTriggered: {
+      currentTime = Qt.formatDateTime(new Date(), "hh:mm")
+      currentHours = Qt.formatDateTime(new Date(), "hh")
+      currentMinutes = Qt.formatDateTime(new Date(), "mm")
+    }
+   }
+   Rectangle {
+     Layout.alignment: Qt.AlignHCenter
+     width: 28
+     height: 45
+     radius: 7
+     border.width: 1
+     border.color: borderColor
+     color: moduleBG
+
+     ColumnLayout {
+       anchors.centerIn: parent
+       spacing: 0
+
+       Text {
+         Layout.alignment: Qt.AlignHCenter
+         text: currentHours
+         color: accent2Color
+         font.family: "Cartograph CF Heavy"
+         font.pixelSize: 12
+       }
+
+       Text {
+         Layout.alignment: Qt.AlignHCenter
+         text: currentMinutes
+         color: accent2Color
+         font.family: "Cartograph CF Heavy"
+         font.pixelSize: 12
+       }
+     }
+   }
+    Bar.BarVolumeControl {}
+
+
+    // CPU and RAM indicators
+    Rectangle {
+      Layout.alignment: Qt.AlignHCenter
+      width: 28
+      height: 60
+      radius: 7
+      color: moduleBG 
+
+      border.width: 1
+      border.color: borderColor
+
+      ColumnLayout {
+        anchors.centerIn: parent
+        spacing: 2
+
+        // CPU indicator
+        Bar.RadialIndicator {
+          Layout.alignment: Qt.AlignHCenter
+          percent: cpuUsage
+          indicatorColor: accentColor
+          backgroundColor: indicatorBGColor
+          size: 24
+        }
+
+        // RAM indicator
+        Bar.RadialIndicator {
+          Layout.alignment: Qt.AlignHCenter
+          percent: ramUsage
+          indicatorColor: accent2Color
+          backgroundColor: indicatorBGColor
+          size: 24
+        }
+      }
+    }
+
+    Bar.BarSystemTray {}
+  }
+}
