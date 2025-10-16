@@ -154,13 +154,13 @@ WlrLayershell {
   WlrLayershell {
       id: barShadow
       margins { 
-          top: 79
-          left: -38
+          top: 83
+          left: -40
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Bottom
-      width: bar.width + 2  // Slightly wider for blur effect
-      height: bar.height + 2
+      width: bar.width + 4  // Slightly wider for blur effect
+      height: bar.height + 4
       color: "transparent" 
       // Outer blur layer (most transparent)
       Rectangle {
