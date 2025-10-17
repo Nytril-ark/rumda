@@ -60,21 +60,27 @@ ShellRoot {
   property int catMarginLeft: -50
   property int catWidth: 50
   property int catHeight: 90
-  
+
+
+  //==============================================================
+  // The current animation isn't great, I plan on improving
+  // its smoothness soon. I shall keep it like this for now
+  // as a placeholder
+  //
   // Cat Animation Configuration
   property string catAnimationFolder: configPath + "/gato-jump"
   property int catAnimationFrames: 9
   
   property var catFrameConfigs: [
-    { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 80 },
-    { marginTop: 20, marginLeft: -90, width: 140, height: 92, delay: 80 },
-    { marginTop: 19, marginLeft: -90, width: 140, height: 94, delay: 80 },
-    { marginTop: 16, marginLeft: -90, width: 140, height: 96, delay: 70 },
-    { marginTop: 12, marginLeft: -90, width: 140, height: 98, delay: 60 },
-    { marginTop: 9, marginLeft: -110, width: 140, height: 96, delay: 55 },
-    { marginTop: 6, marginLeft: -130, width: 140, height: 94, delay: 55 },
-    { marginTop: 3, marginLeft: -160, width: 160, height: 92, delay: 55 },
-    { marginTop: 1, marginLeft: -200, width: 140, height: 90, delay: 55 }
+    { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 30 },
+    { marginTop: 20, marginLeft: -90, width: 140, height: 92, delay: 40 },
+    { marginTop: 19, marginLeft: -90, width: 140, height: 94, delay: 50 },
+    { marginTop: 16, marginLeft: -90, width: 140, height: 96, delay: 50 },
+    { marginTop: 12, marginLeft: -90, width: 140, height: 98, delay: 50 },
+    { marginTop: 9, marginLeft: -110, width: 140, height: 96, delay: 50 },
+    { marginTop: 6, marginLeft: -130, width: 140, height: 94, delay: 50 },
+    { marginTop: 3, marginLeft: -160, width: 160, height: 92, delay: 45 },
+    { marginTop: 1, marginLeft: -200, width: 140, height: 90, delay: 40 }
   ]
 
   CatAnimation {
