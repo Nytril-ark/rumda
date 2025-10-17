@@ -5,15 +5,15 @@ This is a WIP that *might* not work for you out of the box. I plan on cleaning i
 
 Big thanks to xfcasio, as this is a modified version of his rice, Amadeus.
 
-![1](1.png)
+![1](picture/1.png)
 
 
-![2](2.png)
+![2](picture/2.png)
 
 
-![3](3.png)
+![3](picture/3.png)
 
 
-![4](4.png)
+![4](picture/4.png)
 
 
