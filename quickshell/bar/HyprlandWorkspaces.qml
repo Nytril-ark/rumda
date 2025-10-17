@@ -13,44 +13,66 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 
 Rectangle {
-  property color backgroundColor: "#E4C198" //bar color
-  property color indicatorBGColor: "#AF8C65"
-  property color borderColor: "#D1AB86"
-  property color moduleBG: "#DAB08B"
-  property color accentColor: "#6F4732"
-  property color accent2Color: "#9F684C"
-  property color gradientAccent2Color: "#a87358" //bottom / right of volume bar
-  property color errorColor: "#9A4235"
-  property color backgroundTransparent: "#661e1e1e"
-  property color shadowColor: "#3A2D26"
+  id: root
+  
+  // Theme colors
+  readonly property color backgroundColor: "#E4C198"
+  readonly property color indicatorBGColor: "#AF8C65"
+  readonly property color borderColor: "#D1AB86"
+  readonly property color moduleBG: "#DAB08B"
+  readonly property color accentColor: "#6F4732"
+  readonly property color accent2Color: "#9F684C"
+  readonly property color gradientAccent2Color: "#a87358"
+  readonly property color errorColor: "#9A4235"
+  readonly property color backgroundTransparent: "#661e1e1e"
+  readonly property color shadowColor: "#3A2D26"
+  
+  // Dimensions
+  readonly property int moduleWidth: 28
+  readonly property int moduleRadius: 7
+  readonly property int moduleBorderWidth: 1
+  readonly property int workspaceSpacing: 3
+  readonly property int workspaceInnerSpacing: -3
+  readonly property int workspaceWidth: 12
+  readonly property int workspaceActiveHeight: 34
+  readonly property int workspaceInactiveHeight: 19
+  readonly property int workspaceShapeWidth: 8
+  
+  // Layout
   Layout.alignment: Qt.AlignHCenter
   anchors.horizontalCenter: parent.horizontalCenter
   implicitHeight: childrenRect.height + 19
-  width: 28
-  radius: 7
+  width: moduleWidth
+  radius: moduleRadius
   color: moduleBG
-  border.width: 1
+  border.width: moduleBorderWidth
   border.color: borderColor
   
+  // Workspace container
   ColumnLayout {
     anchors.centerIn: parent
-    spacing: 3
+    spacing: workspaceSpacing
     
     ColumnLayout {
-      spacing: -3
+      spacing: workspaceInnerSpacing
       
       Repeater {
         model: Hyprland.workspaces
-        Item {
+        
+        delegate: Item {
+          id: workspaceItem
           required property var modelData
           property bool hovered: false
-          width: 12
-          Layout.preferredHeight: modelData.active ? 34 : 19
+          
+          width: root.workspaceWidth
+          Layout.preferredHeight: modelData.active ? root.workspaceActiveHeight : root.workspaceInactiveHeight
           Layout.alignment: Qt.AlignHCenter
           
+          // Workspace indicator shape
           Shape {
+            id: workspaceShape
             anchors.centerIn: parent
-            width: 8
+            width: root.workspaceShapeWidth
             height: parent.height
             antialiasing: true
             smooth: true
@@ -58,32 +80,51 @@ Rectangle {
             layer.samples: 8
             
             ShapePath {
-              fillColor: (modelData.active || parent.parent.hovered) ? accent2Color : indicatorBGColor
+              fillColor: (workspaceItem.modelData.active || workspaceItem.hovered) 
+                         ? root.accent2Color 
+                         : root.indicatorBGColor
               strokeColor: "transparent"
               strokeWidth: 0
+              
+              // Define parallelogram shape with rounded corners
               startX: 1
               startY: 8
-
-              PathLine { x: 7; y: 2 }  // Top edge - slanted up-right
-              PathArc { x: 8; y: 3; radiusX: 2; radiusY: 2 }  // Top-right corner
-              PathLine { x: 8; y: height - 10 }  // Right edge
-              PathArc { x: 7; y: height - 8; radiusX: 2; radiusY: 2 }  // Bottom-right corner
-              PathLine { x: 1; y: height - 2 }  // Bottom edge - slanted down-left
-              PathArc { x: 0; y: height - 3; radiusX: 2; radiusY: 2 }  // Bottom-left corner
-              PathLine { x: 0; y: 10 }  // Left edge
-              PathArc { x: 1; y: 8; radiusX: 2; radiusY: 2 }  // Top-left corner back to start
+              
+              // Top edge - slanted up-right
+              PathLine { x: 7; y: 2 }
+              PathArc { x: 8; y: 3; radiusX: 2; radiusY: 2 }
+              
+              // Right edge
+              PathLine { x: 8; y: workspaceShape.height - 10 }
+              PathArc { x: 7; y: workspaceShape.height - 8; radiusX: 2; radiusY: 2 }
+              
+              // Bottom edge - slanted down-left
+              PathLine { x: 1; y: workspaceShape.height - 2 }
+              PathArc { x: 0; y: workspaceShape.height - 3; radiusX: 2; radiusY: 2 }
+              
+              // Left edge
+              PathLine { x: 0; y: 10 }
+              PathArc { x: 1; y: 8; radiusX: 2; radiusY: 2 }
+            }
+            
+            Behavior on height {
+              NumberAnimation {
+                duration: 200
+                easing.type: Easing.OutQuad
+              }
             }
           }
           
+          // Interaction area
           MouseArea {
             anchors.fill: parent
-            onClicked: Hyprland.dispatch(`workspace ${modelData.id.toString()}`)
-            hoverEnabled: true
-            onEntered: { parent.hovered = true }
-            onExited: { parent.hovered = false }
+            onWheel: wheel => {
+              const direction = wheel.angleDelta.y > 0 ? "-1" : "+1"
+              Hyprland.dispatch("workspace e" + direction)  // e+1 or e-1 for relative workspace switching
+            }
           }
         }
-      } // Close Repeater
-    } // Close inner ColumnLayout
-  } // Close outer ColumnLayout
-} // Close main Rectangle
+      }
+    }
+  }
+}
