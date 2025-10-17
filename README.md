@@ -1,6 +1,6 @@
 ## RUMDA!
 ### my hyprland dots
-This is a WIP that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and add better features). Stay tuned!
+This is a WIP that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
 
 
 Big thanks to xfcasio, as this is a modified version of his rice, Amadeus.
