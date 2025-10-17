@@ -24,13 +24,13 @@ import 'bar' as Bar
 ShellRoot {
   id: root
   
-  // ==================== CONFIGURATION ====================
+// ==================== CONFIGURATION ====================
   // User Configuration
   property string username: Quickshell.env("USER") || "user"
   property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
   
   // Color Palette
-  property color backgroundColor: "#E4C198"      // Main bar color
+  property color backgroundColor: "#E4C198"
   property color surfaceColor: "#AF8C65"
   property color borderColor: "#D1AB86"
   property color accentColor: "#AD704A"
@@ -56,18 +56,39 @@ ShellRoot {
   property int catWidth: 50
   property int catHeight: 90
   
+  // Cat Animation Configuration
+  property string catAnimationFolder: configPath + "/gato-jump"
+  property int catAnimationFrames: 9
+  
+  // Per-frame configuration: [marginTop, marginLeft, width, height, delay]
+  property var catFrameConfigs: [
+    { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 80 },  // f0
+    { marginTop: 20, marginLeft: -90, width: 140, height: 92, delay: 80 },  // f1
+    { marginTop: 19, marginLeft: -90, width: 140, height: 94, delay: 80 },  // f2
+    { marginTop: 16, marginLeft: -90, width: 140, height: 96, delay: 70 },  // f3
+    { marginTop: 12, marginLeft: -90, width: 140, height: 98, delay: 60 },  // f4
+    { marginTop: 9, marginLeft: -110, width: 140, height: 96, delay: 55 },  // f5
+    { marginTop: 6, marginLeft: -130, width: 140, height: 94, delay: 55 },  // f6
+    { marginTop: 3, marginLeft: -160, width: 160, height: 92, delay: 55 },  // f7
+    { marginTop: 1, marginLeft: -200, width: 140, height: 90, delay: 55 }   // f8
+  ]
+  
   // Shadow Configuration
   property bool enableBarShadow: true
   property bool enableCatShadow: true
   property int shadowOffsetX: -59
   property int shadowOffsetY: 2
   
-  // ==================== CAT WIDGET ====================
+ // Animation state
+  property bool catAnimationPlaying: false
+  property bool catVisible: true
+  property bool catReturning: false
+  
+  // ==================== STATIC CAT WIDGET ====================
   
   Loader {
-    active: root.enableCat
+    active: root.enableCat && root.catVisible && !root.catAnimationPlaying && !root.catReturning
     sourceComponent: Item {
-      // Main Cat
       WlrLayershell {
         id: catsit
         margins { 
@@ -99,43 +120,245 @@ ShellRoot {
               }
             }
           }
+          
+          MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+              root.catAnimationPlaying = true
+            }
+          }
         }
       }
     }
   }
   
-  // ==================== BAR SHADOW ====================
+  // ==================== CAT RETURN TRIGGER ====================
   
   Loader {
-    active: root.enableBarShadow
+    active: root.enableCat && !root.catVisible
     sourceComponent: WlrLayershell {
-      id: barShadow
+      id: catTrigger
       margins { 
-        top: root.barMarginTop + root.shadowOffsetY
-        left: root.barMarginLeft + root.shadowOffsetX
+        top: root.barMarginTop
+        left: -43
       }
       anchors { top: true; left: true }
-      layer: WlrLayer.Bottom
-      width: bar.width + 4
-      height: bar.height + 4
+      layer: WlrLayer.Overlay
+      implicitWidth: root.barWidth
+      implicitHeight: 20
       color: "transparent"
       
-      Repeater {
-        model: [
-          { size: 0, opacity: 0.3, radius: 8 },
-          { size: 2, opacity: 0.33, radius: 8 },
-          { size: 4, opacity: 0.4, radius: 8 }
-        ]
+      Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        
+        MouseArea {
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          onClicked: {
+            root.catReturning = true
+          }
+        }
+      }
+    }
+  }
+  
+  // ==================== ANIMATED CAT WIDGET (LEAVING) ====================
+  
+  Loader {
+    active: root.enableCat && root.catAnimationPlaying
+    sourceComponent: Item {
+      WlrLayershell {
+        id: animatedCat
+        
+        property int currentFrame: 0
+        property var currentConfig: root.catFrameConfigs[currentFrame] || root.catFrameConfigs[0]
+        
+        margins { 
+          top: currentConfig.marginTop
+          left: currentConfig.marginLeft
+        }
+        anchors { top: true; left: true }
+        layer: WlrLayer.Overlay
+        implicitWidth: currentConfig.width
+        color: "transparent"
+        
+        Behavior on margins.top {
+          NumberAnimation { 
+            duration: animatedCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
+        Behavior on margins.left {
+          NumberAnimation { 
+            duration: animatedCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
+        Behavior on implicitWidth {
+          NumberAnimation { 
+            duration: animatedCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
         
         Rectangle {
-          required property var modelData
+          width: animatedCat.currentConfig.width
+          height: animatedCat.currentConfig.height
+          color: "transparent"
+          clip: true
           
-          anchors.centerIn: parent
-          width: parent.width - modelData.size
-          height: parent.height - modelData.size
-          color: root.shadowColor
-          opacity: modelData.opacity
-          radius: modelData.radius
+          Behavior on width {
+            NumberAnimation { 
+              duration: animatedCat.currentConfig.delay
+              easing.type: Easing.Linear 
+            }
+          }
+          Behavior on height {
+            NumberAnimation { 
+              duration: animatedCat.currentConfig.delay
+              easing.type: Easing.Linear 
+            }
+          }
+          
+          Image {
+            id: animatedImage
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            antialiasing: true
+            smooth: true
+            mipmap: true
+            
+            source: `file://${root.catAnimationFolder}/f${animatedCat.currentFrame}.png`
+            
+            onStatusChanged: {
+              if (status === Image.Error) {
+                console.error("Failed to load animation frame:", source)
+              }
+            }
+            
+            Timer {
+              id: animationTimer
+              interval: animatedCat.currentConfig.delay
+              running: true
+              repeat: false
+              
+              onTriggered: {
+                animatedCat.currentFrame++
+                
+                if (animatedCat.currentFrame >= root.catAnimationFrames) {
+                  // Animation finished - hide cat
+                  root.catAnimationPlaying = false
+                  root.catVisible = false
+                } else {
+                  // Continue to next frame
+                  animationTimer.interval = animatedCat.currentConfig.delay
+                  animationTimer.restart()
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // ==================== ANIMATED CAT WIDGET (RETURNING) ====================
+  
+  Loader {
+    active: root.enableCat && root.catReturning
+    sourceComponent: Item {
+      WlrLayershell {
+        id: returningCat
+        
+        property int currentFrame: root.catAnimationFrames - 1
+        property var currentConfig: root.catFrameConfigs[currentFrame] || root.catFrameConfigs[root.catAnimationFrames - 1]
+        
+        margins { 
+          top: currentConfig.marginTop
+          left: currentConfig.marginLeft
+        }
+        anchors { top: true; left: true }
+        layer: WlrLayer.Overlay
+        implicitWidth: currentConfig.width
+        color: "transparent"
+        
+        Behavior on margins.top {
+          NumberAnimation { 
+            duration: returningCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
+        Behavior on margins.left {
+          NumberAnimation { 
+            duration: returningCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
+        Behavior on implicitWidth {
+          NumberAnimation { 
+            duration: returningCat.currentConfig.delay
+            easing.type: Easing.Linear 
+          }
+        }
+        
+        Rectangle {
+          width: returningCat.currentConfig.width
+          height: returningCat.currentConfig.height
+          color: "transparent"
+          clip: true
+          
+          Behavior on width {
+            NumberAnimation { 
+              duration: returningCat.currentConfig.delay
+              easing.type: Easing.Linear 
+            }
+          }
+          Behavior on height {
+            NumberAnimation { 
+              duration: returningCat.currentConfig.delay
+              easing.type: Easing.Linear 
+            }
+          }
+          
+          Image {
+            id: returningImage
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            antialiasing: true
+            smooth: true
+            mipmap: true
+            
+            source: `file://${root.catAnimationFolder}/f${returningCat.currentFrame}.png`
+            
+            onStatusChanged: {
+              if (status === Image.Error) {
+                console.error("Failed to load animation frame:", source)
+              }
+            }
+            
+            Timer {
+              id: returnTimer
+              interval: returningCat.currentConfig.delay
+              running: true
+              repeat: false
+              
+              onTriggered: {
+                returningCat.currentFrame--
+                
+                if (returningCat.currentFrame < 0) {
+                  // Animation finished - show static cat
+                  root.catReturning = false
+                  root.catVisible = true
+                } else {
+                  // Continue to previous frame
+                  returnTimer.interval = returningCat.currentConfig.delay
+                  returnTimer.restart()
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -186,7 +409,7 @@ ShellRoot {
         ColumnLayout {
           anchors { 
             fill: parent
-            topMargin: 3
+            topMargin: -10
             bottomMargin: 10
             leftMargin: 3
             rightMargin: 3
