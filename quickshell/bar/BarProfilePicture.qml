@@ -12,41 +12,69 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 
 Rectangle {
+  id: root
+  
+  // User Configuration
+  readonly property string username: Quickshell.env("USER") || "user"
+  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
+  readonly property string iconPath: configPath + "/icons"
+  readonly property bool useFirefox: true  // Set to true to use Firefox instead of xdg-open
+  
+  // Link Configuration
+  readonly property string githubUrl: "https://github.com/Nytril-ark/rumda"
+  
+  // Dimensions
+  readonly property int moduleSize: 26
+  readonly property int imageSourceSize: 55
+  readonly property int maskWidth: 20
+  readonly property int maskHeight: 18
+  readonly property int maskRadius: 8
+  
+  // Layout
   Layout.alignment: Qt.AlignHCenter
-  Layout.topMargin: 4//2
-  Layout.bottomMargin: 2//2
-  width: 26//32
-  height: 26//32
+  Layout.topMargin: 4
+  Layout.bottomMargin: 2
+  
+  // Appearance
+  width: moduleSize
+  height: moduleSize
   radius: innerModulesRadius
   color: "transparent"
   clip: true
-  //color: "#111A1F"
-
+  
+  // Process for opening URLs
+  Process {
+    id: urlOpener
+    command: root.useFirefox ? ["firefox", root.githubUrl] : ["xdg-open", root.githubUrl]
+  }
+  
+  // GitHub icon
   Image {
+    id: githubIcon
     anchors.fill: parent
-    source: `file:///home/${username}/.config/rumda/quickshell/icons/github.svg`
-    sourceSize.width: 55
-    sourceSize.height: 55
+    source: "file://" + root.iconPath + "/github.svg"
+    sourceSize.width: root.imageSourceSize
+    sourceSize.height: root.imageSourceSize
     fillMode: Image.PreserveAspectCrop
     scale: 1.0
-
+    
     layer.enabled: true
     layer.effect: OpacityMask {
       maskSource: Rectangle {
-        width: 20
-        height: 18
-        radius: 8
+        width: root.maskWidth
+        height: root.maskHeight
+        radius: root.maskRadius
       }
     }
   }
-
-//  Rectangle {
-//    anchors.centerIn: parent
-//    radius: 8
-//    width: 26
-//    height: 24
-//    clip: true
-//    color: "transparent"
-//
-//  }
+  
+  // Click handler
+  MouseArea {
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    
+    onClicked: {
+      urlOpener.running = true
+    }
+  }
 }

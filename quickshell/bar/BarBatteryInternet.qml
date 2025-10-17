@@ -21,60 +21,59 @@ Rectangle {
   property color errorColor: "#9A4235"
   property color backgroundTransparent: "#661e1e1e"
   property color shadowColor: "#3A2D26"
+  
   Layout.alignment: Qt.AlignHCenter
   width: 28
   height: 35
   color: moduleBG
   radius: 7
-
   border.width: 1
   border.color: borderColor
-
+  
   ColumnLayout {
     anchors.centerIn: parent
     spacing: 0
-
+    
     // Internet Module
     QtObject {
       id: internetModule
       property bool internetConnected: false
     }
-
+    
     Item {
       Layout.alignment: Qt.AlignHCenter
       width: 28
       height: 29
-
+      
       Process {
-        id: internetProcess
+        id: connectionCheck
         running: true
-        command: [ "ping", "-c1", "1.0.0.1" ]
-
+        command: ["nmcli", "-t", "-f", "STATE", "connection", "show", "--active"]
         property string fullOutput: ""
-
+        
         stdout: SplitParser {
           onRead: out => {
-            internetProcess.fullOutput += out + "\n"
-            if (out.includes("0% packet loss")) internetModule.internetConnected = true
+            connectionCheck.fullOutput += out
           }
         }
-
+        
         onExited: {
-          internetModule.internetConnected = fullOutput.includes("0% packet loss")
+          // Check if there are active connections (wifi or ethernet)
+          internetModule.internetConnected = fullOutput.includes("activated")
           fullOutput = ""
         }
       }
-
+      
       Timer {
         id: updateTimer
         interval: 5000
         running: true
         repeat: true
         onTriggered: {
-          internetProcess.running = true
+          connectionCheck.running = true
         }
       }
-
+      
       Image {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom

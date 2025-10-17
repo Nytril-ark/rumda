@@ -12,30 +12,49 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 
 Rectangle {
-  property color backgroundColor: "#E4C198" //bar color
-  property color indicatorBGColor: "#AF8C65"
-  property color borderColor: "#D1AB86"
-  property color moduleBG: "#DAB08B"
-  property color accentColor: "#6F4732"
-  property color accent2Color: "#9F684C"
-  property color errorColor: "#9A4235"
-  property color backgroundTransparent: "#661e1e1e"
-  property color shadowColor: "#3A2D26"
+  id: root
+  
+  // Theme colors
+  readonly property color backgroundColor: "#E4C198"
+  readonly property color indicatorBGColor: "#AF8C65"
+  readonly property color borderColor: "#D1AB86"
+  readonly property color moduleBG: "#DAB08B"
+  readonly property color accentColor: "#6F4732"
+  readonly property color accent2Color: "#9F684C"
+  readonly property color errorColor: "#9A4235"
+  readonly property color backgroundTransparent: "#661e1e1e"
+  readonly property color shadowColor: "#3A2D26"
+  
+  // Paths
+  readonly property string username: Quickshell.env("USER") || "user"
+  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
+  readonly property string iconPath: `${configPath}/icons`
+  
+  // Module properties
+  property string iconName: "power"
+  property int moduleSize: 28
+  property int iconSize: 20
+  property int moduleRadius: 7
+  
+  // Layout
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
-  height: 28
-  width: 28
-  radius: 7
+  
+  // Appearance
+  height: moduleSize
+  width: moduleSize
+  radius: moduleRadius
   color: moduleBG
-
   border.width: 1
   border.color: borderColor
-
+  
+  // Icon
   Image {
+    id: icon
     anchors.centerIn: parent
-    width: 20
-    height: 20
-    source: `file:///home/${usr}/.config/rumda/quickshell/icons/power.svg`
+    width: root.iconSize
+    height: root.iconSize
+    source: `file://${root.iconPath}/${root.iconName}.svg`
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     smooth: true
