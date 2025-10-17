@@ -48,6 +48,12 @@ Rectangle {
   border.width: 1
   border.color: borderColor
   
+  // Process for opening ghostty terminal with shutdown command
+  Process {
+    id: shutdownTerminal
+    command: ["ghostty"/*, "-e", "",*/] // (if you want a shutdown command, you add it between those quotation marks.)
+  }
+  
   // Icon
   Image {
     id: icon
@@ -59,5 +65,15 @@ Rectangle {
     antialiasing: true
     smooth: true
     mipmap: true
+  }
+  
+  // Click handler
+  MouseArea {
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    
+    onClicked: {
+      shutdownTerminal.running = true
+    }
   }
 }
