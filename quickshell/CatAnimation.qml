@@ -40,7 +40,7 @@ Item {
           left: catRoot.catMarginLeft
         }
         anchors { top: true; left: true }
-        layer: WlrLayer.Overlay
+        layer: WlrLayer.Top
         implicitWidth: catRoot.catWidth
         color: "transparent"
         

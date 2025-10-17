@@ -1,0 +1,19 @@
+
+/* ~/.config/wofi/theme.css */
+
+* {
+    background-color: #E4C198;      /* Background color */
+    color: #000000;                 /* Text color */
+    font: "Monospace 10";           /* Font and size */
+}
+
+listview:selected {
+    background-color: #DAB08B;      /* Background color for selected item */
+    color: #000000;                 /* Text color for selected item */
+}
+
+window {
+    border-radius: 5px;
+    border: 1px solid #3b4252;      /* Border color */
+    margin: 10px;
+}

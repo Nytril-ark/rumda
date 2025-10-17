@@ -1,0 +1,120 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/hexogen/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+#
+#
+#
+# Ghostty configuration
+# Converted from Alacritty config
+# Place this file at: ~/.config/ghostty/config
+# Window settings
+# window-opacity = 0.95
+# window-width = 75
+# window-height = 20
+window-padding-x = 7
+window-padding-y = 8
+window-decoration = false
+# window-title = "nytril::cyanide"
+theme = Belafonte Day
+# Font settings
+font-size = 11
+# font-family = "Source Code Pro" 
+
+# Cursor settings
+cursor-style = underline
+cursor-style-blink = true
+
+
+# # Colors - Normal
+# palette = 0=#080808
+# palette = 1=#e64a6b
+# palette = 2=#789978
+# palette = 3=#f0c674
+# palette = 4=#7788AA
+# palette = 5=#b86cd4
+# palette = 6=#6e8d9d
+# palette = 7=#f0f0f0
+#
+# # Colors - Bright
+# palette = 8=#080808
+# palette = 9=#e64a6b
+# palette = 10=#789978
+# palette = 11=#f0c674
+# palette = 12=#7788AA
+# palette = 13=#b86cd4
+# palette = 14=#6e8d9d
+# palette = 15=#f0f0f0
+#
+# # Cursor colors
+# cursor-color = 367ba0
+# cursor-text = 101010
+#
+# # Selection colors
+# selection-background = f0c674
+# selection-foreground = 0e1115
+
+# Shell
+shell-integration = zsh
+command = /usr/bin/zsh
+
+# Additional Ghostty-specific settings for better experience
+window-theme = dark
+gtk-tabs-location = hidden
+
+
+# Clipboard settings
+clipboard-read = allow
+clipboard-write = allow
+
+# Key bindings for copy/paste (if needed)
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+# Keybindings
+# keybind = cmd+c=copy_to_clipboard
+# keybind = cmd+v=paste_from_clipboard
+# keybind = cmd+q=quit
+# keybind = cmd+n=new_window
+# #keybind = cmd+return=toggle_fullscreen
+# #keybind = cmd+equal=increase_font_size
+# #keybind = cmd+minus=decrease_font_size
+# keybind = cmd+shift+minus=reset_font_size
