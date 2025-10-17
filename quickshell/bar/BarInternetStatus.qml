@@ -19,50 +19,41 @@ Rectangle {
   color: "#111A1F"
   
   property bool internetConnected: false
-  
+
   Process {
-    id: connectionCheck
+    id: internetProcess
     running: true
-    command: ["nmcli", "-t", "-f", "STATE", "connection", "show", "--active"]
+    command: [ "ping", "-c1", "1.0.0.1" ]
+
     property string fullOutput: ""
-    
+
     stdout: SplitParser {
       onRead: out => {
-        connectionCheck.fullOutput += out
+        internetProcess.fullOutput += out + "\n"
+        if (out.includes("0% packet loss")) internetConnected = true
       }
     }
-    
+
     onExited: {
-      // Check if we have any active connections (wifi or ethernet)
-      internetConnected = fullOutput.includes("activated")
+      internetConnected = fullOutput.includes("0% packet loss")
       fullOutput = ""
     }
   }
-  
+
   Timer {
     id: updateTimer
     interval: 5000
     running: true
     repeat: true
     onTriggered: {
-      connectionCheck.running = true
+      internetProcess.running = true
     }
   }
-  
+
   Image {
     anchors.centerIn: parent
     width: 23
     height: 23
-    source: {
-      if (!internetConnected) {
-        return `file:///home/${username}/.config/rumda/quickshell/icons/disconnected.svg`
-      } else if (connectionType === "wifi") {
-        return `file:///home/${username}/.config/rumda/quickshell/icons/connected.svg`
-      } else if (connectionType === "ethernet") {
-        return `file:///home/${username}/.config/rumda/quickshell/icons/connected.svg`
-      } else {
-        return `file:///home/${username}/.config/rumda/quickshell/icons/connected.svg`
-      }
-    }
+    source: `file:///home/${username}/.config/rumda/quickshell/icons/${internetConnected ? 'connected' : 'disconnected'}.svg`
   }
 }

@@ -11,6 +11,8 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 
+
+// The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {
   property color backgroundColor: "#E4C198" //bar color
   property color indicatorBGColor: "#AF8C65"
@@ -21,7 +23,6 @@ Rectangle {
   property color errorColor: "#9A4235"
   property color backgroundTransparent: "#661e1e1e"
   property color shadowColor: "#3A2D26"
-  
   Layout.alignment: Qt.AlignHCenter
   width: 28
   height: 35
@@ -29,52 +30,48 @@ Rectangle {
   radius: 7
   border.width: 1
   border.color: borderColor
-  
   ColumnLayout {
     anchors.centerIn: parent
     spacing: 0
-    
     // Internet Module
     QtObject {
       id: internetModule
       property bool internetConnected: false
     }
-    
     Item {
       Layout.alignment: Qt.AlignHCenter
       width: 28
       height: 29
-      
       Process {
-        id: connectionCheck
+        id: internetProcess
         running: true
-        command: ["nmcli", "-t", "-f", "STATE", "connection", "show", "--active"]
+        command: [ "ping", "-c1", "1.0.0.1" ]
         property string fullOutput: ""
-        
         stdout: SplitParser {
           onRead: out => {
-            connectionCheck.fullOutput += out
+            internetProcess.fullOutput += out + "\n"
+            if (out.includes("0% packet loss")) internetModule.internetConnected = true
           }
         }
-        
         onExited: {
-          // Check if there are active connections (wifi or ethernet)
-          internetModule.internetConnected = fullOutput.includes("activated")
+          internetModule.internetConnected = fullOutput.includes("0% packet loss")
           fullOutput = ""
+          // Restart the timer after this check completes
+          updateTimer.restart()
         }
       }
-      
       Timer {
         id: updateTimer
         interval: 5000
         running: true
         repeat: true
         onTriggered: {
-          connectionCheck.running = true
+          internetModule.internetConnected = false
+          internetProcess.running = true
         }
       }
-      
       Image {
+        id: connectionImage
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         width: 32
