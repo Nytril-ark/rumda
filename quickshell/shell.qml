@@ -2,7 +2,7 @@
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 //@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
-    pragma ComponentBehavior: Bound
+pragma ComponentBehavior: Bound
 
 import QtQuick.Shapes
 import QtQuick
@@ -21,13 +21,16 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import 'bar' as Bar
 
-// Adjust this to make the shell smaller or larger
-//@ pragma Env QT_SCALE_FACTOR=1
-
-
 ShellRoot {
-  // Color palette
-  property color backgroundColor: "#E4C198" //bar color
+  id: root
+  
+  // ==================== CONFIGURATION ====================
+  // User Configuration
+  property string username: Quickshell.env("USER") || "user"
+  property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
+  
+  // Color Palette
+  property color backgroundColor: "#E4C198"      // Main bar color
   property color surfaceColor: "#AF8C65"
   property color borderColor: "#D1AB86"
   property color accentColor: "#AD704A"
@@ -35,189 +38,129 @@ ShellRoot {
   property color errorColor: "#9A4235"
   property color backgroundTransparent: "#661e1e1e"
   property color shadowColor: "#3A2D26"
-
-
-
-// sitting cat :)
-  WlrLayershell {
-      id: catsit
-      margins { top: 23; left: -50;}
-      anchors { top: true; left: true }
-      
-      layer: WlrLayer.Overlay
-      implicitWidth: 50
-      color: "transparent"
-      
-      Rectangle {
-        width: 50
-        height: 90
+  
+  // Bar Configuration
+  property int barMarginTop: 80
+  property int barMarginBottom: 60
+  property int barMarginLeft: 19
+  property int barMarginRight: -7
+  property int barWidth: 50
+  property int barRadius: 8
+  property int barBorderWidth: 2
+  
+  // Cat Configuration
+  property bool enableCat: true
+  property string catIconPath: configPath + "/icons/catsit.svg"
+  property int catMarginTop: 23
+  property int catMarginLeft: -50
+  property int catWidth: 50
+  property int catHeight: 90
+  
+  // Shadow Configuration
+  property bool enableBarShadow: true
+  property bool enableCatShadow: true
+  property int shadowOffsetX: -59
+  property int shadowOffsetY: 2
+  
+  // ==================== CAT WIDGET ====================
+  
+  Loader {
+    active: root.enableCat
+    sourceComponent: Item {
+      // Main Cat
+      WlrLayershell {
+        id: catsit
+        margins { 
+          top: root.catMarginTop
+          left: root.catMarginLeft
+        }
+        anchors { top: true; left: true }
+        layer: WlrLayer.Overlay
+        implicitWidth: root.catWidth
         color: "transparent"
-        clip: true
         
-        Image {
-          anchors.fill: parent
-          source: "file:///home/hexogen/.config/rumda/quickshell/icons/catsit.svg"  // Hardcoded path
-          fillMode: Image.PreserveAspectFit
-            antialiasing: true  // Smooths edges
-            smooth: true        // Enables smooth filtering
-            mipmap: true        // Optional: improves quality at different scales
+        Rectangle {
+          width: root.catWidth
+          height: root.catHeight
+          color: "transparent"
+          clip: true
+          
+          Image {
+            anchors.fill: parent
+            source: `file://${root.catIconPath}`
+            fillMode: Image.PreserveAspectFit
+            antialiasing: true
+            smooth: true
+            mipmap: true
+            
+            onStatusChanged: {
+              if (status === Image.Error) {
+                console.error("Failed to load cat icon from:", root.catIconPath)
+              }
+            }
+          }
         }
       }
     }
-// SHADOW FOR THE SITTING CAT ========================
-// Shadow layer 1 (outermost, most transparent)
-WlrLayershell {
-    id: catsitShadow1
-    margins { top: 28; left: -48;}
-    anchors { top: true; left: true }
-    
-    layer: WlrLayer.Overlay
-    implicitWidth: 50
-    color: "transparent"
-    
-    Rectangle {
-      width: 50
-      height: 90
-      color: "transparent"
-      clip: true
-      
-      Image {
-        anchors.fill: parent
-        source: "file:///home/hexogen/.config/rumda/quickshell/icons/catsit.svg"
-        fillMode: Image.PreserveAspectFit
-        antialiasing: true
-        smooth: true
-        mipmap: true
-        opacity: 0.1
-      }
-    }
-}
-
-// Shadow layer 2
-WlrLayershell {
-    id: catsitShadow2
-    margins { top: 26; left: -48;}
-    anchors { top: true; left: true }
-    
-    layer: WlrLayer.Overlay
-    implicitWidth: 50
-    color: "transparent"
-    
-    Rectangle {
-      width: 50
-      height: 90
-      color: "transparent"
-      clip: true
-      
-      Image {
-        anchors.fill: parent
-        source: "file:///home/hexogen/.config/rumda/quickshell/icons/catsit.svg"
-        fillMode: Image.PreserveAspectFit
-        antialiasing: true
-        smooth: true
-        mipmap: true
-        opacity: 0.15
-      }
-    }
-}
-
-// Shadow layer 3 (main shadow)
-WlrLayershell {
-    id: catsitShadow3
-    margins { top: 25; left: -48;}
-    anchors { top: true; left: true }
-    
-    layer: WlrLayer.Overlay
-    implicitWidth: 50
-    color: "transparent"
-    
-    Rectangle {
-      width: 50
-      height: 90
-      color: "transparent"
-      clip: true
-      
-      Image {
-        anchors.fill: parent
-        source: "file:///home/hexogen/.config/rumda/quickshell/icons/catsit.svg"
-        fillMode: Image.PreserveAspectFit
-        antialiasing: true
-        smooth: true
-        mipmap: true
-        opacity: 0.2
-      }
-    }
-}
-// END OF CAT SHADOW=========================================
-
-// BAR SHADOW
-  WlrLayershell {
+  }
+  
+  // ==================== BAR SHADOW ====================
+  
+  Loader {
+    active: root.enableBarShadow
+    sourceComponent: WlrLayershell {
       id: barShadow
       margins { 
-          top: 83
-          left: -40
+        top: root.barMarginTop + root.shadowOffsetY
+        left: root.barMarginLeft + root.shadowOffsetX
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Bottom
-      width: bar.width + 4  // Slightly wider for blur effect
+      width: bar.width + 4
       height: bar.height + 4
-      color: "transparent" 
-      // Outer blur layer (most transparent)
-      Rectangle {
-          anchors.centerIn: parent
-          width: parent.width
-          height: parent.height
-          color: shadowColor
-          opacity: 0.3
-          radius: 8
-      }
+      color: "transparent"
       
-      // Middle blur layer
-      Rectangle {
+      Repeater {
+        model: [
+          { size: 0, opacity: 0.3, radius: 8 },
+          { size: 2, opacity: 0.33, radius: 8 },
+          { size: 4, opacity: 0.4, radius: 8 }
+        ]
+        
+        Rectangle {
+          required property var modelData
+          
           anchors.centerIn: parent
-          width: parent.width - 2
-          height: parent.height - 2
-          color: shadowColor
-          opacity: 0.33
-          radius: 8
-      }
-      
-      // Inner shadow (darkest)
-      Rectangle {
-          anchors.centerIn: parent
-          width: parent.width - 4
-          height: parent.height - 4
-          color: shadowColor
-          opacity: 0.4
-          radius: 8
+          width: parent.width - modelData.size
+          height: parent.height - modelData.size
+          color: root.shadowColor
+          opacity: modelData.opacity
+          radius: modelData.radius
+        }
       }
     }
-
-
-//shell.qml from xfcasio/amadeus (for the bar's skeleton)
+  }
+  
+  // ==================== MAIN BAR ====================
+  
   Scope {
-    id: root
-
-    MouseArea {
-      anchors.fill: parent
-      onWheel: wheel => {
-        Hyprland.dispatch("workspace 1")
-        Mpris.players.values.forEach((player, idx) => player.pause())
-      }
-    }
-
+    id: barScope
+    
     Bar.PopoutVolume {}
-
+    
     WlrLayershell {
       id: bar
-      margins { top: 80; bottom: 60; left: 19; right: -7}
+      margins { 
+        top: root.barMarginTop
+        bottom: root.barMarginBottom
+        left: root.barMarginLeft
+        right: root.barMarginRight
+      }
       anchors { top: true; bottom: true; left: true }
-      
       layer: WlrLayer.Top
-
-      implicitWidth: 50
+      implicitWidth: root.barWidth
       color: "transparent"
-
+      
       MouseArea {
         anchors.fill: parent
         onWheel: wheel => {
@@ -225,26 +168,31 @@ WlrLayershell {
           Mpris.players.values.forEach((player, idx) => player.pause())
         }
       }
-
-      // The actual bar - Extra rect to achieve bar-rounding
+      
       Rectangle {
         anchors.fill: parent
-        color: backgroundColor
-        radius: 8
-        border.width: 2
-        border.color: borderColor
-
+        color: root.backgroundColor
+        radius: root.barRadius
+        border.width: root.barBorderWidth
+        border.color: root.borderColor
+        
         Behavior on height {
           NumberAnimation {
             duration: 1000
             easing.type: Easing.InOutQuart
           }
         }
-
+        
         ColumnLayout {
-          anchors { fill: parent; topMargin: 3; bottomMargin: 10; leftMargin: 3; rightMargin: 3 }
+          anchors { 
+            fill: parent
+            topMargin: 3
+            bottomMargin: 10
+            leftMargin: 3
+            rightMargin: 3
+          }
           spacing: 4
-
+          
           TopSection {}
           CenterSection {}
           BottomSection {}
@@ -252,172 +200,4 @@ WlrLayershell {
       }
     }
   }
-
-
-  //==============================================
-  //border=====================
-  //==============================================
-  // PanelWindow {
-  //   id: window
-  //
-  //   property color barColor: "#151518"
-  //
-  //   color: "transparent"
-  //   exclusionMode: ExclusionMode.Ignore
-  //   mask: Region {
-  //     item: cornersArea
-  //     intersection: Intersection.Subtract
-  //   }
-  //
-  //   anchors {
-  //     left: true
-  //     top: true
-  //     right: true
-  //     bottom: true
-  //   }
-  //
-  //   // Inline Components
-  //   component Corner: WrapperItem {
-  //     id: root
-  //
-  //     property int corner
-  //     property real radius: 20
-  //     property color color
-  //
-  //     Component.onCompleted: {
-  //       switch (corner) {
-  //       case 0:
-  //         anchors.left = parent.left;
-  //         anchors.top = parent.top;
-  //         break;
-  //       case 1:
-  //         anchors.top = parent.top;
-  //         anchors.right = parent.right;
-  //         rotation = 90;
-  //         break;
-  //       case 2:
-  //         anchors.right = parent.right;
-  //         anchors.bottom = parent.bottom;
-  //         rotation = 180;
-  //         break;
-  //       case 3:
-  //         anchors.left = parent.left;
-  //         anchors.bottom = parent.bottom;
-  //         rotation = -90;
-  //         break;
-  //       }
-  //     }
-  //
-  //     Shape {
-  //       preferredRendererType: Shape.CurveRenderer
-  //
-  //       ShapePath {
-  //         strokeWidth: 0
-  //         fillColor: backgroundColor
-  //         startX: root.radius
-  //
-  //         PathArc {
-  //           relativeX: -root.radius
-  //           relativeY: root.radius
-  //           radiusX: root.radius
-  //           radiusY: radiusX
-  //           direction: PathArc.Counterclockwise
-  //         }
-  //
-  //         PathLine {
-  //           relativeX: 0
-  //           relativeY: -root.radius
-  //         }
-  //
-  //         PathLine {
-  //           relativeX: root.radius
-  //           relativeY: 0
-  //         }
-  //       }
-  //     }
-  //   }
-  //   component Exclusion: PanelWindow {
-  //     property string name
-  //     implicitWidth: 0
-  //     implicitHeight: 0
-  //     WlrLayershell.namespace: `quickshell:${name}ExclusionZone`
-  //   }
-  //
-  //   // Exclusions
-  //   Scope {
-  //     Exclusion {
-  //       name: "left"
-  //       exclusiveZone: leftBar.implicitWidth
-  //       anchors.left: true
-  //     }
-  //     Exclusion {
-  //       name: "top"
-  //       exclusiveZone: topBar.implicitHeight
-  //       anchors.top: true
-  //     }
-  //     Exclusion {
-  //       name: "right"
-  //       exclusiveZone: rightBar.implicitWidth
-  //       anchors.right: true
-  //     }
-  //     Exclusion {
-  //       name: "bottom"
-  //       exclusiveZone: bottomBar.implicitHeight
-  //       anchors.bottom: true
-  //     }
-  //   }
-  //
-  //   // Bars
-  //   Rectangle {
-  //     id: leftBar
-  //     implicitWidth: 8
-  //     implicitHeight: QsWindow.window?.height ?? 0
-  //     color: backgroundColor
-  //     anchors.left: parent.left
-  //   }
-  //   Rectangle {
-  //     id: topBar
-  //     implicitWidth: QsWindow.window?.width ?? 0
-  //     implicitHeight: 8
-  //     color: backgroundColor
-  //     anchors.top: parent.top
-  //   }
-  //   Rectangle {
-  //     id: rightBar
-  //     implicitWidth: 8
-  //     implicitHeight: QsWindow.window?.height ?? 0
-  //     color: backgroundColor
-  //     anchors.right: parent.right
-  //   }
-  //   Rectangle {
-  //     id: bottomBar
-  //     implicitWidth: QsWindow.window?.width ?? 0
-  //     implicitHeight: 8
-  //     color: backgroundColor
-  //     anchors.bottom: parent.bottom
-  //   }
-  //
-  //   Rectangle {
-  //     id: cornersArea
-  //     implicitWidth: QsWindow.window?.width - (leftBar.implicitWidth + rightBar.implicitWidth)
-  //     implicitHeight: QsWindow.window?.height - (topBar.implicitHeight + bottomBar.implicitHeight)
-  //     color: "transparent"
-  //     x: leftBar.implicitWidth
-  //     y: topBar.implicitHeight
-  //
-  //     Repeater {
-  //       model: [0, 1, 2, 3]
-  //
-  //       Corner {
-  //         required property int modelData
-  //         corner: modelData
-  //         color: window.barColor
-  //       }
-  //     }
-  //   }
-  // }
-    //==============================================
-   //BAR=====================
-  //==============================================
 }
-

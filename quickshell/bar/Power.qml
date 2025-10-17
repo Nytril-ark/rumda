@@ -35,7 +35,7 @@ Rectangle {
     anchors.centerIn: parent
     width: 20
     height: 20
-    source: "file:///home/hexogen/.config/rumda/quickshell/icons/power.svg"
+    source: `file:///home/${usr}/.config/rumda/quickshell/icons/power.svg`
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     smooth: true
