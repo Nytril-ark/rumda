@@ -1,9 +1,26 @@
-## RUMDA!
-### my hyprland dots
+
+<p align="center">
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Silkscreen&size=75&duration=4000&pause=1500&color=9F684C&background=E4C198&center=true&vCenter=true&width=567&height=150&lines=RUMDA" alt="Typing SVG" /></a>
+<br/>
+        <img src="https://img.shields.io/badge/HYPRLAND%20-%20WM?style=for-the-badge&label=WM&labelColor=%236F4732&color=%23D1AB86" />
+        <img src="https://img.shields.io/badge/QUICKSHELL%20-%20BAR?style=for-the-badge&label=BAR&labelColor=%236F4732&color=%23E4C198" />
+        <img src="https://img.shields.io/badge/NEOVIM%20-%20NEOVIM?style=for-the-badge&label=EDITOR&labelColor=%236F4732&color=%23AF8C65"/>
+        <img src="https://img.shields.io/badge/ZSH%20-%20SHELL?style=for-the-badge&label=SHELL&labelColor=%236F4732&color=%23DAB08B"/> <br>
+          
+```
+   ／l、               
+ （ﾟ､ ｡ ７                      a warmer, more cozy desktop..   
+   l  ~ヽ                                                                     (\__/)
+   じしf_,)ノ                                                                 (='.'=) 
+```
+</p>
+
+
+### disclaimer:
 This is a WIP that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
 
 
-Big thanks to xfcasio, as this is a modified version of his rice, Amadeus.
+Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
 ## Gallery
 ![1](pictures/1.png)
@@ -17,7 +34,12 @@ Big thanks to xfcasio, as this is a modified version of his rice, Amadeus.
 
 ![4](pictures/4.png)
 
-### notes:
+### Rumda color-scheme for nvim:
 the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
-**the rumda-light and rumda-dark are more reliable**, the other 2 are still
-experimental.  
+
+
+**the themes: rumda-light and rumda-dark are more reliable**, the warm/extra-warm themes are still
+experimental and aren't refined yet.. enjoy :)
+
+
+
