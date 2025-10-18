@@ -16,7 +16,7 @@ M.base_30 = {
   line = "#c9c0ae",
   green = "#4e2e1f",  -- Darker for insert mode
   vibrant_green = "#3e1e0f",
-  blue = "#5a3a25",  -- Darker for normal mode
+  blue = "#5a3a25",  -- Darker for normal mode (was #6F4732)
   yellow = "#9f7c55",  -- Darker for visual mode
   sun = "#c19b76",
   purple = "#8f5b3c",  -- Darker
@@ -33,7 +33,7 @@ M.base_16 = {
   base02 = "#b3aa98",
   base03 = "#9e4234",
   base04 = "#6F4732",
-  base05 = "#9A4235", -- triangle at status bar
+  base05 = "#9A4235",
   base06 = "#45373C",
   base07 = "#45373C",
   base08 = "#ab4637", -- red (errors, variables)
@@ -47,4 +47,6 @@ M.base_16 = {
 }
 M.type = "light"
 M.polish_hl = {}
+
+
 return M
