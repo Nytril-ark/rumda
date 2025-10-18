@@ -57,7 +57,7 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 ### experimental themes
 
 
-**the themes: rumda-light color-scheme is more reliable**, the dark/warm/extra-warm ones aren't refined yet.. but enjoy, anyway :)
+**the theme: rumda-light is more reliable**, the dark/warm/extra-warm ones aren't refined yet.. but enjoy, anyway :)
 
 
 ---
