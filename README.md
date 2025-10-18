@@ -26,7 +26,7 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 ![1](pictures/1.png)
 
 
-![2](pictures/2.png)
+![bpytop](pictures/bpytop.png)
 
 
 ![3](pictures/3.png)
@@ -34,7 +34,9 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 
 ![4](pictures/4.png)
 
-![bpytop](pictures/bpytop.png)
+
+![2](pictures/2.png)
+
 
 ### Rumda color-scheme for nvim:
 the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
