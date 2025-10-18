@@ -44,6 +44,8 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 ### rumda-light
+|                                   |                                             |                                            |
+| --------------------------------- | ------------------------------------------- | ------------------------------------------ |
 | ![rumda-light-theme](pictures/rl3.png) | ![rumda-light-theme](pictures/rl2.png) | ![rumda-light-theme](pictures/rl1.png) |
 
 
