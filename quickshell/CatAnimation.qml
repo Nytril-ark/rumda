@@ -173,7 +173,15 @@ Item {
             antialiasing: true
             smooth: true
             mipmap: true
-            
+            rotation: animatedCat.currentConfig.rotation || 0  
+            Behavior on rotation {
+              NumberAnimation { 
+                duration: animatedCat.currentConfig.delay
+                easing.type: Easing.Linear 
+              }
+            }
+
+
             source: `file://${catRoot.catAnimationFolder}/f${animatedCat.currentFrame}.png`
             
             onStatusChanged: {
@@ -271,7 +279,15 @@ Item {
             antialiasing: true
             smooth: true
             mipmap: true
-            
+            rotation: returningCat.currentConfig.rotation || 0 
+            Behavior on rotation {
+              NumberAnimation { 
+                duration: returningCat.currentConfig.delay
+                easing.type: Easing.Linear 
+              }
+            }
+
+
             source: `file://${catRoot.catAnimationFolder}/f${returningCat.currentFrame}.png`
             
             onStatusChanged: {
