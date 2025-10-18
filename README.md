@@ -22,6 +22,8 @@ This is a WIP that *might* not work for you out of the box. I plan on cleaning i
 
 Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
+
+
 ## Gallery
 ![1](pictures/1.png)
 
@@ -37,18 +39,25 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 
 ![2](pictures/2.png)
 
+
+
+
 ---
 
 
 ## Rumda color-scheme for nvim:
 the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
+
+
 ### rumda-light
-![rumda-light-theme](pictures/rl3.png)
+![rumda-light-theme](pictures/rl2.png)
 
 |                                        |                                        |
 | -------------------------------------- | -------------------------------------- |
-| ![rumda-light-theme](pictures/rl2.png) | ![rumda-light-theme](pictures/rl1.png) |
+| ![rumda-light-theme](pictures/rl1.png) | ![rumda-light-theme](pictures/rl1.png) |
+
+
 
 
 ---
@@ -61,6 +70,7 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 
 ---
+
 
 
 ### rumda-warm
