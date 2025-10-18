@@ -37,8 +37,10 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 
 ![2](pictures/2.png)
 
+---
 
-### Rumda color-scheme for nvim:
+
+## Rumda color-scheme for nvim:
 the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 ![rumda-light-theme](pictures/rl3.png)
