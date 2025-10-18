@@ -71,10 +71,7 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 
 
-### rumda-warm
-![rumda-warm](pictures/rw.png)
-### rumda-extra-warm
-![rumda-extra-warm](pictures/rew.png)
+
 ### rumda-dark
 ![rumda-dark-theme](pictures/rd.png)
 
