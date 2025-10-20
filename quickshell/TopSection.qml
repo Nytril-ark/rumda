@@ -25,6 +25,8 @@ Rectangle {
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
   property string currentHours: Qt.formatDateTime(new Date(), "hh")
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
+  property string currentMonth: Qt.formatDateTime(new Date(), "MM")
+  property string currentDay: Qt.formatDateTime(new Date(), "dd")
 
   Layout.fillWidth: true
   Layout.preferredHeight: clockModule.implicitHeight + 12
@@ -100,7 +102,17 @@ Rectangle {
 
     // Time module
   Timer {
-    interval: 1000
+    interval: 60000
+    running: true
+    repeat: true
+    onTriggered: {
+      currentMonth = Qt.formatDateTime(new Date(), "MM")
+      currentDay   = Qt.formatDateTime(new Date(), "dd")
+    }
+  }
+    // Date module
+  Timer {
+    interval: 1000 
     running: true
     repeat: true
     onTriggered: {
@@ -115,7 +127,7 @@ Rectangle {
     Layout.preferredHeight: clockModule.expanded ? 80 : 45
     Behavior on Layout.preferredHeight {
       NumberAnimation { 
-        duration: 300
+        duration: 250
         easing.type: Easing.InOutQuad
       }
     }
@@ -130,7 +142,7 @@ Rectangle {
       anchors.centerIn: parent
       sourceComponent: clockModule.expanded ? dateComponent : clockComponent
     }
-
+    // time module component
     Component {
         id: clockComponent
         ColumnLayout {
@@ -154,6 +166,7 @@ Rectangle {
         }
       }
     }
+    // date module component
     Component {
         id: dateComponent
         ColumnLayout {
@@ -163,7 +176,7 @@ Rectangle {
 
         Text {
           Layout.alignment: Qt.AlignHCenter
-          text: currentHours
+          text: currentDay
           color: accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
@@ -171,7 +184,7 @@ Rectangle {
 
         Text {
           Layout.alignment: Qt.AlignHCenter
-          text: currentMinutes
+          text: currentMonth
           color: accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
