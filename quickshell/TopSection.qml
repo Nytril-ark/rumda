@@ -27,7 +27,7 @@ Rectangle {
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
 
   Layout.fillWidth: true
-  Layout.preferredHeight: columnLayout.implicitHeight + 12
+  Layout.preferredHeight: clockModule.implicitHeight + 12
   color: "transparent"
 
   property real innerModulesRadius: 3
@@ -91,14 +91,15 @@ Rectangle {
 
 
   ColumnLayout {
-    id: columnLayout
+    id: clockModule
+    property bool expanded: false
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
     anchors.topMargin: 29
     spacing: 6
-    
+
     // Time module
-   Timer {
+  Timer {
     interval: 1000
     running: true
     repeat: true
@@ -107,38 +108,87 @@ Rectangle {
       currentHours = Qt.formatDateTime(new Date(), "hh")
       currentMinutes = Qt.formatDateTime(new Date(), "mm")
     }
-   }
-   Rectangle {
-     Layout.alignment: Qt.AlignHCenter
-     width: 28
-     height: 45
-     radius: 7
-     border.width: 1
-     border.color: borderColor
-     color: moduleBG
+  }
 
-     ColumnLayout {
-       anchors.centerIn: parent
-       spacing: 0
+  Rectangle {
+    Layout.alignment: Qt.AlignHCenter    
+    Layout.preferredHeight: clockModule.expanded ? 80 : 45
+    Behavior on Layout.preferredHeight {
+      NumberAnimation { 
+        duration: 300
+        easing.type: Easing.InOutQuad
+      }
+    }
+    width: 28
+    radius: 7
+    border.width: 1
+    border.color: borderColor
+    color: moduleBG
 
-       Text {
-         Layout.alignment: Qt.AlignHCenter
-         text: currentHours
-         color: accent2Color
-         font.family: "Cartograph CF Heavy"
-         font.pixelSize: 12
-       }
+    Loader {
+      id: loader
+      anchors.centerIn: parent
+      sourceComponent: clockModule.expanded ? dateComponent : clockComponent
+    }
 
-       Text {
-         Layout.alignment: Qt.AlignHCenter
-         text: currentMinutes
-         color: accent2Color
-         font.family: "Cartograph CF Heavy"
-         font.pixelSize: 12
-       }
-     }
-   }
-    Bar.BarVolumeControl {}
+    Component {
+        id: clockComponent
+        ColumnLayout {
+        anchors.centerIn: parent
+        spacing: 0
+
+        Text {
+          Layout.alignment: Qt.AlignHCenter
+          text: currentHours
+          color: accent2Color
+          font.family: "Cartograph CF Heavy"
+          font.pixelSize: 12
+        }
+
+        Text {
+          Layout.alignment: Qt.AlignHCenter
+          text: currentMinutes
+          color: accent2Color
+          font.family: "Cartograph CF Heavy"
+          font.pixelSize: 12
+        }
+      }
+    }
+    Component {
+        id: dateComponent
+        ColumnLayout {
+
+        anchors.centerIn: parent
+        spacing: 0
+
+        Text {
+          Layout.alignment: Qt.AlignHCenter
+          text: currentHours
+          color: accent2Color
+          font.family: "Cartograph CF Heavy"
+          font.pixelSize: 12
+        }
+
+        Text {
+          Layout.alignment: Qt.AlignHCenter
+          text: currentMinutes
+          color: accent2Color
+          font.family: "Cartograph CF Heavy"
+          font.pixelSize: 12
+        }
+      }
+    }
+    MouseArea {
+      anchors.fill: parent
+      cursorShape: Qt.PointingHandCursor
+      hoverEnabled: true
+      onEntered: clockModule.expanded = !clockModule.expanded
+      onExited: clockModule.expanded = !clockModule.expanded
+    }
+
+  }
+  
+  Bar.BarVolumeControl {}
 
 
     // CPU and RAM indicators

@@ -110,7 +110,7 @@ Rectangle {
             Behavior on height {
               NumberAnimation {
                 duration: 200
-                easing.type: Easing.OutQuad
+                easing.type: Easing.OutQuart
               }
             }
           }

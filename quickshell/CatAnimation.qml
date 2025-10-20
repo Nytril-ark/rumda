@@ -67,6 +67,8 @@ Item {
           
           MouseArea {
             anchors.fill: parent
+            anchors.topMargin: 2
+            anchors.bottomMargin: 36  // this makes the cat's tail unclickable, dont wanna interfere with the clock
             cursorShape: Qt.PointingHandCursor
             onClicked: {
               catRoot.catAnimationPlaying = true

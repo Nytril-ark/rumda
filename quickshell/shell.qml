@@ -56,11 +56,16 @@ ShellRoot {
   // Catsit.svg Configuration
   property bool enableCat: true
   property string catIconPath: configPath + "/icons/catsit.svg"
-  property int catMarginTop: 23
+  property int catMarginTop: barMarginTop - 57
   property int catMarginLeft: -50
   property int catWidth: 50
   property int catHeight: 90
 
+  // Window Border Configuration
+  property bool enableWindowBorders: true
+  property string borderIconPath: configPath + "/icons/catsit.svg"
+  property int borderIconSize: 40
+  property int borderIconOffset: -20
 
   //==============================================================
   // The current animation isn't great, I plan on improving
@@ -158,7 +163,7 @@ ShellRoot {
         anchors.fill: parent
         onWheel: wheel => {
           Hyprland.dispatch("workspace 1")
-          Mpris.players.values.forEach((player, idx) => player.pause())
+          // Mpris.players.values.forEach((player, idx) => player.pause())
         }
       }
       
