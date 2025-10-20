@@ -56,16 +56,11 @@ ShellRoot {
   // Catsit.svg Configuration
   property bool enableCat: true
   property string catIconPath: configPath + "/icons/catsit.svg"
-  property int catMarginTop: barMarginTop - 57
+  property int catMarginTop: barMarginTop - 57   // attach cat to bar
   property int catMarginLeft: -50
   property int catWidth: 50
   property int catHeight: 90
 
-  // Window Border Configuration
-  property bool enableWindowBorders: true
-  property string borderIconPath: configPath + "/icons/catsit.svg"
-  property int borderIconSize: 40
-  property int borderIconOffset: -20
 
   //==============================================================
   // The current animation isn't great, I plan on improving
