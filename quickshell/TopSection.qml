@@ -239,6 +239,6 @@ Rectangle {
       }
     }
 
-    Bar.BarSystemTray {}
+   // Bar.BarSystemTray {}  // uncomment if you want, I just like my bar to have less items
   }
 }
