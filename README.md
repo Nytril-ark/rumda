@@ -16,11 +16,13 @@
 </p>
 
 
-### disclaimer:
-This is a WIP that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
+> [!IMPORTANT] Disclaimer:
+> This is a WIP that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
+
 
 
 Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
+
 
 
 > **things I'm working on:** file-manager, browser, discord themes + more widgets, and more importantly: [Rumda, the cat.](#rumda-the-cat)
