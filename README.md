@@ -24,8 +24,15 @@
 Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
 
+---
 
-> **things I'm working on:** file-manager, browser, discord themes + more widgets, and more importantly: [Rumda, the cat.](#rumda-the-cat)
+
+> **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
+
+
+---
+
+
 ## Gallery
 ![1](pictures/1.png)
 
