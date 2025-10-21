@@ -88,7 +88,7 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 ### Rumda the cat
 
-Rumda the cat is should be the main feature in these dotfiles. Sadly however, I am stuck with many side-projects, so I can't fully finish this widget yet. Here, Rumda is stuck too:
+Rumda the cat should be the main feature in these dotfiles. Sadly however, I am stuck with many side-projects, so I can't fully finish this widget yet. Here, Rumda is stuck too:
 
 ![rumda-trapped](pictures/RumdaIsTrapped.gif)
 
