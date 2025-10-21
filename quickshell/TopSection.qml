@@ -239,6 +239,7 @@ Rectangle {
       }
     }
 
-   // Bar.BarSystemTray {}  // uncomment if you want, I just like my bar to have less items
+    // Bar.BarSystemTray {}  // uncomment if you want, I just like my bar to have less items
+    // NOTE: (for -nazhim): change the icon pack.
   }
 }
