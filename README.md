@@ -23,6 +23,7 @@ This is a WIP that *might* not work for you out of the box. I plan on cleaning i
 Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
 
+> **things I'm working on:** file-manager, browser, discord themes + more widgets, and more importantly: [Rumda, the cat.](#rumda-the-cat)
 ## Gallery
 ![1](pictures/1.png)
 
@@ -81,3 +82,17 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 
 ### rumda-extra-warm
 ![rumda-extra-warm](pictures/rew.png)
+
+
+---
+
+### Rumda the cat
+
+Rumda the cat is should be the main feature in these dotfiles. Sadly however, I am stuck with many side-projects, so I can't fully finish this widget yet. Here, Rumda is stuck too:
+
+![rumda-trapped](pictures/RumdaIsTrapped.gif)
+
+The cat widget ~might~ will (insha'allah) be able to get out soon. We'll see! 
+Currently, the cat on top of the bar just does a ~goofy~ jump-out animation when you click it. If you click on its resting spot again, it comes back.
+
+PS: the cat face at the bottom of the bar is an internet widget. if it's smiling, you're connected :)
