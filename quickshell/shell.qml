@@ -20,6 +20,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import 'bar' as Bar
+import 'widgets' as Widgets
 
 ShellRoot {
   id: root
@@ -60,14 +61,82 @@ ShellRoot {
   property int catMarginLeft: -50
   property int catWidth: 50
   property int catHeight: 90
+  
+  // EXPERIMENTAL ======== rumda-the-cat ========
+  // ============================================
+  //
+  // ==================== TESTING THE CAT WIDGET ====================
+    
+    // Example 1: Static cat in center
+    // Widgets.Rumda_the_cat {
+    //     position: "center"
+    //     catWidth: 150
+    //     catHeight: 150
+    // }
+    // ================================ 
+    // Widgets.Rumda_the_cat {
+    //     position: "custom"
+    //     customX: 400
+    //     customY: 400
+    //     catWidth: 100
+    //     catHeight: 100
+    //     enableMovement: true
+    //     movementDirection: "right"
+    //     movementSpeed: 2000  // milliseconds to cross screen
+    // }
+    
+    // Example 3: Cat bouncing back and forth at top
+    // Widgets.Rumda_the_cat {
+    //     position: "top-left"
+    //     catWidth: 80
+    //     catHeight: 80
+    //     enableMovement: true
+    //     movementDirection: "right"
+    //     movementSpeed: 3000
+    //     movementBounce: true
+    // }
+    
+    // Example 4: Custom positioned cat
+    // Widgets.Rumda_the_cat {
+    //     position: "custom"
+    //     customX: 100
+    //     customY: 200
+    //     catWidth: 120
+    //     catHeight: 120
+    //     catLayer: WlrLayer.Overlay  // Display on top
+    // }
+    
+    // Example 5: Cat walking up the screen
+    // Widgets.Rumda_the_cat {
+    //     position: "bottom-left"
+    //     enableMovement: true
+    //     movementDirection: "up"
+    //     movementSpeed: 4000
+    // }
+
+    
+    // control:
+    // Widgets.AnimatedCat {
+    //   id: myCat
+    // }
+    //
+    // // Control playback
+    // Button { onClicked: myCat.play() }
+    // Button { onClicked: myCat.pause() }
+    // Button { onClicked: myCat.stop() }
+    //
+    // // Control movement
+    // Button { onClicked: myCat.startMovement() }
+    // Button { onClicked: myCat.stopMovement() }
 
 
+    
   //==============================================================
   // The current animation isn't great, I plan on improving
   // its smoothness soon. I shall keep it like this for now
   // as a placeholder
   //
-  // Cat Animation Configuration
+  // Cat jump out Animation Configuration
   property string catAnimationFolder: configPath + "/gato-jump"
   property int catAnimationFrames: 9
   
@@ -187,6 +256,7 @@ ShellRoot {
           spacing: 4
           
           TopSection {}
+
           CenterSection {}
           BottomSection {}
         }

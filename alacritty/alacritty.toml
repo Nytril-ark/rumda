@@ -16,7 +16,7 @@
 # noto sans, montserrat, nimbus mono, z003, cartographCF, fira code
 
 [window]
-opacity = 0.95
+opacity = 1.0
 dimensions = { columns = 75, lines = 20 }
 blur = true
 padding.x = 7
