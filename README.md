@@ -61,12 +61,6 @@ the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
 ### rumda-light
 ![rumda-light-theme](pictures/rl1.png)
 
-|                                        |                                        |
-| -------------------------------------- | -------------------------------------- |
-| ![rumda-light-theme](pictures/rl2.png) | ![rumda-light-theme](pictures/rl1.png) |
-
-
-
 
 ---
 
