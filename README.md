@@ -28,7 +28,7 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 
 
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
-> also, the [theme switcher](theme-switcher)
+> also, the [theme switcher](#theme-switcher)
 
 ---
 
@@ -103,4 +103,4 @@ PS: the cat face at the bottom of the bar is an internet widget. if it's smiling
 
 ### theme switcher
 I kick off the cat for a little fun
-![themeswitch](themeswitch.gif)
+![themeswitch](/pictures/themeswitch.gif)
