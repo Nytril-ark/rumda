@@ -38,7 +38,7 @@ Rectangle {
       onRead: s => {
         if (s === "Playing") {
           playing = true;
-          if (artUrl === '') { artUrl = `file:///home/${username}/.config/rumda/quickshell/icons/player-background.png` }
+          if (artUrl === '') { artUrl = `file:///home/${username}/.config/rumda/light-config/quickshell/icons/player-background.png` }
         } else playing = false
       }
     }
@@ -51,14 +51,14 @@ Rectangle {
     stdout: SplitParser {
       onRead: art => {
         if (art && art.trim() !== "") { artUrl = art.trim() }
-        else { artUrl = `file:///home/${username}/.config/rumda/quickshell/icons/player-background.png` }
+        else { artUrl = `file:///home/${username}/.config/rumda/light-config/quickshell/icons/player-background.png` }
       }
     }
 
     stderr: SplitParser {
       onRead: err => {
         if (err === "No player could handle this command")
-          artUrl = `file:///home/${username}/.config/rumda/quickshell/icons/player-background.png`
+          artUrl = `file:///home/${username}/.config/rumda/light-config/quickshell/icons/player-background.png`
       }
     }
   }
@@ -154,7 +154,7 @@ Rectangle {
       anchors.centerIn: parent
       width: 18
       height: 18
-      source: `file:///home/${username}/.config/rumda/quickshell/icons/headphones.svg`
+      source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/headphones.svg`
       sourceSize.width: 36
       sourceSize.height: 36
     }

@@ -105,7 +105,7 @@ Rectangle {
       Image {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
-        source: `file:///home/${username}/.config/rumda/quickshell/icons/${muted ? 'speaker-dark' : 'speaker'}.svg`
+        source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/${muted ? 'speaker-dark' : 'speaker'}.svg`
         opacity: muted ? 0.6 : 1.0
         antialiasing: true
         smooth: true

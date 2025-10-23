@@ -54,6 +54,6 @@ Rectangle {
     anchors.centerIn: parent
     width: 23
     height: 23
-    source: `file:///home/${username}/.config/rumda/quickshell/icons/${internetConnected ? 'connected' : 'disconnected'}.svg`
+    source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/${internetConnected ? 'connected' : 'disconnected'}.svg`
   }
 }

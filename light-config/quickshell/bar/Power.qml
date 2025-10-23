@@ -27,7 +27,7 @@ Rectangle {
   
   // Paths
   readonly property string username: Quickshell.env("USER") || "user"
-  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
+  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/light-config/quickshell"
   readonly property string iconPath: `${configPath}/icons`
   
   // Module properties

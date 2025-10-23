@@ -61,7 +61,7 @@ Rectangle {
         anchors.centerIn: parent
         width: 20
         height: 20
-        source: `file:///home/${username}/.config/rumda/quickshell/icons/weather.svg`
+        source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/weather.svg`
         sourceSize.width: 36
         sourceSize.height: 36
       }

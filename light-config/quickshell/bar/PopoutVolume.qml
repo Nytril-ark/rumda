@@ -21,7 +21,7 @@ Scope {
   readonly property color shadowColor: "#3A2D26"
   
   // Configuration
-  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/quickshell"
+  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/light-config/quickshell"
   readonly property string iconPath: `${configPath}/icons`
   property string username: Quickshell.env("USER") || "user"
   
