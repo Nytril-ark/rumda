@@ -23,13 +23,13 @@ padding.x = 7
 padding.y = 8
 decorations = "None"
 decorations_theme_variant = "Dark"
-title = "nytril::cyanide"
+title = "  "
 
 [font]
-# normal.family = "Source Code Pro"
-# bold.family = "Cartograph CF"
-# italic.family = "Cartograph CF"
-# bold_italic.family = "Cartograph CF"
+normal.family = "JetBrains Mono Nerd Font"
+bold.family = "cartographCF"
+italic.family = "cartographCF"
+bold_italic.family = "cartographCF"
 size = 11.0
 
 [cursor]
