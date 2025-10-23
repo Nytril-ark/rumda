@@ -148,9 +148,9 @@ Scope {
         id: osdContainer
         anchors.fill: parent
         radius: root.osdRadius
-        color: root.backgroundColor
+        color: Colors.backgroundColor
         border.width: root.osdBorderWidth
-        border.color: root.borderColor
+        border.color: Colors.borderColor
         
         // Show/hide animations
         transform: [
@@ -239,7 +239,7 @@ Scope {
           // Volume bar background
           Rectangle {
             id: volumeBarBg
-            color: root.indicatorBGColor
+            color: Colors.indicatorBGColor
             Layout.fillWidth: true
             implicitHeight: 10
             radius: 2
@@ -256,8 +256,8 @@ Scope {
               
               gradient: Gradient {
                 orientation: Gradient.Horizontal
-                GradientStop { position: 0; color: root.accentColor }
-                GradientStop { position: 1; color: root.accent2Color }
+                GradientStop { position: 0; color: Colors.accentColor }
+                GradientStop { position: 1; color: Colors.accent2Color }
               }
               
               width: {

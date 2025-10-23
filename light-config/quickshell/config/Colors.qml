@@ -1,7 +1,8 @@
 pragma Singleton
+import Quickshell
 import QtQuick
 
-QtObject {
+Singleton {
   property color backgroundColor: "#E4C198"  //bar color
   property color indicatorBGColor: "#AF8C65" 
   property color borderColor: "#D1AB86" 
