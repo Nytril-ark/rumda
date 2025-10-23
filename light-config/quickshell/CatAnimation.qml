@@ -6,22 +6,12 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
+import qs.config
 
 Item {
   id: catRoot
   
-  // Properties passed from shell.qml
-  required property bool enableCat
-  required property string catIconPath
-  required property int catMarginTop
-  required property int catMarginLeft
-  required property int catWidth
-  required property int catHeight
-  required property string catAnimationFolder
-  required property int catAnimationFrames
-  required property var catFrameConfigs
-  required property int barMarginTop
-  required property int barWidth
+
   
   // Internal state
   property bool catAnimationPlaying: false
@@ -31,28 +21,28 @@ Item {
   // ==================== STATIC CAT WIDGET ====================
   
   Loader {
-    active: catRoot.enableCat && catRoot.catVisible && !catRoot.catAnimationPlaying && !catRoot.catReturning
+    active: Config.enableCat && catRoot.catVisible && !catRoot.catAnimationPlaying && !catRoot.catReturning
     sourceComponent: Item {
       WlrLayershell {
         id: catsit
         margins { 
-          top: catRoot.catMarginTop
-          left: catRoot.catMarginLeft
+          top: Config.catMarginTop
+          left: Config.catMarginLeft
         }
         anchors { top: true; left: true }
         layer: WlrLayer.Top
-        implicitWidth: catRoot.catWidth
+        implicitWidth: Config.catWidth
         color: "transparent"
         
         Rectangle {
-          width: catRoot.catWidth
-          height: catRoot.catHeight
+          width: Config.catWidth
+          height: Config.catHeight
           color: "transparent"
           clip: true
           
           Image {
             anchors.fill: parent
-            source: `file://${catRoot.catIconPath}`
+            source: `file://${Config.catIconPath}`
             fillMode: Image.PreserveAspectFit
             antialiasing: true
             smooth: true
@@ -60,7 +50,7 @@ Item {
             
             onStatusChanged: {
               if (status === Image.Error) {
-                console.error("Failed to load cat icon from:", catRoot.catIconPath)
+                console.error("Failed to load cat icon from:", Config.catIconPath)
               }
             }
           }
@@ -82,16 +72,16 @@ Item {
   // ==================== CAT RETURN TRIGGER ====================
   
   Loader {
-    active: catRoot.enableCat && !catRoot.catVisible
+    active: Config.enableCat && !catRoot.catVisible
     sourceComponent: WlrLayershell {
       id: catTrigger
       margins { 
-        top: catRoot.barMarginTop
+        top: Config.barMarginTop
         left: -43
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Overlay
-      implicitWidth: catRoot.barWidth
+      implicitWidth: Config.barWidth
       implicitHeight: 20
       color: "transparent"
       
@@ -113,13 +103,13 @@ Item {
   // ==================== ANIMATED CAT WIDGET (LEAVING) ====================
   
   Loader {
-    active: catRoot.enableCat && catRoot.catAnimationPlaying
+    active: Config.enableCat && catRoot.catAnimationPlaying
     sourceComponent: Item {
       WlrLayershell {
         id: animatedCat
         
         property int currentFrame: 0
-        property var currentConfig: catRoot.catFrameConfigs[currentFrame] || catRoot.catFrameConfigs[0]
+        property var currentConfig: Config.catFrameConfigs[currentFrame] || Config.catFrameConfigs[0]
         
         margins { 
           top: currentConfig.marginTop
@@ -184,7 +174,7 @@ Item {
             }
 
 
-            source: `file://${catRoot.catAnimationFolder}/f${animatedCat.currentFrame}.png`
+            source: `file://${Config.catAnimationFolder}/f${animatedCat.currentFrame}.png`
             
             onStatusChanged: {
               if (status === Image.Error) {
@@ -201,7 +191,7 @@ Item {
               onTriggered: {
                 animatedCat.currentFrame++
                 
-                if (animatedCat.currentFrame >= catRoot.catAnimationFrames) {
+                if (animatedCat.currentFrame >= Config.catAnimationFrames) {
                   catRoot.catAnimationPlaying = false
                   catRoot.catVisible = false
                 } else {
@@ -219,13 +209,13 @@ Item {
   // ==================== ANIMATED CAT WIDGET (RETURNING) ====================
   
   Loader {
-    active: catRoot.enableCat && catRoot.catReturning
+    active: Config.enableCat && catRoot.catReturning
     sourceComponent: Item {
       WlrLayershell {
         id: returningCat
         
-        property int currentFrame: catRoot.catAnimationFrames - 1
-        property var currentConfig: catRoot.catFrameConfigs[currentFrame] || catRoot.catFrameConfigs[catRoot.catAnimationFrames - 1]
+        property int currentFrame: Config.catAnimationFrames - 1
+        property var currentConfig: Config.catFrameConfigs[currentFrame] || Config.catFrameConfigs[Config.catAnimationFrames - 1]
         
         margins { 
           top: currentConfig.marginTop
@@ -290,7 +280,7 @@ Item {
             }
 
 
-            source: `file://${catRoot.catAnimationFolder}/f${returningCat.currentFrame}.png`
+            source: `file://${Config.catAnimationFolder}/f${returningCat.currentFrame}.png`
             
             onStatusChanged: {
               if (status === Image.Error) {

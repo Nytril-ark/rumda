@@ -10,18 +10,10 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import 'bar' as Bar
+import qs.config
+import qs.barModules
 
 Rectangle {
-  property color backgroundColor: "#E4C198" //bar color
-  property color indicatorBGColor: "#AF8C65"
-  property color borderColor: "#D1AB86"
-  property color moduleBG: "#DAB08B"
-  property color accentColor: "#6F4732"
-  property color accent2Color: "#9F684C"
-  property color errorColor: "#9A4235"
-  property color backgroundTransparent: "#661e1e1e"
-  property color shadowColor: "#3A2D26"
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
   property string currentHours: Qt.formatDateTime(new Date(), "hh")
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
@@ -134,8 +126,8 @@ Rectangle {
     width: 28
     radius: 7
     border.width: 1
-    border.color: borderColor
-    color: moduleBG
+    border.color: Colors.borderColor
+    color: Colors.moduleBG
 
     Loader {
       id: loader
@@ -152,7 +144,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentHours
-          color: accent2Color
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -160,7 +152,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMinutes
-          color: accent2Color
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -177,7 +169,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentDay
-          color: accent2Color
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -185,7 +177,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMonth
-          color: accent2Color
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -201,7 +193,7 @@ Rectangle {
 
   }
   
-  Bar.BarVolumeControl {}
+  VolumeControl {}
 
 
     // CPU and RAM indicators
@@ -210,36 +202,33 @@ Rectangle {
       width: 28
       height: 60
       radius: 7
-      color: moduleBG 
+      color: Colors.moduleBG 
 
       border.width: 1
-      border.color: borderColor
+      border.color: Colors.borderColor
 
       ColumnLayout {
         anchors.centerIn: parent
         spacing: 2
 
         // CPU indicator
-        Bar.RadialIndicator {
+        RadialIndicator {
           Layout.alignment: Qt.AlignHCenter
           percent: cpuUsage
-          indicatorColor: accentColor
-          backgroundColor: indicatorBGColor
+          indicatorColor: Colors.accentColor
+          backgroundColor: Colors.indicatorBGColor
           size: 24
         }
 
         // RAM indicator
-        Bar.RadialIndicator {
+        RadialIndicator {
           Layout.alignment: Qt.AlignHCenter
           percent: ramUsage
-          indicatorColor: accent2Color
-          backgroundColor: indicatorBGColor
+          indicatorColor: Colors.accent2Color
+          backgroundColor: Colors.indicatorBGColor
           size: 24
         }
       }
     }
-
-    // Bar.BarSystemTray {}  // uncomment if you want, I just like my bar to have less items
-    // NOTE: (for -nazhim): change the icon pack.
   }
 }

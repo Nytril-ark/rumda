@@ -10,7 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import 'bar' as Bar
+import qs.barModules
 
 Rectangle {
   Layout.fillWidth: true
@@ -56,11 +56,11 @@ Rectangle {
     anchors.bottomMargin: 2
     spacing: 6
 
-    // Components.BarInternetStatus {}
-    Bar.BarProfilePicture {}
-    Bar.BarWeatherStatus {}
-    Bar.BarBatteryInternet {}
-    Bar.Power {}
-
+    ThemeSwitch {
+      onThemeChanged: root.triggerBarAnimation()  // Pass the signal through
+    }
+    WeatherStatus {}
+    InternetConnection {}
+    Power {}
   }
 }

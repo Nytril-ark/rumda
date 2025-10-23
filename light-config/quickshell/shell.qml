@@ -19,41 +19,20 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
-import 'bar' as Bar
-import 'widgets' as Widgets
-import qs.config.colors as Colors
-// import 'config/config' as Config
+import qs.barModules
+import qs.widgets
+import qs.config
 
 ShellRoot {
   id: root
-  
+
+
+
+  signal triggerBarAnimation()
+
+
 // ==================== CONFIGURATION ====================
-  // User Configuration
-  property string username: Quickshell.env("USER") || "user"
-  property string configPath: Quickshell.env("HOME") + "/.config/rumda/light-config/quickshell"
-
-  // Bar Configuration
-  property int barMarginTop: 80
-  property int barMarginBottom: 80
-  property int barMarginLeft: 19
-  property int barMarginRight: -7
-  property int barWidth: 50
-  property int barRadius: 8
-  property int barBorderWidth: 2
-  // Shadow Configuration
-  property bool enableBarShadow: true
-  property bool enableCatShadow: true
-  property int shadowOffsetX: -61
-  property int shadowOffsetY: 1
-
-  // Catsit.svg Configuration
-  property bool enableCat: true
-  property string catIconPath: configPath + "/icons/catsit.svg"
-  property int catMarginTop: barMarginTop - 57   // attach cat to bar
-  property int catMarginLeft: -50
-  property int catWidth: 50
-  property int catHeight: 90
-  
+// configuration moved to /config/Config.qml for now  
   // EXPERIMENTAL ======== rumda-the-cat ========
   // ============================================
   //
@@ -121,17 +100,14 @@ ShellRoot {
     // Button { onClicked: myCat.startMovement() }
     // Button { onClicked: myCat.stopMovement() }
 
+  
 
-    
+
   //==============================================================
   // The current animation isn't great, I plan on improving
   // its smoothness soon. I shall keep it like this for now
   // as a placeholder
   //
-  // Cat jump out Animation Configuration
-  property string catAnimationFolder: configPath + "/gato-jump"
-  property int catAnimationFrames: 9
-  
   property var catFrameConfigs: [
     { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 10, rotation: 0 },
     { marginTop: 20, marginLeft: -90, width: 140, height: 92, delay: 25, rotation: 0 },
@@ -144,36 +120,43 @@ ShellRoot {
     { marginTop: -16, marginLeft: -190, width: 200, height: 90, delay: 20, rotation: 0 }
   ]
 
-  CatAnimation {
-    enableCat: root.enableCat
-    catIconPath: root.catIconPath
-    catMarginTop: root.catMarginTop
-    catMarginLeft: root.catMarginLeft
-    catWidth: root.catWidth
-    catHeight: root.catHeight
-    catAnimationFolder: root.catAnimationFolder
-    catAnimationFrames: root.catAnimationFrames
-    catFrameConfigs: root.catFrameConfigs
-    barMarginTop: root.barMarginTop
-    barWidth: root.barWidth
-  }
+  CatAnimation {}
 
 
 // ==================== BAR SHADOW ====================
-  Loader {
-    active: root.enableBarShadow
+Loader {
+
+
+    active: Config.enableBarShadow
     sourceComponent: WlrLayershell {
       id: barShadow
       margins { 
-        top: root.barMarginTop + root.shadowOffsetY
-        left: root.barMarginLeft + root.shadowOffsetX
+        top: Config.barMarginTop + Config.shadowOffsetY
+        left: Config.barMarginLeft + Config.shadowOffsetX
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Bottom
       width: bar.width + 4
       height: bar.height + 4
       color: "transparent"
-      
+
+      Connections {
+        target: root
+        function onTriggerBarAnimation() {
+          console.log("Bar animation triggered!")
+          barShadow.margins.top = -barShadow.height
+        }
+      }
+
+
+      Behavior on margins.top {
+        NumberAnimation {
+          duration: 300
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+
       Repeater {
         model: [
           { size: 0, opacity: 0.3, radius: 8 },
@@ -199,20 +182,36 @@ ShellRoot {
   
   Scope {
     id: barScope
+
+    Connections {
+      target: root
+      function onTriggerBarAnimation() {
+        console.log("Bar animation triggered!")
+        barRect.anchors.topMargin = -bar.height
+        barRect.anchors.bottomMargin = bar.height
+      }
+    }
     
-    Bar.PopoutVolume {}
+
+
+    PopoutVolume {}
     
     WlrLayershell {
       id: bar
+      property int screenHeight: screen ? screen.height : 1080
+      
       margins { 
-        top: root.barMarginTop
-        bottom: root.barMarginBottom
-        left: root.barMarginLeft
-        right: root.barMarginRight
+        top: Config.barMarginTop
+        left: Config.barMarginLeft
+        right: Config.barMarginRight
+        bottom: Config.barMarginBottom
       }
+
+
       anchors { top: true; bottom: true; left: true }
       layer: WlrLayer.Top
-      implicitWidth: root.barWidth
+      implicitWidth: Config.barWidth
+      implicitHeight: screenHeight - Config.barMarginTop - Config.barMarginBottom
       color: "transparent"
       
       MouseArea {
@@ -224,19 +223,37 @@ ShellRoot {
       }
       
       Rectangle {
+        id: barRect
         anchors.fill: parent
         color: Colors.backgroundColor
-        radius: root.barRadius
-        border.width: root.barBorderWidth
+        radius: Config.barRadius
+        border.width: Config.barBorderWidth
         border.color: Colors.borderColor
-        
+  
+
         Behavior on height {
           NumberAnimation {
             duration: 1000
             easing.type: Easing.InOutQuart
           }
         }
-        
+
+        Behavior on anchors.topMargin {
+            NumberAnimation {
+              duration: 500
+              easing.type: Easing.InOutQuad
+          }
+        }
+       Behavior on anchors.bottomMargin {
+            NumberAnimation {
+              duration: 500
+              easing.type: Easing.InOutQuad
+          }
+        }
+
+
+
+
         ColumnLayout {
           anchors { 
             fill: parent
