@@ -28,7 +28,7 @@ Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](http
 
 
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
-
+> also, the [theme switcher](theme-switcher)
 
 ---
 
@@ -99,3 +99,8 @@ The cat widget ~might~ will (insha'allah) be able to get out soon. We'll see!
 Currently, the cat on top of the bar just does a ~goofy~ jump-out animation when you click it. If you click on its resting spot again, it comes back.
 
 PS: the cat face at the bottom of the bar is an internet widget. if it's smiling, you're connected :)
+
+
+### theme switcher
+I kick off the cat for a little fun
+![themeswitch](themeswitch.gif)
