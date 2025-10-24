@@ -2,8 +2,6 @@
 #!/bin/bash
 
 
-# Usage: ./wall.sh [dark|light]
-
 MODE="$1"
 WALLDIR="/home/$USER/.config/rumda/pictures"
 
