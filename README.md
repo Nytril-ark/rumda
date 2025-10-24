@@ -19,16 +19,14 @@
 > [!WARNING]
 > This is a **WIP** that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
 
-
-
-Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
-
-
 ---
 
 
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
 > also, the [theme switcher](#theme-switcher)
+
+
+>  Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
 ---
 
