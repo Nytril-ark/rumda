@@ -1,3 +1,9 @@
 # dark-config/
+sshkey
+*.pem
+*.key
+id_*
+sshkey.pub
+dark-config/quickshell/rumda-the-cat/
 light-config/quickshell/rumda-the-cat/
 # light-config/quickshell/shell.qml
