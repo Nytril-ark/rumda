@@ -10,10 +10,10 @@
 
 
 ```
-        ／l、               
-      （ﾟ､ ｡ ７                    a warmer, more cozy desktop..                    へ      ╱|、
-        l  ~ヽ                                                                  ૮ -  ՛)   (`  -7
-        じしf_,)ノ                                                           乀 (ˍ, ل ل     じしˍ,)ノ
+      ／l、             
+    （ﾟ､ ｡ ７                 a warmer, more cozy desktop..                   へ      ╱|、
+      l  ~ヽ                                                              ૮ -  ՛)   (`  -7
+      じしf_,)ノ                                                       乀 (ˍ, ل ل     じしˍ,)ノ
 ```
 </p>
 
