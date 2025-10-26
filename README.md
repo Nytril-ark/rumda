@@ -26,7 +26,9 @@
 
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
 > also, the [theme switcher](#theme-switcher)
-
+>
+> **Note:** the bar and widgets config can be changed through the qml files in /common/quickshell/light/config/
+---
 
 >  Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 
