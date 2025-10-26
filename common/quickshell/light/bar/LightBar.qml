@@ -17,7 +17,7 @@ import qs.light.barModules
 import qs.light.widgets
 import qs.light.config
 import qs.light.barSections
-
+import qs
 // ==================== MAIN BAR ====================
   
   Scope {
@@ -25,23 +25,19 @@ import qs.light.barSections
     PopoutVolume {}
     
     WlrLayershell {
-      id: bar
-      property int screenHeight: screen ? screen.height : 1080
-      
-      margins { 
-        top: Config.barMarginTop
-        left: Config.barMarginLeft
-        right: Config.barMarginRight
-        bottom: Config.barMarginBottom
-      }
-
-
+      id: bar 
       anchors { top: true; bottom: true; left: true }
       layer: WlrLayer.Top
-      implicitWidth: Config.barWidth
-      implicitHeight: screenHeight - Config.barMarginTop - Config.barMarginBottom
+      implicitWidth: Config.barWidth + Config.barBorderWidth
       color: "transparent"
-      
+
+      margins { 
+        top: 0
+        left: Config.barMarginLeft
+        right: Config.barMarginRight
+        bottom: 0
+      }
+
       MouseArea {
         anchors.fill: parent
         onWheel: wheel => {
@@ -53,12 +49,17 @@ import qs.light.barSections
       
       Rectangle {
         id: barRect
+
         anchors.fill: parent
+        anchors.horizontalCenter: bar.horizontalCenter
         color: Colors.backgroundColor
         radius: Config.barRadius
         border.width: Config.barBorderWidth
         border.color: Colors.borderColor
-  
+        anchors.topMargin: Config.barMarginTop
+        anchors.bottomMargin: Config.barMarginBottom
+        implicitWidth: Config.barWidth
+ 
 
         Behavior on height {
           NumberAnimation {

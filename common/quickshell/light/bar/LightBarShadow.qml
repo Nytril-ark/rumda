@@ -16,20 +16,21 @@ import Quickshell.Services.Mpris
 import qs.light.barModules
 import qs.light.widgets
 import qs.light.config
-import qs.light.bars
-
+import qs.light.bar
+import qs
 
 Scope {
-    WlrLayershell {
-      id: barShadow
+  WlrLayershell {
+    id: barShadow
+    property int screenHeight: ScreenConf.screenHeight ? screen.height : 1080 // screenheight or default
       margins { 
         top: Config.barMarginTop + Config.shadowOffsetY
         left: Config.barMarginLeft + Config.shadowOffsetX
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Bottom
-      width: Config.barWidth + 4
-      height: Config.barHeight + 4
+      width: Config.barWidth + 5
+      height: screenHeight - Config.barMarginTop - Config.barMarginBottom + 5
       color: "transparent"
 
       Connections {
