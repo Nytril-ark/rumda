@@ -32,7 +32,7 @@ Singleton {
   
   // Cat Configuration
   readonly property bool enableCat: true
-  readonly property string catIconPath: configPath + "light/icons/catsit.svg"
+  readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
   readonly property int catMarginLeft: -50
   readonly property int catWidth: 50
@@ -43,7 +43,7 @@ Singleton {
   // as a placeholder
   //
   // Cat jump out Animation Configuration
-  property string catAnimationFolder: configPath + "light/gato-jump"
+  property string catAnimationFolder: configPath + "/light/gato-jump"
   property int catAnimationFrames: 9
   property var catFrameConfigs: [
     { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 10, rotation: 0 },

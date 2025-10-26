@@ -68,7 +68,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 32
         height: 32
-        source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
+        source: `file://${Config.configPath}/light/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
         antialiasing: true
         smooth: true
         mipmap: true

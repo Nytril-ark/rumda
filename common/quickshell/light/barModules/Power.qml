@@ -15,8 +15,6 @@ import qs.light.config
 Rectangle {
   id: root
   
-  readonly property string iconPath: `${Config.configPath}/icons`
-  
   // Module properties
   property string iconName: "power"
   property int moduleSize: 28
@@ -47,7 +45,7 @@ Rectangle {
     anchors.centerIn: parent
     width: root.iconSize
     height: root.iconSize
-    source: `file://${root.iconPath}/${root.iconName}.svg`
+    source: `file://${Config.configPath}/light/icons/${root.iconName}.svg`
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     smooth: true

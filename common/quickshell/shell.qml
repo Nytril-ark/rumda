@@ -22,13 +22,13 @@ import Quickshell.Services.Mpris
 
 // dark bar imports
 // import qs.dark.barModules
-// import qs.dark.bars
+// import qs.dark.bar
 // import qs.dark.barSections
 import qs.dark.config
 // import qs.dark.widgets
 // light bar imports 
 import qs.light.barModules
-import qs.light.bars
+import qs.light.bar
 import qs.light.barSections
 import qs.light.config
 import qs.light.widgets
@@ -148,15 +148,15 @@ ShellRoot {
 // ==================== BAR SHADOW ====================
   Loader {
       active: Config.enableBarShadow
-      readonly property Component lightBarShadow: Qt.createComponent("light/bars/LightBarShadow.qml")
-      readonly property Component darkBarShadow: Qt.createComponent("dark/bars/DarkBarShadow.qml") 
+      readonly property Component lightBarShadow: Qt.createComponent("light/bar/LightBarShadow.qml")
+      readonly property Component darkBarShadow: Qt.createComponent("dark/bar/DarkBarShadow.qml") 
       sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
   }
 
 
   Loader {
-    readonly property Component lightBar: Qt.createComponent("light/bars/LightBar.qml")
-    readonly property Component darkBar: Qt.createComponent("dark/bars/DarkBar.qml")        
+    readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
+    readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")        
     sourceComponent: Config.showLightBar ? lightBar : darkBar
   }
 
