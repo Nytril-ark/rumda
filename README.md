@@ -19,14 +19,13 @@
 
 
 > [!WARNING]
-> This is a **WIP** that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
-> **Note:** theme switch is *still* under construction
+> This is a **WIP** that *might* not work for you out of the box. I am currently cleaning it up and adding better features. Stay tuned!
 ---
 
 
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
 > also, the [theme switcher](#theme-switcher)
->
+> **Note:** theme switch is *still* under construction
 > **Note:** the bar and widgets config can be changed through the qml files in /common/quickshell/light/config/
 ---
 
