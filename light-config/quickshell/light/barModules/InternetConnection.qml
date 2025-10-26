@@ -10,7 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
+import qs.light.config
 
 // The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {

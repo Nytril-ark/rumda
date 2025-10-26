@@ -10,7 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.barModules
+import qs.light.barModules
 
 Rectangle {
   Layout.fillWidth: true

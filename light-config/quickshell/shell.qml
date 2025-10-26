@@ -19,9 +19,19 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
-import qs.barModules
-import qs.widgets
-import qs.config
+
+// dark bar imports
+// import qs.dark.barModules
+// import qs.dark.bars
+// import qs.dark.barSections
+import qs.dark.config
+// import qs.dark.widgets
+// light bar imports 
+import qs.light.barModules
+import qs.light.bars
+import qs.light.barSections
+import qs.light.config
+import qs.light.widgets
 
 ShellRoot {
   id: root
@@ -29,6 +39,18 @@ ShellRoot {
 
 
   signal triggerBarAnimation()
+
+ // note to self: use:
+    // Connections {
+    //   target: root
+    //   function onTriggerBarAnimation() {
+    //     console.log("Bar animation triggered!")
+    //     barRect.anchors.topMargin = -bar.height
+    //     barRect.anchors.bottomMargin = bar.height
+    //   }
+    // }
+
+
 
 
 // ==================== CONFIGURATION ====================
@@ -124,152 +146,18 @@ ShellRoot {
 
 
 // ==================== BAR SHADOW ====================
-Loader {
-
-
-    active: Config.enableBarShadow
-    sourceComponent: WlrLayershell {
-      id: barShadow
-      margins { 
-        top: Config.barMarginTop + Config.shadowOffsetY
-        left: Config.barMarginLeft + Config.shadowOffsetX
-      }
-      anchors { top: true; left: true }
-      layer: WlrLayer.Bottom
-      width: bar.width + 4
-      height: bar.height + 4
-      color: "transparent"
-
-      Connections {
-        target: root
-        function onTriggerBarAnimation() {
-          console.log("Bar animation triggered!")
-          barShadow.margins.top = -barShadow.height
-        }
-      }
-
-
-      Behavior on margins.top {
-        NumberAnimation {
-          duration: 300
-          easing.type: Easing.InOutQuad
-        }
-      }
-
-
-      Repeater {
-        model: [
-          { size: 0, opacity: 0.3, radius: 8 },
-          { size: 2, opacity: 0.33, radius: 8 },
-          { size: 4, opacity: 0.4, radius: 8 }
-        ]
-        
-        Rectangle {
-          required property var modelData
-          
-          anchors.centerIn: parent
-          width: parent.width - modelData.size
-          height: parent.height - modelData.size
-          color: Colors.shadowColor
-          opacity: modelData.opacity
-          radius: modelData.radius
-        }
-      }
-    }
+  Loader {
+      active: Config.enableBarShadow
+      readonly property Component lightBarShadow: Qt.createComponent("light/bars/LightBarShadow.qml")
+      readonly property Component darkBarShadow: Qt.createComponent("dark/bars/DarkBarShadow.qml") 
+      sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
   }
 
-  // ==================== MAIN BAR ====================
-  
-  Scope {
-    id: barScope
 
-    Connections {
-      target: root
-      function onTriggerBarAnimation() {
-        console.log("Bar animation triggered!")
-        barRect.anchors.topMargin = -bar.height
-        barRect.anchors.bottomMargin = bar.height
-      }
-    }
-    
-
-
-    PopoutVolume {}
-    
-    WlrLayershell {
-      id: bar
-      property int screenHeight: screen ? screen.height : 1080
-      
-      margins { 
-        top: Config.barMarginTop
-        left: Config.barMarginLeft
-        right: Config.barMarginRight
-        bottom: Config.barMarginBottom
-      }
-
-
-      anchors { top: true; bottom: true; left: true }
-      layer: WlrLayer.Top
-      implicitWidth: Config.barWidth
-      implicitHeight: screenHeight - Config.barMarginTop - Config.barMarginBottom
-      color: "transparent"
-      
-      MouseArea {
-        anchors.fill: parent
-        onWheel: wheel => {
-          Hyprland.dispatch("workspace 1")
-          // Mpris.players.values.forEach((player, idx) => player.pause())
-        }
-      }
-      
-      Rectangle {
-        id: barRect
-        anchors.fill: parent
-        color: Colors.backgroundColor
-        radius: Config.barRadius
-        border.width: Config.barBorderWidth
-        border.color: Colors.borderColor
-  
-
-        Behavior on height {
-          NumberAnimation {
-            duration: 1000
-            easing.type: Easing.InOutQuart
-          }
-        }
-
-        Behavior on anchors.topMargin {
-            NumberAnimation {
-              duration: 500
-              easing.type: Easing.InOutQuad
-          }
-        }
-       Behavior on anchors.bottomMargin {
-            NumberAnimation {
-              duration: 500
-              easing.type: Easing.InOutQuad
-          }
-        }
-
-
-
-
-        ColumnLayout {
-          anchors { 
-            fill: parent
-            topMargin: -10
-            bottomMargin: 10
-            leftMargin: 3
-            rightMargin: 3
-          }
-          spacing: 4
-          
-          TopSection {}
-
-          CenterSection {}
-          BottomSection {}
-        }
-      }
-    }
+  Loader {
+    readonly property Component lightBar: Qt.createComponent("light/bars/LightBar.qml")
+    readonly property Component darkBar: Qt.createComponent("dark/bars/DarkBar.qml")        
+    sourceComponent: Config.showLightBar ? lightBar : darkBar
   }
+
 }

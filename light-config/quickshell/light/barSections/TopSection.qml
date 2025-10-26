@@ -10,8 +10,8 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
-import qs.barModules
+import qs.light.config
+import qs.light.barModules
 
 Rectangle {
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")

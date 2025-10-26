@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 import Quickshell.Io
-import qs.config
+import qs.light.config
 
 Scope {
   id: root
