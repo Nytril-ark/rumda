@@ -4,6 +4,6 @@ sshkey
 *.key
 id_*
 sshkey.pub
-dark-config/quickshell/rumda-the-cat/
-light-config/quickshell/rumda-the-cat/
+# dark-config/quickshell/rumda-the-cat/
+# light-config/quickshell/rumda-the-cat/
 # light-config/quickshell/shell.qml
