@@ -20,8 +20,7 @@
 
 > [!WARNING]
 > This is a **WIP** that *might* not work for you out of the box. I plan on cleaning it up **very** soon, and I'll add better features. Stay tuned!
-> [!DANGER]
-> theme switch is *still* under construction
+> **Note:** theme switch is *still* under construction
 ---
 
 
