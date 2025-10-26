@@ -3,7 +3,7 @@
 sleep 0.5
 
 # launch quickshell directly and grab its PID
-quickshell -p /home/${USER}/.config/rumda/dark-config/quickshell/shell.qml & 
+quickshell -p /home/${USER}/.config/rumda/common/quickshell/dark/shell.qml & 
 NEW_PID=$!
 disown $NEW_PID
 
