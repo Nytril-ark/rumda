@@ -16,20 +16,19 @@ Singleton {
   readonly property int barWidth: 48
   readonly property int barRadius: 8
   readonly property int barBorderWidth: 2
-  readonly property bool showLightBar: true
+  property bool showLightBar: true
 
   // Shadow Configuration
   readonly property bool enableBarShadow: true
   readonly property bool enableCatShadow: true
   readonly property int shadowOffsetX: -18 - barWidth // note: hardcoded, bind later
-
   readonly property int shadowOffsetY: 1
   
   // Cat Configuration
   readonly property bool enableCat: true
   readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
-  readonly property int catMarginLeft: -7 -barWidth //note: this is hardcoded, bind it to the bar later
+  readonly property int catMarginLeft: -7 - barWidth //note: this is hardcoded, bind it to the bar later
   readonly property int catWidth: 50
   readonly property int catHeight: 90
   //==============================================================

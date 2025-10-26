@@ -16,7 +16,6 @@ Rectangle {
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
   color: "transparent"
-  
   property real innerModulesRadius: 3
 
   // Date/time formatting
@@ -56,9 +55,7 @@ Rectangle {
     anchors.bottomMargin: 2
     spacing: 6
 
-    ThemeSwitch {
-      onThemeChanged: root.triggerBarAnimation()  // Pass the signal through
-    }
+    ThemeSwitch {}
     WeatherStatus {}
     InternetConnection {}
     Power {}

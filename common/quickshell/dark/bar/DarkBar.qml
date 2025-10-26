@@ -13,10 +13,11 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
-import qs.light.barModules
-import qs.light.widgets
-import qs.light.config
-import qs.light.barSections
+import qs.dark.barModules
+import qs.dark.bar
+import qs.dark.barSections
+import qs.dark.config
+import qs.dark.widgets
 import qs
 
   
@@ -55,9 +56,7 @@ Scope {
       height: screenHeight - Config.barMarginTop - Config.barMarginBottom + 5
       color: "transparent"
       
-      Component.onCompleted: {  
-        if (barScopeRef) barScopeRef.barShadow = barShadow
-      }
+
       
       Behavior on margins.top {
         NumberAnimation {

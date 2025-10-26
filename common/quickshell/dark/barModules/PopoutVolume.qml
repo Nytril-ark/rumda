@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 import Quickshell.Io
-import qs.config
+import qs.dark.config
 
 Scope {
   id: root
@@ -216,7 +216,7 @@ Scope {
           // Speaker icon
           IconImage {
             implicitSize: 20
-            source: `file://${Config.configPath}/icons/${root.muted ? 'speaker-dark' : 'speaker'}.svg`
+            source: `file://${Config.configPath}/dark/icons/${root.muted ? 'speaker-dark' : 'speaker'}.svg`
             opacity: root.muted ? 0.6 : 1.0
           }
           

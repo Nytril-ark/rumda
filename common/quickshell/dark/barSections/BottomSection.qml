@@ -10,13 +10,12 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.barModules
+import qs.dark.barModules
 
 Rectangle {
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
   color: "transparent"
-  
   property real innerModulesRadius: 3
 
   // Date/time formatting
@@ -56,12 +55,9 @@ Rectangle {
     anchors.bottomMargin: 2
     spacing: 6
 
-    ThemeSwitch {
-      onThemeChanged: root.triggerBarAnimation()  // Pass the signal through
-    }
+    ThemeSwitch {}
     WeatherStatus {}
     InternetConnection {}
     Power {}
-
   }
 }

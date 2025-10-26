@@ -10,12 +10,10 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
+import qs.dark.config
 
 Rectangle {
   id: root
-  
-  readonly property string iconPath: `${Config.configPath}/icons`
   
   // Module properties
   property string iconName: "power"
@@ -47,7 +45,7 @@ Rectangle {
     anchors.centerIn: parent
     width: root.iconSize
     height: root.iconSize
-    source: `file://${root.iconPath}/${root.iconName}.svg`
+    source: `file://${Config.configPath}/dark/icons/${root.iconName}.svg`
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     smooth: true

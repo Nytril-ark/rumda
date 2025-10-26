@@ -10,7 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
+import qs.dark.config
 
 // The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {
@@ -68,7 +68,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 32
         height: 32
-        source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
+        source: `file://${Config.configPath}/dark/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
         antialiasing: true
         smooth: true
         mipmap: true

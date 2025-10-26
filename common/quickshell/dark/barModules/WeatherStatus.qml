@@ -10,7 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
+import qs.dark.config
 Rectangle {
 
   Layout.alignment: Qt.AlignHCenter
@@ -53,7 +53,7 @@ Rectangle {
         anchors.centerIn: parent
         width: 20
         height: 20
-        source: `file:///home/${username}/.config/rumda/light-config/quickshell/icons/weather.svg`
+        source: `file://${Config.configPath}/dark/icons/weather.svg`
         sourceSize.width: 36
         sourceSize.height: 36
       }
@@ -66,7 +66,7 @@ Rectangle {
       Text {
         anchors.centerIn: parent
         text: `${temperature}°`
-        color: Colors.accentColor 
+        color: Colors.accent2Color 
         font.family: "Cartograph CF"
         font.pixelSize: 11
       }

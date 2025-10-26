@@ -10,32 +10,31 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
+import qs.dark.config
 Rectangle {
-  id: root
-  signal themeChanged()
-  readonly property string iconPath: Config.configPath + "/icons"
-
+  id: themeSwitchButton
+  readonly property string iconPath: Config.configPath + "/dark/icons"
+  readonly property bool toggledTheme: false  
   // Dimensions
   readonly property int moduleSize: 26
   readonly property int imageSourceSize: 55
   readonly property int maskWidth: 20
   readonly property int maskHeight: 18
-  readonly property int maskRadius: 8
-
+  readonly property int maskRadius: 8 
 
   Process {
     id: lightConfigScript
     command: [
       "bash",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/light-config.sh"
+      "-c",
+      Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh light"
     ]
   }
 
   // Layout
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
-  Layout.bottomMargin: 3
+  Layout.bottomMargin: 2
   
   // Appearance
   width: moduleSize
@@ -46,35 +45,36 @@ Rectangle {
   
 
   
-  // GitHub icon
+  // Theme switch icon
   Image {
     id: githubIcon
     anchors.fill: parent
-    source: "file://" + root.iconPath + "/themeSwitch.svg"
-    sourceSize.width: root.imageSourceSize
-    sourceSize.height: root.imageSourceSize
+    source: "file://" + themeSwitchButton.iconPath + "/themeSwitch.svg"
+    sourceSize.width: themeSwitchButton.imageSourceSize
+    sourceSize.height: themeSwitchButton.imageSourceSize
     fillMode: Image.PreserveAspectCrop
     scale: 1.0
     antialiasing: true 
     smooth: true
     mipmap: true
+
     layer.enabled: true
     layer.effect: OpacityMask {
       maskSource: Rectangle {
-        width: root.maskWidth
-        height: root.maskHeight
-        radius: root.maskRadius
+        width: themeSwitchButton.maskWidth
+        height: themeSwitchButton.maskHeight
+        radius: themeSwitchButton.maskRadius
       }
     }
   }
   
-  // Click handler
+  
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
-
     onClicked: {
-      themeChanged()
+      Config.showLightBar = !Config.showLightBar
+      console.log("Theme toggled. showLightBar:", Config.showLightBar)
       lightConfigScript.running = true
     }
   } 

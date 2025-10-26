@@ -10,8 +10,8 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.config
-import qs.barModules
+import qs.dark.config
+import qs.dark.barModules
 
 Rectangle {
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
@@ -144,7 +144,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentHours
-          color: Colors.accentColor
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -152,7 +152,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMinutes
-          color: Colors.accentColor
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -169,7 +169,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentDay
-          color: Colors.accentColor
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -177,7 +177,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMonth
-          color: Colors.accentColor
+          color: Colors.accent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }

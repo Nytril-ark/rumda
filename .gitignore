@@ -4,6 +4,7 @@ sshkey
 *.key
 id_*
 sshkey.pub
+backup.qml
 # dark-config/quickshell/rumda-the-cat/
 # light-config/quickshell/rumda-the-cat/
 # light-config/quickshell/shell.qml

@@ -21,11 +21,11 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 
 // dark bar imports
-// import qs.dark.barModules
-// import qs.dark.bar
-// import qs.dark.barSections
+import qs.dark.barModules
+import qs.dark.bar
+import qs.dark.barSections
 import qs.dark.config
-// import qs.dark.widgets
+import qs.dark.widgets
 // light bar imports 
 import qs.light.barModules
 import qs.light.bar
@@ -37,90 +37,6 @@ ShellRoot {
   id: root
 
 
-
-  signal triggerBarAnimation()
-
- // note to self: use:
-    // Connections {
-    //   target: root
-    //   function onTriggerBarAnimation() {
-    //     console.log("Bar animation triggered!")
-    //     barRect.anchors.topMargin = -bar.height
-    //     barRect.anchors.bottomMargin = bar.height
-    //   }
-    // }
-
-
-
-
-// ==================== CONFIGURATION ====================
-// configuration moved to /config/Config.qml for now  
-  // EXPERIMENTAL ======== rumda-the-cat ========
-  // ============================================
-  //
-  // ==================== TESTING THE CAT WIDGET ====================
-    
-    // Example 1: Static cat in center
-    // Widgets.Rumda_the_cat {
-    //     position: "center"
-    //     catWidth: 150
-    //     catHeight: 150
-    // }
-    // ================================ 
-    // Widgets.Rumda_the_cat {
-    //     position: "custom"
-    //     customX: 400
-    //     customY: 400
-    //     catWidth: 100
-    //     catHeight: 100
-    //     enableMovement: true
-    //     movementDirection: "right"
-    //     movementSpeed: 2000  // milliseconds to cross screen
-    // }
-    
-    // Example 3: Cat bouncing back and forth at top
-    // Widgets.Rumda_the_cat {
-    //     position: "top-left"
-    //     catWidth: 80
-    //     catHeight: 80
-    //     enableMovement: true
-    //     movementDirection: "right"
-    //     movementSpeed: 3000
-    //     movementBounce: true
-    // }
-    
-    // Example 4: Custom positioned cat
-    // Widgets.Rumda_the_cat {
-    //     position: "custom"
-    //     customX: 100
-    //     customY: 200
-    //     catWidth: 120
-    //     catHeight: 120
-    //     catLayer: WlrLayer.Overlay  // Display on top
-    // }
-    
-    // Example 5: Cat walking up the screen
-    // Widgets.Rumda_the_cat {
-    //     position: "bottom-left"
-    //     enableMovement: true
-    //     movementDirection: "up"
-    //     movementSpeed: 4000
-    // }
-
-    
-    // control:
-    // Widgets.AnimatedCat {
-    //   id: myCat
-    // }
-    //
-    // // Control playback
-    // Button { onClicked: myCat.play() }
-    // Button { onClicked: myCat.pause() }
-    // Button { onClicked: myCat.stop() }
-    //
-    // // Control movement
-    // Button { onClicked: myCat.startMovement() }
-    // Button { onClicked: myCat.stopMovement() }
 
   
 
@@ -146,18 +62,60 @@ ShellRoot {
 
 
 // ==================== BAR SHADOW ====================
-  Loader {
-      active: Config.enableBarShadow
-      readonly property Component lightBarShadow: Qt.createComponent("light/bar/LightBarShadow.qml")
-      readonly property Component darkBarShadow: Qt.createComponent("dark/bar/DarkBarShadow.qml") 
-      sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
-  }
+  // Loader {    // NOTE TO SELF : remove this shadow loader later
+  //     active: Config.enableBarShadow
+  //     readonly property Component lightBarShadow: Qt.createComponent("light/bar/LightBarShadow.qml")
+  //     readonly property Component darkBarShadow: Qt.createComponent("dark/bar/DarkBarShadow.qml") 
+  //     sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
+  // }
 
-
   Loader {
+    id: barLoader
     readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")        
+
+    // States for animation purposes
+    property string animationState: "idle"  // idle, entering (from bottom), exiting (to top)
+    property bool targetIsLight: Config.showLightBar
+
     sourceComponent: Config.showLightBar ? lightBar : darkBar
+
+    Connections {
+      target: Config
+      function onShowLightBarChanged() {
+        if (barLoader.animationState === "idle") {
+          barLoader.startTransition()
+        }
+      }
+    }
+    function startTransition() {
+      animationState = "exiting"
+      
+      // tell le current bar to animate out
+      if (barLoader.item && barLoader.item.animateOut) {
+        barLoader.item.animateOut()
+      }
+    }
+
+    // Called by bar when exit animation completes
+    function onExitComplete() {
+      animationState = "switching"
+      targetIsLight = Config.showLightBar
+      
+      // Component will reload here
+      Qt.callLater(() => {
+        animationState = "entering"
+        if (barLoader.item && barLoader.item.animateIn) {
+          barLoader.item.animateIn()
+        }
+      })
+    }
+    
+    function onEnterComplete() {
+      animationState = "idle"
+    }
   }
+
+
 
 }
