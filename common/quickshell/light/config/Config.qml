@@ -8,21 +8,15 @@ Singleton {
   readonly property string username: Quickshell.env("USER") || "user"
   readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/common/quickshell"
 
-
-
-
   // Bar Configuration
   readonly property int barMarginTop: 80
   readonly property int barMarginBottom: 80
   readonly property int barMarginLeft: 18
   readonly property int barMarginRight: 1
-  readonly property int barWidth: 50
+  readonly property int barWidth: 48
   readonly property int barRadius: 8
   readonly property int barBorderWidth: 2
   readonly property bool showLightBar: true
-
-
-  readonly property int barHeight: 700 // NOTE TO SELF: delete this LATER
 
   // Shadow Configuration
   readonly property bool enableBarShadow: true
