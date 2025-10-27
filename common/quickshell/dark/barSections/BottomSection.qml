@@ -12,7 +12,13 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 import qs.dark.barModules
 
+
 Rectangle {
+  id: root
+  signal barAnimate()
+  function themeClicked() {
+    barAnimate()
+  }
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
   color: "transparent"
@@ -55,9 +61,12 @@ Rectangle {
     anchors.bottomMargin: 2
     spacing: 6
 
-    ThemeSwitch {}
+    ThemeSwitch {
+      onThemeChanged: themeClicked()
+    }
     WeatherStatus {}
     InternetConnection {}
     Power {}
   }
 }
+

@@ -14,7 +14,8 @@ import qs.dark.config
 
 Rectangle {
   id: themeSwitchButton
-  readonly property string iconPath: Config.configPath + "/light/icons"
+
+  readonly property string iconPath: Config.configPath + "/dark/icons"
   
   readonly property int moduleSize: 26
   readonly property int imageSourceSize: 55
@@ -23,7 +24,7 @@ Rectangle {
   readonly property int maskRadius: 8 
   
   Process {
-    id: darkConfigScript
+    id: lightConfigScript
     command: [
       "bash",
       "-c",
@@ -62,16 +63,13 @@ Rectangle {
     }
   }
   
+  signal ThemeChanged()
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      // TRIGGER: Toggle the config property (this starts the whole animation chain)
-      Config.showLightBar = !Config.showLightBar
-      console.log("Theme toggled. showLightBar:", Config.showLightBar)
-      
-      // RUN: Change wallpaper script
-      darkConfigScript.running = true
+      ThemeChanged()
+      lightConfigScript.running = true
     }
   } 
 }

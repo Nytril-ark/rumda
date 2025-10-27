@@ -63,12 +63,20 @@ ShellRoot {
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
     
     sourceComponent: Config.showLightBar ? lightBar : darkBar
+
+    
     Connections {
-      target: barLoader.item
-      function onBarSignalTheme() {  // Change "YourSignalNameHere" to match your signal
-        root.themeChangedAnimateCat()       // Change "root" to your ShellRoot id
-      }                                   // Change "triggerBarAnimation" to your signal name
-    } 
+        target: barLoader.item
+        
+        function onBarSignalTheme() { 
+            root.themeChangedAnimateCat()
+            
+            Timer.singleShot(4000, () => {
+                console.log("Switching theme")
+                Config.showLightBar = !Config.showLightBar
+            })
+        }
+    }
   }
 }
 
@@ -81,4 +89,16 @@ ShellRoot {
   //     readonly property Component darkBarShadow: Qt.createComponent("dark/bar/DarkBarShadow.qml") 
   //     sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
   // }
+  //
+  //
+  //
+  //
+    // Connections {
+
+    //   target: barLoader.item
+    //   function onBarDarkSignalTheme() { 
+    //     root.themeChangedAnimateCat()
+    //   }
+    // }
+
 
