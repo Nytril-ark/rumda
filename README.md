@@ -106,4 +106,4 @@ PS: the cat face at the bottom of the bar is an internet widget. if it's smiling
 
 ### theme switcher
 I kick off the cat for a little fun
-![themeswitch](/pictures/themeswitch.gif)
+
