@@ -14,38 +14,41 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import qs.dark.barModules
-import qs.dark.bar
-import qs.dark.barSections
-import qs.dark.config
 import qs.dark.widgets
+import qs.dark.config
+import qs.dark.barSections
 import qs
 
-  
 Scope {
-
-    id: barScope
-    // Animation functions exposed to parent
-    // Note to self: well.. this works.. 
-    // what I understand is that we're wrapping
-    // the rectangle's function to expose it to the 
-    // parent (aka, shell.qml) because it can't 
-    // access it directly, and rather accesses
-    // this scope
-    function animateOut() {
-      barRectangle.animateToTop()
-    }
-    
-    function animateIn() {
-      barRectangle.animateFromBottom()
-    }
-
-
-  // ================shadow=======================
- Loader {
+  id: barScope
+  
+  // SIGNAL: Emitted when exit animation completes
+  signal exitAnimationDone()
+  
+  // SIGNAL: Emitted when enter animation completes
+  signal enterAnimationDone()
+  
+  // FUNCTION: Called by parent (shell.qml) to start exit animation
+  function animateOut() {
+    barRectangle.slideToTop()
+  }
+  
+  // FUNCTION: Called automatically when this bar is first created
+  function animateIn() {
+    barRectangle.slideFromBottom()
+  }
+  
+  // AUTO-CONNECT: When exit animation finishes, notify parent
+  onExitAnimationDone: {
+    barLoader.barExitComplete()
+  }
+  
+  // Shadow
+  Loader {
     active: Config.enableBarShadow
     sourceComponent: WlrLayershell {
       id: barShadow
-      property int screenHeight: ScreenConf.screenHeight ? screen.height : 1080 // screenheight or default
+      property int screenHeight: ScreenConf.screenHeight ? screen.height : 1080
       margins { 
         top: Config.barMarginTop + Config.shadowOffsetY
         left: Config.barMarginLeft + Config.shadowOffsetX
@@ -56,14 +59,13 @@ Scope {
       height: screenHeight - Config.barMarginTop - Config.barMarginBottom + 5
       color: "transparent"
       
-
-      
       Behavior on margins.top {
         NumberAnimation {
           duration: 300
           easing.type: Easing.InOutQuad
         }
       }
+      
       Repeater {
         model: [
           { size: 0, opacity: 0.3, radius: 8 },
@@ -73,7 +75,6 @@ Scope {
         
         Rectangle {
           required property var modelData
-          
           anchors.centerIn: parent
           width: parent.width - modelData.size
           height: parent.height - modelData.size
@@ -84,107 +85,102 @@ Scope {
       }
     }
   }
-// ==================== MAIN BAR ====================
 
-    PopoutVolume {}
-    WlrLayershell {
-      id: bar 
-      anchors { top: true; bottom: true; left: true }
-      layer: WlrLayer.Top
-      implicitWidth: Config.barWidth + Config.barBorderWidth
-      color: "transparent"
-
-      margins { 
-        top: 0
-        left: Config.barMarginLeft
-        right: Config.barMarginRight
-        bottom: 0
+  // Main Bar
+  PopoutVolume {}
+  
+  WlrLayershell {
+    id: bar 
+    anchors { top: true; bottom: true; left: true }
+    layer: WlrLayer.Top
+    implicitWidth: Config.barWidth + Config.barBorderWidth
+    color: "transparent"
+    
+    margins { 
+      top: 0
+      left: Config.barMarginLeft
+      right: Config.barMarginRight
+      bottom: 0
+    }
+    
+    MouseArea {
+      anchors.fill: parent
+      onWheel: wheel => {
+        Hyprland.dispatch("workspace 1")
       }
-
-      MouseArea {
-        anchors.fill: parent
-        onWheel: wheel => {
-          Hyprland.dispatch("workspace 1")
-          // Mpris.players.values.forEach((player, idx) => player.pause())
-          // this ^ pauses on wspace switch, which i dont like
-        }
+    }
+    
+    Rectangle {
+      id: barRectangle
+      anchors.fill: parent
+      anchors.horizontalCenter: bar.horizontalCenter
+      color: Colors.backgroundColor
+      radius: Config.barRadius
+      border.width: Config.barBorderWidth
+      border.color: Colors.borderColor
+      anchors.topMargin: Config.barMarginTop
+      anchors.bottomMargin: Config.barMarginBottom
+      implicitWidth: Config.barWidth
+      
+      // LIFECYCLE: When bar is first created, start at bottom and animate in
+      Component.onCompleted: {
+        anchors.topMargin = ScreenConf.screenHeight + 20  // Start below screen
+        Qt.callLater(() => slideFromBottom())  // Wait one frame then animate in
       }
       
-      Rectangle {
-        id: barRectangle
-        property bool isAnimatingOut: false
-        property bool isAnimatingIn: false     
-        anchors.fill: parent
-        anchors.horizontalCenter: bar.horizontalCenter
-        color: Colors.backgroundColor
-        radius: Config.barRadius
-        border.width: Config.barBorderWidth
-        border.color: Colors.borderColor
-        anchors.topMargin: Config.barMarginTop
-        anchors.bottomMargin: Config.barMarginBottom
-        implicitWidth: Config.barWidth
-
-        Behavior on height {
-          NumberAnimation {
-            duration: 1000
-            easing.type: Easing.InOutQuart
-          }
-        }
-
-        Component.onCompleted: {
-          if (barLoader.animationState === "entering") {
-            anchors.topMargin = ScreenConf.screenHeight + 20  // Start from bottom + a few px for good measure
-            animateFromBottom()
-          }
-        }
-
-
-        function animateToTop() {
-          isAnimatingOut = true
-          anchors.topMargin = -height  // Slide up
-        }
-        
-        function animateFromBottom() {
-          isAnimatingIn = true
-          anchors.topMargin = Config.barMarginTop  // Slide to normal position
-        }
-
-        Behavior on anchors.topMargin {
-          NumberAnimation {
-            duration: 500
-            easing.type: Easing.InOutQuad
-            
-            onRunningChanged: {
-              if (!running) {
-                if (barRectangle.isAnimatingOut) {
-                  barRectangle.isAnimatingOut = false
-                  barLoader.onExitComplete()
-                }
-                if (barRectangle.isAnimatingIn) {
-                  barRectangle.isAnimatingIn = false
-                  barLoader.onEnterComplete()
-                }
+      // FUNCTION: Slide bar up off screen (exit animation)
+      function slideToTop() {
+        anchors.topMargin = -height  // Move above screen
+      }
+      
+      // FUNCTION: Slide bar up from bottom to normal position (enter animation)
+      function slideFromBottom() {
+        anchors.topMargin = Config.barMarginTop  // Move to normal position
+      }
+      
+      // ANIMATION: Smooth transition for topMargin changes
+      Behavior on anchors.topMargin {
+        NumberAnimation {
+          duration: 500
+          easing.type: Easing.InOutQuad
+          
+          // CALLBACK: When animation finishes, emit appropriate signal
+          onRunningChanged: {
+            if (!running) {  // Animation just stopped
+              // Check if we're off-screen (exit complete)
+              if (barRectangle.anchors.topMargin < 0) {
+                barScope.exitAnimationDone()
+              }
+              // Check if we're at normal position (enter complete)
+              else if (barRectangle.anchors.topMargin === Config.barMarginTop) {
+                barScope.enterAnimationDone()
               }
             }
           }
         }
-
-
-        ColumnLayout {
-          anchors { 
-            fill: parent
-            topMargin: -10
-            bottomMargin: 10
-            leftMargin: 3
-            rightMargin: 3
-          }
-          spacing: 4
-          
-          TopSection {}
-
-          CenterSection {}
-          BottomSection {}
+      }
+      
+      Behavior on height {
+        NumberAnimation {
+          duration: 1000
+          easing.type: Easing.InOutQuart
         }
+      }
+      
+      ColumnLayout {
+        anchors { 
+          fill: parent
+          topMargin: -10
+          bottomMargin: 10
+          leftMargin: 3
+          rightMargin: 3
+        }
+        spacing: 4
+        
+        TopSection {}
+        CenterSection {}
+        BottomSection {}
       }
     }
   }
+}

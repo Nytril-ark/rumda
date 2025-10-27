@@ -3,7 +3,6 @@
 //@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 pragma ComponentBehavior: Bound
-
 import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts
@@ -19,7 +18,6 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
-
 // dark bar imports
 import qs.dark.barModules
 import qs.dark.bar
@@ -38,14 +36,11 @@ ShellRoot {
 
 
 
-  
-
-
   //==============================================================
   // The current animation isn't great, I plan on improving
   // its smoothness soon. I shall keep it like this for now
   // as a placeholder
-  //
+ 
   property var catFrameConfigs: [
     { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 10, rotation: 0 },
     { marginTop: 20, marginLeft: -90, width: 140, height: 92, delay: 25, rotation: 0 },
@@ -57,8 +52,19 @@ ShellRoot {
     { marginTop: -6, marginLeft: -170, width: 190, height: 92, delay: 20, rotation: 0 },
     { marginTop: -16, marginLeft: -190, width: 200, height: 90, delay: 20, rotation: 0 }
   ]
-
+  
   CatAnimation {}
+
+  Loader {
+    id: barLoader
+    readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
+    readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
+    
+    sourceComponent: Config.showLightBar ? lightBar : darkBar
+    
+  }
+}
+
 
 
 // ==================== BAR SHADOW ====================
@@ -69,53 +75,3 @@ ShellRoot {
   //     sourceComponent: Config.showLightBar ? lightBarShadow : darkBarShadow
   // }
 
-  Loader {
-    id: barLoader
-    readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
-    readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")        
-
-    // States for animation purposes
-    property string animationState: "idle"  // idle, entering (from bottom), exiting (to top)
-    property bool targetIsLight: Config.showLightBar
-
-    sourceComponent: Config.showLightBar ? lightBar : darkBar
-
-    Connections {
-      target: Config
-      function onShowLightBarChanged() {
-        if (barLoader.animationState === "idle") {
-          barLoader.startTransition()
-        }
-      }
-    }
-    function startTransition() {
-      animationState = "exiting"
-      
-      // tell le current bar to animate out
-      if (barLoader.item && barLoader.item.animateOut) {
-        barLoader.item.animateOut()
-      }
-    }
-
-    // Called by bar when exit animation completes
-    function onExitComplete() {
-      animationState = "switching"
-      targetIsLight = Config.showLightBar
-      
-      // Component will reload here
-      Qt.callLater(() => {
-        animationState = "entering"
-        if (barLoader.item && barLoader.item.animateIn) {
-          barLoader.item.animateIn()
-        }
-      })
-    }
-    
-    function onEnterComplete() {
-      animationState = "idle"
-    }
-  }
-
-
-
-}

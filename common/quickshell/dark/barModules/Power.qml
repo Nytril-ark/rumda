@@ -45,7 +45,7 @@ Rectangle {
     anchors.centerIn: parent
     width: root.iconSize
     height: root.iconSize
-    source: `file://${Config.configPath}/dark/icons/${root.iconName}.svg`
+    source: `file://${Config.configPath}/light/icons/${root.iconName}.svg`
     fillMode: Image.PreserveAspectFit
     antialiasing: true
     smooth: true

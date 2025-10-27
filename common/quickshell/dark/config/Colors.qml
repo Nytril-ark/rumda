@@ -13,16 +13,18 @@ Singleton {
   // property color errorColor: "#9A4235" 
   // property color shadowColor: "#3A2D26" 
 
+  // ====
+  // property color accent2Color: "#e05e63" 
   // property color backgroundColor: "#2A1F18"  //bar color
-  property color backgroundColor: "#1c1612"  //bar color
+  // property color gradientAccent2Color: "#EE696E"  //bottom / right of volume bar
   // property color indicatorBGColor: "#D58A8E" 
+  // ====
+  property color backgroundColor: "#1c1612"  //bar color
   property color indicatorBGColor: "#DAB08B" 
   property color borderColor: "#3A2D22" 
   property color moduleBG: "#3A2D26" 
   property color accentColor: "#9F684C" 
-  // property color accent2Color: "#e05e63" 
   property color accent2Color: "#AF8C65" 
-  // property color gradientAccent2Color: "#EE696E"  //bottom / right of volume bar
   property color gradientAccent2Color: "#D1AB86"  //bottom / right of volume bar
   property color errorColor: "#9A4235" 
   property color shadowColor: "#33EE696E" 

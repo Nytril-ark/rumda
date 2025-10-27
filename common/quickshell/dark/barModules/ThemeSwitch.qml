@@ -11,41 +11,36 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 import qs.dark.config
+
 Rectangle {
   id: themeSwitchButton
-  readonly property string iconPath: Config.configPath + "/dark/icons"
-  readonly property bool toggledTheme: false  
-  // Dimensions
+  readonly property string iconPath: Config.configPath + "/light/icons"
+  
   readonly property int moduleSize: 26
   readonly property int imageSourceSize: 55
   readonly property int maskWidth: 20
   readonly property int maskHeight: 18
   readonly property int maskRadius: 8 
-
+  
   Process {
-    id: lightConfigScript
+    id: darkConfigScript
     command: [
       "bash",
       "-c",
       Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh light"
     ]
   }
-
-  // Layout
+  
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
   Layout.bottomMargin: 2
   
-  // Appearance
   width: moduleSize
   height: moduleSize
   radius: innerModulesRadius
   color: "transparent"
   clip: true
   
-
-  
-  // Theme switch icon
   Image {
     id: githubIcon
     anchors.fill: parent
@@ -57,7 +52,6 @@ Rectangle {
     antialiasing: true 
     smooth: true
     mipmap: true
-
     layer.enabled: true
     layer.effect: OpacityMask {
       maskSource: Rectangle {
@@ -68,14 +62,16 @@ Rectangle {
     }
   }
   
-  
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
+      // TRIGGER: Toggle the config property (this starts the whole animation chain)
       Config.showLightBar = !Config.showLightBar
       console.log("Theme toggled. showLightBar:", Config.showLightBar)
-      lightConfigScript.running = true
+      
+      // RUN: Change wallpaper script
+      darkConfigScript.running = true
     }
   } 
 }

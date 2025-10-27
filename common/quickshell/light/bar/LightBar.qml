@@ -22,7 +22,38 @@ import qs
   
 Scope {
 
-    id: barScope
+  id: barScope
+  property int margint: Config.barMarginTop
+  property int marginb: Config.barMarginBottom 
+
+  signal barAnimate()
+
+  function animationTrig() {
+    console.log("Bar animation triggered!")
+      margint = Config.syncTbar
+      marginb = Config.syncBbar 
+      // barShadow.margins.top = bar.margins.top + Config.barMarginTop + Config.shadowOffsetY 
+      // barShadow.margins.bottom = bar.margins.bottom + Config.barMarginBottom - Config.shadowOffsetY
+      // barShadow.margins.top = -ScreenConf.screenHeight
+      // barShadow.margins.bottom = ScreenConf.screenHeight
+  }
+
+
+  Behavior on margint {
+    NumberAnimation {
+      duration: 500
+      easing.type: Easing.InOutQuad
+    }
+  }
+  Behavior on marginb {
+      NumberAnimation {
+      duration: 500
+      easing.type: Easing.InOutQuad
+    }
+  }
+
+
+
     // Animation functions exposed to parent
     // Note to self: well.. this works.. 
     // what I understand is that we're wrapping
@@ -30,13 +61,8 @@ Scope {
     // parent (aka, shell.qml) because it can't 
     // access it directly, and rather accesses
     // this scope
-    function animateOut() {
-      barRectangle.animateToTop()
-    }
-    
-    function animateIn() {
-      barRectangle.animateFromBottom()
-    }
+
+
 
 
   // ================shadow=======================
@@ -45,26 +71,30 @@ Scope {
     sourceComponent: WlrLayershell {
       id: barShadow
       property int screenHeight: ScreenConf.screenHeight ? screen.height : 1080 // screenheight or default
-      margins { 
-        top: Config.barMarginTop + Config.shadowOffsetY
+      margins {
         left: Config.barMarginLeft + Config.shadowOffsetX
+        top: barScope.margint  + Config.shadowOffsetY 
+        bottom : barScope.marginb  - Config.shadowOffsetY
       }
       anchors { top: true; left: true }
       layer: WlrLayer.Bottom
       width: Config.barWidth + 5
       height: screenHeight - Config.barMarginTop - Config.barMarginBottom + 5
       color: "transparent"
-      
-      Component.onCompleted: {  
-        if (barScopeRef) barScopeRef.barShadow = barShadow
-      }
-      
       Behavior on margins.top {
         NumberAnimation {
           duration: 300
           easing.type: Easing.InOutQuad
         }
       }
+     Behavior on margins.bottom {
+        NumberAnimation {
+        duration: 300
+        easing.type: Easing.InOutQuad
+      }
+    }
+
+
       Repeater {
         model: [
           { size: 0, opacity: 0.3, radius: 8 },
@@ -87,21 +117,20 @@ Scope {
   }
 // ==================== MAIN BAR ====================
 
+
     PopoutVolume {}
     WlrLayershell {
       id: bar 
       anchors { top: true; bottom: true; left: true }
       layer: WlrLayer.Top
       implicitWidth: Config.barWidth + Config.barBorderWidth
-      color: "transparent"
-
-      margins { 
-        top: 0
+      color: "transparent"    
+      margins {
         left: Config.barMarginLeft
         right: Config.barMarginRight
-        bottom: 0
+        top: 0 
+        bottom : 0
       }
-
       MouseArea {
         anchors.fill: parent
         onWheel: wheel => {
@@ -113,62 +142,33 @@ Scope {
       
       Rectangle {
         id: barRectangle
-        property bool isAnimatingOut: false
-        property bool isAnimatingIn: false     
         anchors.fill: parent
         anchors.horizontalCenter: bar.horizontalCenter
         color: Colors.backgroundColor
         radius: Config.barRadius
         border.width: Config.barBorderWidth
         border.color: Colors.borderColor
-        anchors.topMargin: Config.barMarginTop
-        anchors.bottomMargin: Config.barMarginBottom
         implicitWidth: Config.barWidth
+        anchors.topMargin: barScope.margint
+        anchors.bottomMargin: barScope.marginb
 
-        Behavior on height {
-          NumberAnimation {
-            duration: 1000
-            easing.type: Easing.InOutQuart
-          }
-        }
-
-        Component.onCompleted: {
-          if (barLoader.animationState === "entering") {
-            anchors.topMargin = ScreenConf.screenHeight + 20  // Start from bottom + a few px for good measure
-            animateFromBottom()
-          }
-        }
-
-
-        function animateToTop() {
-          isAnimatingOut = true
-          anchors.topMargin = -height  // Slide up
-        }
-        
-        function animateFromBottom() {
-          isAnimatingIn = true
-          anchors.topMargin = Config.barMarginTop  // Slide to normal position
-        }
 
         Behavior on anchors.topMargin {
           NumberAnimation {
             duration: 500
             easing.type: Easing.InOutQuad
-            
-            onRunningChanged: {
-              if (!running) {
-                if (barRectangle.isAnimatingOut) {
-                  barRectangle.isAnimatingOut = false
-                  barLoader.onExitComplete()
-                }
-                if (barRectangle.isAnimatingIn) {
-                  barRectangle.isAnimatingIn = false
-                  barLoader.onEnterComplete()
-                }
-              }
-            }
           }
         }
+       Behavior on anchors.bottomMargin {
+          NumberAnimation {
+          duration: 500
+          easing.type: Easing.InOutQuad
+        }
+       }
+
+
+
+
 
 
         ColumnLayout {
@@ -180,11 +180,11 @@ Scope {
             rightMargin: 3
           }
           spacing: 4
-          
           TopSection {}
-
           CenterSection {}
-          BottomSection {}
+          BottomSection {
+            onBarAnimate: animationTrig()
+          }
         }
       }
     }
