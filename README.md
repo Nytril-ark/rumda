@@ -26,8 +26,6 @@
 > **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
 > also, the [theme switcher](#theme-switcher)
 
-> **Note:** theme switch is *still* under construction
-
 > **Note:** the bar and widgets config can be changed through the qml files in /common/quickshell/light/config/
 ---
 
@@ -107,3 +105,4 @@ PS: the cat face at the bottom of the bar is an internet widget. if it's smiling
 ### theme switcher
 I kick off the cat for a little fun
 
+![themeswitch](/pictures/themeswitch.gif)
