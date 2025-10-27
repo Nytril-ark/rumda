@@ -7,17 +7,25 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
 import qs.light.config
-
+import qs
 Item {
   id: catRoot
-  
-
-  
   // Internal state
+  property var shellRoot
   property bool catAnimationPlaying: false
   property bool catVisible: true
   property bool catReturning: false
-  
+
+  Connections {
+    target: shellRoot
+    function onThemeChangedAnimateCat() {
+      console.log("Cat animation triggered from CatAnimation.qml!")
+      catRoot.catAnimationPlaying = true
+    }
+  }
+
+
+
   // ==================== STATIC CAT WIDGET ====================
   
   Loader {

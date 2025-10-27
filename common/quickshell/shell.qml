@@ -33,7 +33,7 @@ import qs.light.widgets
 
 ShellRoot {
   id: root
-
+  signal themeChangedAnimateCat()
 
 
   //==============================================================
@@ -53,7 +53,9 @@ ShellRoot {
     { marginTop: -16, marginLeft: -190, width: 200, height: 90, delay: 20, rotation: 0 }
   ]
   
-  CatAnimation {}
+  CatAnimation {
+    shellRoot: root  
+  }
 
   Loader {
     id: barLoader
@@ -61,7 +63,12 @@ ShellRoot {
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
     
     sourceComponent: Config.showLightBar ? lightBar : darkBar
-    
+    Connections {
+      target: barLoader.item
+      function onBarSignalTheme() {  // Change "YourSignalNameHere" to match your signal
+        root.themeChangedAnimateCat()       // Change "root" to your ShellRoot id
+      }                                   // Change "triggerBarAnimation" to your signal name
+    } 
   }
 }
 

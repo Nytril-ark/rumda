@@ -27,11 +27,12 @@ Scope {
   property int marginb: Config.barMarginBottom 
 
   signal barAnimate()
-
+  signal barSignalTheme()
   function animationTrig() {
     console.log("Bar animation triggered!")
       margint = Config.syncTbar
       marginb = Config.syncBbar 
+      barSignalTheme()
       // barShadow.margins.top = bar.margins.top + Config.barMarginTop + Config.shadowOffsetY 
       // barShadow.margins.bottom = bar.margins.bottom + Config.barMarginBottom - Config.shadowOffsetY
       // barShadow.margins.top = -ScreenConf.screenHeight
@@ -165,10 +166,6 @@ Scope {
           easing.type: Easing.InOutQuad
         }
        }
-
-
-
-
 
 
         ColumnLayout {
