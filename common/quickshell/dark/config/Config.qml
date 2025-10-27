@@ -1,4 +1,3 @@
-
 pragma Singleton
 
 import QtQuick
@@ -16,11 +15,10 @@ Singleton {
   readonly property int barMarginRight: 1
   readonly property int barWidth: 48
   readonly property int barRadius: 8
-  readonly property int barBorderWidth: 2
+  readonly property int barBorderWidth: 1
   readonly property int barsGrave: 1400    // where the bar goes in terms of y position when it's animated out on a themeswitch (it then gets killed)
                                           // increasing it will increase animation speed. also, it kinda depends on ur screenheight
   property bool showLightBar: true
-
   // stuff I'm using to sync the bar switch animation. plz don't mess it up
   property int syncTbar: -(barsGrave - barMarginTop - barMarginBottom)
   property int syncBbar:  (barsGrave - barMarginTop - barMarginBottom)
@@ -29,14 +27,14 @@ Singleton {
   // Shadow Configuration
   readonly property bool enableBarShadow: true
   readonly property bool enableCatShadow: true
-  readonly property int shadowOffsetX: -18 - barWidth // note: hardcoded, bind later
-  readonly property int shadowOffsetY: 1
+  readonly property int shadowOffsetX: 3 // note: hardcoded, bind later
+  readonly property int shadowOffsetY: 3
   
   // Cat Configuration
   readonly property bool enableCat: true
-  readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
+  readonly property string catIconPath: configPath + "/dark/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
-  readonly property int catMarginLeft: -7 - barWidth //note: this is hardcoded, bind it to the bar later
+  readonly property int catMarginLeft: -15 - barWidth //note: this is hardcoded, bind it to the bar later
   readonly property int catWidth: 50
   readonly property int catHeight: 90
   //==============================================================
@@ -45,7 +43,7 @@ Singleton {
   // as a placeholder
   //
   // Cat jump out Animation Configuration
-  property string catAnimationFolder: configPath + "/light/gato-jump"
+  property string catAnimationFolder: configPath + "/dark/gato-jump"
   property int catAnimationFrames: 9
   property var catFrameConfigs: [
     { marginTop: 25, marginLeft: -85, width: 140, height: 90, delay: 10, rotation: 0 },

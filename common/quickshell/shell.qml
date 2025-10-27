@@ -19,22 +19,22 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 // dark bar imports
-import qs.dark.barModules
+// import qs.dark.barModules
 import qs.dark.bar
-import qs.dark.barSections
-import qs.dark.config
-import qs.dark.widgets
+// import qs.dark.barSections
+// import qs.dark.config
+// import qs.dark.widgets
 // light bar imports 
-import qs.light.barModules
+// import qs.light.barModules
 import qs.light.bar
-import qs.light.barSections
+// import qs.light.barSections
 import qs.light.config
-import qs.light.widgets
+// import qs.light.widgets
 
 ShellRoot {
   id: root
   signal themeChangedAnimateCat()
-
+  signal barLoaded()
 
   //==============================================================
   // The current animation isn't great, I plan on improving
@@ -61,22 +61,37 @@ ShellRoot {
     id: barLoader
     readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
-    
     sourceComponent: Config.showLightBar ? lightBar : darkBar
-
+  
     
+    
+    onLoaded: {
+      console.log("Bar created:", barLoader.item)
+      barLoader.item.shellRoot = root
+      barLoaded()
+    }
+
+
     Connections {
         target: barLoader.item
-        
         function onBarSignalTheme() { 
-            root.themeChangedAnimateCat()
-            
-            Timer.singleShot(4000, () => {
-                console.log("Switching theme")
-                Config.showLightBar = !Config.showLightBar
-            })
+          Qt.callLater(() => {
+            // root.themeChangedAnimateCat()
+          })
+          delayTimer.start()
         }
     }
+
+    Timer {
+      id: delayTimer
+      interval: 1000 
+      repeat: false
+      onTriggered: Qt.callLater(() => {
+        Config.showLightBar = !Config.showLightBar
+      })
+    }
+
+
   }
 }
 

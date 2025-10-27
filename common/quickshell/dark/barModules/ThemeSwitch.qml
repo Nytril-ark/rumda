@@ -63,12 +63,12 @@ Rectangle {
     }
   }
   
-  signal ThemeChanged()
+  signal themeDarkChanged()
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      ThemeChanged()
+      themeDarkChanged()
       lightConfigScript.running = true
     }
   } 

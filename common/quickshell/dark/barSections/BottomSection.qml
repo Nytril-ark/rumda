@@ -15,9 +15,9 @@ import qs.dark.barModules
 
 Rectangle {
   id: root
-  signal barAnimate()
+  signal barDarkAnimate()
   function themeClicked() {
-    barAnimate()
+    barDarkAnimate()
   }
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
@@ -62,7 +62,7 @@ Rectangle {
     spacing: 6
 
     ThemeSwitch {
-      onThemeChanged: themeClicked()
+      onThemeDarkChanged: themeClicked()
     }
     WeatherStatus {}
     InternetConnection {}

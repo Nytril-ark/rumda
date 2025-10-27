@@ -19,19 +19,51 @@ import qs.light.config
 import qs.light.barSections
 import qs
 
-  
-Scope {
+//
+// Item {
+//   id: catRoot
+//   // Internal state
+//   property var shellRoot
+//   property bool catAnimationPlaying: false
+//   property bool catVisible: true
+//   property bool catReturning: false
+//
+//   Connections {
+//     target: shellRoot
+//     function onThemeChangedAnimateCat() {
+//       console.log("Cat animation triggered from CatAnimation.qml!")
+//       catRoot.catAnimationPlaying = true
+//     }
+//   }
+//
+//
 
+
+Scope {
   id: barScope
+  property var shellRoot
   property int margint: Config.barMarginTop
-  property int marginb: Config.barMarginBottom 
+  property int marginb: Config.barMarginBottom
+  signal barLoaded()
+  function initialiseBar() {
+    barRectangle.anchors.topMargin = barScope.margint
+    barRectangle.anchors.bottomMargin = barScope.marginb
+  }
+  Connections {
+    target: shellRoot
+    function onBarLoaded() {
+      initialiseBar()
+    }
+  }
+
+
 
   signal barAnimate()
   signal barSignalTheme()
   function animationTrig() {
     console.log("Bar animation triggered!")
-      margint = Config.syncTbar
-      marginb = Config.syncBbar 
+      barRectangle.anchors.topMargin = Config.syncTbar
+      barRectangle.anchors.bottomMargin = Config.syncBbar 
       barSignalTheme()
       // barShadow.margins.top = bar.margins.top + Config.barMarginTop + Config.shadowOffsetY 
       // barShadow.margins.bottom = bar.margins.bottom + Config.barMarginBottom - Config.shadowOffsetY
@@ -67,55 +99,11 @@ Scope {
 
 
   // ================shadow=======================
- Loader {
-    active: Config.enableBarShadow
-    sourceComponent: WlrLayershell {
-      id: barShadow
-      property int screenHeight: ScreenConf.screenHeight ? screen.height : 1080 // screenheight or default
-      margins {
-        left: Config.barMarginLeft + Config.shadowOffsetX
-        top: barScope.margint  + Config.shadowOffsetY 
-        bottom : barScope.marginb  - Config.shadowOffsetY
-      }
-      anchors { top: true; left: true }
-      layer: WlrLayer.Bottom
-      width: Config.barWidth + 5
-      height: screenHeight - Config.barMarginTop - Config.barMarginBottom + 5
-      color: "transparent"
-      Behavior on margins.top {
-        NumberAnimation {
-          duration: 300
-          easing.type: Easing.InOutQuad
-        }
-      }
-     Behavior on margins.bottom {
-        NumberAnimation {
-        duration: 300
-        easing.type: Easing.InOutQuad
-      }
-    }
 
+  // the old convoluted shadow has been removed
+  // because I'm a dummy who didn't know
+  // DropShadow {} exists in qml
 
-      Repeater {
-        model: [
-          { size: 0, opacity: 0.3, radius: 8 },
-          { size: 2, opacity: 0.33, radius: 8 },
-          { size: 4, opacity: 0.4, radius: 8 }
-        ]
-        
-        Rectangle {
-          required property var modelData
-          
-          anchors.centerIn: parent
-          width: parent.width - modelData.size
-          height: parent.height - modelData.size
-          color: Colors.shadowColor
-          opacity: modelData.opacity
-          radius: modelData.radius
-        }
-      }
-    }
-  }
 // ==================== MAIN BAR ====================
 
 
@@ -124,11 +112,11 @@ Scope {
       id: bar 
       anchors { top: true; bottom: true; left: true }
       layer: WlrLayer.Top
-      implicitWidth: Config.barWidth + Config.barBorderWidth
+      implicitWidth: Config.barWidth + Config.barBorderWidth + Config.shadowOffsetX + 4
       color: "transparent"    
       margins {
         left: Config.barMarginLeft
-        right: Config.barMarginRight
+        right: Config.barMarginRight 
         top: 0 
         bottom : 0
       }
@@ -140,18 +128,34 @@ Scope {
           // this ^ pauses on wspace switch, which i dont like
         }
       }
-      
-      Rectangle {
+
+
+      // le new simple shadow
+    DropShadow {
+        anchors.fill: barRectangle
+        horizontalOffset: Config.shadowOffsetX
+        verticalOffset: Config.shadowOffsetY
+        radius: 9
+        samples: 21
+        spread: 0.3
+        transparentBorder: true
+        color: Config.enableBarShadow ? Colors.shadowColor : "transparent"
+        source: barRectangle
+    }
+
+     Rectangle {
         id: barRectangle
-        anchors.fill: parent
-        anchors.horizontalCenter: bar.horizontalCenter
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        // anchors.horizontalCenter: parent.horizontalCenter
         color: Colors.backgroundColor
         radius: Config.barRadius
         border.width: Config.barBorderWidth
         border.color: Colors.borderColor
-        implicitWidth: Config.barWidth
-        anchors.topMargin: barScope.margint
-        anchors.bottomMargin: barScope.marginb
+        implicitWidth: Config.barWidth + Config.barBorderWidth
+        anchors.topMargin: -Config.syncTbar
+        anchors.bottomMargin: -Config.syncBbar
 
 
         Behavior on anchors.topMargin {
