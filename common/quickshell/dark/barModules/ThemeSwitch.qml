@@ -32,6 +32,15 @@ Rectangle {
     ]
   }
   
+  Process {
+    id: lightAlacritty
+    command: [
+      "bash",
+      "-c",
+      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh light"
+    ]
+  }
+
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
   Layout.bottomMargin: 2
@@ -70,6 +79,7 @@ Rectangle {
     onClicked: {
       themeDarkChanged()
       lightConfigScript.running = true
+      lightAlacritty.running = true
     }
   } 
 }

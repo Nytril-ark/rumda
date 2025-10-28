@@ -36,9 +36,8 @@ size = 11.0
 style = { shape = "Underline", blinking = "On" }
 
 [colors.primary]
-background = "#d5ccba"
-foreground = "#45373c"
-
+background = "#2A1F18"
+foreground = "#E4C198"
 [colors.cursor]
 cursor = "#45373c"
 text = "#d5ccba"

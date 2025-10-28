@@ -7,10 +7,8 @@ quickshell -p /home/${USER}/.config/rumda/common/quickshell/light/shell.qml &
 NEW_PID=$!
 disown $NEW_PID
 
-# wait a bit to make sure it’s running
 sleep 1
 
-# only kill *other* quickshells, not this one
 pgrep -af "quickshell -p" | awk -v pid="$NEW_PID" '$1 != pid { print $1 }' | xargs -r kill
 
 

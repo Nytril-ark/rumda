@@ -31,7 +31,17 @@ Rectangle {
       Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh dark"
     ]
   }
-  
+
+  Process {
+    id: darkAlacritty
+    command: [
+      "bash",
+      "-c",
+      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark"
+    ]
+  }
+
+
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
   Layout.bottomMargin: 2
@@ -70,6 +80,7 @@ Rectangle {
     onClicked: {
       themeChanged()
       darkConfigScript.running = true
+      darkAlacritty.running = true
     }
   } 
 }
