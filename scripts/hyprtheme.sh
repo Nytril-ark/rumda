@@ -34,10 +34,4 @@ TMP="$(mktemp --tmpdir="$COMMON" hypr.XXXXXX.conf)"
 cp --preserve=mode,ownership,timestamps "$SRC" "$TMP"
 mv --force "$TMP" "$TARGET"
 
-# Trigger reload manually just in case
-if command -v hyprctl >/dev/null 2>&1; then
-  hyprctl reload || true
-fi
-
-echo "✅ Switched Hyprland theme to '$THEME'"
 
