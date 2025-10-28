@@ -1,44 +1,43 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
 # usage: hyprtheme [light|dark]
+set -euo pipefail
 
-set -e
+# Paths
+COMMON="$HOME/.config/rumda/common/hypr"
+LIGHT="$HOME/.config/rumda/light-config/hypr/hyprland.conf"
+DARK="$HOME/.config/rumda/dark-config/hypr/hyprland.conf"
+TARGET="$COMMON/hyprland.conf"
+
+# Argument check
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 [light|dark]" >&2
+  exit 1
+fi
+
 THEME="$1"
 
 case "$THEME" in
-  light)
-    echo "Switching to LIGHT theme..."
-
-    # General border colors
-    hyprctl keyword general:col.active_border "rgba(D1AB86FF)" >/dev/null
-    hyprctl keyword general:col.inactive_border "rgba(D1AB86AA)" >/dev/null
-
-    # Borders-plus-plus plugin
-    hyprctl keyword plugin:borders-plus-plus:col.border_1 "rgb(D5CCBA)" >/dev/null
-    hyprctl keyword plugin:borders-plus-plus:col.border_2 "rgb(2A1F18)" >/dev/null
-    hyprctl keyword plugin:borders-plus-plus:natural_rounding "yes" >/dev/null
-    ;;
-    
-  dark)
-    echo "🌙 Switching to DARK theme..."
-
-    # General border colors
-    hyprctl keyword general:col.active_border "rgba(D1AB86FF)" >/dev/null
-    hyprctl keyword general:col.inactive_border "rgba(D1AB86AA)" >/dev/null
-
-    # Borders-plus-plus plugin
-    hyprctl keyword plugin:borders-plus-plus:col.border_1 "rgb(D5CCBA)" >/dev/null
-    hyprctl keyword plugin:borders-plus-plus:col.border_2 "rgb(3A2D26)" >/dev/null
-    hyprctl keyword plugin:borders-plus-plus:natural_rounding "2" >/dev/null
-    ;;
-    
-  *)
-    echo "Usage: $0 [light|dark]"
-    exit 1
-    ;;
+  light) SRC="$LIGHT" ;;
+  dark)  SRC="$DARK" ;;
+  *) echo "Invalid theme: $THEME"; exit 1 ;;
 esac
 
+if [[ ! -f "$SRC" ]]; then
+  echo "Error: source config not found at $SRC" >&2
+  exit 2
+fi
+
+mkdir -p "$COMMON"
+
+# Atomic replace: copy to temp, then move into place
+TMP="$(mktemp --tmpdir="$COMMON" hypr.XXXXXX.conf)"
+cp --preserve=mode,ownership,timestamps "$SRC" "$TMP"
+mv --force "$TMP" "$TARGET"
+
+# Trigger reload manually just in case
+if command -v hyprctl >/dev/null 2>&1; then
+  hyprctl reload || true
+fi
+
 echo "✅ Switched Hyprland theme to '$THEME'"
-
-
 
