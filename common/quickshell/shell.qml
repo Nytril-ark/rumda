@@ -63,7 +63,14 @@ ShellRoot {
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
     sourceComponent: Config.showLightBar ? lightBar : darkBar
   
-    
+    // ==================================
+    // ==================================
+    // NOTE to self:
+    // use bezier curve in hypr window 
+    // out animation and use a different
+    // easing for the bar
+    // ==================================
+    // ==================================
     
     onLoaded: {
       console.log("Bar created:", barLoader.item)
@@ -84,7 +91,7 @@ ShellRoot {
 
     Timer {
       id: delayTimer
-      interval: 1000 
+      interval: 950 
       repeat: false
       onTriggered: Qt.callLater(() => {
         Config.showLightBar = !Config.showLightBar

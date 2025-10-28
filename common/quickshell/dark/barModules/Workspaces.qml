@@ -69,7 +69,7 @@ Rectangle {
             
             ShapePath {
               fillColor: (workspaceItem.modelData.active || workspaceItem.hovered) 
-                         ? Colors.accent2Color 
+                         ? Colors.gradientAccent2Color 
                          : Colors.indicatorBGColor
               strokeColor: "transparent"
               strokeWidth: 0

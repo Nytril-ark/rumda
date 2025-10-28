@@ -53,22 +53,20 @@ Scope {
       barSignalTheme()
   }
 
-
-  Behavior on margint {
-    NumberAnimation {
-      duration: 500
-      easing.type: Easing.InOutQuad
-    }
-  }
-  Behavior on marginb {
-      NumberAnimation {
-      duration: 500
-      easing.type: Easing.InOutQuad
-    }
-  }
-
-
-
+  //
+  // Behavior on margint {
+  //   NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
+  // Behavior on marginb {
+  //     NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
+  //
     // Animation functions exposed to parent
     // Note to self: well.. this works.. 
     // what I understand is that we're wrapping
@@ -118,8 +116,8 @@ Scope {
         horizontalOffset: Config.shadowOffsetX
         verticalOffset: Config.shadowOffsetY
         radius: 9
-        samples: 21
-        spread: 0.3
+        samples: 29
+        spread: 0.4
         transparentBorder: true
         color: Config.enableBarShadow ? Colors.shadowColor : "transparent"
         source: barRectangle
@@ -142,14 +140,16 @@ Scope {
 
         Behavior on anchors.topMargin {
           NumberAnimation {
-            duration: 500
-            easing.type: Easing.InOutQuad
+            duration: 600
+            // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
           }
         }
        Behavior on anchors.bottomMargin {
           NumberAnimation {
-          duration: 500
-          easing.type: Easing.InOutQuad
+          duration: 600
+          // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
         }
        }
 

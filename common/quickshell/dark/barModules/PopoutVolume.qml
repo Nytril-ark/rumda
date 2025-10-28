@@ -216,7 +216,7 @@ Scope {
           // Speaker icon
           IconImage {
             implicitSize: 20
-            source: `file://${Config.configPath}/light/icons/${root.muted ? 'speaker-dark' : 'speaker'}.svg`
+            source: `file://${Config.configPath}/dark/icons/${root.muted ? 'speaker-dark' : 'speaker'}.svg`
             opacity: root.muted ? 0.6 : 1.0
           }
           

@@ -53,7 +53,7 @@ Rectangle {
         anchors.centerIn: parent
         width: 20
         height: 20
-        source: `file://${Config.configPath}/light/icons/weather.svg`
+        source: `file://${Config.configPath}/dark/icons/weather.svg`
         sourceSize.width: 36
         sourceSize.height: 36
       }
@@ -66,7 +66,7 @@ Rectangle {
       Text {
         anchors.centerIn: parent
         text: `${temperature}°`
-        color: Colors.accent2Color 
+        color: Colors.gradientAccent2Color 
         font.family: "Cartograph CF"
         font.pixelSize: 11
       }

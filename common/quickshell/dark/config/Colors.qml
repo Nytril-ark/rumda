@@ -24,8 +24,8 @@ Singleton {
   property color borderColor: "#3A2D22" 
   property color moduleBG: "#3A2D26" 
   property color accentColor: "#9F684C" 
-  property color accent2Color: "#AF8C65" 
-  property color gradientAccent2Color: "#D1AB86"  //bottom / right of volume bar
+  property color accent2Color: "#9F684C" 
+  property color gradientAccent2Color: "#AF8C65"  //bottom / right of volume bar
   property color errorColor: "#9A4235" 
   property color shadowColor: "#33EE696E" 
 }

@@ -72,18 +72,18 @@ Scope {
   }
 
 
-  Behavior on margint {
-    NumberAnimation {
-      duration: 500
-      easing.type: Easing.InOutQuad
-    }
-  }
-  Behavior on marginb {
-      NumberAnimation {
-      duration: 500
-      easing.type: Easing.InOutQuad
-    }
-  }
+  // Behavior on margint {
+  //   NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
+  // Behavior on marginb {
+  //     NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
 
 
 
@@ -160,14 +160,16 @@ Scope {
 
         Behavior on anchors.topMargin {
           NumberAnimation {
-            duration: 500
-            easing.type: Easing.InOutQuad
+            duration: 600
+            // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
           }
         }
        Behavior on anchors.bottomMargin {
           NumberAnimation {
-          duration: 500
-          easing.type: Easing.InOutQuad
+          duration: 600
+          // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
         }
        }
 

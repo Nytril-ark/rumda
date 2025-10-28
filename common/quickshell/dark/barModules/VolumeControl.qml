@@ -96,7 +96,7 @@ Rectangle {
       Image {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
-        source: `file://${Config.configPath}/light/icons/${muted ? 'speaker-dark' : 'speaker'}.svg`
+        source: `file://${Config.configPath}/dark/icons/${muted ? 'speaker-dark' : 'speaker'}.svg`
         opacity: muted ? 0.6 : 1.0
         antialiasing: true
         smooth: true

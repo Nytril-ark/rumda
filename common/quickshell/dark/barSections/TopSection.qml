@@ -144,7 +144,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentHours
-          color: Colors.accent2Color
+          color: Colors.gradientAccent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -152,7 +152,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMinutes
-          color: Colors.accent2Color
+          color: Colors.gradientAccent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -169,7 +169,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentDay
-          color: Colors.accent2Color
+          color: Colors.gradientAccent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }
@@ -177,7 +177,7 @@ Rectangle {
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMonth
-          color: Colors.accent2Color
+          color: Colors.gradientAccent2Color
           font.family: "Cartograph CF Heavy"
           font.pixelSize: 12
         }

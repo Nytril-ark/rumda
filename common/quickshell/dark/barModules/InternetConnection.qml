@@ -68,7 +68,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 32
         height: 32
-        source: `file://${Config.configPath}/light/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
+        source: `file://${Config.configPath}/dark/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
         antialiasing: true
         smooth: true
         mipmap: true
