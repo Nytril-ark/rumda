@@ -25,6 +25,8 @@ if [[ ! -f "$SRC" ]]; then
   exit 1
 fi
 
+sleep 0.9 
+
 cp "$SRC" "$COMMON_FILE"
 
 ./alacrittytheme.sh $THEME

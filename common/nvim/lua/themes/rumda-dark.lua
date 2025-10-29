@@ -2,7 +2,7 @@ local M = {}
 M.base_30 = {
   white = "#D5CCBA", -- Inverted: light text on dark bg
   darker_black = "#1a1410", -- Darkest background
-  black = "#2a1f18", -- Main dark background
+  black = "#1C1612", -- Main dark background
   black2 = "#362b22", -- Secondary background (slightly lighter)
   one_bg = "#362b22", -- Background for floating windows
   one_bg2 = "#3c312a", -- Background for certain UI elements
@@ -28,7 +28,7 @@ M.base_30 = {
   folder_bg = "#9f7f65", -- Folder icons in file explorer
 }
 M.base_16 = {
-  base00 = "#2a1f18", -- Default dark background
+  base00 = "#1C1612", -- Default dark background
   base01 = "#2a1f18", -- Lighter background (used for status bars, line numbers)
   base02 = "#4c4133", -- Selection background
   base03 = "#d87c6c", -- Comments, invisibles, line highlighting
