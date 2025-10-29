@@ -28,7 +28,7 @@ Singleton {
   readonly property bool enableBarShadow: true
   readonly property bool enableCatShadow: true
   readonly property int shadowOffsetX: 3 // note: hardcoded, bind later
-  readonly property int shadowOffsetY: 3
+  readonly property int shadowOffsetY: 0
   
   // Cat Configuration
   readonly property bool enableCat: true

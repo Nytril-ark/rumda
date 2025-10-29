@@ -135,9 +135,9 @@ Scope {
         anchors.fill: barRectangle
         horizontalOffset: Config.shadowOffsetX
         verticalOffset: Config.shadowOffsetY
-        radius: 9
-        samples: 21
-        spread: 0.3
+        radius: 6
+        samples: 29
+        spread: 0.45
         transparentBorder: true
         color: Config.enableBarShadow ? Colors.shadowColor : "transparent"
         source: barRectangle
