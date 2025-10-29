@@ -1,0 +1,19 @@
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#f4ecd8"
+# set default-fg "#5b4636"
+#
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#1b1512"
+# set default-fg "#d2b48c"
+#
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#1e1e1e"
+# set default-fg "#dcdccc"
+
+set recolor true
+set recolor-keephue true
+set default-bg "#E4C198"
+set default-fg "#1b1512"

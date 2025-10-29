@@ -7,6 +7,7 @@ sshkey.pub
 backup.qml
 scripts/light-config.sh
 scripts/dark-config.sh
+common/hypr/hyprland.conf
 # dark-config/quickshell/rumda-the-cat/
 # light-config/quickshell/rumda-the-cat/
 # light-config/quickshell/shell.qml
