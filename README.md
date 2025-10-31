@@ -47,6 +47,8 @@
 
 
 
+## Installation
+
 
 > [!NOTE]
 > the installation assumes you have all the dependencies 
@@ -94,12 +96,11 @@ Note to self: add swww
 </details>
 
 
-
-## Installation
 > [!CAUTION]
 > please follow these steps carefully:
-> - make sure you have the dependencies listed below
+> - make sure you have installed quickshell, hyprland, etc
 > - make sure the repo is at ~/.config/rumda
+> - lastly, I recommend installing NvChad for nvim
 > You can use this one-liner to clone it and install:
 
 
