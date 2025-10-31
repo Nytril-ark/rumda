@@ -95,7 +95,7 @@ Scope {
           anchors.topMargin: dashboard.height  
           anchors.bottomMargin: -dashboard.height  
 
-          color: Colors.backgroundColor
+          color: Colors.dashBGColor
           radius: Config.dashRadius
           border.width: Config.dashBorderWidth
           border.color: Colors.borderColor
