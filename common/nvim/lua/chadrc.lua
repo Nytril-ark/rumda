@@ -44,6 +44,64 @@ M.ui = {
   },
 }
 
+
+-- --for xfc 
+-- M.ui = {
+--   statusline = {
+--     theme = 'minimal',
+--     separator_style = 'block',
+--     order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd", "cursor" },
+--   modules = {
+--       mode = function()
+--         local stl = require("nvchad.stl.utils")
+--         local m = vim.api.nvim_get_mode().mode
+--         local mode_data = stl.modes[m] or stl.modes["n"]
+--         local mode_hl = "%#St_" .. mode_data[2] .. "Mode#"
+--         -- Icons if you want them:
+--         -- local mode_icons = {
+--         --   n = " 🙤  ",      -- Normal
+--         --   i = " 🙛  ",      -- Insert
+--         --   v = " 🙵  ",      -- Visual
+--         --   V = " ",      -- Visual Line
+--         --   [""] = " ☢  ", -- Visual Block (Ctrl-V)
+--         --   c = " 🙪  ",      -- Command
+--         --   R = " ♣  ",      -- Replace
+--         --   t = " ⨋ ",      -- Terminal
+--         -- }
+--         local mode_icons = {
+--           n = " N ",      -- Normal
+--           i = " I ",      -- Insert
+--           v = " V ",      -- Visual
+--           V = " v ",      -- Visual Line (what's visual line :deep_think:)
+--           [""] = " ☢  ", -- Visual Block (Ctrl-V) (idk)
+--           c = " C ",      -- Command
+--           R = " R ",      -- Replace
+--           t = " T ",      -- Terminal
+--         }
+--         local icon = mode_icons[m] or mode_icons["n"]
+--         return mode_hl .. icon .. " %#St_NormalMode#"
+--       end,
+--     }
+--   },
+--
+--   hl_override = {
+--     Comment = { italic = true },
+--     Keyword = { italic = true },
+--     Statement = { italic = true },
+--     Variable = { italic = true },
+--     Type = { italic = true },
+--     Include = { italic = true },
+--     TSDefine = { italic = true },
+--     TSKeyword = { italic = true },
+--     TSMethod = { italic = true },
+--     TSVariable = { italic = true },
+--     SpecialComment = { italic = true },
+--   },
+-- }
+
+
+
+
 -- ayu_dark, gatekeeper, jelly beans, yoru, rxyhn
 
 return M

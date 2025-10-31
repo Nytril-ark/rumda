@@ -8,7 +8,7 @@ set -e
 
 THEME="$1"
 RUMDA_DIR="$HOME/.config/rumda"
-COMMON_FILE="$RUMDA_DIR/common/hypr/hyprland.conf"
+COMMON_FILE="$HOME/.config/hypr/hyprland.conf"
 
 case "$THEME" in
   light)

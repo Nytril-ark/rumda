@@ -4,10 +4,4 @@ sshkey
 *.key
 id_*
 sshkey.pub
-backup.qml
-scripts/light-config.sh
-scripts/dark-config.sh
-common/hypr/hyprland.conf
-# dark-config/quickshell/rumda-the-cat/
-# light-config/quickshell/rumda-the-cat/
-# light-config/quickshell/shell.qml
+common/nvim/pack/github/start/copilot.vim
