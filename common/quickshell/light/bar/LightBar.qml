@@ -19,25 +19,6 @@ import qs.light.config
 import qs.light.barSections
 import qs
 
-//
-// Item {
-//   id: catRoot
-//   // Internal state
-//   property var shellRoot
-//   property bool catAnimationPlaying: false
-//   property bool catVisible: true
-//   property bool catReturning: false
-//
-//   Connections {
-//     target: shellRoot
-//     function onThemeChangedAnimateCat() {
-//       console.log("Cat animation triggered from CatAnimation.qml!")
-//       catRoot.catAnimationPlaying = true
-//     }
-//   }
-//
-//
-
 
 Scope {
   id: barScope
@@ -56,8 +37,6 @@ Scope {
     }
   }
 
-
-
   signal barAnimate()
   signal barSignalTheme()
   function animationTrig() {
@@ -65,28 +44,7 @@ Scope {
       barRectangle.anchors.topMargin = Config.syncTbar
       barRectangle.anchors.bottomMargin = Config.syncBbar 
       barSignalTheme()
-      // barShadow.margins.top = bar.margins.top + Config.barMarginTop + Config.shadowOffsetY 
-      // barShadow.margins.bottom = bar.margins.bottom + Config.barMarginBottom - Config.shadowOffsetY
-      // barShadow.margins.top = -ScreenConf.screenHeight
-      // barShadow.margins.bottom = ScreenConf.screenHeight
   }
-
-
-  // Behavior on margint {
-  //   NumberAnimation {
-  //     duration: 500
-  //     easing.type: Easing.InOutQuad
-  //   }
-  // }
-  // Behavior on marginb {
-  //     NumberAnimation {
-  //     duration: 500
-  //     easing.type: Easing.InOutQuad
-  //   }
-  // }
-
-
-
     // Animation functions exposed to parent
     // Note to self: well.. this works.. 
     // what I understand is that we're wrapping
@@ -96,17 +54,7 @@ Scope {
     // this scope
 
 
-
-
-  // ================shadow=======================
-
-  // the old convoluted shadow has been removed
-  // because I'm a dummy who didn't know
-  // DropShadow {} exists in qml
-
 // ==================== MAIN BAR ====================
-
-
     PopoutVolume {}
     WlrLayershell {
       id: bar 

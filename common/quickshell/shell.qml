@@ -29,7 +29,7 @@ import qs.dark.bar
 import qs.light.bar
 // import qs.light.barSections
 import qs.light.config
-// import qs.light.widgets
+import qs.light.widgets
 
 ShellRoot {
   id: root
@@ -56,6 +56,13 @@ ShellRoot {
   CatAnimation {
     shellRoot: root  
   }
+  
+
+  // DASHBOARD ==========
+
+  Dashboard {}
+
+  // ===================
 
   Loader {
     id: barLoader

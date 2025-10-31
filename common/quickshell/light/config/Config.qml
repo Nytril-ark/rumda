@@ -26,12 +26,26 @@ Singleton {
 
   // Shadow Configuration
   readonly property bool enableBarShadow: true
-  readonly property bool enableCatShadow: true
+  readonly property bool enableCatShadow: false
   readonly property int shadowOffsetX: 3 // note: hardcoded, bind later
   readonly property int shadowOffsetY: 0
+
+
+  // Dashboard Configuration =========
+  readonly property int dashAnimDuration: 250
+  readonly property int dashMarginTop: 230
+  readonly property int dashMarginBottom: 230
+  readonly property int dashMarginLeft: 400 - (barWidth + barBorderWidth + shadowOffsetX + 4)
+  readonly property int dashMarginRight: 400
+  readonly property int dashWidth: 200 // (margins are preferred. edit right/left margins above instead to change the dashb width)
+  readonly property int dashRadius: 8
+  readonly property int dashBorderWidth: 2
+  // shadow config for the dashboard
+  readonly property bool enableDashShadow: false //note to self: implement
+  // =================================
   
   // Cat Configuration
-  readonly property bool enableCat: true
+  readonly property bool enableCat: false
   readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
   readonly property int catMarginLeft: -15 - barWidth //note: this is hardcoded, bind it to the bar later
