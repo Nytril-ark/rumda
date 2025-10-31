@@ -22,13 +22,18 @@
 > This is a *wip* and I'm adding things to it every day, but if you would like to try it
 > see [installation](#installation).
 >
+> 
 > you can also check: [Gallery](#gallery)  -  [Keybinds](#keybinds) - [Misc](#misc)
 >
+
 ---
 
->  Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
+>  Big thanks to xfcasio, as this was based on his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 >
 > **things I haven't finished:** themes for: Thunar (file manager), browser, discord + more widgets
+>
+> if you wanna [make your own changes](#config)
+>
 
 
 ---
@@ -150,12 +155,26 @@ chmod +x install.sh
 ## misc
 
 
+
 ### theme switcher
 I kick off the cat for a little fun
 
 ![themeswitch](/pictures/themeswitchsmooth.gif)
 
 ---
+## config
+<details>
+<summary>Configuring your own changes in the rice</summary>
+
+> if you know what you're doing and you want to modify the rice
+> you can change the files at /.config/ directly. **Except** for
+> the hyprland config, which is modified at
+> `.config/rumda/light-config/hypr` or similarly `/dark-config/hypr`
+>
+> this is because the file at .config/hypr/ is overwritten on theme switches
+>
+> 
+</details>
 
 
 #### Color-scheme for nvim:
