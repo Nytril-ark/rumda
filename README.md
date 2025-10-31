@@ -75,6 +75,12 @@ cd rumda
 this is a wip as I am trying the install script, in the rare case that you happen to be reading this while I'm testing, please
 dont install yet.
 
+You can run the dots if you just have basics like hyprland, quickshell, rofi, and nvim. If you want a complete list 
+of dependencies, expand the bits below:
+
+<details>
+<summary>All dependencies</summary>
+
 Use your fav package manager to install those:
 ```
 hyprland quickshell rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
@@ -101,12 +107,9 @@ sudo dnf install ghostty
 dnf copr enable lihaohong/yazi
 dnf install yazi
 ```
-for swww, we gotta clone and build:
-```
-git clone https://github.com/LGFae/swww 
-cd swww
-cargo build --release
-```
+Note to self: add swww
+
+</details>
 
 
 
