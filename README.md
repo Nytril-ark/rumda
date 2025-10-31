@@ -86,7 +86,10 @@ ghostty
 yazi
 ```
 
-Lastly, if you want to, I would recommend installing nvchad.
+The double borders are from the borders-plus-plus hyprland plugin, you might wanna install that
+
+
+Lastly, if you want to, I would _recommend_ installing nvchad.
 
 </details>
 
