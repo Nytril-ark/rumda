@@ -72,11 +72,39 @@ cd rumda
 #### dependencies:
 this is a wip as I am trying the install script, in the rare case that you happen to be reading this while I'm testing, please
 dont install yet.
+
+Use your fav package manager to install those:
 ```
-sudo dnf install hyprland quickshell rofi alacritty ghostty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
-swww thunar nautilus neovim btop bpytop yazi papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
-xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable
+hyprland quickshell rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
+thunar nautilus neovim btop bpytop papirus-icon-theme yazi jetbrains-mono-fonts mako hyprpicker obs-studio \
+xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 swww ghostty
 ```
+If using dnf, do this: 
+```
+sudo dnf install hyprland rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
+thunar nautilus neovim btop bpytop papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
+xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 
+
+
+then those
+```
+sudo dnf copr enable errornointernet/quickshell 
+sudo dnf install quickshell
+
+sudo dnf copr enable scottames/ghostty
+sudo dnf install ghostty
+
+dnf copr enable lihaohong/yazi
+dnf install yazi
+
+# for swww, we gotta clone and build:
+git clone https://github.com/LGFae/swww 
+cd swww
+cargo build --release
+```
+
+
+
 
 
 ## Keybinds
