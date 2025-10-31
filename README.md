@@ -68,7 +68,9 @@ cd rumda
 
 > [!NOTE]
 > the installation assumes you have all the dependencies 
-> 
+> you could skip some of them if you don't want them
+> but this is what I use:
+>
 #### dependencies:
 this is a wip as I am trying the install script, in the rare case that you happen to be reading this while I'm testing, please
 dont install yet.
@@ -84,26 +86,27 @@ If using dnf, do this:
 sudo dnf install hyprland rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
 thunar nautilus neovim btop bpytop papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 
-
+```
 
 then those
 ```
 sudo dnf copr enable errornointernet/quickshell 
 sudo dnf install quickshell
-
+```
+```
 sudo dnf copr enable scottames/ghostty
 sudo dnf install ghostty
-
+```
+```
 dnf copr enable lihaohong/yazi
 dnf install yazi
-
-# for swww, we gotta clone and build:
+```
+for swww, we gotta clone and build:
+```
 git clone https://github.com/LGFae/swww 
 cd swww
 cargo build --release
 ```
-
-
 
 
 
