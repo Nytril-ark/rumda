@@ -73,7 +73,7 @@ xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 swww ghostty
 ```
 If using dnf, do this: 
 ```
-sudo dnf install hyprland rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
+sudo dnf install hyprland rofi alacritty swww zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
 thunar nautilus neovim btop bpytop papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable 
 ```
@@ -91,7 +91,6 @@ sudo dnf install ghostty
 dnf copr enable lihaohong/yazi
 dnf install yazi
 ```
-Note to self: add swww
 
 </details>
 
