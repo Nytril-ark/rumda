@@ -163,8 +163,13 @@ I kick off the cat for a little fun
 
 ---
 ## config
+
+
+> [!NOTE]
+> Configuring your own changes in the rice
+
 <details>
-<summary>Configuring your own changes in the rice</summary>
+<summary>If you know what you're doing, click me!</summary>
 
 > if you know what you're doing and you want to modify the rice
 > you can change the files at /.config/ directly. **Except** for
