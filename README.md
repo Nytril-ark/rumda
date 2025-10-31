@@ -18,18 +18,18 @@
 </p>
 
 
-> [!WARNING]
-> This is a **WIP** that *might* not work for you out of the box. I am currently cleaning it up and adding better features. Stay tuned!
----
-
-
-> **things I'm working on:** themes for: file-manager, browser, discord + more widgets, and of course: [Rumda, the cat.](#rumda-the-cat)
-> also, the [theme switcher](#theme-switcher)
-
-> **Note:** the bar and widgets config can be changed through the qml files in /common/quickshell/light/config/
+> [!IMPORTANT]
+> This is a *wip* and I'm adding things to it every day, but if you would like to try it
+> see [installation](#installation).
+>
+> you can also check: [Gallery](#gallery)  -  [Keybinds](#keybinds) - [Misc](#misc)
+>
 ---
 
 >  Big thanks to xfcasio, as this is a modified version of his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
+>
+> **things I haven't finished:** themes for: Thunar (file manager), browser, discord + more widgets
+
 
 ---
 
@@ -38,55 +38,108 @@
 ![1](pictures/1.png)
 
 
-![bpytop](pictures/bpytop.png)
-
-
-![3](pictures/3.png)
-
-
-![4](pictures/4.png)
-
-
-![2](pictures/2.png)
-
+| ![image1](pictures/bpytop.png) | ![image2](pictures/3.png) |
+| ------------------------------ | ------------------------- |
+| ![image3](pictures/4.png)      | ![image4](pictures/2.png) |
 
 
 ---
 
+## Installation
+> [!CAUTION]
+> please follow these steps carefully:
+> - make sure you have the dependencies listed below
+> - make sure the repo is at ./config/rumda
+> You can use this one-liner to clone it and install:
 
-## Rumda color-scheme for nvim:
-the colorscheme for the editor could be found at /.config/rumda/nvim/lua/themes/
+
+```bash
+cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
+```
+
+or do them one by one..
+```bash
+cd ~/.config 
+git clone https://github.com/Nytril-ark/rumda 
+cd rumda 
+chmod +x install.sh 
+./install.sh
+```
+
+
+> [!NOTE]
+> the installation assumes you have all the dependencies 
+> 
+#### dependencies:
+this is a wip as I am trying the install script, in the rare case that you happen to be reading this while I'm testing, please
+dont install yet.
+```
+sudo dnf install hyprland quickshell rofi alacritty ghostty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
+swww thunar nautilus neovim btop bpytop yazi papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
+xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable
+```
+
+
+## Keybinds
+
+| **Keys**                     | **Description**            |
+| ---------------------------- | -------------------------- |
+| `$mainMod + W`               | Open Firefox               |
+| `$mainMod + Enter`           | Open terminal              |
+| `$mainMod + R`               | Launch app menu            |
+| `$mainMod + F`               | Open file manager          |
+| `$mainMod + S`               | Take screenshot            |
+| `$mainMod + C`               | Close focused window       |
+| `$mainMod + M`               | Exit Hyprland              |
+| `$mainMod + V`               | Toggle floating mode       |
+| `$mainMod + P`               | Toggle pseudo layout       |
+| `$mainMod + L`               | Lock screen                |
+| `$mainMod + Shift + Return`  | Open Ghostty terminal      |
+| `$mainMod + Shift + Alt + Q` | Force kill window          |
+| `$mainMod + Alt + Arrows`    | Move focus between windows |
+| `$mainMod + Shift + [0–9]`   | Move window to workspace   |
+| `$mainMod + Scroll / Arrows` | Switch workspace scroll    |
+| `$mainMod + up/down arrows`  | Move or resize window      |
+| `XF86Audio / F-keys`         | Volume and media control   |
+| `$mainMod + TAB`             | Toggle Rumda dashboard (WIP) |
+| `$mainMod + ;`               | Shrink split ratio         |
+| `$mainMod + ' `              | Grow split ratio           |
+| `$mainMod + Alt + Space`     | Float/tile                 |
+| `$mainMod + D`               | Maximize window            |
+| `$mainMod + Shift + C`       | Color picker               |
+| `Ctrl + Alt + R`             | Start OBS recording        |
 
 
 
-### rumda-light
-![rumda-light-theme](pictures/rl1.png)
 
+
+
+---
+## misc
+
+
+### theme switcher
+I kick off the cat for a little fun
+
+![themeswitch](/pictures/themeswitchsmooth.gif)
 
 ---
 
 
-### experimental themes
+#### Color-scheme for nvim:
 
 
-**the theme: rumda-light is more reliable**, the dark/warm/extra-warm ones aren't refined yet.. but enjoy, anyway :)
+##### rumda light
+<img src="pictures/rl1.png">
 
-
----
-
-
-
-### rumda-dark
-![rumda-dark-theme](pictures/rd.png)
-
-
-### rumda-warm
-![rumda-warm](pictures/rw.png)
-
-
-### rumda-extra-warm
-![rumda-extra-warm](pictures/rew.png)
-
+#### experimental themes:
+haven't refined those yet..
+<details>
+<summary>dark, warm, extra-warm</summary>
+<img src="pictures/rd.png">
+<img src="pictures/rw.png">
+<img src="pictures/rew.png">
+</details>
 
 ---
 
@@ -101,8 +154,3 @@ Currently, the cat on top of the bar just does a ~goofy~ jump-out animation when
 
 PS: the cat face at the bottom of the bar is an internet widget. if it's smiling, you're connected :)
 
-
-### theme switcher
-I kick off the cat for a little fun
-
-![themeswitch](/pictures/themeswitchsmooth.gif)
