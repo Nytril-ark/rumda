@@ -108,7 +108,7 @@ xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable
 | `$mainMod + D`               | Maximize window            |
 | `$mainMod + Shift + C`       | Color picker               |
 | `Ctrl + Alt + R`             | Start OBS recording        |
-
+|**note:**                     | mainmod =      `Super`     |
 
 
 
