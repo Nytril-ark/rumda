@@ -45,25 +45,7 @@
 
 ---
 
-## Installation
-> [!CAUTION]
-> please follow these steps carefully:
-> - make sure you have the dependencies listed below
-> - make sure the repo is at ~/.config/rumda
-> You can use this one-liner to clone it and install:
 
-
-```bash
-cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && ./install.sh
-```
-
-or do them one by one..
-```bash
-cd ~/.config 
-git clone https://github.com/Nytril-ark/rumda 
-cd rumda 
-./install.sh
-```
 
 
 > [!NOTE]
@@ -110,6 +92,30 @@ dnf install yazi
 Note to self: add swww
 
 </details>
+
+
+
+## Installation
+> [!CAUTION]
+> please follow these steps carefully:
+> - make sure you have the dependencies listed below
+> - make sure the repo is at ~/.config/rumda
+> You can use this one-liner to clone it and install:
+
+
+```bash
+cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && ./install.sh
+```
+
+or do them one by one..
+```bash
+cd ~/.config 
+git clone https://github.com/Nytril-ark/rumda 
+cd rumda 
+./install.sh
+```
+
+
 
 
 
