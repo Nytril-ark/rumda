@@ -108,7 +108,7 @@ echo ""
 
 # Install Hyprland
 if [ "$INSTALL_HYPRLAND" = true ]; then
-    install_config "$SOURCE_DIR/common/hypr" "$DEST_DIR/hypr" "Hyprland"
+    install_config "$SOURCE_DIR/light-config/hypr" "$DEST_DIR/hypr" "Hyprland"
 fi
 
 # Install Quickshell
@@ -128,7 +128,7 @@ fi
 
 # Install ZATHURA
 if [ "$INSTALL_ZATHURA" = true ]; then
-    install_config "$SOURCE_DIR/light-config/zathura" "$DEST_DIR/zathura" "Zathura"
+    install_config "$SOURCE_DIR/common/zathura" "$DEST_DIR/zathura" "Zathura"
 fi
 
 # Install Rofi
@@ -138,7 +138,7 @@ fi
 
 # Install bpytop
 if [ "$INSTALL_BPYTOP" = true ]; then
-    install_config "$SOURCE_DIR/light-config/bpytop" "$DEST_DIR/bpytop" "Bpytop"
+    install_config "$SOURCE_DIR/common/bpytop" "$DEST_DIR/bpytop" "Bpytop"
 fi
 
 # Install btop
