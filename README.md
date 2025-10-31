@@ -49,7 +49,7 @@
 > [!CAUTION]
 > please follow these steps carefully:
 > - make sure you have the dependencies listed below
-> - make sure the repo is at ./config/rumda
+> - make sure the repo is at ~/.config/rumda
 > You can use this one-liner to clone it and install:
 
 
