@@ -51,70 +51,63 @@
 
 
 > [!NOTE]
-> the installation assumes you have all the dependencies 
-> you could skip some of them if you don't want them
-> but this is what I use:
+> the installation assumes you have all the dependencies
+> 
+> you could eyeball what dependencies to install if you want.
+> 
+> If you don't want to eyeball them, check the following:
 >
-#### dependencies:
-this is a wip as I am trying the install script, in the rare case that you happen to be reading this while I'm testing, please
-dont install yet.
-
-You can run the dots if you just have basics like hyprland, quickshell, rofi, and nvim. If you want a complete list 
-of dependencies, expand the bits below:
 
 <details>
 <summary>All dependencies</summary>
 
 Use your fav package manager to install those:
 ```
-hyprland quickshell rofi alacritty zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
-thunar nautilus neovim btop bpytop papirus-icon-theme yazi jetbrains-mono-fonts mako hyprpicker obs-studio \
-xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 swww ghostty
+hyprland quickshell rofi alacritty swww thunar neofetch grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
+ghostty  nautilus  btop bpytop papirus-icon-theme obs-studio \
+xdg-desktop-portal-hyprland wl-clipboard git jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
 ```
-If using dnf, do this: 
+If using dnf, copy this: 
 ```
 sudo dnf install hyprland rofi alacritty swww zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
 thunar nautilus neovim btop bpytop papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable 
 ```
 
-then those
+Check the installation for those from their wikis if you're using dnf
 ```
-sudo dnf copr enable errornointernet/quickshell 
-sudo dnf install quickshell
+quickshell
+ghostty
+yazi
 ```
-```
-sudo dnf copr enable scottames/ghostty
-sudo dnf install ghostty
-```
-```
-dnf copr enable lihaohong/yazi
-dnf install yazi
-```
+
+Lastly, if you want to, I would recommend installing nvchad.
 
 </details>
 
+---
 
+
+### install.sh
 > [!CAUTION]
-> please follow these steps carefully:
+> please follow these steps:
 > - make sure you have installed quickshell, hyprland, etc
-> - make sure the repo is at ~/.config/rumda
-> - lastly, I recommend installing NvChad for nvim
+> - make **sure** the repo is at _~/.config/rumda_
+> 
 > You can use this one-liner to clone it and install:
 
 
 ```bash
-cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && ./install.sh
+cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
 ```
-
-or do them one by one..
+separated commands for readability:
 ```bash
 cd ~/.config 
 git clone https://github.com/Nytril-ark/rumda 
 cd rumda 
+chmod +x install.sh
 ./install.sh
 ```
-
 
 
 
