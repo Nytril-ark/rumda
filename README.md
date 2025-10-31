@@ -54,7 +54,7 @@
 
 
 ```bash
-cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
+cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && ./install.sh
 ```
 
 or do them one by one..
@@ -62,7 +62,6 @@ or do them one by one..
 cd ~/.config 
 git clone https://github.com/Nytril-ark/rumda 
 cd rumda 
-chmod +x install.sh 
 ./install.sh
 ```
 
