@@ -34,7 +34,9 @@ rm -f "$COMMON_FILE"
 
 ln -s "$SRC" "$COMMON_FILE"
 
-./alacrittytheme.sh "$THEME"
+/home/$USER/.config/rumda/scripts/alacrittytheme.sh "$THEME"
+
+/home/$USER/.config/rumda/scripts/zathuratheme.sh "$THEME"
 
 hyprctl reload >/dev/null 2>&1 || true
 

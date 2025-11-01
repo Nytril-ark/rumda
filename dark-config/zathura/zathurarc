@@ -1,0 +1,54 @@
+# Open document in fit-width mode by default
+# set adjust-open "best-fit"
+# # One page per row by default
+# set pages-per-row 1
+#stop at page boundries
+# set scroll-page-aware "true"
+# set smooth-scroll "true"
+# set scroll-full-overlap 0.01
+# set scroll-step 100
+#zoom settings
+# set zoom-min 10
+# set guioptions ""
+
+set font "Cartograph CF"
+set default-bg "#1C1612"
+set default-fg "#DAB08B"
+
+set statusbar-fg                "#DAB08B"
+set statusbar-bg                "#553A2F"
+
+set inputbar-bg                 "#553A2F"
+set inputbar-fg                 "#DAB08B"
+
+set notification-bg             "#1a1b26"
+set notification-fg             "#73daca"
+
+set notification-error-bg       "#1a1b26"
+set notification-error-fg       "#f7768e"
+
+set notification-warning-bg     "#1a1b26"
+set notification-warning-fg     "#f7768e"
+
+set highlight-color             "#AF8C65"
+set highlight-active-color      "#D1AB86"
+
+set completion-bg               "#24283b"
+set completion-fg               "#a9b1d6"
+
+set completion-highlight-fg     "#9aa5ce"
+set completion-highlight-bg     "24283b"
+
+set recolor-lightcolor          "#1C1612"
+set recolor-darkcolor           "#E4C198"
+
+set recolor                     "true"
+set recolor-keephue             "false"
+
+
+
+# set render-loading "false"
+# set scroll-step 50
+# unmap f
+# map f toggle_fullscreen
+# map [fullscreen] f toggle_fullscreen

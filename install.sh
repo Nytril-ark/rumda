@@ -128,7 +128,7 @@ fi
 
 # Install ZATHURA
 if [ "$INSTALL_ZATHURA" = true ]; then
-    install_config "$SOURCE_DIR/common/zathura" "$DEST_DIR/zathura" "Zathura"
+    install_config "$SOURCE_DIR/light-config/zathura" "$DEST_DIR/zathura" "Zathura"
 fi
 
 # Install Rofi
