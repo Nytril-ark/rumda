@@ -128,7 +128,9 @@ chmod +x install.sh
 | `$mainMod + Enter`           | Open terminal              |
 | `$mainMod + R`               | Launch app menu            |
 | `$mainMod + F`               | Open file manager          |
-| `$mainMod + S`               | Take screenshot            |
+| `$mainMod + S`               | Full screen screenshot     |
+| `$mainMod + shift + S`       | screenshot a region        |
+| `$mainMod + alt + shift S`   | screenshot region + edit   |
 | `$mainMod + C`               | Close focused window       |
 | `$mainMod + M`               | Exit Hyprland              |
 | `$mainMod + V`               | Toggle floating mode       |
