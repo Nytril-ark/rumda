@@ -97,9 +97,9 @@ Scope {
             anchors.fill: dashboardBGRect
             horizontalOffset: Config.dashShadowOffsetX
             verticalOffset: Config.dashShadowOffsetY
-            radius: 6
+            radius: 5
             samples: 29
-            spread: 0.67
+            spread: 0.73
             transparentBorder: true
             color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
             source: dashboardBGRect

@@ -17,9 +17,12 @@ import qs.light.config
 Rectangle {
   id: profileAndPowerRect
 
-  
+  readonly property int buttonSizes: 52
+  readonly property int buttonSpacing: 7
+  readonly property int buttonBorderWidth: 2
   readonly property int pfpRadius: 100
   readonly property int pfpSize: 160
+  readonly property int buttonsGapFromBottom: 15
 
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
@@ -41,7 +44,7 @@ Rectangle {
         width: pfpSize + 40
         height: pfpSize + 40
         
-        // Bottom circle
+        // bottom circle (behind pfp)
         Rectangle {
           anchors.centerIn: parent
           width: pfpSize + 40
@@ -81,8 +84,9 @@ Rectangle {
       }
     }
     
-    Row {     
+    Row {
       anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.verticalCenter
       Text {
         text: "Hello.."
         font.family: "Cartograph CF"
@@ -94,13 +98,8 @@ Rectangle {
     }
     Row {
       anchors.horizontalCenter: parent.horizontalCenter
-      // Text {
-      //   text: Config.username
-      //   font.family: "Cartograph CF"
-      //   font.italic: true        
-      //   color: Colors.accent2Color
-      //   font.pixelSize: 17
-      // }
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.verticalCenterOffset: 20
       Text {
         text: Config.username
         font.family: "Cartograph CF"
@@ -110,6 +109,108 @@ Rectangle {
         font.bold: true
       }
     }
-  }
+
+// POWER BUTTONS ======================================
+
+    Row {
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.bottom
+      spacing: buttonSpacing
+      anchors.verticalCenterOffset: -(buttonsGapFromBottom)
+      
+      // Square Button 1
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        radius: Config.dashInnerModuleRadius
+        color: Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        
+        MouseArea {
+          anchors.fill: parent
+          onClicked: {
+            process5.running = true
+          }
+        }
+        
+        Process {
+          id: process5
+          command: ["/bin/sh", "-c", "your-script-here"]
+          running: false
+        }
+      }
+      
+      // Square Button 2
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        radius: Config.dashInnerModuleRadius
+        color: Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        
+        MouseArea {
+          anchors.fill: parent
+          onClicked: {
+            process6.running = true
+          }
+        }
+        
+        Process {
+          id: process6
+          command: ["/bin/sh", "-c", "your-script-here"]
+          running: false
+        }
+      }
+      
+      // Square Button 3
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        radius: Config.dashInnerModuleRadius
+        color: Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        
+        MouseArea {
+          anchors.fill: parent
+          onClicked: {
+            process7.running = true
+          }
+        }
+        
+        Process {
+          id: process7
+          command: ["/bin/sh", "-c", "your-script-here"]
+          running: false
+        }
+      }
+      
+      // Square Button 4
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        radius: Config.dashInnerModuleRadius
+        color: Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        
+        MouseArea {
+          anchors.fill: parent
+          onClicked: {
+            process8.running = true
+          }
+        }
+        
+        Process {
+          id: process8
+          command: ["/bin/sh", "-c", "your-script-here"]
+          running: false
+        }
+      }
+    }
+  } // END OF COLUMN
 }
+
 

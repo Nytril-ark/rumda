@@ -22,6 +22,7 @@ Singleton {
   property color level2Contrib: "#99674e"
   property color level3Contrib: "#7a503a"
   property color level4Contrib: "#6F4732"
+  property color powerButtons: "#D5CCBA"
 }
 
 
