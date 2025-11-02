@@ -14,6 +14,15 @@ Rectangle {
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
 
+  // lil watcher to clear the data if the username is changed 
+  onUsernameChanged: {
+    contributionData = []
+    gridData = []
+    githubFetch.running = true
+  }
+
+
+
   id: contribGraphRect
   implicitWidth: Math.ceil(gridData.length / 7) * (Config.commitSquareSize + 1)
   color: Colors.dashModulesColor
@@ -38,12 +47,14 @@ Rectangle {
 
           let today = new Date()
           today.setHours(23, 59, 59, 999)
-          
+          contributionData = [] 
+
+
           contributionData = response.contributions.filter(day => {
             let dayDate = new Date(day.date)
             return dayDate <= today
           })
-          
+
           console.log(`Loaded ${contributionData.length} days of contributions`)
           
           organizeGridData()
@@ -56,6 +67,7 @@ Rectangle {
 
 
   function organizeGridData() {
+    gridData = []
     let organized = []
     
     // Find the starting day of week for the first contribution
