@@ -1,17 +1,26 @@
 // Dashboard.qml
-import Quickshell
-import Quickshell.Wayland
+import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Services.Pipewire
-import Quickshell.Widgets
+import QtQuick.Controls
+import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
+import Qt5Compat.GraphicalEffects
+import Quickshell.Widgets
+import Quickshell.Wayland
+import QtQuick.Window
+import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
+import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
 import qs.light.config
+import qs.light.widgets
 
 Scope {
   id: dashboardScope
+  
   property int closeDuration: Config.dashAnimDuration
-
   Timer {
     id: closeTimer
     interval: dashboardScope.closeDuration
@@ -82,7 +91,21 @@ Scope {
       MouseArea {
         anchors.fill: parent 
         onClicked: dashboardScope.closeDashboard()
-        
+
+         // le new simple shadow
+        DropShadow {
+            anchors.fill: dashboardBGRect
+            horizontalOffset: Config.dashShadowOffsetX
+            verticalOffset: Config.dashShadowOffsetY
+            radius: 6
+            samples: 29
+            spread: 0.67
+            transparentBorder: true
+            color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
+            source: dashboardBGRect
+        }
+
+
         Rectangle {
           id: dashboardBGRect
           anchors.top: parent.top
@@ -97,9 +120,6 @@ Scope {
 
           color: Colors.dashBGColor
           radius: Config.dashRadius
-          border.width: Config.dashBorderWidth
-          border.color: Colors.borderColor
-          implicitWidth: Config.dashWidth
 
           MouseArea {
             anchors.fill: parent
@@ -122,18 +142,75 @@ Scope {
           }
 
 
-          ColumnLayout {
-            anchors { 
-              fill: parent
-              topMargin: -10
-              bottomMargin: 10
-              leftMargin: 3
-              rightMargin: 3
-            }
-            spacing: 4
-            // TopSection {}
-            // CenterSection {}
+          // ColumnLayout {
+          //   anchors { 
+          //     fill: parent
+          //     topMargin: -10
+          //     bottomMargin: 10
+          //     leftMargin: 3
+          //     rightMargin: 3
+          //   }
+          //   spacing: 4
+          //   // TopSection {}
+          //   // CenterSection {}
+          // }
+          Rectangle {
+            id: dashInnerWrapper
+            anchors.fill: parent
+            anchors.leftMargin: Config.dashInnerPadding
+            anchors.rightMargin: Config.dashInnerPadding 
+            anchors.topMargin: Config.dashInnerPadding
+            anchors.bottomMargin: Config.dashInnerPadding
+
+            anchors.centerIn: parent
+            radius: Config.dashRadius
+            color: Colors.dashBGColor
+            border.width: Config.dashBorderWidth
+            border.color: Colors.borderColor            
+            GridLayout {
+              id: dashInnerGrid
+              columns: 2
+              rows: 2   
+              anchors.fill: parent
+
+              anchors.leftMargin: Config.dashInnerPadding
+              anchors.rightMargin: Config.dashInnerPadding 
+              anchors.topMargin: Config.dashInnerPadding
+              anchors.bottomMargin: Config.dashInnerPadding
+
+              columnSpacing: Config.dashInnerPadding
+              rowSpacing: Config.dashInnerPadding
+
+              ProfileAndPower {
+                Layout.row: 0
+                Layout.column: 0
+                Layout.rowSpan: 2 
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredWidth: 200
+                // Layout.minimumHeight: 
+              }
+
+              DashBoardControls {
+                Layout.row: 0
+                Layout.column: 1              
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredHeight: 70
+              }
+
+              ContribGraph {
+                Layout.row: 1
+                Layout.column: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredHeight: 30
+              }
+
+            } // end of gridLayout
           }
+
+
         } // end of dashboardBGRect
       }
     }

@@ -40,6 +40,10 @@ ShellRoot {
   // The current animation isn't great, I plan on improving
   // its smoothness soon. I shall keep it like this for now
   // as a placeholder
+  //
+  //
+  //
+  // NOTE TO SELF: the paths for the frames have changed
   CatAnimation {
     shellRoot: root  
   }

@@ -13,9 +13,15 @@ Singleton {
   property color errorColor: "#9A4235" 
   property color shadowColor: "#AA3A2D26" 
   // dashboard related colors
-  property color dashBGColor: "#E4C198"
-  property color dashModulesColor: "#B3AA98"
-  property color dashAccentColor: "#C3BAA8"
+  property color dashBGColor: "#D5CCBA"
+  property color dashModulesColor: "#C2C1A9"
+  property color dashAccentColor: "#D1AB86" 
+  property color dashPFPColor: "#D5CCBA"
+  property color level0Contrib: "#D1AB86"
+  property color level1Contrib: "#b07b61"
+  property color level2Contrib: "#99674e"
+  property color level3Contrib: "#7a503a"
+  property color level4Contrib: "#6F4732"
 }
 
 

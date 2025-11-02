@@ -53,7 +53,7 @@ Rectangle {
   clip: true
   
   Image {
-    id: githubIcon
+    id: themeSwitchIcon
     anchors.fill: parent
     source: "file://" + themeSwitchButton.iconPath + "/themeSwitch.svg"
     sourceSize.width: themeSwitchButton.imageSourceSize

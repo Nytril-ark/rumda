@@ -1,12 +1,27 @@
 pragma Singleton
-
+import QtQuick.Shapes
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import Quickshell
+import Quickshell.Io
+import Quickshell.Hyprland
+import Qt5Compat.GraphicalEffects
+import Quickshell.Widgets
+import Quickshell.Wayland
+import QtQuick.Window
+import qs
 
 Singleton {
+  // ScreenConf
+  readonly property int screenHeight: 1080 // note: un-hard-code this
+  readonly property int screenWidth: 1920 // un-hard-code this too
+
+
   // User Configuration
   readonly property string username: Quickshell.env("USER") || "user"
   readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/common/quickshell"
+  readonly property string profilePath:  Quickshell.env("HOME") + "/.config/rumda/pictures/gatoInPan.png"  // profile pic in the dashboard
 
   // Bar Configuration
   readonly property int barMarginTop: 80
@@ -35,13 +50,22 @@ Singleton {
   readonly property int dashAnimDuration: 250
   readonly property int dashMarginTop: 230
   readonly property int dashMarginBottom: 230
-  readonly property int dashMarginLeft: 400 - (barWidth + barBorderWidth + shadowOffsetX + 4)
-  readonly property int dashMarginRight: 400
-  readonly property int dashWidth: 200 // (margins are preferred. edit right/left margins above instead to change the dashb width)
-  readonly property int dashRadius: 8
-  readonly property int dashBorderWidth: 2
+
+  readonly property int dashMarginLeft: (0.23 * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
+  readonly property int dashMarginRight: (0.23 * screenWidth)
+  readonly property int dashRadius: 12
+  readonly property int dashBorderWidth: 3
+  readonly property int dashInnerModuleBorderWidth: 0 // me when long names
+  readonly property int dashInnerModuleRadius: 6
+  readonly property int dashInnerPadding: 10
+  readonly property int commitSquareSize: 12
   // shadow config for the dashboard
-  readonly property bool enableDashShadow: false //note to self: implement
+  readonly property bool enableDashShadow: true //note to self: implement
+  readonly property int dashShadowOffsetX: 3 // note: hardcoded, bind later
+  readonly property int dashShadowOffsetY: 3
+  // uhh
+  readonly property bool dashContribToolTip: false // note: fix the layer for this
+
   // =================================
   
   // Cat Configuration

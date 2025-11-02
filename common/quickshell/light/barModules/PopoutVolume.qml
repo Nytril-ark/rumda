@@ -52,50 +52,50 @@ Scope {
   // Bounce animation trigger
   onVolumeChanged: {
     if (Math.abs(volume - lastVolume) > 0.01) {
-      bounceAnimation.start()
+      // bounceAnimation.start()
       lastVolume = volume
     }
   }
   
-  // Bounce animation sequence
-  SequentialAnimation {
-    id: bounceAnimation
-    PropertyAnimation {
-      target: popoutVolume.item
-      property: "anchors.bottomMargin"
-      to: -8
-      duration: 120
-      easing.type: Easing.OutBack
-    }
-    PropertyAnimation {
-      target: popoutVolume.item
-      property: "anchors.bottomMargin"
-      to: 10
-      duration: 180
-      easing.type: Easing.InOutBounce
-    }
-    PropertyAnimation {
-      target: popoutVolume.item
-      property: "anchors.bottomMargin"
-      to: -4
-      duration: 140
-      easing.type: Easing.OutBounce
-    }
-    PropertyAnimation {
-      target: popoutVolume.item
-      property: "anchors.bottomMargin"
-      to: 6
-      duration: 100
-      easing.type: Easing.InOutQuad
-    }
-    PropertyAnimation {
-      target: popoutVolume.item
-      property: "anchors.bottomMargin"
-      to: 0
-      duration: 160
-      easing.type: Easing.OutElastic
-    }
-  }
+  // // Bounce animation sequence     // COMMENTED OUT MOMENTARILY = doesn't work rn
+  // SequentialAnimation {
+  //   id: bounceAnimation
+  //   PropertyAnimation {
+  //     target: popoutVolume.item
+  //     property: "anchors.bottomMargin"
+  //     to: -8
+  //     duration: 120
+  //     easing.type: Easing.OutBack
+  //   }
+  //   PropertyAnimation {
+  //     target: popoutVolume.item
+  //     property: "anchors.bottomMargin"
+  //     to: 10
+  //     duration: 180
+  //     easing.type: Easing.InOutBounce
+  //   }
+  //   PropertyAnimation {
+  //     target: popoutVolume.item
+  //     property: "anchors.bottomMargin"
+  //     to: -4
+  //     duration: 140
+  //     easing.type: Easing.OutBounce
+  //   }
+  //   PropertyAnimation {
+  //     target: popoutVolume.item
+  //     property: "anchors.bottomMargin"
+  //     to: 6
+  //     duration: 100
+  //     easing.type: Easing.InOutQuad
+  //   }
+  //   PropertyAnimation {
+  //     target: popoutVolume.item
+  //     property: "anchors.bottomMargin"
+  //     to: 0
+  //     duration: 160
+  //     easing.type: Easing.OutElastic
+  //   }
+  // }
   
   // OSD window (lazy loaded)
   LazyLoader {
