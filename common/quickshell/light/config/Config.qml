@@ -51,6 +51,9 @@ Singleton {
   readonly property int dashMarginTop: 230
   readonly property int dashMarginBottom: 230
 
+ // obviously, if you aren't me, which you aren't, just change this into you github username
+  readonly property string githubUsername: "Nytril-ark"
+
   readonly property int dashMarginLeft: (0.23 * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
   readonly property int dashMarginRight: (0.23 * screenWidth)
   readonly property int dashRadius: 12

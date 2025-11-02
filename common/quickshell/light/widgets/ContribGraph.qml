@@ -10,7 +10,7 @@ import qs.light.config
 
 
 Rectangle {
-  property string username: "Nytril-ark"  // obviously, if you aren't me, which you aren't, just change this into you github username
+  property string username: Config.githubUsername  // obviously, if you aren't me, which you aren't, just change this into you github username
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
 
@@ -46,13 +46,14 @@ Rectangle {
           
 
           let today = new Date()
+          let yearStart = new Date(today.getFullYear(), 0, 1) 
           today.setHours(23, 59, 59, 999)
           contributionData = [] 
 
 
           contributionData = response.contributions.filter(day => {
             let dayDate = new Date(day.date)
-            return dayDate <= today
+            return dayDate >= yearStart && dayDate <= today
           })
 
           console.log(`Loaded ${contributionData.length} days of contributions`)
