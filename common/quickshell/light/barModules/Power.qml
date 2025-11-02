@@ -36,7 +36,7 @@ Rectangle {
   // Process for opening ghostty terminal with shutdown command
   Process {
     id: shutdownTerminal
-    command: ["ghostty"/*, "-e", "",*/] // (if you want a shutdown command, you add it between those quotation marks.)
+    command: ["ghostty"/*, "-e", "",*/] 
   }
   
   // Icon

@@ -59,7 +59,7 @@ Singleton {
   readonly property int dashRadius: 12
   readonly property int dashBorderWidth: 3
   readonly property int dashInnerModuleBorderWidth: 0 // me when long names
-  readonly property int dashInnerModuleRadius: 6
+  readonly property int dashInnerModuleRadius: 9
   readonly property int dashInnerPadding: 10
   readonly property int commitSquareSize: 12
   // shadow config for the dashboard

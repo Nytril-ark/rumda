@@ -15,7 +15,7 @@ Singleton {
   readonly property int barMarginRight: 1
   readonly property int barWidth: 48
   readonly property int barRadius: 8
-  readonly property int barBorderWidth: 1
+  readonly property int barBorderWidth: 3
   readonly property int barsGrave: 1400    // where the bar goes in terms of y position when it's animated out on a themeswitch (it then gets killed)
                                           // increasing it will increase animation speed. also, it kinda depends on ur screenheight
   property bool showLightBar: true
@@ -25,8 +25,8 @@ Singleton {
 
 
   // Shadow Configuration
-  readonly property bool enableBarShadow: true
-  readonly property bool enableCatShadow: true
+  readonly property bool enableBarShadow: false
+  readonly property bool enableCatShadow: false
   readonly property int shadowOffsetX: 1 // note: hardcoded, bind later
   readonly property int shadowOffsetY: 2
   

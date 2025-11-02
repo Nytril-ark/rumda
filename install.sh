@@ -16,7 +16,7 @@ INSTALL_BTOP=true
 INSTALL_YAZI=true
 INSTALL_NEOFETCH=true
 INSTALL_NEOTHEME=true
-INSTALL_GHOSTTY=false # false till I fix this. The rest work. Ghostty had a mem leak recently and I'm not using it momentarily
+INSTALL_GHOSTTY=true # false till I fix this. The rest work. Ghostty had a mem leak recently and I'm not using it momentarily
 INSTALL_CHADRC=false # this is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
 # go ahead and set it to true. Not having my chadrc
