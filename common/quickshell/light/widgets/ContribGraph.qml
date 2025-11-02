@@ -1,11 +1,18 @@
-import Quickshell.Io
-import Quickshell
-import Quickshell.Wayland
-import Quickshell.Services.Pipewire
-import Quickshell.Widgets
-import Quickshell.Io
+import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Io
+import Quickshell.Hyprland
+import Qt5Compat.GraphicalEffects
+import Quickshell.Widgets
+import Quickshell.Wayland
+import QtQuick.Window
+import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
+import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
 import qs.light.config
 
 
@@ -27,27 +34,40 @@ Rectangle {
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
-  
 
-  function loadCachedData() {
-    try {
-      let cached = JSON.parse(window.localStorage.getItem('github_contributions') || '[]')
-      if (cached.length > 0) {
-        contributionData = cached
-        organizeGridData()
-        console.log("Loaded cached contribution data")
+  Process {
+    id: cacheWriter
+    running: false
+  }
+
+  Process {
+    id: cacheReader
+    command: ["cat", `${Quickshell.env("HOME")}/.cache/quickshell/github_contributions.json`]
+    running: true
+    
+    stdout: SplitParser {
+      onRead: data => {
+        try {
+          let cached = JSON.parse(data)
+          if (cached.length > 0) {
+            contributionData = cached
+            organizeGridData()
+            console.log("Loaded cached contribution data")
+          }
+        } catch (e) {
+          console.log("No cached data available")
+        }
       }
-    } catch (e) {
-      console.log("No cached data available")
     }
   }
 
+
   function saveCachedData() {
-    try {
-      window.localStorage.setItem('github_contributions', JSON.stringify(contributionData))
-    } catch (e) {
-      console.error("Failed to cache data:", e)
-    }
+    cacheWriter.command = [
+      "sh", "-c",
+      `mkdir -p ~/.cache/quickshell && echo '${JSON.stringify(contributionData)}' > ~/.cache/quickshell/github_contributions.json`
+    ]
+    cacheWriter.running = true
   }
 
 
@@ -79,8 +99,7 @@ Rectangle {
           saveCachedData()  
           organizeGridData()
         } catch (e) {
-          console.error("Failed to parse GitHub data:", e)
-          loadCachedData()
+          console.error("Failed to parse GitHub data, using cached data:", e)
         }
       }
     }
