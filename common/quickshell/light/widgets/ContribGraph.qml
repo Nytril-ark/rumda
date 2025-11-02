@@ -10,17 +10,49 @@ import qs.light.config
 
 
 Rectangle {
+
+  // THIS WHOLE WIDGET IS MOSTLY JUST A TEST.
+  // I need to use it for a while to confirm whether or not the caching works
+  // it's a bit of a mess but it works sooooooooooooooooooo
+
+
   property string username: "Nytril-ark"  // obviously, if you aren't me, which you aren't, just change this into you github username
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
 
   id: contribGraphRect
+  Component.onCompleted: loadCachedData()
   implicitWidth: Math.ceil(gridData.length / 7) * (Config.commitSquareSize + 1)
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
   
+
+  function loadCachedData() {
+    try {
+      let cached = JSON.parse(window.localStorage.getItem('github_contributions') || '[]')
+      if (cached.length > 0) {
+        contributionData = cached
+        organizeGridData()
+        console.log("Loaded cached contribution data")
+      }
+    } catch (e) {
+      console.log("No cached data available")
+    }
+  }
+
+  function saveCachedData() {
+    try {
+      window.localStorage.setItem('github_contributions', JSON.stringify(contributionData))
+    } catch (e) {
+      console.error("Failed to cache data:", e)
+    }
+  }
+
+
+
+
 
   Process {
     id: githubFetch
@@ -35,7 +67,6 @@ Rectangle {
         try {
           let response = JSON.parse(data)
           
-
           let today = new Date()
           today.setHours(23, 59, 59, 999)
           
@@ -45,10 +76,11 @@ Rectangle {
           })
           
           console.log(`Loaded ${contributionData.length} days of contributions`)
-          
+          saveCachedData()  
           organizeGridData()
         } catch (e) {
           console.error("Failed to parse GitHub data:", e)
+          loadCachedData()
         }
       }
     }
@@ -99,9 +131,9 @@ Rectangle {
     gridData = columnFirst
   }
   
-  // this is set to auto-refresh every 6 hours
+  // this is set to auto-refresh every hour
   Timer {
-    interval: 21600000
+    interval: 3600000 
     running: true
     repeat: true
     onTriggered: githubFetch.running = true
