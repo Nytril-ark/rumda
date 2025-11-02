@@ -1,78 +1,26 @@
-import QtQuick.Shapes
+import Quickshell.Io
+import Quickshell
+import Quickshell.Wayland
+import Quickshell.Services.Pipewire
+import Quickshell.Widgets
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
-import Quickshell
-import Quickshell.Io
-import Quickshell.Hyprland
-import Qt5Compat.GraphicalEffects
-import Quickshell.Widgets
-import Quickshell.Wayland
-import QtQuick.Window
-import Quickshell.Services.UPower
-import Quickshell.Services.SystemTray
-import Quickshell.Services.Pipewire
-import Quickshell.Services.Mpris
 import qs.light.config
 
 
 Rectangle {
-
-  // THIS WHOLE WIDGET IS MOSTLY JUST A TEST.
-  // I need to use it for a while to confirm whether or not the caching works
-  // it's a bit of a mess but it works sooooooooooooooooooo
-
-
   property string username: "Nytril-ark"  // obviously, if you aren't me, which you aren't, just change this into you github username
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
 
   id: contribGraphRect
-  Component.onCompleted: loadCachedData()
   implicitWidth: Math.ceil(gridData.length / 7) * (Config.commitSquareSize + 1)
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
-
-  Process {
-    id: cacheWriter
-    running: false
-  }
-
-  Process {
-    id: cacheReader
-    command: ["cat", `${Quickshell.env("HOME")}/.cache/quickshell/github_contributions.json`]
-    running: true
-    
-    stdout: SplitParser {
-      onRead: data => {
-        try {
-          let cached = JSON.parse(data)
-          if (cached.length > 0) {
-            contributionData = cached
-            organizeGridData()
-            console.log("Loaded cached contribution data")
-          }
-        } catch (e) {
-          console.log("No cached data available")
-        }
-      }
-    }
-  }
-
-
-  function saveCachedData() {
-    cacheWriter.command = [
-      "sh", "-c",
-      `mkdir -p ~/.cache/quickshell && echo '${JSON.stringify(contributionData)}' > ~/.cache/quickshell/github_contributions.json`
-    ]
-    cacheWriter.running = true
-  }
-
-
-
-
+  
 
   Process {
     id: githubFetch
@@ -87,6 +35,7 @@ Rectangle {
         try {
           let response = JSON.parse(data)
           
+
           let today = new Date()
           today.setHours(23, 59, 59, 999)
           
@@ -96,10 +45,10 @@ Rectangle {
           })
           
           console.log(`Loaded ${contributionData.length} days of contributions`)
-          saveCachedData()  
+          
           organizeGridData()
         } catch (e) {
-          console.error("Failed to parse GitHub data, using cached data:", e)
+          console.error("Failed to parse GitHub data:", e)
         }
       }
     }
@@ -152,7 +101,7 @@ Rectangle {
   
   // this is set to auto-refresh every hour
   Timer {
-    interval: 3600000 
+    interval: 3600000
     running: true
     repeat: true
     onTriggered: githubFetch.running = true
