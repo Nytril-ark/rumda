@@ -136,7 +136,7 @@ Rectangle {
         
         Process {
           id: process5
-          command: ["/bin/sh", "-c", "your-script-here"]
+          command: ["/bin/sh", "-c", "a script"]
           running: false
         }
       }
@@ -159,7 +159,7 @@ Rectangle {
         
         Process {
           id: process6
-          command: ["/bin/sh", "-c", "your-script-here"]
+          command: ["/bin/sh", "-c", "lolz"]
           running: false
         }
       }
@@ -182,7 +182,7 @@ Rectangle {
         
         Process {
           id: process7
-          command: ["/bin/sh", "-c", "your-script-here"]
+          command: ["/bin/sh", "-c", "script"]
           running: false
         }
       }
@@ -205,7 +205,7 @@ Rectangle {
         
         Process {
           id: process8
-          command: ["/bin/sh", "-c", "your-script-here"]
+          command: ["/bin/sh", "-c", "some script yo"]
           running: false
         }
       }
