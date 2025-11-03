@@ -22,6 +22,9 @@ Singleton {
   readonly property string username: Quickshell.env("USER") || "user"
   readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/common/quickshell"
   readonly property string profilePath:  Quickshell.env("HOME") + "/.config/rumda/pictures/gatoInPan.png"  // profile pic in the dashboard
+  readonly property string fileManager: "nautilus" // or change it to "yazi", or "thunar" or whatever file manager you like
+  readonly property string browser: "firefox" // or whatever browser you like
+  
 
   // Bar Configuration
   readonly property int barMarginTop: 80
@@ -48,20 +51,17 @@ Singleton {
 
   // Dashboard Configuration =========
   readonly property int dashAnimDuration: 250
-  readonly property int dashMarginTop: 230
-  readonly property int dashMarginBottom: 230
-
   // obviously, if you aren't me, which you aren't, just change this into you github username
   readonly property string githubUsername: "Nytril-ark"
+  // dashboard size config
+  readonly property double dashboardWidth:  3.36 // this is what you change, don't touch the below 2
+  readonly property double dashboardHeight: 3.6    // same here       // note that both those values are proportional to screen width/height
   
-  readonly property double dashboardWidth: 4.30 // this is what you change, don't touch the below 2
-
-  
-
   // to change width accordingly: (don't mess with those)
   readonly property int dashMarginLeft: ((1 / dashboardWidth) * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
   readonly property int dashMarginRight: ((1 / dashboardWidth) * screenWidth) // note to self: allow it to change according to github graph size
-
+  readonly property int dashMarginTop: ((1 / dashboardHeight) * screenHeight)
+  readonly property int dashMarginBottom: ((1 / dashboardHeight) * screenHeight) 
 
 
 
@@ -78,6 +78,11 @@ Singleton {
   readonly property bool enableDashShadow: true //note to self: implement
   readonly property int dashShadowOffsetX: 3 // note: hardcoded, bind later
   readonly property int dashShadowOffsetY: 3
+
+
+  // inner module-related sizes
+  readonly property int profileAndControlsMinHeight: 85  // minimum height for the top row of modules in the dashboard
+  readonly property int contribGraphMinHeight: 55 // bottom row of dashboard
 
   // =================================
   

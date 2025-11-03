@@ -19,16 +19,16 @@ import qs.light.widgets
 
 
 Row {
-  readonly property int buttonSizes: 51
-  readonly property int buttonSpacing: 7
+  property int rowSpacing: 6
+  readonly property int buttonSizes: 40
+  readonly property int iconSizes: 26
   readonly property int buttonBorderWidth: 0
   readonly property int pfpRadius: 100
   readonly property int pfpSize: 160
   readonly property int buttonsGapFromBottom: 15
-  readonly property int iconSizes: 27
-  readonly property int buttonFloatAmount: 6
-  property int rowSpacing: 8
-  y: -6
+  readonly property int buttonFloatAmount: 4
+  anchors.bottom: parent.bottom 
+  anchors.bottomMargin: 0
 
   Process { id: playerPrev; command: ["playerctl", "previous"] }
   Process { id: playerPlayPause; command: ["playerctl", "play-pause"] }
@@ -105,6 +105,11 @@ Row {
           color: mouseAreaPrev.containsMouse ? Colors.accentColor : Colors.powerButtons 
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
+          scale: mouseAreaPrev.containsMouse ? 0.95 : 1.0
+             
+          Behavior on scale {
+            NumberAnimation { duration: 200 }
+          }       
           
           Behavior on color {
             ColorAnimation { duration: 200 }
@@ -150,16 +155,16 @@ Row {
           color: mouseAreaPlayPause.containsMouse ? Colors.accentColor : Colors.powerButtons 
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
-          
           scale: mouseAreaPlayPause.containsMouse ? 1.05 : 1.0
-          
+             
+          Behavior on scale {
+            NumberAnimation { duration: 200 }
+          }       
+
           Behavior on color {
             ColorAnimation { duration: 200 }
           }
-          
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }
+
           
           MouseArea {
             id: mouseAreaPlayPause
@@ -200,6 +205,11 @@ Row {
           color: mouseAreaNext.containsMouse ? Colors.accentColor : Colors.powerButtons 
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
+          scale: mouseAreaNext.containsMouse ? 0.95 : 1.0
+             
+          Behavior on scale {
+            NumberAnimation { duration: 200 }
+          }                 
           
           Behavior on color {
             ColorAnimation { duration: 200 }

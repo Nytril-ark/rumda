@@ -19,8 +19,9 @@ import qs.light.widgets
 
 Scope {
   id: dashboardScope
-  
   property int closeDuration: Config.dashAnimDuration
+
+
   Timer {
     id: closeTimer
     interval: dashboardScope.closeDuration
@@ -157,7 +158,7 @@ Scope {
             border.color: Colors.borderColor            
             GridLayout {
               id: dashInnerGrid
-              columns: 2
+              columns: 3
               rows: 2   
               anchors.fill: parent
 
@@ -172,24 +173,37 @@ Scope {
               ProfileAndPower {
                 Layout.row: 0
                 Layout.column: 0
-                Layout.rowSpan: 2 
-                Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: 200
+                Layout.minimumHeight: Config.profileAndControlsMinHeight
+                Layout.minimumWidth: 344
               }
 
               DashBoardControls {
                 Layout.row: 0
-                Layout.column: 1              
-                Layout.fillWidth: true
-                Layout.preferredHeight: 370
-              }
-
-              ContribGraph {
-                Layout.row: 1
                 Layout.column: 1
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.minimumHeight: Config.profileAndControlsMinHeight
+              }
+
+
+              DashBrightnessControl {
+                Layout.row: 0     
+                Layout.column: 2
+                Layout.fillHeight: true     
+                Layout.minimumHeight: Config.profileAndControlsMinHeight
+                Layout.minimumWidth: 56
+              }
+
+
+
+              ContribGraph {
+                Layout.row: 1
+                Layout.column: 0
+                Layout.columnSpan: 3
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumHeight: Config.contribGraphMinHeight
               }
 
             } // end of gridLayout

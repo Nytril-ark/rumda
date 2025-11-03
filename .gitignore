@@ -4,4 +4,5 @@ sshkey
 *.key
 id_*
 sshkey.pub
+pictures/drink.jpg
 common/nvim/pack/github/start/copilot.vim

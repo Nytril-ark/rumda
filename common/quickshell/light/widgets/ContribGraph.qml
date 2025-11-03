@@ -122,11 +122,11 @@ Rectangle {
   
 ColumnLayout {
     anchors.fill: parent
-    anchors.leftMargin: 10
-    anchors.rightMargin: 10 
-    anchors.topMargin: 13
-    anchors.bottomMargin: 30
-    spacing: 12
+    anchors.leftMargin: 22
+    anchors.rightMargin: 10
+    anchors.topMargin: 14
+    anchors.bottomMargin: 13
+    spacing: 4
     
     // // Header   // above graph ========
     RowLayout { 
@@ -138,7 +138,7 @@ ColumnLayout {
         font.pixelSize: 11
         font.bold: true
         Layout.alignment: Qt.AlignBottom  
-        Layout.leftMargin: 16
+        Layout.leftMargin: 1
       }
 
       Item {  // Spacer
@@ -151,7 +151,7 @@ ColumnLayout {
         color: Colors.accent2Color
         font.pixelSize: 19
         font.bold: true
-        Layout.rightMargin: 19
+        Layout.rightMargin: 25
         Layout.alignment: Qt.AlignBottom
       }
     }
@@ -159,7 +159,7 @@ ColumnLayout {
 
 
     Grid {
-      columns: Math.ceil(gridData.length / 7) 
+      columns: 53 
       rows: 7      
       spacing: 3
       flow: Grid.TopToBottom 
