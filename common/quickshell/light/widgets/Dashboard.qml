@@ -142,18 +142,6 @@ Scope {
           }
 
 
-          // ColumnLayout {
-          //   anchors { 
-          //     fill: parent
-          //     topMargin: -10
-          //     bottomMargin: 10
-          //     leftMargin: 3
-          //     rightMargin: 3
-          //   }
-          //   spacing: 4
-          //   // TopSection {}
-          //   // CenterSection {}
-          // }
           Rectangle {
             id: dashInnerWrapper
             anchors.fill: parent
@@ -187,16 +175,14 @@ Scope {
                 Layout.rowSpan: 2 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.preferredWidth: 200
-                // Layout.minimumHeight: 
+                Layout.minimumWidth: 200
               }
 
               DashBoardControls {
                 Layout.row: 0
                 Layout.column: 1              
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.preferredHeight: 70
+                Layout.preferredHeight: 370
               }
 
               ContribGraph {
@@ -204,7 +190,6 @@ Scope {
                 Layout.column: 1
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.preferredHeight: 30
               }
 
             } // end of gridLayout

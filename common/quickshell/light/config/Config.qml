@@ -51,23 +51,33 @@ Singleton {
   readonly property int dashMarginTop: 230
   readonly property int dashMarginBottom: 230
 
- // obviously, if you aren't me, which you aren't, just change this into you github username
+  // obviously, if you aren't me, which you aren't, just change this into you github username
   readonly property string githubUsername: "Nytril-ark"
+  
+  readonly property double dashboardWidth: 4.30 // this is what you change, don't touch the below 2
 
-  readonly property int dashMarginLeft: (0.23 * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
-  readonly property int dashMarginRight: (0.23 * screenWidth)
+  
+
+  // to change width accordingly: (don't mess with those)
+  readonly property int dashMarginLeft: ((1 / dashboardWidth) * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
+  readonly property int dashMarginRight: ((1 / dashboardWidth) * screenWidth) // note to self: allow it to change according to github graph size
+
+
+
+
+  //  other custom properties
   readonly property int dashRadius: 12
   readonly property int dashBorderWidth: 3
   readonly property int dashInnerModuleBorderWidth: 0 // me when long names
   readonly property int dashInnerModuleRadius: 9
   readonly property int dashInnerPadding: 10
   readonly property int commitSquareSize: 12
+  readonly property bool dashContribToolTip: false // note: fix the layer for this
+
   // shadow config for the dashboard
   readonly property bool enableDashShadow: true //note to self: implement
   readonly property int dashShadowOffsetX: 3 // note: hardcoded, bind later
   readonly property int dashShadowOffsetY: 3
-  // uhh
-  readonly property bool dashContribToolTip: false // note: fix the layer for this
 
   // =================================
   
