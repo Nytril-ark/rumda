@@ -102,31 +102,7 @@ Rectangle {
       }
     }
 
-    // Row {
-    //   anchors.horizontalCenter: parent.horizontalCenter
-    //   anchors.verticalCenter: parent.verticalCenter
-    //   Text {
-    //     text: "Hello.."
-    //     font.family: "Cartograph CF"
-    //     font.italic: true     
-    //     color: Colors.accentColor
-    //     font.pixelSize: 19
-    //     font.bold: true
-    //   }      
-    // }
-    // Row {
-    //   anchors.horizontalCenter: parent.horizontalCenter
-    //   anchors.verticalCenter: parent.verticalCenter
-    //   anchors.verticalCenterOffset: 20
-    //   Text {
-    //     text: Config.username
-    //     font.family: "Cartograph CF"
-    //     font.italic: true     
-    //     color: Colors.accentColor
-    //     font.pixelSize: 24
-    //     font.bold: true
-    //   }
-    // }
+
 
 // POWER BUTTONS ======================================
 

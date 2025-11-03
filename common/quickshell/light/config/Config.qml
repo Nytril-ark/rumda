@@ -23,7 +23,8 @@ Singleton {
   readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/common/quickshell"
   readonly property string profilePath:  Quickshell.env("HOME") + "/.config/rumda/pictures/gatoInPan.png"  // profile pic in the dashboard
   readonly property string fileManager: "nautilus" // or change it to "yazi", or "thunar" or whatever file manager you like
-  readonly property string browser: "firefox" // or whatever browser you like
+  readonly property string browser: "firefox" // or whatever browser you lik
+  readonly property string terminal: "ghostty" // same thing here
   
 
   // Bar Configuration

@@ -31,30 +31,32 @@ Rectangle {
 
 
 
-// contains header for controls + the controls
+// contains header for controls + the controls themselves
   ColumnLayout {
     anchors.fill: parent
     anchors.margins: 20 
     spacing: 12           
-    // Header
-    Row {
-      spacing: 10
-      Layout.fillWidth: true
-    
-      Text {
-        text: "control"
-        color: Colors.accentColor
-        font.pixelSize: 16
-        font.bold: true
-      }
-      
-      Text {
-        text: "hello"
-        color: Colors.accent2Color
-        font.pixelSize: 12
-        anchors.verticalCenter: parent.verticalCenter
-      }
-    }
+
+
+    // // Header
+    // Row {
+    //   spacing: 10
+    //   Layout.fillWidth: true
+    //
+    //   Text {
+    //     text: "control"
+    //     color: Colors.accentColor
+    //     font.pixelSize: 16
+    //     font.bold: true
+    //   }
+    //
+    //   // Text {
+    //   //   text: "hello"
+    //   //   color: Colors.accent2Color
+    //   //   font.pixelSize: 12
+    //   //   anchors.verticalCenter: parent.verticalCenter
+    //   // }
+    // }
 
 
   // ==========================
@@ -75,7 +77,7 @@ Rectangle {
         Layout.fillWidth: true
         Layout.fillHeight: true
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -20
+        anchors.verticalCenterOffset: 0
 
         DashControlExtras {
           id: dashControlExtras
