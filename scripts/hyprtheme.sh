@@ -32,7 +32,7 @@ sleep 0.9
 
 rm -f "$COMMON_FILE"
 
-ln -s "$SRC" "$COMMON_FILE"
+ln -fs "$SRC" "$COMMON_FILE"
 
 /home/$USER/.config/rumda/scripts/alacrittytheme.sh "$THEME"
 

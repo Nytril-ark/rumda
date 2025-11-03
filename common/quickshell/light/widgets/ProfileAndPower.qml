@@ -265,7 +265,7 @@ Rectangle {
           
           Process {
             id: process7
-            command: ["bash", "-c", ".config/rumda/scripts/lock.sh", "&disown"]
+            command: ["bash", "-c", "hyprlock"]
             running: false
           }
 

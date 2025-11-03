@@ -6,18 +6,40 @@
 # be aware that anything selected as true
 # will overwrite the config files you have 
 # at .config
+#
+#
+DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
+#
+#
+# All falsed out version: (make true what you want to install minimally)
 INSTALL_HYPRLAND=true
-INSTALL_QUICKSHELL=true
-INSTALL_ALACRITTY=true
-INSTALL_ZATHURA=true
-INSTALL_ROFI=true
-INSTALL_BPYTOP=true
-INSTALL_BTOP=true
-INSTALL_YAZI=true
-INSTALL_NEOFETCH=true
-INSTALL_NEOTHEME=true
-INSTALL_GHOSTTY=true # false till I fix this. The rest work. Ghostty had a mem leak recently and I'm not using it momentarily
-INSTALL_CHADRC=false # this is defaulted as false so as not to 
+INSTALL_QUICKSHELL=false
+INSTALL_ALACRITTY=false
+INSTALL_ZATHURA=false
+INSTALL_ROFI=false
+INSTALL_BPYTOP=false
+INSTALL_BTOP=false
+INSTALL_YAZI=false
+INSTALL_NEOFETCH=false
+INSTALL_NEOTHEME=false
+INSTALL_GHOSTTY=false 
+INSTALL_CHADRC=false
+
+# OR --- all true version: (installs full thing but chadrc optional)
+# INSTALL_HYPRLAND=true
+# INSTALL_QUICKSHELL=true
+# INSTALL_ALACRITTY=true
+# INSTALL_ZATHURA=true
+# INSTALL_ROFI=true
+# INSTALL_BPYTOP=true
+# INSTALL_BTOP=true
+# INSTALL_YAZI=true
+# INSTALL_NEOFETCH=true
+# INSTALL_NEOTHEME=true
+# INSTALL_GHOSTTY=true
+# INSTALL_CHADRC=false 
+
+# # chadrc is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
 # go ahead and set it to true. Not having my chadrc
 # might make your theme look weird
@@ -66,17 +88,38 @@ install_config() {
 
     # Backup existing config if it exists
     if [ -e "$dest" ]; then
-        echo -e "${YELLOW}  Backing up existing config to ${dest}.backup${NC}"
-        mv "$dest" "${dest}.backup"
+        if [ "$DISABLE_BACKUP" = false ]; then
+            local backup_name="${dest}.backup.$(date +%Y%m%d_%H%M%S)"
+            echo -e "${YELLOW}  Backing up existing config to ${backup_name}${NC}"
+            mv "$dest" "$backup_name"
+        else
+            echo -e "${RED}  Removing existing config (backup disabled)${NC}"
+            rm -rf "$dest"
+        fi
     fi
 
-    # Copy the config
-    if cp -r "$source" "$dest"; then
-        echo -e "${GREEN}> Successfully installed ${name} to ${dest}${NC}"
-        return 0
+    # If source is a directory, copy its contents (not the directory itself)
+    if [ -d "$source" ]; then
+        # Create destination directory
+        mkdir -p "$dest"
+        
+        # Copy contents, not the folder itself
+        if cp -r "$source/"* "$dest/" 2>/dev/null; then
+            echo -e "${GREEN}> Successfully installed ${name} to ${dest}${NC}"
+            return 0
+        else
+            echo -e "${RED}> Failed to install ${name}${NC}"
+            return 1
+        fi
     else
-        echo -e "${RED}> Failed to install ${name}${NC}"
-        return 1
+        # If source is a file, copy it directly
+        if cp "$source" "$dest"; then
+            echo -e "${GREEN}> Successfully installed ${name} to ${dest}${NC}"
+            return 0
+        else
+            echo -e "${RED}> Failed to install ${name}${NC}"
+            return 1
+        fi
     fi
 }
 
@@ -95,7 +138,6 @@ echo "      じしf_,)ノ"
 echo "============================================"
 echo -e "${NC}"
 
-# Check if source directory exists
 if [ ! -d "$SOURCE_DIR" ]; then
     echo -e "${RED}Error: Source directory not found at ${SOURCE_DIR}${NC}"
     echo -e "${YELLOW}Please clone the repository to ~/.config/rumda first${NC}"
@@ -105,6 +147,14 @@ fi
 echo -e "${YELLOW}Source directory: ${SOURCE_DIR}${NC}"
 echo -e "${YELLOW}Destination directory: ${DEST_DIR}${NC}"
 echo ""
+
+echo -e "${CYAN}This will install the selected configs and backup existing ones.${NC}"
+read -p "Continue? (y/n) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "${RED}Installation cancelled.${NC}"
+    exit 0
+fi
 
 # Install Hyprland
 if [ "$INSTALL_HYPRLAND" = true ]; then
@@ -163,13 +213,10 @@ fi
 
 # Install chadrc 
 if [ "$INSTALL_CHADRC" = true ]; then
-    install_config "$SOURCE_DIR/common/nvim/lua/chadrc.lua" "$DEST_DIR/nvim/lua/" "chadrc"
+    install_config "$SOURCE_DIR/common/nvim/lua/chadrc.lua" "$DEST_DIR/nvim/lua/chadrc.lua" "chadrc"
 fi
 
 
-# ============================================
-# COMPLETION
-# ============================================
 
 echo ""
 echo -e "${GREEN}"
@@ -181,7 +228,8 @@ echo "          ૮ -  ՛)  ('  -7"
 echo "     乀 (ˍ, ل ل    じしˍ,)ノ"
 echo ""
 echo -e "${NC}"
-echo -e "${YELLOW}Note: Original configs (if existent) were backed up with .backup extension${NC}"
+echo -e "${YELLOW}Note: Original configs (if existent) were backed up with timestamp${NC}"
 echo -e "${YELLOW}You may need to restart your session for changes to take effect${NC}"
 echo ""
+
 
