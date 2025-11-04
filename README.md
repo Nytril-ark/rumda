@@ -69,13 +69,13 @@
 Use your fav package manager to install those:
 ```
 hyprland quickshell rofi alacritty swww thunar neofetch grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
-ghostty  nautilus  btop bpytop papirus-icon-theme obs-studio \
+ghostty  nautilus  btop bpytop obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
 ```
 If using dnf, copy this: 
 ```
 sudo dnf install hyprland rofi alacritty swww zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
-thunar nautilus neovim btop bpytop papirus-icon-theme jetbrains-mono-fonts mako hyprpicker obs-studio \
+thunar nautilus neovim btop bpytop jetbrains-mono-fonts mako hyprpicker obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable 
 ```
 
