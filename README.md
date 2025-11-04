@@ -40,12 +40,30 @@
 
 
 ## Gallery
-![1](pictures/1.png)
 
 
-| ![image1](pictures/discordl.png) | ![image2](pictures/3.png) |
-| ------------------------------ | ------------------------- |
-| ![image3](pictures/4.png)      | ![image4](pictures/triplewindows.png) |
+
+
+![1](pictures/dark.png)
+
+
+| ![discord](pictures/discord.png) | ![allwins](pictures/filled.png) |
+| -------------------------------- | ------------------------------- |
+
+
+### old pistachio theme available in installer
+<details>
+  <summary>Rumda-pistachio</summary>
+
+  ![1](pictures/1.png)
+
+  ![image1](pictures/discordl.png)  
+  ![image2](pictures/3.png)
+
+  ![image3](pictures/4.png)  
+  ![image4](pictures/triplewindows.png)
+
+</details>
 
 
 ---
@@ -203,7 +221,7 @@ I kick off the cat for a little fun
 
 
 ##### rumda light
-<img src="pictures/rl1.png">
+<img src="pictures/rll.png">
 
 #### experimental themes:
 haven't refined those yet..
