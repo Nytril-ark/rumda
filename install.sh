@@ -43,6 +43,9 @@ INSTALL_CHADRC=false
 
 # Make sure you cloned rumda in 
 # /home/.config/rumda
+#
+#
+# DO NOT CHANGE THOSE AT ALL
 SOURCE_DIR="$HOME/.config/rumda"
 DEST_DIR="$HOME/.config"
 

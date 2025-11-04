@@ -29,6 +29,7 @@ INSTALL_CHADRC=false
 # PATH CONFIGURATION
 # ============================================
 
+# DO NOT CHANGE THOSE AT ALL
 SOURCE_DIR="$HOME/.config/rumda-pistachio"
 DEST_DIR="$HOME/.config"
 
