@@ -2,7 +2,7 @@
 # usage: hyprtheme light / hyprtheme dark
 
 # note to self: the old copy script results in no white blink when switching
-# but the symlink does that. possibly cuz of the rm -f 
+# but the symlink does that.
 
 set -e
 
@@ -30,7 +30,7 @@ fi
 
 sleep 0.9
 
-rm -f "$COMMON_FILE"
+rm -r "$COMMON_FILE"
 
 ln -fs "$SRC" "$COMMON_FILE"
 

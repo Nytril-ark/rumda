@@ -114,7 +114,7 @@ if [ "$THEME_CHOICE" = "pistachio" ]; then
     
     if [ -d "$HOME/.config/rumda-pistachio" ]; then
         echo -e "${YELLOW}Removing existing rumda-pistachio directory...${NC}"
-        rm -rf "$HOME/.config/rumda-pistachio"
+        rm -r "$HOME/.config/rumda-pistachio"
     fi
     
     cp -r "$SOURCE_DIR/rumda-pistachio" "$HOME/.config/rumda-pistachio"
@@ -124,8 +124,8 @@ if [ "$THEME_CHOICE" = "pistachio" ]; then
     
     # Launch pistachio installer and disown
     echo -e "${MAGENTA}Launching Pistachio installer...${NC}"
-    (cd "$HOME/.config/rumda-pistachio" && ./install.sh) & disown
-    
+    cd "$HOME/.config/rumda-pistachio"
+    exec ./install.sh
     echo -e "${GREEN}Pistachio installer launched independently!${NC}"
     exit 0
 fi
@@ -209,7 +209,7 @@ install_config() {
             mv "$dest" "$backup_name"
         else
             echo -e "${RED}  Removing existing config (backup disabled)${NC}"
-            rm -rf "$dest"
+            rm -r "$dest"
         fi
     fi
     
