@@ -1,9 +1,15 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg fill="#AF8C65" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-volume-high">
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier">
-<path d="M13 2H15V3H16V4H17V5H18V6H19V8H20V14H19V16H18V17H17V18H16V19H15V20H13V18H14V17H15V16H16V15H17V13H18V9H17V7H16V6H15V5H14V4H13V2M14 7V8H15V10H16V12H15V14H14V15H13V7H14M2 8H6V7H7V6H8V5H9V4H10V3H11V19H10V18H9V17H8V16H7V15H6V14H2V8M4 10V12H7V13H8V14H9V8H8V9H7V10H4Z"/>
-</g>
-</svg>
+<svg fill="#dba380" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" id="memory-volume-high">
+
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+<g id="SVGRepo_iconCarrier">
+
+<path d="M13 2H15V3H16V4H17V5H18V6H19V8H20V14H19V16H18V17H17V18H16V19H15V20H13V18H14V17H15V16H16V15H17V13H18V9H17V7H16V6H15V5H14V4H13V2M14 7V8H15V10H16V12H15V14H14V15H13V7H14M2 8H6V7H7V6H8V5H9V4H10V3H11V19H10V18H9V17H8V16H7V15H6V14H2V8M4 10V12H7V13H8V14H9V8H8V9H7V10H4Z"/>
+
+</g>
+
+</svg>

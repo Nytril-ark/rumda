@@ -19,13 +19,13 @@ Custom Rumda-light colorscheme, by @Nytril-ark:
 ---------------*/
 
 * {
-    background:     #E4C198FF;  /* backgroundColor */
-    background-alt: #DAB08BFF;  /* moduleBG */
-    foreground:     #3A2D26FF;  /* shadowColor - dark text */
-    selected:       #9F684CFF;  /* accent2Color */
-    active:         #6F4732FF;  /* accentColor */
+    background:     #f0c997FF;  /* backgroundColor */
+    background-alt: #f0bb90FF;  /* moduleBG */
+    foreground:     #784d37FF;  /* shadowColor - dark text */
+    selected:       #c47c4fFF;  /* accent2Color */
+    active:         #a1694dFF;  /* accentColor */
     urgent:         #9A4235AA;  /* errorColor */
-    border:         #D1AB86FF;  /* borderColor */
-    indicator-bg:   #AF8C65FF;  /* indicatorBGColor */
+    border:         #f2bc88FF;  /* borderColor */
+    indicator-bg:   #dba380FF;  /* indicatorBGColor */
     gradient:       #a87358FF;  /* gradientAccent2Color */
 }

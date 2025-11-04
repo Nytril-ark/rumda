@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+
+<svg
+   width="498.07755"
+   height="652.02673"
+   viewBox="0 0 14.942326 19.560802"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="bluetooth.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="-8.3130895e-16"
+       y="0"
+       width="14.942326"
+       height="19.560802"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     id="SVGRepo_iconCarrier"
+     style="fill:#f2bc88;fill-opacity:1"
+     transform="translate(-5.0000001,-2.2721159)">
+    <path
+       d="m 15,3 h -2 v 2 h 2 v 2 h 2 v 2 h -2 v 2 h 2 V 9 h 2 V 7 H 17 V 5 H 15 Z M 13,3 H 11 V 9 H 9 V 7 H 7 V 5 H 5 v 2 h 2 v 2 h 2 v 2 h 2 v 2 H 9 v 2 H 7 v 2 H 5 v 2 h 2 v -2 h 2 v -2 h 2 v 6 h 2 z m 2,8 h -2 v 2 h 2 v 2 h 2 v 2 h -2 v 2 h -2 v 2 h 2 v -2 h 2 v -2 h 2 v -2 h -2 v -2 h -2 z"
+       fill="#f2bc88"
+       id="path1"
+       style="fill:#f2bc88;fill-opacity:1" />
+  </g>
+  <path
+     style="fill:#f2bc88;fill-opacity:1;stroke:#f2bc88;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:stroke fill markers"
+     d="M 2.667396,1.0364179 13.905908,18.524383"
+     id="path2" />
+</svg>

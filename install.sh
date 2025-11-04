@@ -1,7 +1,12 @@
 #!/bin/bash
+
 # ============================================
-# RUMDA DOTFILES INSTALLER
+# RUMDA DOTFILES INSTALLER (LIGHT)
 # ============================================
+
+# Theme Selection
+THEME_CHOICE="light"  # Options: "light" or "pistachio"
+
 # Installation Configuration (true/false)
 # be aware that anything selected as true
 # will overwrite the config files you have 
@@ -11,81 +16,191 @@
 DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
 #
 #
-# All falsed out version: (make true what you want to install minimally)
-INSTALL_HYPRLAND=true
-INSTALL_QUICKSHELL=false
-INSTALL_ALACRITTY=false
-INSTALL_ZATHURA=false
-INSTALL_ROFI=false
-INSTALL_BPYTOP=false
-INSTALL_BTOP=false
-INSTALL_YAZI=false
-INSTALL_NEOFETCH=false
-INSTALL_NEOTHEME=false
-INSTALL_GHOSTTY=false 
-INSTALL_CHADRC=false
+
 
 # OR --- all true version: (installs full thing but chadrc optional)
-# INSTALL_HYPRLAND=true
-# INSTALL_QUICKSHELL=true
-# INSTALL_ALACRITTY=true
-# INSTALL_ZATHURA=true
-# INSTALL_ROFI=true
-# INSTALL_BPYTOP=true
-# INSTALL_BTOP=true
-# INSTALL_YAZI=true
-# INSTALL_NEOFETCH=true
-# INSTALL_NEOTHEME=true
-# INSTALL_GHOSTTY=true
-# INSTALL_CHADRC=false 
-
+INSTALL_HYPRLAND=true
+INSTALL_QUICKSHELL=true
+INSTALL_ALACRITTY=true
+INSTALL_ZATHURA=true
+INSTALL_ROFI=true
+INSTALL_BPYTOP=true
+INSTALL_BTOP=true
+INSTALL_YAZI=true
+INSTALL_NEOFETCH=true
+INSTALL_NEOTHEME=true
+INSTALL_GHOSTTY=true
+INSTALL_DISCORD=true
+INSTALL_CHADRC=false 
 # # chadrc is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
 # go ahead and set it to true. Not having my chadrc
 # might make your theme look weird
 
-
 # ============================================
 # PATH CONFIGURATION
 # ============================================
+
 # Make sure you cloned rumda in 
 # /home/.config/rumda
 SOURCE_DIR="$HOME/.config/rumda"
-
 DEST_DIR="$HOME/.config"
 
 # ============================================
 # COLORS
 # ============================================
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 BOLD_YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
 NC='\033[0m' 
+
 # ============================================
-# HELPER FUNCTIONS
+# THEME SELECTION
 # ============================================
 
-# Function to copy config with error checking
+echo -e "${BOLD_YELLOW}"
+echo "============================================"
+echo "          RUMDA DOTFILES INSTALLER"
+echo "============================================"
+echo "      ／l、"
+echo "    （ﾟ､ ｡ ７   a warmer, more cozy desktop.."
+echo "      l  ~ヽ"
+echo "      じしf_,)ノ"
+echo "============================================"
+echo -e "${NC}"
+
+# Check if source directory exists
+if [ ! -d "$SOURCE_DIR" ]; then
+    echo -e "${RED}Error: Source directory not found at ${SOURCE_DIR}${NC}"
+    echo -e "${YELLOW}Please clone the repository to ~/.config/rumda first${NC}"
+    exit 1
+fi
+
+# Ask user which theme to install
+echo -e "${CYAN}Which theme would you like to install?${NC}"
+echo -e "${YELLOW}1) Rumda Light (default)${NC}"
+echo -e "${MAGENTA}2) Rumda Pistachio${NC}"
+echo ""
+read -p "Enter choice (1 or 2, default: 1): " theme_input
+
+case $theme_input in
+    2)
+        THEME_CHOICE="pistachio"
+        ;;
+    *)
+        THEME_CHOICE="light"
+        ;;
+esac
+
+# ============================================
+# HANDLE PISTACHIO THEME
+# ============================================
+
+if [ "$THEME_CHOICE" = "pistachio" ]; then
+    echo -e "${MAGENTA}Installing Rumda Pistachio...${NC}"
+    
+    # Check if pistachio subdirectory exists
+    if [ ! -d "$SOURCE_DIR/rumda-pistachio" ]; then
+        echo -e "${RED}Error: Pistachio theme not found at ${SOURCE_DIR}/rumda-pistachio${NC}"
+        exit 1
+    fi
+    
+    # Copy rumda-pistachio to .config/rumda-pistachio
+    echo -e "${YELLOW}Copying Rumda Pistachio to ~/.config/rumda-pistachio...${NC}"
+    
+    if [ -d "$HOME/.config/rumda-pistachio" ]; then
+        echo -e "${YELLOW}Removing existing rumda-pistachio directory...${NC}"
+        rm -rf "$HOME/.config/rumda-pistachio"
+    fi
+    
+    cp -r "$SOURCE_DIR/rumda-pistachio" "$HOME/.config/rumda-pistachio"
+    
+    # Make pistachio install script executable
+    chmod +x "$HOME/.config/rumda-pistachio/install.sh"
+    
+    # Launch pistachio installer and disown
+    echo -e "${MAGENTA}Launching Pistachio installer...${NC}"
+    (cd "$HOME/.config/rumda-pistachio" && ./install.sh) & disown
+    
+    echo -e "${GREEN}Pistachio installer launched independently!${NC}"
+    exit 0
+fi
+
+# ============================================
+# CONTINUE WITH LIGHT THEME INSTALLATION
+# ============================================
+
+echo -e "${YELLOW}Installing Rumda Light...${NC}"
+echo ""
+
+# Git pull to get latest version
+echo -e "${CYAN}Updating repository to latest version...${NC}"
+cd "$SOURCE_DIR"
+
+# Check if there are uncommitted changes
+if git diff-index --quiet HEAD --; then
+    # No local changes, safe to pull
+    echo -e "${CYAN}Updating repository to latest version...${NC}"
+    git pull origin main 2>/dev/null || git pull origin master 2>/dev/null
+else
+    # Has local changes, offer choice
+    echo -e "${YELLOW}Warning: You have local changes in the repository.${NC}"
+    echo -e "${CYAN}1) Keep local changes and skip update${NC}"
+    echo -e "${CYAN}2) Discard local changes and update${NC}"
+    read -p "Choice (1/2): " pull_choice
+    
+    case $pull_choice in
+        2)
+            echo -e "${RED}Discarding local changes...${NC}"
+            git fetch origin
+            git reset --hard origin/main 2>/dev/null || git reset --hard origin/master 2>/dev/null
+            ;;
+        *)
+            echo -e "${YELLOW}Keeping local changes, skipping update...${NC}"
+            ;;
+    esac
+fi
+
+echo ""
+
+echo -e "${YELLOW}Source directory: ${SOURCE_DIR}${NC}"
+echo -e "${YELLOW}Destination directory: ${DEST_DIR}${NC}"
+echo ""
+
+echo -e "${CYAN}This will install the selected configs and backup existing ones.${NC}"
+read -p "Continue? (y/n) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "${RED}Installation cancelled.${NC}"
+    exit 0
+fi
+
+# ============================================
+# HELPER FUNCTION
+# ============================================
+
 install_config() {
     local source="$1"
     local dest="$2"
     local name="$3"
-
+    
     echo -e "${YELLOW}Installing ${name}...${NC}"
-
+    
     # Check if source exists
     if [ ! -d "$source" ] && [ ! -f "$source" ]; then
         echo -e "${RED}> Failed: Source not found at ${source}${NC}"
         echo -e "${RED}Are you sure you cloned to the right location? ${NC}"
         return 1
     fi
-
+    
     # Create destination parent directory if it doesn't exist
     local dest_parent=$(dirname "$dest")
     mkdir -p "$dest_parent"
-
+    
     # Backup existing config if it exists
     if [ -e "$dest" ]; then
         if [ "$DISABLE_BACKUP" = false ]; then
@@ -97,7 +212,7 @@ install_config() {
             rm -rf "$dest"
         fi
     fi
-
+    
     # If source is a directory, copy its contents (not the directory itself)
     if [ -d "$source" ]; then
         # Create destination directory
@@ -126,35 +241,6 @@ install_config() {
 # ============================================
 # MAIN INSTALLATION
 # ============================================
-
-echo -e "${BOLD_YELLOW}"
-echo "============================================"
-echo "          RUMDA DOTFILES INSTALLER"
-echo "============================================"
-echo "      ／l、"
-echo "    （ﾟ､ ｡ ７   a warmer, more cozy desktop.."
-echo "      l  ~ヽ"
-echo "      じしf_,)ノ"
-echo "============================================"
-echo -e "${NC}"
-
-if [ ! -d "$SOURCE_DIR" ]; then
-    echo -e "${RED}Error: Source directory not found at ${SOURCE_DIR}${NC}"
-    echo -e "${YELLOW}Please clone the repository to ~/.config/rumda first${NC}"
-    exit 1
-fi
-
-echo -e "${YELLOW}Source directory: ${SOURCE_DIR}${NC}"
-echo -e "${YELLOW}Destination directory: ${DEST_DIR}${NC}"
-echo ""
-
-echo -e "${CYAN}This will install the selected configs and backup existing ones.${NC}"
-read -p "Continue? (y/n) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo -e "${RED}Installation cancelled.${NC}"
-    exit 0
-fi
 
 # Install Hyprland
 if [ "$INSTALL_HYPRLAND" = true ]; then
@@ -211,12 +297,15 @@ if [ "$INSTALL_NEOTHEME" = true ]; then
     install_config "$SOURCE_DIR/common/nvim/lua/themes" "$DEST_DIR/nvim/lua/themes" "editor_theme"
 fi
 
+# Install discord theme
+if [ "$INSTALL_DISCORD" = true ]; then
+    install_config "$SOURCE_DIR/common/vencord" "$DEST_DIR/Vencord/themes" "discord_theme"
+fi
+
 # Install chadrc 
 if [ "$INSTALL_CHADRC" = true ]; then
     install_config "$SOURCE_DIR/common/nvim/lua/chadrc.lua" "$DEST_DIR/nvim/lua/chadrc.lua" "chadrc"
 fi
-
-
 
 echo ""
 echo -e "${GREEN}"
@@ -232,4 +321,5 @@ echo -e "${YELLOW}Note: Original configs (if existent) were backed up with times
 echo -e "${YELLOW}You may need to restart your session for changes to take effect${NC}"
 echo ""
 
-
+# Apply light theme
+"$HOME/.config/rumda/scripts/hyprtheme.sh" light

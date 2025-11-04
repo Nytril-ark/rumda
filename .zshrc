@@ -224,6 +224,9 @@ alias cargo-generate-flamelens='cargo flamegraph --post-process "flamelens --ech
 alias temp='echo "CPU Temp: $(sensors | awk '\''/Tctl/ {print $2}'\'')" | sed "s/+/\x1b[31m+/;s/°C/°C\x1b[0m/"'
 alias rumda='Hyprland --config /home/hexogen/.config/rumda/hyprland.conf'
 alias rumdafetch='neofetch --source /home/$USER/.config/rumda/neofetch/2.svg --kitty --size 230'
+alias wall='/$HOME/.config/rumda/scripts/wall.sh'
+alias hyprtheme='/$HOME/.config/rumda/scripts/hyprtheme.sh'
+
 
 
 BRACK_HEX="%F{#53595f}"
@@ -254,7 +257,7 @@ RESET=$'%{\e[0m%}'
 
 # Update the color definitions
 C_USER=$'%{\e[1;38;2;109;94;83m%}'      # #6D5E53 (user color)
-C_HOST=$'%{\e[1;38;2;159;104;76m%}'     # #9F684C (host color)
+C_HOST=$'%{\e[1;38;2;159;104;76m%}'     # #c47c4f (host color)
 C_ERR=$'%{\e[1;38;2;154;66;53m%}'       # #9A4235 (error color)
 C_AT=$'%{\e[1;38;2;173;112;74m%}'       # #AD704A (@ symbol color)
 RESET=$'%{\e[0m%}'

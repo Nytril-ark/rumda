@@ -37,10 +37,10 @@ style = { shape = "Underline", blinking = "On" }
 
 [colors.primary]
 background = "#1C1612"
-foreground = "#E4C198"
+foreground = "#f0c997"
 [colors.cursor]
 cursor = "#45373c"
-text = "#d5ccba"
+text = "#F5DCC6"
 
 [colors.selection]
 text = "#45373c"
@@ -64,7 +64,7 @@ yellow = "#d08b30"
 blue = "#426a79"
 magenta = "#97522c"
 cyan = "#989a9c"
-white = "#d5ccba"
+white = "#F5DCC6"
 
 [terminal]
 [terminal.shell]

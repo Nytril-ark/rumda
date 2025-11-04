@@ -2,6 +2,7 @@ import Quickshell.Io
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Pipewire
+import Quickshell.Bluetooth
 import Quickshell.Widgets
 import Quickshell.Io
 import QtQuick
@@ -270,7 +271,8 @@ Item {
 
 
       // bluetooth button ==============================================
-      Item {
+      Item {                              // PLEASE note that I do not use bluetooth nor have it as a feature on my pc 
+                                          // so I have no idea whether or not this works.. sorry
         width: buttonSizes + buttonFloatAmount
         height: buttonSizes + buttonFloatAmount
         
@@ -279,7 +281,7 @@ Item {
           height: buttonSizes
           anchors.verticalCenter: parent.verticalCenter
           radius: Config.dashInnerModuleRadius
-          color: mouseArea5.containsMouse ? Colors.accentColor : Colors.powerButtons 
+          color: mouseArea5.containsMouse ? Colors.accentColor : Colors.powerButtons
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
           scale: mouseArea5.containsMouse ? 0.95 : 1.0
@@ -291,28 +293,28 @@ Item {
           Behavior on color {
             ColorAnimation { duration: 200 }
           }
-
-
-          Process {
-            id: process5
-            command: ["/bin/sh", "-c", "alacritty -e nvim .config/rumda/common/quickshell/light/icons/dashboard/bluetoothWIP.txt"]
-            running: false
-          }
-
           
           MouseArea {
             id: mouseArea5
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
-            onClicked: process5.running = true
+            onClicked: {
+              if (Bluetooth.adapter) {
+                Bluetooth.adapter.powered = !Bluetooth.adapter.powered
+              } else {
+                console.error("No bluetooth adapter found")
+              }
+            }
           }
           
           Image {
             anchors.centerIn: parent
             width: iconSizes
             height: iconSizes
-            source: `file://${Config.configPath}/light/icons/dashboard/bluetooth.svg`
+            source: Bluetooth.adapter?.powered ? 
+              `file://${Config.configPath}/light/icons/dashboard/bluetooth.svg` :
+              `file://${Config.configPath}/light/icons/dashboard/bluetoothOff.svg`
             fillMode: Image.PreserveAspectFit
             antialiasing: true
             smooth: true
@@ -321,9 +323,6 @@ Item {
         }
       }
 
-
-
     }   // row 1 ends here
-
 } // end of column that contains the 2 rows of buttons
 

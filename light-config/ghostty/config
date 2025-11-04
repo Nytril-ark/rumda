@@ -78,12 +78,12 @@ palette = 11=#d08b30
 palette = 12=#426a79
 palette = 13=#97522c
 palette = 14=#989a9c
-palette = 15=#d5ccba
-background = #d5ccba
+palette = 15=#F5DCC6
+background = #F5DCC6
 foreground = #45373c
 # Cursor colors
 cursor-color = #45373c
-cursor-text = #d5ccba
+cursor-text = #F5DCC6
 # Selection colors
 selection-background = #968c83
 selection-foreground = #45373c

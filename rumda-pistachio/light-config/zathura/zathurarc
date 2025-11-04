@@ -1,0 +1,48 @@
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#f4ecd8"
+# set default-fg "#5b4636"
+#
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#1b1512"
+# set default-fg "#d2b48c"
+#
+# set recolor true
+# set recolor-keephue true
+# set default-bg "#1e1e1e"
+# set default-fg "#dcdccc"
+
+
+set default-bg "#D5CCBA"
+set default-fg "#1b1512"
+
+set statusbar-fg                "#553A2F"
+set statusbar-bg                "#DAB08B"
+
+set inputbar-bg                 "#DAB08B"
+set inputbar-fg                 "#553A2F"
+
+set notification-bg             "#1a1b26"
+set notification-fg             "#73daca"
+
+set notification-error-bg       "#1a1b26"
+set notification-error-fg       "#f7768e"
+
+set notification-warning-bg     "#1a1b26"
+set notification-warning-fg     "#f7768e"
+
+set highlight-color             "#AF8C65"
+set highlight-active-color      "#D1AB86"
+
+set completion-bg               "#24283b"
+set completion-fg               "#a9b1d6"
+
+set completion-highlight-fg     "#9aa5ce"
+set completion-highlight-bg     "24283b"
+
+set recolor-lightcolor          "#E4C198"
+set recolor-darkcolor           "#1b1512"
+
+set recolor                     "true"
+set recolor-keephue             "false"
