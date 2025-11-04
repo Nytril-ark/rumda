@@ -116,6 +116,7 @@ cd rumda
 chmod +x install.sh
 ./install.sh
 ```
+#### note that the installer will let you install either the old pistachio theme or the new beige theme (which is the default)
 
 
 
