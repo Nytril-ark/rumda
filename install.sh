@@ -117,7 +117,7 @@ if [ "$THEME_CHOICE" = "pistachio" ]; then
     
     if [ -d "$HOME/.config/rumda-pistachio" ]; then
         echo -e "${YELLOW}Removing existing rumda-pistachio directory...${NC}"
-        rm -r "$HOME/.config/rumda-pistachio"
+        rm -rf "$HOME/.config/rumda-pistachio"
     fi
     
     cp -r "$SOURCE_DIR/rumda-pistachio" "$HOME/.config/rumda-pistachio"
@@ -212,7 +212,7 @@ install_config() {
             mv "$dest" "$backup_name"
         else
             echo -e "${RED}  Removing existing config (backup disabled)${NC}"
-            rm -r "$dest"
+            rm -rf "$dest"
         fi
     fi
     

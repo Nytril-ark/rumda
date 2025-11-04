@@ -85,21 +85,21 @@ body {
     --text-5: #5A3A25; /* muted channels/chats and timestamps */
 
     /* background and dark colors */
-    --bg-1: #D5CCBA; /* dark buttons when clicked */
-    --bg-2: #C9C0AE; /* dark buttons */
-    --bg-3: #D5CCBA; /* spacing, secondary elements */
-    --bg-4: #c2c1a9; /* main background color */
-    --hover: #8F5B3C; /* channels and buttons when hovered */
-    --active: #C19B76; /* channels and buttons when clicked or selected */
-    --active-2: #C19B76; /* extra state for transparent buttons */
-    --message-hover: #AF8C65; /* messages when hovered */
+    --bg-1: #f0d4bb; /* dark buttons when clicked */
+    --bg-2: #a86943; /* dark buttons */
+    --bg-3: #f0d4bb; /* spacing, secondary elements */
+    --bg-4: #F2CDAC; /* main background color */
+    --hover: #a86943; /* channels and buttons when hovered */
+    --active: #c99d71; /* channels and buttons when clicked or selected */
+    --active-2: #c99d71; /* extra state for transparent buttons */
+    --message-hover: #dbac81; /* messages when hovered */
 
     /* accent colors */
     --accent-1: #426A79; /* links and other accent text */
-    --accent-2: #9F7C55; /* small accent elements */
-    --accent-3: #A87358; /* accent buttons */
-    --accent-4: #C19B76; /* accent buttons when hovered */
-    --accent-5: #C3BAA8; /* accent buttons when clicked */
+    --accent-2: #A86943; /* small accent elements */
+    --accent-3: #a86943; /* accent buttons */
+    --accent-4: #C99D71; /* accent buttons when hovered */
+    --accent-5: #d4a87d; /* accent buttons when clicked */
     --accent-new: #9E4234; /* stuff that's normally red like mute/deafen buttons */
     --mention: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 90%) 40%, transparent); /* background of messages that mention you */
     --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 95%) 40%, transparent); /* background of messages that mention you when hovered */
@@ -107,15 +107,15 @@ body {
     --reply-hover: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 95%) 40%, transparent); /* background of messages that reply to you when hovered */
 
     /* status indicator colors */
-    --online: #447028; /* change to #40a258 for default */
+    --online: #537a3a; /* change to #40a258 for default */
     --dnd: #9E4234; /* change to #d83a41 for default */
     --idle: #b8771a; /* change to #cc954c for default */
     --streaming: #8F5B3C; /* change to ##9147ff for default */
     --offline: #8F866E; /* change to #82838b for default offline color */
 
     /* border colors */
-    --border-light: #C19B76; /* general light border color */
-    --border: #D1AB86; /* general normal border color */
-    --border-hover: #D1AB86; /* border color of panels when hovered */
-    --button-border: #B3AA98; /* neutral border color of buttons */
+    --border-light: #F2BC886; /* general light border color */
+    --border: #F2BC88; /* general normal border color */
+    --border-hover: #F2BC88; /* border color of panels when hovered */
+    --button-border: #F2BC88; /* neutral border color of buttons */
 }
