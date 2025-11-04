@@ -68,15 +68,15 @@
 
 Use your fav package manager to install those:
 ```
-hyprland quickshell rofi alacritty swww thunar neofetch grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
+hyprland quickshell rofi alacritty swww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
 ghostty  nautilus  btop bpytop obs-studio \
 xdg-desktop-portal-hyprland wl-clipboard git jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
 ```
 If using dnf, copy this: 
 ```
-sudo dnf install hyprland rofi alacritty swww zathura grim brightnessctl playerctl wpctl pipewire wireplumber \
+sudo dnf install hyprland rofi alacritty swww zathura grim swappy brightnessctl playerctl wpctl pipewire wireplumber \
 thunar nautilus neovim btop bpytop jetbrains-mono-fonts mako hyprpicker obs-studio \
-xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable 
+xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable  
 ```
 
 Check the installation for those from their wikis if you're using dnf
