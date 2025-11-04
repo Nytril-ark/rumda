@@ -19,7 +19,7 @@
 
 
 > [!IMPORTANT]
-> This is a *wip* and I'm adding things to it every day, but if you would like to try it
+> if you would like to try it
 > see [installation](#installation).
 >
 > 
