@@ -173,21 +173,29 @@ I kick off the cat for a little fun
 
 <details>
 <summary>Basic configuration</summary>
+
+
 > to change things like dashboard pfp, github account name (for the dashboard too), you can
 > go to rumda/common/quickshell/shared/Common.qml
 >
 > you can go to rumda/common/quickshell/light/config/ to edit things like colors, same goes for the dark/config/
 > other things are set up there in Config.qml, but I don't recommend messing with them *too much*
+>
+
 </details>
 
 <details>
 <summary>configuring further</summary>
+
+
 > if you don't want updates, you can mostly directly configure any of the files at ~/.config/ on your pc
 > if you do want updates however, it would be better to make the changes in the rumda dir itself
 > then migrate them with the install script, and pull from the repo for updates/features.
 >
 > note that ~/.config/hypr/ is symlinked to the ones in the rumda dir whenever you use the theme switcher
 > so applying changes there would be better
+>
+
 </details>
 
 
@@ -215,7 +223,6 @@ Rumda the cat should be the main feature in these dotfiles. Sadly however, I am 
 ![rumda-trapped](pictures/RumdaIsTrapped.gif)
 
 The cat widget ~might~ will (insha'allah) be able to get out soon. We'll see! 
-Currently, the cat on top of the bar just does a ~goofy~ jump-out animation when you click it. If you click on its resting spot again, it comes back.
 
-PS: the cat face at the bottom of the bar is an internet widget. if it's smiling, you're connected :)
+PS: the cat face at the bottom of the bar is an internet widget. If it's smiling, you're connected :)
 
