@@ -212,4 +212,4 @@ fi
 
 killall quickshell
 
-quickshell -p .config/rumda/common/quickshell/shell.qml &disown
+cd && quickshell -p .config/rumda/common/quickshell/shell.qml &disown
