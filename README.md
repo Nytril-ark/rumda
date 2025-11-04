@@ -65,31 +65,35 @@
 
 <details>
 <summary>All dependencies</summary>
+        
+Basic dependencies
+```
+hyprland
+quickshell
+rofi
+alacritty
+swww 
+neofetch 
+swappy slurp grim 
+zathura 
+yazi 
+neovim
+Cartograph-CF font
+```
 
-Use your fav package manager to install those:
+Full dependencies: 
 ```
 hyprland quickshell rofi alacritty swww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
-ghostty  nautilus  btop bpytop obs-studio \
-xdg-desktop-portal-hyprland wl-clipboard git jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
-```
-If using dnf, copy this: 
-```
-sudo dnf install hyprland rofi alacritty swww zathura grim swappy brightnessctl playerctl wpctl pipewire wireplumber \
-thunar nautilus neovim btop bpytop jetbrains-mono-fonts mako hyprpicker obs-studio \
-xdg-desktop-portal-hyprland wl-clipboard git jq lua python3 --skip-unavailable  
+ghostty  nautilus  btop bpytop obs-studio xdg-desktop-portal-hyprland wl-clipboard git\
+ jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
 ```
 
-Check the installation for those from their wikis if you're using dnf
+Recommended:
 ```
-quickshell
-ghostty
-yazi
+borders-plus-plus hyprland plugin (for the double borders)
+Nvchad (cleanly manage your themes)
+And lastly, something to setup the custom discord theme.
 ```
-
-The double borders are from the borders-plus-plus hyprland plugin, you might wanna install that
-
-
-Lastly, if you want to, I would _recommend_ installing nvchad.
 
 </details>
 
@@ -108,15 +112,8 @@ Lastly, if you want to, I would _recommend_ installing nvchad.
 ```bash
 cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
 ```
-separated commands for readability:
-```bash
-cd ~/.config 
-git clone https://github.com/Nytril-ark/rumda 
-cd rumda 
-chmod +x install.sh
-./install.sh
-```
 #### note that the installer will let you install either the old pistachio theme or the new beige theme (which is the default)
+> you can also edit the install.sh file to only install what you want by making some vars at the top = false.
 
 
 
@@ -175,16 +172,22 @@ I kick off the cat for a little fun
 > Configuring your own changes in the rice
 
 <details>
-<summary>If you know what you're doing, click me!</summary>
+<summary>Basic configuration</summary>
+> to change things like dashboard pfp, github account name (for the dashboard too), you can
+> go to rumda/common/quickshell/shared/Common.qml
+>
+> you can go to rumda/common/quickshell/light/config/ to edit things like colors, same goes for the dark/config/
+> other things are set up there in Config.qml, but I don't recommend messing with them *too much*
+</details>
 
-> if you know what you're doing and you want to modify the rice
-> you can change the files at /.config/ directly. **Except** for
-> the hyprland config, which is modified at
-> `.config/rumda/light-config/hypr` or similarly `/dark-config/hypr`
+<details>
+<summary>configuring further</summary>
+> if you don't want updates, you can mostly directly configure any of the files at ~/.config/ on your pc
+> if you do want updates however, it would be better to make the changes in the rumda dir itself
+> then migrate them with the install script, and pull from the repo for updates/features.
 >
-> this is because the file at .config/hypr/ is overwritten on theme switches
->
-> 
+> note that ~/.config/hypr/ is symlinked to the ones in the rumda dir whenever you use the theme switcher
+> so applying changes there would be better
 </details>
 
 
