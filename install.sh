@@ -326,3 +326,8 @@ echo ""
 
 # Apply light theme
 "$HOME/.config/rumda/scripts/hyprtheme.sh" light
+
+killall quickshell 
+
+
+quickshell -p .config/rumda/common/quickshell/shell.qml &disown

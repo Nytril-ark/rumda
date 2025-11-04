@@ -370,7 +370,7 @@ Rectangle {
           
           Process {
             id: process8
-            command: ["bash", "-c", "alacritty -e nvim ~/.config/rumda-pistachio/README.md"]
+            command: ["bash", "-c", "zathura ~/.config/rumda-pistachio/pictures/keybinds.pdf"]
             running: false
           }
 

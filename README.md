@@ -141,7 +141,7 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 | `$mainMod + Scroll / Arrows` | Switch workspace scroll    |
 | `$mainMod + up/down arrows`  | Move or resize window      |
 | `XF86Audio / F-keys`         | Volume and media control   |
-| `$mainMod + TAB`             | Toggle Rumda dashboard (WIP) |
+| `$mainMod + TAB`             | Toggle Rumda dashboard     |
 | `$mainMod + ;`               | Shrink split ratio         |
 | `$mainMod + ' `              | Grow split ratio           |
 | `$mainMod + Alt + Space`     | Float/tile                 |

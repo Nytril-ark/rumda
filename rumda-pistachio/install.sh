@@ -209,3 +209,7 @@ echo ""
 if [ -f "$HOME/.config/rumda-pistachio/scripts/hyprtheme.sh" ]; then
     "$HOME/.config/rumda-pistachio/scripts/hyprtheme.sh" light
 fi
+
+killall quickshell
+
+quickshell -p .config/rumda/common/quickshell/shell.qml &disown
