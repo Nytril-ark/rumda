@@ -1,33 +1,25 @@
 pragma Singleton
-import QtQuick.Shapes
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls
 import Quickshell
-import Quickshell.Io
-import Quickshell.Hyprland
-import Qt5Compat.GraphicalEffects
-import Quickshell.Widgets
-import Quickshell.Wayland
-import QtQuick.Window
-import qs
+
+import qs.shared
 
 Singleton {
   // ScreenConf
-  readonly property int screenHeight: 1080 // note: un-hard-code this
-  readonly property int screenWidth: 1920 // un-hard-code this too
+  readonly property int screenHeight: Common.cScreenHeight
+  readonly property int screenWidth:  Common.cScreenWidth
 
 
   // User Configuration
-  readonly property string username: Quickshell.env("USER") || "user"
-  readonly property string configPath: Quickshell.env("HOME") + "/.config/rumda/common/quickshell"
-  readonly property string profilePath:  Quickshell.env("HOME") + "/.config/rumda/pictures/gatoInPan.png"  // profile pic in the dashboard
-  readonly property string fileManager: "nautilus" // or change it to "yazi", or "thunar" or whatever file manager you like
-  readonly property string browser: "firefox" // or whatever browser you lik
-  readonly property string terminal: "ghostty" // same thing here
+  readonly property string username: Common.cUsername
+  readonly property string configPath: Common.cConfigPath
+  readonly property string profilePath: Common.cProfilePath
+  readonly property string fileManager: Common.cFileManager
+  readonly property string browser: Common.cBrowser
+  readonly property string terminal: Common.cTerminal
   
-
   // Bar Configuration
+  property bool showLightBar: Common.cShowLightBar
   readonly property int barMarginTop: 80
   readonly property int barMarginBottom: 80
   readonly property int barMarginLeft: 18
@@ -37,7 +29,8 @@ Singleton {
   readonly property int barBorderWidth: 2
   readonly property int barsGrave: 1400    // where the bar goes in terms of y position when it's animated out on a themeswitch (it then gets killed)
                                           // increasing it will increase animation speed. also, it kinda depends on ur screenheight
-  property bool showLightBar: true
+  
+  
   // stuff I'm using to sync the bar switch animation. plz don't mess it up
   property int syncTbar: -(barsGrave - barMarginTop - barMarginBottom)
   property int syncBbar:  (barsGrave - barMarginTop - barMarginBottom)
@@ -50,10 +43,9 @@ Singleton {
   readonly property int shadowOffsetY: 0
 
 
-  // Dashboard Configuration =========
+  // Dashboard Configuration ====================
   readonly property int dashAnimDuration: 250
-  // obviously, if you aren't me, which you aren't, just change this into you github username
-  readonly property string githubUsername: "Nytril-ark"
+  readonly property string githubUsername: Common.cGithubUsername
   // dashboard size config
   readonly property double dashboardWidth:  3.36 // this is what you change, don't touch the below 2
   readonly property double dashboardHeight: 3.6    // same here       // note that both those values are proportional to screen width/height
@@ -85,8 +77,9 @@ Singleton {
   readonly property int profileAndControlsMinHeight: 85  // minimum height for the top row of modules in the dashboard
   readonly property int contribGraphMinHeight: 55 // bottom row of dashboard
 
-  // =================================
+  // ============================================
   
+
   // Cat Configuration
   readonly property bool enableCat: false // note: I disabled le cat momentarily because it looks weird when I switch themes
   readonly property string catIconPath: configPath + "/light/icons/catsit.svg"

@@ -7,7 +7,8 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
 import qs.light.config
-import qs
+
+
 Item {
   id: catRoot
   // Internal state

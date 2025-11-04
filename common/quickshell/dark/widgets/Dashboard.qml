@@ -14,8 +14,8 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
-import qs.light.config
-import qs.light.widgets
+import qs.dark.config
+import qs.dark.widgets
 
 Scope {
   id: dashboardScope
@@ -155,7 +155,7 @@ Scope {
             radius: Config.dashRadius
             color: Colors.dashBGColor
             border.width: Config.dashBorderWidth
-            border.color: Colors.dashBorderColor
+            border.color: Colors.dashBorderColor            
             GridLayout {
               id: dashInnerGrid
               columns: 3

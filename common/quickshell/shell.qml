@@ -20,16 +20,18 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 // dark bar imports
 // import qs.dark.barModules
-import qs.dark.bar
 // import qs.dark.barSections
 // import qs.dark.config
 // import qs.dark.widgets
 // light bar imports 
 // import qs.light.barModules
-import qs.light.bar
 // import qs.light.barSections
+//
+import qs.shared
 import qs.light.config
+import qs.light.bar
 import qs.light.widgets
+import qs.dark.bar
 
 ShellRoot {
   id: root
@@ -49,11 +51,7 @@ ShellRoot {
   }
   
 
-  // DASHBOARD ==========
 
-  Dashboard {}
-
-  // ===================
 
   Loader {
     id: barLoader

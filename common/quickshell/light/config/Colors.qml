@@ -13,16 +13,19 @@ Singleton {
   property color errorColor: "#9A4235" 
   property color shadowColor: "#AA3A2D26" 
   // dashboard related colors
-  property color dashBGColor: "#D5CCBA"
-  property color dashModulesColor: "#C2C1A9"
-  property color dashAccentColor: "#D1AB86" 
-  property color dashPFPColor: "#D5CCBA"
+  property color dashBGColor: "#D5CCBA"        
+  property color dashModulesColor: "#C2C1A9"  // color of the inner modules / rectangles
+  // property color dashAccentColor: "#D1AB86" // ignore this
+  property color dashBorderColor: "#D1AB86"     // this is used in the borders / border circle around pfp
+  property color dashPFPColor: "#D5CCBA"   // circle around pfp
+  // ========================================those are specific to the contribution squares in the commit graph
   property color level0Contrib: "#D1AB86"
   property color level1Contrib: "#b07b61"
   property color level2Contrib: "#99674e"
   property color level3Contrib: "#7a503a"
   property color level4Contrib: "#6F4732"
-  property color powerButtons: "#D5CCBA"
+  //========================================
+  property color powerButtons: "#D5CCBA"  // bg color of the buttons (used in all buttons for consistency)
 }
 
 

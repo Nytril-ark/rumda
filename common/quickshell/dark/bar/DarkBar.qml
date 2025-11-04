@@ -17,7 +17,6 @@ import qs.dark.barModules
 import qs.dark.widgets
 import qs.dark.config
 import qs.dark.barSections
-import qs
 
 
 
@@ -28,9 +27,16 @@ Scope {
   property var shellRoot
   property int margint: Config.barMarginTop
   property int marginb: Config.barMarginBottom
+
+
+  // DASHBOARD ==========
+
+  Dashboard {}
+
+  // ===================
+
+
   signal barLoaded()
-
-
   function initialiseBar() {
     barRectangle.anchors.topMargin = barScope.margint
     barRectangle.anchors.bottomMargin = barScope.marginb

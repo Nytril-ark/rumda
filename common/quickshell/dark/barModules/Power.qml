@@ -15,17 +15,14 @@ import qs.dark.config
 Rectangle {
   id: root
   
-  // Module properties
   property string iconName: "power"
   property int moduleSize: 28
   property int iconSize: 20
   property int moduleRadius: 7
   
-  // Layout
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
   
-  // Appearance
   height: moduleSize
   width: moduleSize
   radius: moduleRadius
@@ -33,13 +30,11 @@ Rectangle {
   border.width: 1
   border.color: Colors.borderColor
   
-  // Process for opening ghostty terminal with shutdown command
   Process {
-    id: shutdownTerminal
-    command: ["ghostty"/*, "-e", "",*/] // (if you want a shutdown command, you add it between those quotation marks.)
+    id: openDashboard
+    command: ["bash", "-c", "echo 'toggle' > /tmp/qs-dashboard.fifo",] 
   }
   
-  // Icon
   Image {
     id: icon
     anchors.centerIn: parent
@@ -50,15 +45,23 @@ Rectangle {
     antialiasing: true
     smooth: true
     mipmap: true
+    rotation: 0 
+
+    Behavior on rotation {
+      NumberAnimation {
+        duration: 800
+        easing.type: Easing.OutBack
+      }
+    }    
   }
   
-  // Click handler
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     
     onClicked: {
-      shutdownTerminal.running = true
+      openDashboard.running = true
+      icon.rotation = icon.rotation + 360
     }
   }
 }

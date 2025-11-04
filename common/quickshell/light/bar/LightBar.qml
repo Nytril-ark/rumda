@@ -17,7 +17,6 @@ import qs.light.barModules
 import qs.light.widgets
 import qs.light.config
 import qs.light.barSections
-import qs
 
 
 Scope {
@@ -25,6 +24,15 @@ Scope {
   property var shellRoot
   property int margint: Config.barMarginTop
   property int marginb: Config.barMarginBottom
+
+
+  // DASHBOARD ==========
+
+  Dashboard {}
+
+  // ===================
+
+
   signal barLoaded()
   function initialiseBar() {
     barRectangle.anchors.topMargin = barScope.margint
