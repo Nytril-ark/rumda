@@ -194,9 +194,11 @@ I kick off the cat for a little fun
 
 
 > to change things like dashboard pfp, github account name (for the dashboard too), you can
+> 
 > go to rumda/common/quickshell/shared/Common.qml
 >
 > you can go to rumda/common/quickshell/light/config/ to edit things like colors, same goes for the dark/config/
+> 
 > other things are set up there in Config.qml, but I don't recommend messing with them *too much*
 >
 
@@ -207,10 +209,13 @@ I kick off the cat for a little fun
 
 
 > if you don't want updates, you can mostly directly configure any of the files at ~/.config/ on your pc
+> 
 > if you do want updates however, it would be better to make the changes in the rumda dir itself
+> 
 > then migrate them with the install script, and pull from the repo for updates/features.
 >
 > note that ~/.config/hypr/ is symlinked to the ones in the rumda dir whenever you use the theme switcher
+> 
 > so applying changes there would be better
 >
 
