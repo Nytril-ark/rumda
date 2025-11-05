@@ -30,8 +30,6 @@
 
 >  Big thanks to xfcasio, as this was based on his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 >
-> **things I haven't finished:** themes for: Thunar (file manager), browser, discord + more widgets
->
 > if you wanna [make your own changes](#config)
 >
 
