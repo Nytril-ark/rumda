@@ -39,7 +39,7 @@ Singleton {
   // Shadow Configuration
   readonly property bool enableBarShadow: true
   readonly property bool enableCatShadow: false
-  readonly property int shadowOffsetX: 3 // note: hardcoded, bind later
+  readonly property int shadowOffsetX: 3
   readonly property int shadowOffsetY: 0
 
 
@@ -65,11 +65,11 @@ Singleton {
   readonly property int dashInnerModuleRadius: 9
   readonly property int dashInnerPadding: 10
   readonly property int commitSquareSize: 12
-  readonly property bool dashContribToolTip: false // note: fix the layer for this
+  readonly property bool dashContribToolTip: true // note: fix the layer for this
 
   // shadow config for the dashboard
-  readonly property bool enableDashShadow: true //note to self: implement
-  readonly property int dashShadowOffsetX: 3 // note: hardcoded, bind later
+  readonly property bool enableDashShadow: true
+  readonly property int dashShadowOffsetX: 3 
   readonly property int dashShadowOffsetY: 3
 
 

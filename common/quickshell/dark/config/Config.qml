@@ -64,7 +64,7 @@ Singleton {
   readonly property int dashInnerModuleRadius: 9
   readonly property int dashInnerPadding: 10
   readonly property int commitSquareSize: 12
-  readonly property bool dashContribToolTip: false // note: fix the layer for this
+  readonly property bool dashContribToolTip: true // note: fix the layer for this
 
   // shadow config for the dashboard
   readonly property bool enableDashShadow: true

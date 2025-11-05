@@ -120,162 +120,181 @@ Rectangle {
     onTriggered: githubFetch.running = true
   }
   
-ColumnLayout {
+  Item {
+    id: tooltipContainer
     anchors.fill: parent
-    anchors.leftMargin: 22
-    anchors.rightMargin: 10
-    anchors.topMargin: 14
-    anchors.bottomMargin: 13
-    spacing: 4
+    z: 1000
     
-    // // Header   // above graph ========
-    RowLayout { 
-      Layout.fillWidth: true
-
-      Text {
-        text: `@${username}'s Contributions`
-        color: Colors.accentColor
-        font.pixelSize: 11
-        font.bold: true
-        Layout.alignment: Qt.AlignBottom  
-        Layout.leftMargin: 1
-      }
-
-      Item {  // Spacer
-        Layout.fillWidth: true
-      }
-
-      Text {
-        text: contributionData.length > 0 ? 
-          `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
-        color: Colors.accent2Color
-        font.pixelSize: 19
-        font.bold: true
-        Layout.rightMargin: 25
-        Layout.alignment: Qt.AlignBottom
+    Loader {
+      id: tooltipLoader
+      active: false
+      
+      sourceComponent: Rectangle {
+        id: tooltip
+        property var dayData: ({count: 0, date: ""})
+        
+        function updatePosition(square) {
+          let pos = square.mapToItem(tooltipContainer, 0, 0)
+          tooltip.x = pos.x + square.width / 2 - tooltip.width / 2
+          tooltip.y = pos.y - tooltip.height - 5
+        }
+        
+        width: tooltipText.width + 16
+        height: tooltipText.height + 12
+        color: Colors.dashAccentColor
+        radius: 6
+        border.color: Colors.borderColor
+        border.width: 1
+        
+        // Tooltip arrow
+        Rectangle {
+          width: 8
+          height: 8
+          color: Colors.dashAccentColor
+          rotation: 45
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.top: parent.bottom
+          anchors.topMargin: -4
+        }
+        
+        Text {
+          id: tooltipText
+          anchors.centerIn: parent
+          text: dayData.count + " contributions\n" + dayData.date
+          color: Colors.indicatorBGColor
+          font.pixelSize: 11
+          horizontalAlignment: Text.AlignHCenter
+        }
       }
     }
-    // // ======================================
+  }
 
-
-    Grid {
-      columns: 53 
-      rows: 7      
-      spacing: 3
-      flow: Grid.TopToBottom 
-      Layout.alignment: Qt.AlignHCenter
+  ColumnLayout {
+      anchors.fill: parent
+      anchors.leftMargin: 22
+      anchors.rightMargin: 10
+      anchors.topMargin: 14
+      anchors.bottomMargin: 13
+      spacing: 4
       
-      Repeater {
-        model: gridData.length  
+      // // Header   // above graph ========
+      RowLayout { 
+        Layout.fillWidth: true
+
+        Text {
+          text: `@${username}'s Contributions`
+          color: Colors.accentColor
+          font.pixelSize: 11
+          font.bold: true
+          Layout.alignment: Qt.AlignBottom  
+          Layout.leftMargin: 1
+        }
+
+        Item {  // spacer between the 2 texts
+          Layout.fillWidth: true
+        }
+
+        Text {
+          text: contributionData.length > 0 ? 
+            `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
+          color: Colors.accent2Color
+          font.pixelSize: 19
+          font.bold: true
+          Layout.rightMargin: 25
+          Layout.alignment: Qt.AlignBottom
+        }
+      }
+      // ======================================
+
+
+      Grid {
+        id: contributionGrid
+        columns: 53 
+        rows: 7      
+        spacing: 3
+        flow: Grid.TopToBottom 
+        Layout.alignment: Qt.AlignHCenter
         
-        Rectangle {
-          id: commitSquares
-          width: Config.commitSquareSize
-          height: Config.commitSquareSize
-          radius: 2
+        Repeater {
+          model: gridData.length  
           
-          property var day: gridData[index] || {level: 0, count: 0, date: ""} 
-          
-          color: {
-            switch (day.level) {
-              // case 0: return "#161b22"  // No contributions
-              // case 1: return "#0e4429"  // 1-3 contributions
-              // case 2: return "#006d32"  // 4-6 contributions   << those are the colors for 
-              // case 3: return "#26a641"  // 7-9 contributions   << people who want it to look
-              // case 4: return "#39d353"  // 10+ contributions   << exactly like github. (I don't)
-              // default: return "#161b22"
-
-              // light >> dark ==================
-              case 0: return Colors.level0Contrib  // No contributions   
-              case 1: return Colors.level1Contrib  // 1-3 contributions
-              case 2: return Colors.level2Contrib  // 4-6 contributions
-              case 3: return Colors.level3Contrib  // 7-9 contributions
-              case 4: return Colors.level4Contrib  // 10+ contributions
-              default: return Colors.level0Contrib // also no contribs
-
-              // dark >> light ==================
-              // case 0: return Colors.level4Contrib  // No contributions
-              // case 1: return Colors.level3Contrib  // 1-3 contributions
-              // case 2: return Colors.level2Contrib  // 4-6 contributions
-              // case 3: return Colors.level1Contrib  // 7-9 contributions
-              // case 4: return Colors.level0Contrib  // 10+ contributions
-              // default: return Colors.level4Contrib // also no contribs
-            }
-          }
-          
-          // Hover tooltip
-          MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
+          Rectangle {
+            id: commitSquares
+            width: Config.commitSquareSize
+            height: Config.commitSquareSize
+            radius: 2
             
-            Rectangle {
-              visible: parent.containsMouse && day.date !== "" && day.count !== 0 && Config.dashContribToolTip // CHANGED: Don't show tooltip for empty cells 
-              x: parent.width / 2 - width / 2
-              y: -height - 5
-              width: tooltipText.width + 16
-              height: tooltipText.height + 12
-              color: Colors.dashAccentColor
-              radius: 6
-              border.color: Colors.borderColor
-              border.width: 1
-              
-              // Tooltip arrow
-              Rectangle {
-                width: 8
-                height: 8
-                color: Colors.dashAccentColor
-                rotation: 45
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: parent.bottom
-                anchors.topMargin: -4
-                // border.color: Colors.borderColor
-                // border.width: 1
+            property var day: gridData[index] || {level: 0, count: 0, date: ""} 
+            
+            color: {
+              switch (day.level) {
+                case 0: return Colors.level0Contrib
+                case 1: return Colors.level1Contrib
+                case 2: return Colors.level2Contrib
+                case 3: return Colors.level3Contrib
+                case 4: return Colors.level4Contrib
+                default: return Colors.level0Contrib
               }
+            }
+            
+            // Hover tooltip
+            MouseArea {
+              id: hoverArea
+              anchors.fill: parent
+              hoverEnabled: true
               
-              Text {
-                id: tooltipText
-                anchors.centerIn: parent
-                text: `${day.count} contributions\n${day.date}`
-                color: Colors.accentColor
-                font.pixelSize: 11
-                horizontalAlignment: Text.AlignHCenter
+              onContainsMouseChanged: {
+                if (containsMouse && day.date !== "" && day.count !== 0 && Config.dashContribToolTip) {
+                  tooltipLoader.active = true
+                  tooltipLoader.item.dayData = day
+                  tooltipLoader.item.updatePosition(commitSquares)
+                } else {
+                  tooltipLoader.active = false
+                }
               }
             }
           }
         }
-      }
-    } // END OF CONTRIB GRAPH GRID
-    // Header // bottom header =======================
-    // RowLayout { 
-    //   Layout.fillWidth: true
-    //
-    //   Text {
-    //     text: `@${username}'s Contributions`
-    //     color: Colors.accentColor
-    //     font.pixelSize: 11
-    //     font.bold: true
-    //     Layout.alignment: Qt.AlignBottom  
-    //     Layout.leftMargin: 19    
-    //   }
-    //
-    //   Item {  // Spacer
-    //     Layout.fillWidth: true
-    //   }
-    //
-    //   Text {
-    //     text: contributionData.length > 0 ? 
-    //       `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
-    //     color: Colors.accent2Color
-    //     font.pixelSize: 19
-    //     font.bold: true
-    //     Layout.rightMargin: 22
-    //     Layout.alignment: Qt.AlignBottom
-    //   }
-    // }
-    // // ==================================================
+      } // END OF CONTRIB GRAPH GRID
 
 
+
+
+
+
+
+
+
+      // Header // bottom header =======================
+      // RowLayout { 
+      //   Layout.fillWidth: true
+      //
+      //   Text {
+      //     text: `@${username}'s Contributions`
+      //     color: Colors.accentColor
+      //     font.pixelSize: 11
+      //     font.bold: true
+      //     Layout.alignment: Qt.AlignBottom  
+      //     Layout.leftMargin: 19    
+      //   }
+      //
+      //   Item {  // Spacer
+      //     Layout.fillWidth: true
+      //   }
+      //
+      //   Text {
+      //     text: contributionData.length > 0 ? 
+      //       `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
+      //     color: Colors.accent2Color
+      //     font.pixelSize: 19
+      //     font.bold: true
+      //     Layout.rightMargin: 22
+      //     Layout.alignment: Qt.AlignBottom
+      //   }
+      // }
+      // // ==================================================
+
+
+    }
   }
-}
-
 
