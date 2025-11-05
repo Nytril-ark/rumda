@@ -48,6 +48,8 @@
 | ![discord](pictures/discord.png) | ![allwins](pictures/filled.png) |
 | -------------------------------- | ------------------------------- |
 
+![lightdashboard](pictures/lightdash.png)
+
 
 ### old pistachio theme available in installer
 <details>
