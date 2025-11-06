@@ -24,13 +24,13 @@ case "$THEME" in
 esac
 
 if [[ ! -f "$SRC" ]]; then
-  echo "❌ Theme config not found at: $SRC"
+  echo " Theme config not found at: $SRC"
   exit 1
 fi
 
 sleep 0.9
 
-rm -r "$COMMON_FILE"
+rm -f "$COMMON_FILE"
 
 ln -fs "$SRC" "$COMMON_FILE"
 
