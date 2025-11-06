@@ -177,10 +177,9 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 
 
 
-### theme switcher
-I kick off the cat for a little fun
+### themeswitch, dashboard and lockscreen
 
-![themeswitch](/pictures/themeswitchsmooth.gif)
+![themeswitch](/pictures/showcase2.gif)
 
 ---
 ## config
