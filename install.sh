@@ -18,7 +18,7 @@ DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT
 #
 
 
-# OR --- all true version: (installs full thing but chadrc optional)
+# (installs full thing but chadrc optional)
 INSTALL_HYPRLAND=true
 INSTALL_QUICKSHELL=true
 INSTALL_ALACRITTY=true
