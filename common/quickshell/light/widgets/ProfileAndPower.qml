@@ -370,7 +370,7 @@ Rectangle {
           
           Process {
             id: process8
-            command: ["bash", "-c", "zathura ~/.config/rumda/pictures/keybinds.pdf"]
+            command: ["bash", "-c", "zathura ~/.config/rumda/pictures/keybinds.pdf &disown"]
             running: false
           }
 
