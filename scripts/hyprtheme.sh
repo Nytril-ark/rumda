@@ -34,13 +34,14 @@ rm -f "$COMMON_FILE"
 
 ln -fs "$SRC" "$COMMON_FILE"
 
-hyprctl reload >/dev/null 2>&1 || true
 
 /home/$USER/.config/rumda/scripts/alacrittytheme.sh "$THEME"
 
 /home/$USER/.config/rumda/scripts/yazitheme.sh "$THEME"
 
 /home/$USER/.config/rumda/scripts/zathuratheme.sh "$THEME"
+
+hyprctl reload >/dev/null 2>&1 || true
 
 echo "Switched to '$THEME' theme"
 
