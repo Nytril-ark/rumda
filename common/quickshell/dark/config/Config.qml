@@ -80,7 +80,7 @@ Singleton {
 
   
   // Cat Configuration
-  readonly property bool enableCat: true
+  readonly property bool enableCat: false // set this to true to have the cat at the top of the bar
   readonly property string catIconPath: configPath + "/dark/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
   readonly property int catMarginLeft: -15 - barWidth //note: this is hardcoded, bind it to the bar later

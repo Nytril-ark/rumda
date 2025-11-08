@@ -81,7 +81,7 @@ Singleton {
   
 
   // Cat Configuration
-  readonly property bool enableCat: true // note: I disabled le cat momentarily because it looks weird when I switch themes
+  readonly property bool enableCat: false // note: I disabled le cat momentarily because it looks weird when I switch themes
   readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
   readonly property int catMarginTop: barMarginTop - 57
   readonly property int catMarginLeft: -15 - barWidth //note: this is hardcoded, bind it to the bar later
