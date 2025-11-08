@@ -45,7 +45,7 @@ text = "#F5DCC6"
 
 [colors.selection]
 text = "#45373c"
-background = "#968c83"
+background = "#D68E60"
 
 [colors.normal]
 black = "#20111b"

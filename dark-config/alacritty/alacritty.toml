@@ -39,12 +39,12 @@ style = { shape = "Underline", blinking = "On" }
 background = "#1C1612"
 foreground = "#f0c997"
 [colors.cursor]
-cursor = "#45373c"
+cursor = "#784D37"
 text = "#F5DCC6"
 
 [colors.selection]
 text = "#45373c"
-background = "#968c83"
+background = "#784D37"
 
 [colors.normal]
 black = "#20111b"
