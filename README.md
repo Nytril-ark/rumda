@@ -122,15 +122,15 @@ And lastly, something to setup the custom discord theme.
 > [!CAUTION]
 > please follow these steps:
 > - make sure you have installed quickshell, hyprland, etc
-> - make **sure** the repo is at _~/.config/rumda_
+> - don't delete or change the position of the repo after using the following command:
 > 
-> You can use this one-liner to clone it and install:
+> Use this one-liner to clone it and install:
 
 
 ```bash
 cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
 ```
-#### note that the installer will let you install either the old pistachio theme or the new beige theme (which is the default)
+#### note that the installer will let you install either the old pistachio theme or the new beige theme (beige is default)
 > you can also edit the install.sh file to only install what you want by making some vars at the top = false.
 
 
