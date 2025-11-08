@@ -40,7 +40,7 @@ background = "#F5DCC6"
 foreground = "#45373c"
 
 [colors.cursor]
-cursor = "#45373c"
+cursor = "#6D4A39"
 text = "#F5DCC6"
 
 [colors.selection]
