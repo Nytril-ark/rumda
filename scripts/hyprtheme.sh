@@ -41,7 +41,12 @@ ln -fs "$SRC" "$COMMON_FILE"
 
 /home/$USER/.config/rumda/scripts/zathuratheme.sh "$THEME"
 
+/home/$USER/.config/rumda/scripts/makotheme.sh "$THEME"
+
+notify-send "Rumda:" "switched to '$THEME' theme" &
+
 hyprctl reload >/dev/null 2>&1 || true
 
 echo "Switched to '$THEME' theme"
 
+# YOU CAN COMMENT OUT THE BELOW LINE TO DISABLE NOTIFICATION ON THEME SWITCH

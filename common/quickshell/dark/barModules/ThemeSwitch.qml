@@ -28,16 +28,16 @@ Rectangle {
     command: [
       "bash",
       "-c",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh light"
+      Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh light &disown"
     ]
   }
   
   Process {
-    id: lightAlacritty
+    id: lightGlobal
     command: [
       "bash",
       "-c",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh light"
+      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh light &disown"
     ]
   }
 
@@ -79,7 +79,7 @@ Rectangle {
     onClicked: {
       themeDarkChanged()
       lightConfigScript.running = true
-      lightAlacritty.running = true
+      lightGlobal.running = true
     }
   } 
 }

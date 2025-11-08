@@ -1,18 +1,18 @@
 #!/bin/bash
-# usage: zathuratheme [light|dark]
+# usage: makotheme [light|dark]
 
 set -e
 
 THEME="$1"
 RUMDA_DIR="$HOME/.config/rumda"
-COMMON_FILE="$HOME/.config/zathura/zathurarc"
+COMMON_FILE="$HOME/.config/mako/config"
 
 case "$THEME" in
   light)
-    SRC="$RUMDA_DIR/light-config/zathura/zathurarc"
+    SRC="$RUMDA_DIR/light-config/mako/config"
     ;;
   dark)
-    SRC="$RUMDA_DIR/dark-config/zathura/zathurarc"
+    SRC="$RUMDA_DIR/dark-config/mako/config"
     ;;
   *)
     echo "Usage: $0 [light|dark]"
@@ -25,5 +25,7 @@ if [[ ! -f "$SRC" ]]; then
   exit 1
 fi
 
-cp "$SRC" "$COMMON_FILE"
+ln -sf "$SRC" "$COMMON_FILE"
+
+makoctl reload
 

@@ -28,16 +28,16 @@ Rectangle {
     command: [
       "bash",
       "-c",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh dark"
+      Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh dark &disown"
     ]
   }
 
   Process {
-    id: darkAlacritty
+    id: darkGlobal
     command: [
       "bash",
       "-c",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark"
+      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark &disown"
     ]
   }
 
@@ -80,7 +80,7 @@ Rectangle {
     onClicked: {
       themeChanged()
       darkConfigScript.running = true
-      darkAlacritty.running = true
+      darkGlobal.running = true
     }
   } 
 }

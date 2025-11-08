@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: hyprtheme [light|dark]
+# usage: alacrittytheme [light|dark]
 
 set -e
 
