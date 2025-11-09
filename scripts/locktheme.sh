@@ -1,18 +1,18 @@
 #!/bin/bash
-# usage: yazitheme [light|dark]
+# usage: locktheme [light|dark]
 
 set -e
 
 THEME="$1"
 RUMDA_DIR="$HOME/.config/rumda"
-COMMON_FILE="$HOME/.config/yazi/theme.toml"
+COMMON_FILE="$HOME/.config/hypr/hyprlock.conf"
 
 case "$THEME" in
   light)
-    SRC="$RUMDA_DIR/light-config/yazi/theme.toml"
+    SRC="$RUMDA_DIR/light-config/hypr/hyprlock.conf"
     ;;
   dark)
-    SRC="$RUMDA_DIR/dark-config/yazi/theme.toml"
+    SRC="$RUMDA_DIR/dark-config/hypr/hyprlock.conf"
     ;;
   *)
     echo "Usage: $0 [light|dark]"

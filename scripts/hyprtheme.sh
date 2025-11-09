@@ -43,6 +43,8 @@ ln -fs "$SRC" "$COMMON_FILE"
 
 /home/$USER/.config/rumda/scripts/makotheme.sh "$THEME"
 
+/home/hexogen/.config/rumda/scripts/locktheme.sh "$THEME"
+
 notify-send "Rumda:" "switched to '$THEME' theme" &
 
 hyprctl reload >/dev/null 2>&1 || true
