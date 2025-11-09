@@ -102,7 +102,7 @@ Cartograph-CF font
 Full dependencies: 
 ```
 hyprland quickshell rofi alacritty swww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
-ghostty  nautilus  btop bpytop obs-studio xdg-desktop-portal-hyprland wl-clipboard git\
+ghostty  nautilus  btop bpytop obs-studio slurp xdg-desktop-portal-hyprland wl-clipboard git\
  jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber Cartograph-CF
 ```
 
