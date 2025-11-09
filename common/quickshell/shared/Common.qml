@@ -22,5 +22,8 @@ Singleton {
 
   readonly property bool cShowLightBar: true
 
+  readonly property bool cEnableCat: false // set this to true to have the cat at the top of the bar
+                                          // I disabled the cat by default because it looks weird when I theme-switch, but
+                                         // you can also just kick it off by clicking on it, before switching themes.
 }
 
