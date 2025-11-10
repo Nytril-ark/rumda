@@ -5,5 +5,4 @@ sshkey
 id_*
 sshkey.pub
 pictures/drink.jpg
-common/neofetch/*
 common/nvim/pack/github/start/copilot.vim
