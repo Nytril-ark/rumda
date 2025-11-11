@@ -7,7 +7,7 @@ M.base_30 = {
   one_bg = "#F2CDAC",
   one_bg2 = "#f7d5b7",
   one_bg3 = "#e6c0a1",
-  grey = "#cc996c",
+  grey = "#DAC79B",
   grey_fg = "#C09B72",
   light_grey = "#C09B72",
   red = "#9e5044",
@@ -43,7 +43,7 @@ M.base_16 = {
   base0C = "#a1694d", -- cyan (support)
   base0D = "#426A79", -- blue (functions)
   base0E = "#a1694d", -- purple (keywords)
-  base0F = "#45373C", -- (!?)
+  base0F = "#45373C", -- error
 }
 M.type = "light"
 M.polish_hl = {}

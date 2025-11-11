@@ -25,5 +25,5 @@ if [[ ! -f "$SRC" ]]; then
   exit 1
 fi
 
-cp "$SRC" "$COMMON_FILE"
+ln -fs "$SRC" "$COMMON_FILE"
 

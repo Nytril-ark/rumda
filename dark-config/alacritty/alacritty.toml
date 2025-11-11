@@ -26,11 +26,14 @@ decorations_theme_variant = "Dark"
 title = "  "
 
 [font]
-normal.family = "JetBrains Mono Nerd Font"
-bold.family = "cartographCF"
+normal.family = "Terminess Nerd Font"
+normal.style = "Bold"
+
+bold.family = "Hurmit Nerd Font"
+bold.style = "Regular"
 italic.family = "cartographCF"
 bold_italic.family = "cartographCF"
-size = 11.0
+size = 12.0
 
 [cursor]
 style = { shape = "Underline", blinking = "On" }

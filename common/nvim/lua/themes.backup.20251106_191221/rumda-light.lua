@@ -43,7 +43,7 @@ M.base_16 = {
   base0C = "#a1694d", -- cyan (support)
   base0D = "#426A79", -- blue (functions)
   base0E = "#a1694d", -- purple (keywords)
-  base0F = "#45373C", -- (!?)
+  base0F = "#45373C", -- error
 }
 M.type = "light"
 M.polish_hl = {}

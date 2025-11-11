@@ -26,18 +26,21 @@ decorations_theme_variant = "Dark"
 title = "  "
 
 [font]
-normal.family = "JetBrains Mono Nerd Font"
-bold.family = "cartographCF"
+normal.family = "Terminess Nerd Font"
+normal.style = "Bold"
+
+# bold.family = "Hurmit Nerd Font"
+bold.style = "Bold"
 italic.family = "cartographCF"
 bold_italic.family = "cartographCF"
-size = 11.0
+size = 12.0
 
 [cursor]
 style = { shape = "Underline", blinking = "On" }
 
 [colors.primary]
 background = "#F5DCC6"
-foreground = "#45373c"
+foreground = "#4E2E1F"
 
 [colors.cursor]
 cursor = "#6D4A39"
@@ -45,7 +48,7 @@ text = "#F5DCC6"
 
 [colors.selection]
 text = "#45373c"
-background = "#D68E60"
+background = "#E6C0A1"
 
 [colors.normal]
 black = "#20111b"
