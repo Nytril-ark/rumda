@@ -192,13 +192,13 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 <summary>Basic configuration</summary>
 
 
-> to change things like dashboard pfp, github account name (for the dashboard too), you can
+> to change things like dashboard pfp, github account name (for the dashboard too), as well as default bar theme
 > 
-> go to rumda/common/quickshell/shared/Common.qml
+> you can go to rumda/common/quickshell/shared/Common.qml
 >
-> you can go to rumda/common/quickshell/light/config/ to edit things like colors, same goes for the dark/config/
+> you can go to rumda/common/quickshell/light/config/Colors.qml to edit colors, same goes for .../dark/config/Color.qml
 > 
-> other things are set up there in Config.qml, but I don't recommend messing with them *too much*
+> I don't recommend messing with them *too much* though
 >
 
 </details>
