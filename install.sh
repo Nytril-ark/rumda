@@ -31,7 +31,6 @@ INSTALL_NEOFETCH=true
 INSTALL_NEOTHEME=true
 INSTALL_GHOSTTY=true
 INSTALL_DISCORD=true
-INSTALL_TERMINESS=true ## << terminess font for alacritty
 INSTALL_CHADRC=false 
 # # chadrc is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
