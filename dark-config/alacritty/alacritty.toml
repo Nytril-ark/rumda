@@ -29,8 +29,8 @@ title = "  "
 normal.family = "Terminess Nerd Font"
 normal.style = "Bold"
 
-bold.family = "Hurmit Nerd Font"
-bold.style = "Regular"
+# bold.family = "Hurmit Nerd Font"
+bold.style = "Bold"
 italic.family = "cartographCF"
 bold_italic.family = "cartographCF"
 size = 12.0
