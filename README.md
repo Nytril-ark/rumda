@@ -206,17 +206,9 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 <details>
 <summary>configuring further</summary>
 
-
-> if you don't want updates, you can mostly directly configure any of the files at ~/.config/ on your pc
-> 
-> if you do want updates however, it would be better to make the changes in the rumda dir itself
-> 
-> then migrate them with the install script, and pull from the repo for updates/features.
->
-> note that ~/.config/hypr/ is symlinked to the ones in the rumda dir whenever you use the theme switcher
-> 
-> so applying changes there would be better
->
+> it would be better to make changes in the rumda dir itself, as the files at .config are just symlinked to there.
+> you can then use any of the theme scripts in rumda/scripts/ to push your updates into place, in case they didn't
+> get pushed there on their own. Please open an issue here if you need further guidance.
 
 </details>
 
