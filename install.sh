@@ -31,6 +31,7 @@ INSTALL_NEOFETCH=true
 INSTALL_NEOTHEME=true
 INSTALL_GHOSTTY=true
 INSTALL_DISCORD=true
+INSTALL_TERMINESS=true ## << terminess font for alacritty
 INSTALL_CHADRC=false 
 # # chadrc is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
@@ -312,6 +313,13 @@ if [ "$INSTALL_CHADRC" = true ]; then
     install_config "$SOURCE_DIR/common/nvim/lua/chadrc.lua" "$DEST_DIR/nvim/lua/chadrc.lua" "chadrc"
 fi
 
+
+
+# Run the font install script
+/home/$USER/.config/rumda/scripts/installFonts.sh
+echo -e "${GREEN}> Successfully installed fonts to /usr/share/fonts"
+
+echo ""
 echo ""
 echo -e "${GREEN}"
 echo "============================================"
