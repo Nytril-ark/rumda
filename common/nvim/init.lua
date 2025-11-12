@@ -70,7 +70,8 @@ vim.keymap.set('v', '<Leader>w`', 'c`<C-r>"`<Esc>', { desc = 'Wrap in `text`' })
 vim.keymap.set('n', '<Leader>wcb', 'i```<CR>```<Esc>O', { desc = 'Code block' })
 
 
-vim.diagnostic.config({
+-- error-only config so the lsp doesnt clutter the view
+local error_only_config = {
   severity_sort = true,
   signs = {
     severity = { min = vim.diagnostic.severity.ERROR }
@@ -84,7 +85,31 @@ vim.diagnostic.config({
   underline = {
     severity = { min = vim.diagnostic.severity.ERROR }
   },
-})
+}
+
+-- Apply error-only config by default
+vim.diagnostic.config(error_only_config)
+
+-- Toggle diagnostics visibility (toggle lsp in normal mode through leader + t + d)
+local diagnostics_visible = true
+vim.keymap.set('n', '<Leader>td', function()
+  diagnostics_visible = not diagnostics_visible
+  
+  if diagnostics_visible then
+    -- Restore error-only config
+    vim.diagnostic.config(error_only_config)
+  else
+    -- Hide all diagnostics
+    vim.diagnostic.config({
+      virtual_text = false,
+      signs = false,
+      underline = false,
+    })
+  end
+  
+  print('Diagnostics ' .. (diagnostics_visible and 'visible' or 'hidden'))
+end, { desc = 'Toggle diagnostics visibility' })
+
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
