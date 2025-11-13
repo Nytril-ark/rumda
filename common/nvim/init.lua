@@ -111,6 +111,9 @@ vim.keymap.set('n', '<Leader>td', function()
 end, { desc = 'Toggle diagnostics visibility' })
 
 
+-- vim.g.mkdp_browser = "firefox"
+
+
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
