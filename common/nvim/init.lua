@@ -69,6 +69,13 @@ vim.keymap.set('v', '<Leader>w`', 'c`<C-r>"`<Esc>', { desc = 'Wrap in `text`' })
 -- Code block
 vim.keymap.set('n', '<Leader>wcb', 'i```<CR>```<Esc>O', { desc = 'Code block' })
 
+-- Subscript and superscript 
+vim.keymap.set('v', '<Leader>wS', 'c<sup><C-r>"</sup><Esc>', { desc = 'Superscript (wrap in <sup>)' })
+vim.keymap.set('v', '<Leader>wd', 'c<sub><C-r>"</sub><Esc>', { desc = 'Subscript (wrap in <sub>)' })
+
+-- Collapsible details block
+vim.keymap.set('v', '<Leader>wD', 'c<details><CR><summary><C-r>"</summary><CR><CR></details><Esc>kk$a', { desc = 'Wrap in <details> (selection as summary)' })
+
 
 -- error-only config so the lsp doesnt clutter the view
 local error_only_config = {
@@ -111,7 +118,7 @@ vim.keymap.set('n', '<Leader>td', function()
 end, { desc = 'Toggle diagnostics visibility' })
 
 
--- vim.g.mkdp_browser = "firefox"
+vim.g.mkdp_browser = "firefox"
 
 
 -- load theme

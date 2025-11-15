@@ -14,6 +14,8 @@
 # set default-fg "#dcdccc"
 
 
+set selection-clipboard clipboard
+
 set default-bg "#F5DCC6"
 set default-fg "#1b1512"
 
