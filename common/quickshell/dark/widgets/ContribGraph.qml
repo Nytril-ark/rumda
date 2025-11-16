@@ -75,59 +75,61 @@ Rectangle {
     }
   }
 
-
   function organizeGridData() {
     const MAX_WEEKS = 45
     gridData = []
-    let organized = []
     
     if (contributionData.length === 0) return
     
-    // Find the starting day of week for the first contribution
+    // Calculate total number of weeks needed
     let firstDate = new Date(contributionData[0].date)
-    let startDayOfWeek = firstDate.getDay()  // 0=Sunday, 1=Monday, etc.
+    let lastDate = new Date(contributionData[contributionData.length - 1].date)
     
-    // Add empty cells before the first day to align the grid properly
-    for (let i = 0; i < startDayOfWeek; i++) {
-      organized.push({level: 0, count: 0, date: ""})
+    // Calculate week difference
+    let firstWeekStart = new Date(firstDate)
+    firstWeekStart.setDate(firstDate.getDate() - firstDate.getDay()) // Go to Sunday of first week
+    
+    let lastWeekStart = new Date(lastDate)
+    lastWeekStart.setDate(lastDate.getDate() - lastDate.getDay()) // Go to Sunday of last week
+    
+    let totalWeeks = Math.ceil((lastWeekStart - firstWeekStart) / (7 * 24 * 60 * 60 * 1000)) + 1
+    
+    // Create a 2D array: [week][day] where day 0=Sunday, 1=Monday, etc.
+    let weekGrid = []
+    for (let w = 0; w < totalWeeks; w++) {
+      weekGrid[w] = []
+      for (let d = 0; d < 7; d++) {
+        weekGrid[w][d] = {level: 0, count: 0, date: ""}  // Initialize with empty
+      }
     }
     
-    // Add all contribution data
+    // Fill in actual contribution data
     contributionData.forEach(day => {
-      organized.push(day)
+      let date = new Date(day.date)
+      let weekIndex = Math.floor((date - firstWeekStart) / (7 * 24 * 60 * 60 * 1000))
+      let dayIndex = date.getDay()  // 0=Sunday, 1=Monday, ..., 6=Saturday
+      
+      if (weekIndex >= 0 && weekIndex < totalWeeks) {
+        weekGrid[weekIndex][dayIndex] = day
+      }
     })
     
-    let lastRealIndex = organized.length - 1
-    // Loop backwards to find last entry with a date
-    while (lastRealIndex >= 0 && organized[lastRealIndex].date === "") {
-      lastRealIndex--
+    // If we have more weeks than MAX_WEEKS, trim from the LEFT (old weeks)
+    if (totalWeeks > MAX_WEEKS) {
+      weekGrid = weekGrid.slice(totalWeeks - MAX_WEEKS)  // Keep only last MAX_WEEKS
     }
     
-    // Trim array to only include up to last real day
-    organized = organized.slice(0, lastRealIndex + 1)
-    let maxDays = MAX_WEEKS * 7
-    if (organized.length > maxDays) {
-      // Take the last maxDays entries (most recent)
-      organized = organized.slice(organized.length - maxDays)
-    }
-
-    // reorganize into column-first order (each column is a week)
+    // Convert to column-first format for Grid (column = week, fills top-to-bottom)
     let columnFirst = []
-    let numWeeks = Math.ceil(organized.length / 7)
-    
-    // For each week
-    for (let week = 0; week < numWeeks; week++) {
-      // For each day of week (0-6)
+    for (let week = 0; week < weekGrid.length; week++) {
       for (let day = 0; day < 7; day++) {
-        let index = week * 7 + day
-        if (index < organized.length) {
-          columnFirst.push(organized[index])
-        }
+        columnFirst.push(weekGrid[week][day])
       }
-    }    
-
+    }
+    
     gridData = columnFirst
   }
+
   
   // this is set to auto-refresh every hour
   Timer {
