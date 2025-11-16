@@ -9,10 +9,13 @@ import QtQuick.Layouts
 import qs.dark.config
 
 
+
 Rectangle {
   property string username: Config.githubUsername  // obviously, if you aren't me, which you aren't, just change this into you github username
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
+
+  readonly property int headerMargin: 23
 
   // lil watcher to clear the data if the username is changed 
   onUsernameChanged: {
@@ -24,12 +27,15 @@ Rectangle {
 
 
   id: contribGraphRect
-  implicitWidth: Math.ceil(gridData.length / 7) * (Config.commitSquareSize + 1)
+  implicitWidth: {
+    let weeks = Math.ceil(gridData.length / 7)
+    return weeks * (Config.commitSquareSize + 3) + 44  // +44 for margins
+  }
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
-  
+
 
   Process {
     id: githubFetch
@@ -45,11 +51,14 @@ Rectangle {
           let response = JSON.parse(data)
           
 
+          // let today = new Date()
+          // let yearStart = new Date(today.getFullYear(), 0, 1) 
+          // today.setHours(23, 59, 59, 999)
+          // contributionData = [] 
           let today = new Date()
+          today.setHours(0, 0, 0, 0)
           let yearStart = new Date(today.getFullYear(), 0, 1) 
-          today.setHours(23, 59, 59, 999)
-          contributionData = [] 
-
+          contributionData = []
 
           contributionData = response.contributions.filter(day => {
             let dayDate = new Date(day.date)
@@ -68,8 +77,11 @@ Rectangle {
 
 
   function organizeGridData() {
+    const MAX_WEEKS = 45
     gridData = []
     let organized = []
+    
+    if (contributionData.length === 0) return
     
     // Find the starting day of week for the first contribution
     let firstDate = new Date(contributionData[0].date)
@@ -93,7 +105,12 @@ Rectangle {
     
     // Trim array to only include up to last real day
     organized = organized.slice(0, lastRealIndex + 1)
-    
+    let maxDays = MAX_WEEKS * 7
+    if (organized.length > maxDays) {
+      // Take the last maxDays entries (most recent)
+      organized = organized.slice(organized.length - maxDays)
+    }
+
     // reorganize into column-first order (each column is a week)
     let columnFirst = []
     let numWeeks = Math.ceil(organized.length / 7)
@@ -161,7 +178,7 @@ Rectangle {
           id: tooltipText
           anchors.centerIn: parent
           text: dayData.count + " contributions\n" + dayData.date
-          color: Colors.indicatorBGColor
+          color: Colors.accentColor
           font.pixelSize: 11
           horizontalAlignment: Text.AlignHCenter
         }
@@ -171,8 +188,8 @@ Rectangle {
 
   ColumnLayout {
       anchors.fill: parent
-      anchors.leftMargin: 22
-      anchors.rightMargin: 10
+      // anchors.leftMargin: 8
+      // anchors.rightMargin: 8
       anchors.topMargin: 14
       anchors.bottomMargin: 13
       spacing: 4
@@ -187,7 +204,7 @@ Rectangle {
           font.pixelSize: 11
           font.bold: true
           Layout.alignment: Qt.AlignBottom  
-          Layout.leftMargin: 1
+          Layout.leftMargin: headerMargin
         }
 
         Item {  // spacer between the 2 texts
@@ -200,7 +217,7 @@ Rectangle {
           color: Colors.accent2Color
           font.pixelSize: 19
           font.bold: true
-          Layout.rightMargin: 25
+          Layout.rightMargin: headerMargin
           Layout.alignment: Qt.AlignBottom
         }
       }
@@ -209,7 +226,7 @@ Rectangle {
 
       Grid {
         id: contributionGrid
-        columns: 53 
+        columns: Math.ceil(gridData.length / 7)
         rows: 7      
         spacing: 3
         flow: Grid.TopToBottom 
@@ -256,13 +273,6 @@ Rectangle {
           }
         }
       } // END OF CONTRIB GRAPH GRID
-
-
-
-
-
-
-
 
 
       // Header // bottom header =======================

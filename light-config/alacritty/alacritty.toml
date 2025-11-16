@@ -26,14 +26,20 @@ decorations_theme_variant = "Dark"
 title = "  "
 
 [font]
+# =======================Terminess
 normal.family = "Terminess Nerd Font"
 normal.style = "Bold"
-
 # bold.family = "Hurmit Nerd Font"
 bold.style = "Bold"
 italic.family = "cartographCF"
 bold_italic.family = "cartographCF"
 size = 12.0
+# =======================Dogica
+# normal.family = "Dogica Pixel"
+# size = 7
+# offset.y = 8
+# =============================
+
 
 [cursor]
 style = { shape = "Underline", blinking = "On" }
