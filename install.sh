@@ -318,6 +318,11 @@ fi
 /home/$USER/.config/rumda/scripts/installFonts.sh
 echo -e "${GREEN}> Successfully installed fonts to /usr/share/fonts"
 
+
+echo -e "${YELLOW}Creating tinkerer flag file...${NC}"
+echo "Hello Tinkerer. Do not delete this file. For more info, check the tinkerer.md file in this same directory." > "$HOME/.config/rumda/common/tinkerer/DoNotDeleteMe.txt"
+
+
 echo ""
 echo ""
 echo -e "${GREEN}"

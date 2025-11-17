@@ -37,7 +37,7 @@ Rectangle {
     command: [
       "bash",
       "-c",
-      Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark &disown"
+      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark > /dev/null 2>&1 &) &"
     ]
   }
 
