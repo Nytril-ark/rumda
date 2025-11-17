@@ -44,7 +44,7 @@ if [[ ! -f "$TINKERER_FLAG" ]]; then
     # Notify user and open tinkerer.md
     notify-send "Rumda:" "If you are seeing this then you didnt use the install script. Dont worry though. Your configs have been backed up." &
     
-    # Open tinkerer.md by trying different terminals. yes, this might be a bit stupid or repititve but it works..
+    # Open tinkerer.md by trying different terminals. yes, this might be a bit stupid or repetitive but it works..
     open_editor() {
         nohup "$@" > /dev/null 2>&1 &
         disown

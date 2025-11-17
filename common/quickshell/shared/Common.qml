@@ -18,7 +18,7 @@ Singleton {
   readonly property string cGithubUsername: "Nytril-ark"   // obviously, if you aren't me, which you aren't, just change this into you github username
   readonly property string cFileManager: "nautilus" // or change it to "yazi", or "thunar" or whatever file manager you like
   readonly property string cBrowser: "firefox" // or whatever browser you like
-  readonly property string cTerminal: "ghostty" // same thing here
+  readonly property string cTerminal: "alacritty" // same thing here
 
   readonly property bool cShowLightBar: true
 
