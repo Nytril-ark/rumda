@@ -85,10 +85,10 @@ fi
 
 # Ask user which theme to install
 echo -e "${CYAN}Which theme would you like to install?${NC}"
-echo -e "${YELLOW}1) Rumda Light (default)${NC}"
+echo -e "${YELLOW}1) Rumda Light (recommended)${NC}"
 echo -e "${MAGENTA}2) Rumda Pistachio${NC}"
 echo ""
-echo -e "${MAGENTA}NOTE: rumda-pistachio is unmaintained and doesn't recieve updates, sadly${NC}"
+echo -e "${MAGENTA}NOTE: rumda-pistachio is unmaintained and doesn't recieve updates, sadly.${NC}"
 echo ""
 read -p "Enter choice (1 or 2, default: 1): " theme_input
 
