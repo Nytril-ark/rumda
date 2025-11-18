@@ -9,10 +9,13 @@ import QtQuick.Layouts
 import qs.dark.config
 
 
+
 Rectangle {
   property string username: Config.githubUsername  // obviously, if you aren't me, which you aren't, just change this into you github username
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
+
+  readonly property int headerMargin: 23
 
   // lil watcher to clear the data if the username is changed 
   onUsernameChanged: {
@@ -24,12 +27,15 @@ Rectangle {
 
 
   id: contribGraphRect
-  implicitWidth: Math.ceil(gridData.length / 7) * (Config.commitSquareSize + 1)
+  implicitWidth: {
+    let weeks = Math.ceil(gridData.length / 7)
+    return weeks * (Config.commitSquareSize + 3) + 44  // +44 for margins
+  }
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
-  
+
 
   Process {
     id: githubFetch
@@ -45,11 +51,14 @@ Rectangle {
           let response = JSON.parse(data)
           
 
+          // let today = new Date()
+          // let yearStart = new Date(today.getFullYear(), 0, 1) 
+          // today.setHours(23, 59, 59, 999)
+          // contributionData = [] 
           let today = new Date()
+          today.setHours(0, 0, 0, 0)
           let yearStart = new Date(today.getFullYear(), 0, 1) 
-          today.setHours(23, 59, 59, 999)
-          contributionData = [] 
-
+          contributionData = []
 
           contributionData = response.contributions.filter(day => {
             let dayDate = new Date(day.date)
@@ -66,51 +75,61 @@ Rectangle {
     }
   }
 
-
   function organizeGridData() {
+    const MAX_WEEKS = 45
     gridData = []
-    let organized = []
     
-    // Find the starting day of week for the first contribution
+    if (contributionData.length === 0) return
+    
+    // Calculate total number of weeks needed
     let firstDate = new Date(contributionData[0].date)
-    let startDayOfWeek = firstDate.getDay()  // 0=Sunday, 1=Monday, etc.
+    let lastDate = new Date(contributionData[contributionData.length - 1].date)
     
-    // Add empty cells before the first day to align the grid properly
-    for (let i = 0; i < startDayOfWeek; i++) {
-      organized.push({level: 0, count: 0, date: ""})
+    // Calculate week difference
+    let firstWeekStart = new Date(firstDate)
+    firstWeekStart.setDate(firstDate.getDate() - firstDate.getDay()) // Go to Sunday of first week
+    
+    let lastWeekStart = new Date(lastDate)
+    lastWeekStart.setDate(lastDate.getDate() - lastDate.getDay()) // Go to Sunday of last week
+    
+    let totalWeeks = Math.ceil((lastWeekStart - firstWeekStart) / (7 * 24 * 60 * 60 * 1000)) + 1
+    
+    // Create a 2D array: [week][day] where day 0=Sunday, 1=Monday, etc.
+    let weekGrid = []
+    for (let w = 0; w < totalWeeks; w++) {
+      weekGrid[w] = []
+      for (let d = 0; d < 7; d++) {
+        weekGrid[w][d] = {level: 0, count: 0, date: ""}  // Initialize with empty
+      }
     }
     
-    // Add all contribution data
+    // Fill in actual contribution data
     contributionData.forEach(day => {
-      organized.push(day)
+      let date = new Date(day.date)
+      let weekIndex = Math.floor((date - firstWeekStart) / (7 * 24 * 60 * 60 * 1000))
+      let dayIndex = date.getDay()  // 0=Sunday, 1=Monday, ..., 6=Saturday
+      
+      if (weekIndex >= 0 && weekIndex < totalWeeks) {
+        weekGrid[weekIndex][dayIndex] = day
+      }
     })
     
-    let lastRealIndex = organized.length - 1
-    // Loop backwards to find last entry with a date
-    while (lastRealIndex >= 0 && organized[lastRealIndex].date === "") {
-      lastRealIndex--
+    // If we have more weeks than MAX_WEEKS, trim from the LEFT (old weeks)
+    if (totalWeeks > MAX_WEEKS) {
+      weekGrid = weekGrid.slice(totalWeeks - MAX_WEEKS)  // Keep only last MAX_WEEKS
     }
     
-    // Trim array to only include up to last real day
-    organized = organized.slice(0, lastRealIndex + 1)
-    
-    // reorganize into column-first order (each column is a week)
+    // Convert to column-first format for Grid (column = week, fills top-to-bottom)
     let columnFirst = []
-    let numWeeks = Math.ceil(organized.length / 7)
-    
-    // For each week
-    for (let week = 0; week < numWeeks; week++) {
-      // For each day of week (0-6)
+    for (let week = 0; week < weekGrid.length; week++) {
       for (let day = 0; day < 7; day++) {
-        let index = week * 7 + day
-        if (index < organized.length) {
-          columnFirst.push(organized[index])
-        }
+        columnFirst.push(weekGrid[week][day])
       }
-    }    
-
+    }
+    
     gridData = columnFirst
   }
+
   
   // this is set to auto-refresh every hour
   Timer {
@@ -120,162 +139,174 @@ Rectangle {
     onTriggered: githubFetch.running = true
   }
   
-ColumnLayout {
+  Item {
+    id: tooltipContainer
     anchors.fill: parent
-    anchors.leftMargin: 22
-    anchors.rightMargin: 10
-    anchors.topMargin: 14
-    anchors.bottomMargin: 13
-    spacing: 4
+    z: 1000
     
-    // // Header   // above graph ========
-    RowLayout { 
-      Layout.fillWidth: true
-
-      Text {
-        text: `@${username}'s Contributions`
-        color: Colors.accentColor
-        font.pixelSize: 11
-        font.bold: true
-        Layout.alignment: Qt.AlignBottom  
-        Layout.leftMargin: 1
-      }
-
-      Item {  // Spacer
-        Layout.fillWidth: true
-      }
-
-      Text {
-        text: contributionData.length > 0 ? 
-          `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
-        color: Colors.accent2Color
-        font.pixelSize: 19
-        font.bold: true
-        Layout.rightMargin: 25
-        Layout.alignment: Qt.AlignBottom
+    Loader {
+      id: tooltipLoader
+      active: false
+      
+      sourceComponent: Rectangle {
+        id: tooltip
+        property var dayData: ({count: 0, date: ""})
+        
+        function updatePosition(square) {
+          let pos = square.mapToItem(tooltipContainer, 0, 0)
+          tooltip.x = pos.x + square.width / 2 - tooltip.width / 2
+          tooltip.y = pos.y - tooltip.height - 5
+        }
+        
+        width: tooltipText.width + 16
+        height: tooltipText.height + 12
+        color: Colors.dashAccentColor
+        radius: 6
+        border.color: Colors.borderColor
+        border.width: 1
+        
+        // Tooltip arrow
+        Rectangle {
+          width: 8
+          height: 8
+          color: Colors.dashAccentColor
+          rotation: 45
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.top: parent.bottom
+          anchors.topMargin: -4
+        }
+        
+        Text {
+          id: tooltipText
+          anchors.centerIn: parent
+          text: dayData.count + " contributions\n" + dayData.date
+          color: Colors.accentColor
+          font.pixelSize: 11
+          horizontalAlignment: Text.AlignHCenter
+        }
       }
     }
-    // // ======================================
+  }
 
-
-    Grid {
-      columns: 53 
-      rows: 7      
-      spacing: 3
-      flow: Grid.TopToBottom 
-      Layout.alignment: Qt.AlignHCenter
+  ColumnLayout {
+      anchors.fill: parent
+      // anchors.leftMargin: 8
+      // anchors.rightMargin: 8
+      anchors.topMargin: 14
+      anchors.bottomMargin: 13
+      spacing: 4
       
-      Repeater {
-        model: gridData.length  
+      // // Header   // above graph ========
+      RowLayout { 
+        Layout.fillWidth: true
+
+        Text {
+          text: `@${username}'s Contributions`
+          color: Colors.accentColor
+          font.pixelSize: 11
+          font.bold: true
+          Layout.alignment: Qt.AlignBottom  
+          Layout.leftMargin: headerMargin
+        }
+
+        Item {  // spacer between the 2 texts
+          Layout.fillWidth: true
+        }
+
+        Text {
+          text: contributionData.length > 0 ? 
+            `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
+          color: Colors.accent2Color
+          font.pixelSize: 19
+          font.bold: true
+          Layout.rightMargin: headerMargin
+          Layout.alignment: Qt.AlignBottom
+        }
+      }
+      // ======================================
+
+
+      Grid {
+        id: contributionGrid
+        columns: Math.ceil(gridData.length / 7)
+        rows: 7      
+        spacing: 3
+        flow: Grid.TopToBottom 
+        Layout.alignment: Qt.AlignHCenter
         
-        Rectangle {
-          id: commitSquares
-          width: Config.commitSquareSize
-          height: Config.commitSquareSize
-          radius: 2
+        Repeater {
+          model: gridData.length  
           
-          property var day: gridData[index] || {level: 0, count: 0, date: ""} 
-          
-          color: {
-            switch (day.level) {
-              // case 0: return "#161b22"  // No contributions
-              // case 1: return "#0e4429"  // 1-3 contributions
-              // case 2: return "#006d32"  // 4-6 contributions   << those are the colors for 
-              // case 3: return "#26a641"  // 7-9 contributions   << people who want it to look
-              // case 4: return "#39d353"  // 10+ contributions   << exactly like github. (I don't)
-              // default: return "#161b22"
-
-              // light >> dark ==================
-              case 0: return Colors.level0Contrib  // No contributions   
-              case 1: return Colors.level1Contrib  // 1-3 contributions
-              case 2: return Colors.level2Contrib  // 4-6 contributions
-              case 3: return Colors.level3Contrib  // 7-9 contributions
-              case 4: return Colors.level4Contrib  // 10+ contributions
-              default: return Colors.level0Contrib // also no contribs
-
-              // dark >> light ==================
-              // case 0: return Colors.level4Contrib  // No contributions
-              // case 1: return Colors.level3Contrib  // 1-3 contributions
-              // case 2: return Colors.level2Contrib  // 4-6 contributions
-              // case 3: return Colors.level1Contrib  // 7-9 contributions
-              // case 4: return Colors.level0Contrib  // 10+ contributions
-              // default: return Colors.level4Contrib // also no contribs
-            }
-          }
-          
-          // Hover tooltip
-          MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
+          Rectangle {
+            id: commitSquares
+            width: Config.commitSquareSize
+            height: Config.commitSquareSize
+            radius: 2
             
-            Rectangle {
-              visible: parent.containsMouse && day.date !== "" && day.count !== 0 && Config.dashContribToolTip // CHANGED: Don't show tooltip for empty cells 
-              x: parent.width / 2 - width / 2
-              y: -height - 5
-              width: tooltipText.width + 16
-              height: tooltipText.height + 12
-              color: Colors.dashAccentColor
-              radius: 6
-              border.color: Colors.borderColor
-              border.width: 1
-              
-              // Tooltip arrow
-              Rectangle {
-                width: 8
-                height: 8
-                color: Colors.dashAccentColor
-                rotation: 45
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: parent.bottom
-                anchors.topMargin: -4
-                // border.color: Colors.borderColor
-                // border.width: 1
+            property var day: gridData[index] || {level: 0, count: 0, date: ""} 
+            
+            color: {
+              switch (day.level) {
+                case 0: return Colors.level0Contrib
+                case 1: return Colors.level1Contrib
+                case 2: return Colors.level2Contrib
+                case 3: return Colors.level3Contrib
+                case 4: return Colors.level4Contrib
+                default: return Colors.level0Contrib
               }
+            }
+            
+            // Hover tooltip
+            MouseArea {
+              id: hoverArea
+              anchors.fill: parent
+              hoverEnabled: true
               
-              Text {
-                id: tooltipText
-                anchors.centerIn: parent
-                text: `${day.count} contributions\n${day.date}`
-                color: Colors.accentColor
-                font.pixelSize: 11
-                horizontalAlignment: Text.AlignHCenter
+              onContainsMouseChanged: {
+                if (containsMouse && day.date !== "" && day.count !== 0 && Config.dashContribToolTip) {
+                  tooltipLoader.active = true
+                  tooltipLoader.item.dayData = day
+                  tooltipLoader.item.updatePosition(commitSquares)
+                } else {
+                  tooltipLoader.active = false
+                }
               }
             }
           }
         }
-      }
-    } // END OF CONTRIB GRAPH GRID
-    // Header // bottom header =======================
-    // RowLayout { 
-    //   Layout.fillWidth: true
-    //
-    //   Text {
-    //     text: `@${username}'s Contributions`
-    //     color: Colors.accentColor
-    //     font.pixelSize: 11
-    //     font.bold: true
-    //     Layout.alignment: Qt.AlignBottom  
-    //     Layout.leftMargin: 19    
-    //   }
-    //
-    //   Item {  // Spacer
-    //     Layout.fillWidth: true
-    //   }
-    //
-    //   Text {
-    //     text: contributionData.length > 0 ? 
-    //       `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
-    //     color: Colors.accent2Color
-    //     font.pixelSize: 19
-    //     font.bold: true
-    //     Layout.rightMargin: 22
-    //     Layout.alignment: Qt.AlignBottom
-    //   }
-    // }
-    // // ==================================================
+      } // END OF CONTRIB GRAPH GRID
 
 
+      // Header // bottom header =======================
+      // RowLayout { 
+      //   Layout.fillWidth: true
+      //
+      //   Text {
+      //     text: `@${username}'s Contributions`
+      //     color: Colors.accentColor
+      //     font.pixelSize: 11
+      //     font.bold: true
+      //     Layout.alignment: Qt.AlignBottom  
+      //     Layout.leftMargin: 19    
+      //   }
+      //
+      //   Item {  // Spacer
+      //     Layout.fillWidth: true
+      //   }
+      //
+      //   Text {
+      //     text: contributionData.length > 0 ? 
+      //       `${contributionData.reduce((sum, d) => sum + d.count, 0)} total` : ""
+      //     color: Colors.accent2Color
+      //     font.pixelSize: 19
+      //     font.bold: true
+      //     Layout.rightMargin: 22
+      //     Layout.alignment: Qt.AlignBottom
+      //   }
+      // }
+      // // ==================================================
+
+
+    }
   }
-}
-
 

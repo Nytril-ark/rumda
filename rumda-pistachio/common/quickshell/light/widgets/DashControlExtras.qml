@@ -85,7 +85,7 @@ Item {
 
           Process {
             id: process1
-            command: ["bash", "-c", `${Config.fileManager}`]
+            command: ["bash", "-c", `${Config.fileManager} &disown`]
             running: false
           }
           
@@ -137,7 +137,7 @@ Item {
 
           Process {
             id: process2
-            command: ["/bin/sh", "-c", `${Config.browser}`]   // note to self: maybe this should be auto-read from hyprland.conf later
+            command: ["/bin/sh", "-c", `${Config.browser} &disown`]   // note to self: maybe this should be auto-read from hyprland.conf later
             running: false
           }
 
@@ -191,7 +191,7 @@ Item {
 
           Process {
             id: process3
-            command: ["bash", "-c", ".config/rumda-pistachio/scripts/delayedScreenshot.sh &disown"] 
+            command: ["bash", "-c", ".config/rumda/scripts/delayedScreenshot.sh &disown"] 
             running: false
           }
           
@@ -243,7 +243,7 @@ Item {
           
           Process {
             id: process4
-            command: ["/bin/sh", "-c", `${Config.terminal}`]
+            command: ["/bin/sh", "-c", `${Config.terminal} &disown`]
             running: false
           }
 

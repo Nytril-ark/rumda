@@ -148,7 +148,7 @@ Rectangle {
           
           Process {
             id: process5
-            command: ["/bin/sh", "-c", "shutdown"]
+            command: ["/bin/sh", "-c", "shutdown && notify-send 'Rumda' 'Shutting down in 1 minute'"]
             running: false
           }
 
@@ -370,7 +370,7 @@ Rectangle {
           
           Process {
             id: process8
-            command: ["bash", "-c", "zathura ~/.config/rumda-pistachio/pictures/keybinds.pdf"]
+            command: ["bash", "-c", "zathura ~/.config/rumda/pictures/keybinds.pdf &disown"]
             running: false
           }
 
@@ -606,7 +606,7 @@ Rectangle {
   //
   //         Process {
   //           id: process8
-  //           command: ["bash", "-c", "alacritty -e nvim ~/.config/rumda-pistachio/README.md"]
+  //           command: ["bash", "-c", "alacritty -e nvim ~/.config/rumda/README.md"]
   //           running: false
   //         }
   //

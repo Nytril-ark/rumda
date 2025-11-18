@@ -8,7 +8,7 @@ WlrLayershell {
     // ==================== CONFIGURATION ====================
     
     // Animation settings
-    property string framesPath: Quickshell.env("HOME") + "/.config/rumda-pistachio/light-config/quickshell/rumda-the-cat/walk_frames"
+    property string framesPath: Quickshell.env("HOME") + "/.config/rumda/light-config/quickshell/rumda-the-cat/walk_frames"
     property int startFrame: 1
     property int endFrame: 15
     property int frameDelay: 50  // milliseconds between frames
