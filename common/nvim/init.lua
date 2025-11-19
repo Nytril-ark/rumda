@@ -73,8 +73,8 @@ vim.keymap.set('n', '<Leader>wcb', 'i```<CR>```<Esc>O', { desc = 'Code block' })
 vim.keymap.set('v', '<Leader>wS', 'c<sup><C-r>"</sup><Esc>', { desc = 'Superscript (wrap in <sup>)' })
 vim.keymap.set('v', '<Leader>wd', 'c<sub><C-r>"</sub><Esc>', { desc = 'Subscript (wrap in <sub>)' })
 
--- Collapsible details block
-vim.keymap.set('v', '<Leader>wD', 'c<details><CR><summary><C-r>"</summary><CR><CR></details><Esc>kk$a', { desc = 'Wrap in <details> (selection as summary)' })
+-- Collapsible details block (selection becomes hidden)
+vim.keymap.set('v', '<Leader>wD', 'c<details><CR><summary>collapsible</summary><CR><C-r>"<CR></details><Esc>', { desc = 'Wrap in <details> (selection is collapsed)' })
 
 
 -- error-only config so the lsp doesnt clutter the view
