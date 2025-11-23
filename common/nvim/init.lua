@@ -117,7 +117,6 @@ vim.keymap.set('n', '<Leader>td', function()
   print('Diagnostics ' .. (diagnostics_visible and 'visible' or 'hidden'))
 end, { desc = 'Toggle diagnostics visibility' })
 
-
 vim.g.mkdp_browser = "firefox"
 
 
