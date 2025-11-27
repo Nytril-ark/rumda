@@ -34,6 +34,91 @@ return {
       ft = { "markdown" },
     },
 
+
+  -- {
+  --   "sphamba/smear-cursor.nvim",
+  --   lazy = false,
+  --   opts = {
+  --     never_draw_over_target = true,
+  --
+  --     -- Smear cursor when switching buffers or windows.
+  --     smear_between_buffers = true,
+  --
+  --     -- Smear cursor when moving within line or to neighbor lines.
+  --     -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
+  --     smear_between_neighbor_lines = true,
+  --
+  --     -- Draw the smear in buffer space instead of screen space when scrolling
+  --     scroll_buffer_space = true,
+  --
+  --     -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+  --     -- Smears and particles will look a lot less blocky.
+  --     legacy_computing_symbols_support = true,
+  --
+  --     -- Smear cursor in insert mode.
+  --     -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
+  --     smear_insert_mode = false,
+  --
+  --     gradient_exponent = 0,
+  --     particles_enabled = false,
+  --     particle_spread = 1,
+  --     particles_per_second = 100,
+  --     particles_per_length = 100,
+  --     particle_max_lifetime = 1000,
+  --     particle_damping = 0.1,
+  --     particle_gravity = 100,
+  --   },
+  -- },
+
+
+
+    {
+      "karb94/neoscroll.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("neoscroll").setup({
+          hide_cursor = true,
+          stop_eof = true,
+          respect_scrolloff = true,
+          cursor_scrolls_alone = true,
+          easing_function = "sine", 
+          -- Easing options: nil (default), linear, quadratic, cubic, quartic, quintic, circular, sine
+          -- nil - Default (linear-ish)
+          -- "linear" - Constant speed (robotic)
+          -- "quadratic" - Slow start/end, fast middle (smooth)
+          -- "cubic" - More pronounced slow start/end
+          -- "quartic" - Even more pronounced
+          -- "quintic" - Very smooth
+          -- "circular" - Circular motion feel
+          -- "sine" - Sine wave motion
+        })
+        
+        -- Smooth movement mappings
+        local t = {}
+        
+        -- j/k keys
+        -- t['j'] = {'scroll', {0.05, 'true', '150'}}     -- CHANGED: Last number is duration (ms)
+        -- t['k'] = {'scroll', {-0.05, 'true', '150'}}
+        --
+        -- -- Arrow keys (ADDED)
+        -- t['<Down>'] = {'scroll', {0.2, 'true', '150'}}
+        -- t['<Up>'] = {'scroll', {-0.2, 'true', '150'}}
+        
+        -- Optional: Add Ctrl+d/u for page scrolling
+        t['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '250'}}
+        t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
+        
+        -- Optional: Add zz, zt, zb for centering
+        t['zz'] = {'zz', {'150'}}
+        t['zt'] = {'zt', {'150'}}
+        t['zb'] = {'zb', {'150'}}
+        
+        -- require('neoscroll.config').set_mappings(t)
+      end,
+    },
+
+
+
     {
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite

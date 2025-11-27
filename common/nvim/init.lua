@@ -76,6 +76,13 @@ vim.keymap.set('v', '<Leader>wd', 'c<sub><C-r>"</sub><Esc>', { desc = 'Subscript
 -- Collapsible details block (selection becomes hidden)
 vim.keymap.set('v', '<Leader>wD', 'c<details><CR><summary>collapsible</summary><CR><C-r>"<CR></details><Esc>', { desc = 'Wrap in <details> (selection is collapsed)' })
 
+-- CURSOR AND SCROLLING STUFF 
+vim.keymap.set('n', '<leader>tn', ':set relativenumber!<CR>', { desc = 'Toggle relative numbers on lines' })
+vim.opt.number = true         -- Show absolute line number on current line
+vim.opt.relativenumber = false -- show relative nums for other lines
+vim.opt.scrolloff = 999
+
+
 
 -- error-only config so the lsp doesnt clutter the view
 local error_only_config = {

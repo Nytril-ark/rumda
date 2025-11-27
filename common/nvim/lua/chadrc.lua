@@ -6,8 +6,8 @@
 local M = {}
 
 M.base46 = {
-	theme = "rumda-warm",
-  theme_toggle = {"rumda-warm", "rumda-warm"},
+	theme = "rumda-light",
+  theme_toggle = {"rumda-light", "rumda-light"},
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
