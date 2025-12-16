@@ -191,7 +191,7 @@ Item {
 
           Process {
             id: process3
-            command: ["bash", "-c", ".config/rumda/scripts/delayedScreenshot.sh &disown"] 
+            command: ["bash", "-c", "~/.config/rumda/scripts/delayedScreenshot.sh &disown"] 
             running: false
           }
           
