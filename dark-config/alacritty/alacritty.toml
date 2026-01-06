@@ -27,7 +27,7 @@ title = "  "
 
 [font]
 normal.family = "Terminess Nerd Font"
-
+normal.style = "Bold"
 italic.family = "cartographCF"
 bold_italic.family = "cartographCF"
 size = 12.0

@@ -29,6 +29,8 @@ title = "  "
 # =======================Terminess
 normal.family = "Terminess Nerd Font"
 normal.style = "Bold"
+
+
 # bold.family = "Hurmit Nerd Font"
 bold.style = "Bold"
 italic.family = "cartographCF"

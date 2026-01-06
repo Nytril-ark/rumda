@@ -37,6 +37,7 @@ Rectangle {
   radius: Config.dashInnerModuleRadius
 
 
+
   Process {
     id: githubFetch
     command: [
@@ -45,89 +46,62 @@ Rectangle {
     ]
     running: true
     
-    stdout: SplitParser {
-      onRead: data => {
-        try {
-          let response = JSON.parse(data)
+  stdout: SplitParser {
+    onRead: data => {
+      try {
+        let response = JSON.parse(data)
+        
+        let today = new Date()
+        today.setHours(0, 0, 0, 0)
+        
+        // Calculate one year ago more carefully
+        let oneYearAgo = new Date(today)
+        oneYearAgo.setFullYear(today.getFullYear() - 1)
+        oneYearAgo.setHours(0, 0, 0, 0)
+        
+        console.log("Today:", today.toISOString())
+        console.log("One year ago:", oneYearAgo.toISOString())
+        
+        contributionData = []
+        contributionData = response.contributions.filter(day => {
+          // Parse date string directly to avoid timezone issues
+          let parts = day.date.split('-')
+          let dayDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]))
           
-
-          // let today = new Date()
-          // let yearStart = new Date(today.getFullYear(), 0, 1) 
-          // today.setHours(23, 59, 59, 999)
-          // contributionData = [] 
-          let today = new Date()
-          today.setHours(0, 0, 0, 0)
-          let yearStart = new Date(today.getFullYear(), 0, 1) 
-          contributionData = []
-
-          contributionData = response.contributions.filter(day => {
-            let dayDate = new Date(day.date)
-            return dayDate >= yearStart && dayDate <= today
-          })
-
-          console.log(`Loaded ${contributionData.length} days of contributions`)
-          
-          organizeGridData()
-        } catch (e) {
-          console.error("Failed to parse GitHub data:", e)
+          let inRange = dayDate >= oneYearAgo && dayDate <= today
+          return inRange
+        })
+        
+        console.log(`Loaded ${contributionData.length} days of contributions`)
+        if (contributionData.length > 0) {
+          console.log("First day:", contributionData[0].date)
+          console.log("Last day:", contributionData[contributionData.length - 1].date)
         }
+        
+        organizeGridData()
+      } catch (e) {
+        console.error("Failed to parse GitHub data:", e)
       }
     }
   }
+  }
+
 
   function organizeGridData() {
-    const MAX_WEEKS = 45
     gridData = []
     
     if (contributionData.length === 0) return
     
-    // Calculate total number of weeks needed
-    let firstDate = new Date(contributionData[0].date)
-    let lastDate = new Date(contributionData[contributionData.length - 1].date)
-    
-    // Calculate week difference
-    let firstWeekStart = new Date(firstDate)
-    firstWeekStart.setDate(firstDate.getDate() - firstDate.getDay()) // Go to Sunday of first week
-    
-    let lastWeekStart = new Date(lastDate)
-    lastWeekStart.setDate(lastDate.getDate() - lastDate.getDay()) // Go to Sunday of last week
-    
-    let totalWeeks = Math.ceil((lastWeekStart - firstWeekStart) / (7 * 24 * 60 * 60 * 1000)) + 1
-    
-    // Create a 2D array: [week][day] where day 0=Sunday, 1=Monday, etc.
-    let weekGrid = []
-    for (let w = 0; w < totalWeeks; w++) {
-      weekGrid[w] = []
-      for (let d = 0; d < 7; d++) {
-        weekGrid[w][d] = {level: 0, count: 0, date: ""}  // Initialize with empty
-      }
-    }
-    
-    // Fill in actual contribution data
-    contributionData.forEach(day => {
-      let date = new Date(day.date)
-      let weekIndex = Math.floor((date - firstWeekStart) / (7 * 24 * 60 * 60 * 1000))
-      let dayIndex = date.getDay()  // 0=Sunday, 1=Monday, ..., 6=Saturday
-      
-      if (weekIndex >= 0 && weekIndex < totalWeeks) {
-        weekGrid[weekIndex][dayIndex] = day
-      }
+    let sorted = contributionData.slice().sort((a, b) => {
+      return new Date(a.date) - new Date(b.date)
     })
     
-    // If we have more weeks than MAX_WEEKS, trim from the LEFT (old weeks)
-    if (totalWeeks > MAX_WEEKS) {
-      weekGrid = weekGrid.slice(totalWeeks - MAX_WEEKS)  // Keep only last MAX_WEEKS
+    const MAX_DAYS = 46 * 7
+    if (sorted.length > MAX_DAYS) {
+      sorted = sorted.slice(sorted.length - MAX_DAYS)
     }
     
-    // Convert to column-first format for Grid (column = week, fills top-to-bottom)
-    let columnFirst = []
-    for (let week = 0; week < weekGrid.length; week++) {
-      for (let day = 0; day < 7; day++) {
-        columnFirst.push(weekGrid[week][day])
-      }
-    }
-    
-    gridData = columnFirst
+    gridData = sorted
   }
 
   
