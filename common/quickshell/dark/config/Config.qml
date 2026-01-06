@@ -43,8 +43,8 @@ Singleton {
   readonly property string githubUsername: Common.cGithubUsername
 
   // dashboard size config
-  readonly property double dashboardWidth:  4.7 // this is what you change if u wanna modify it 
-  readonly property double dashboardHeight: 0.7   // same here       // note that both those values are proportional to screen width/height
+  readonly property double dashboardWidth:  Common.cDashboardWidth
+  readonly property double dashboardHeight: Common.cDashboardHeight
 
   //  other custom properties
   readonly property int dashRadius: 12
