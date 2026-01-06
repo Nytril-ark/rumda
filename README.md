@@ -30,7 +30,7 @@
 
 >  Big thanks to xfcasio, as this was based on his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
 >
-> if you wanna [make your own changes](#config)
+> for config and some issues, [check this](#config)
 >
 
 
@@ -186,20 +186,29 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 
 
 > [!NOTE]
-> Configuring your own changes in the rice
+> Configuring your own changes in the rice & possible issues
+
+<details>
+<summary>Things that may cause issues</summary>
+
+> you can go to rumda/common/quickshell/shared/Common.qml to change things like dashboard pfp, github account name (for the dashboard), as well as default bar theme. 
+>
+>MORE IMPORTANTLY if your dashboard has weird ssizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
+>
+</details>
+
+
 
 <details>
 <summary>Basic configuration</summary>
 
-> you can go to rumda/common/quickshell/shared/Common.qml to change things like dashboard pfp, github account name (for the dashboard), as well as default bar theme. MORE IMPORTANTLY if your dashboard has weird ssizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
->
->
 > you can go to rumda/common/quickshell/light/config/Colors.qml to edit colors, same goes for .../dark/config/Color.qml
 > 
 > I don't recommend messing with them *too much* though
 >
-
 </details>
+
+
 
 <details>
 <summary>configuring further</summary>
@@ -207,7 +216,6 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 > it would be better to make changes in the rumda dir itself, as the files at .config are just symlinked to there.
 > you can then use any of the theme scripts in rumda/scripts/ to push your updates into place, in case they didn't
 > get pushed there on their own. Please open an issue here if you need further guidance.
-
 </details>
 
 
