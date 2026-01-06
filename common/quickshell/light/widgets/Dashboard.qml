@@ -20,7 +20,7 @@ import qs.light.widgets
 Scope {
   id: dashboardScope
   property int closeDuration: Config.dashAnimDuration
-
+  property int dashboardVerticalGap: dashboard.implicitHeight * (1 / Config.dashboardHeight)
 
   Timer {
     id: closeTimer
@@ -50,11 +50,11 @@ Scope {
 
     onVisibleChanged: {  
       if (visible) {
-        dashboardBGRect.anchors.topMargin = Config.dashMarginTop
-        dashboardBGRect.anchors.bottomMargin = Config.dashMarginBottom          
+        dashboardBGRect.anchors.topMargin = dashboardVerticalGap
+        dashboardBGRect.anchors.bottomMargin = dashboardVerticalGap
       } else {
-        dashboardBGRect.anchors.topMargin = dashboard.height  
-        dashboardBGRect.anchors.bottomMargin = -dashboard.height  
+        dashboardBGRect.anchors.topMargin = dashboard.height
+        dashboardBGRect.anchors.bottomMargin = -dashboard.height
       }
     }
     
@@ -67,8 +67,8 @@ Scope {
         onRead: data => {
           if (data.includes("toggle")) {
             if (!dashboard.visible) {
-              dashboardBGRect.anchors.topMargin = dashboard.height  
-              dashboardBGRect.anchors.bottomMargin = -dashboard.height
+              dashboardBGRect.anchors.topMargin = dashboardVerticalGap
+              dashboardBGRect.anchors.bottomMargin = dashboardVerticalGap
               dashboard.visible = !dashboard.visible
             } else {
               dashboardScope.closeDashboard()
@@ -114,10 +114,10 @@ Scope {
           anchors.left: parent.left 
           anchors.right: parent.right 
 
-          anchors.rightMargin: Config.dashMarginRight 
-          anchors.leftMargin: Config.dashMarginLeft 
-          anchors.topMargin: dashboard.height  
-          anchors.bottomMargin: -dashboard.height  
+          anchors.rightMargin: dashboard.width / Config.dashboardWidth
+          anchors.leftMargin: dashboard.width / Config.dashboardWidth
+          anchors.topMargin: dashboard.height / Config.dashboardHeight
+          anchors.bottomMargin: dashboard.height / Config.dashboardHeight
 
           color: Colors.dashBGColor
           radius: Config.dashRadius

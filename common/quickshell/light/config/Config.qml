@@ -5,11 +5,6 @@ import Quickshell
 import qs.shared
 
 Singleton {
-  // ScreenConf
-  readonly property int screenHeight: Common.cScreenHeight
-  readonly property int screenWidth:  Common.cScreenWidth
-
-
   // User Configuration
   readonly property string username: Common.cUsername
   readonly property string configPath: Common.cConfigPath
@@ -25,7 +20,7 @@ Singleton {
   readonly property int barMarginLeft: 18
   readonly property int barMarginRight: 1
   readonly property int barWidth: 48
-  readonly property int barRadius: 8
+  readonly property int barRadius: 4
   readonly property int barBorderWidth: 2
   readonly property int barsGrave: 1400    // where the bar goes in terms of y position when it's animated out on a themeswitch (it then gets killed)
                                           // increasing it will increase animation speed. also, it kinda depends on ur screenheight
@@ -47,16 +42,8 @@ Singleton {
   readonly property int dashAnimDuration: 250
   readonly property string githubUsername: Common.cGithubUsername
   // dashboard size config
-  readonly property double dashboardWidth:  3.36 // this is what you change, don't touch the below 2
-  readonly property double dashboardHeight: 3.6    // same here       // note that both those values are proportional to screen width/height
-  
-  // to change width accordingly: (don't mess with those)
-  readonly property int dashMarginLeft: ((1 / dashboardWidth) * screenWidth) - barWidth - barBorderWidth - shadowOffsetX - 4
-  readonly property int dashMarginRight: ((1 / dashboardWidth) * screenWidth) // note to self: allow it to change according to github graph size
-  readonly property int dashMarginTop: ((1 / dashboardHeight) * screenHeight)
-  readonly property int dashMarginBottom: ((1 / dashboardHeight) * screenHeight) 
-
-
+  readonly property double dashboardWidth:  4.7 // this is what you change if u wanna modify it 
+  readonly property double dashboardHeight: 0.7   // same here       // note that both those values are proportional to screen width/height
 
   //  other custom properties
   readonly property int dashRadius: 12
