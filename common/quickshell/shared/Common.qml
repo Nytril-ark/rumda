@@ -5,11 +5,6 @@ import Quickshell
 import qs.shared
 
 Singleton {
-                                                                  // this file is for stuff that applies to both light and dark bar
-  // ScreenConf
-  readonly property int cScreenHeight: 1080 // note to self: un-hard-code this
-  readonly property int cScreenWidth: 1920 // note to self: un-hard-code this too
-
 
   // User Configuration
   readonly property string cUsername: Quickshell.env("USER") || "user"
