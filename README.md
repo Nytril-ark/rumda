@@ -45,11 +45,15 @@
 ![1](pictures/dark.png)
 
 
-| ![discord](pictures/discord.png) | ![allwins](pictures/filled.png) |
+| ![discord](pictures/discord.png) | ![lightdashboard](pictures/lightdash.png) |
+| -------------------------------- | ----------------------------------------- |
+
+
+![newBarThingy](pictures/barArt.png)
+
+| ![allwins](pictures/filled.png)  | ![weird](pictures/weird.png)    |
 | -------------------------------- | ------------------------------- |
 
-![lightdashboard](pictures/lightdash.png)
-![newBarThingy](pictures/barArt.png)
 
 
 ### old pistachio theme available in installer
