@@ -193,7 +193,7 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 
 > you can go to rumda/common/quickshell/shared/Common.qml to change things like dashboard pfp, github account name (for the dashboard), as well as default bar theme. 
 >
->MORE IMPORTANTLY if your dashboard has weird ssizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
+>MORE IMPORTANTLY if your dashboard has weird sizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
 >
 </details>
 
