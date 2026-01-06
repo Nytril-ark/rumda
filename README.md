@@ -49,6 +49,7 @@
 | -------------------------------- | ------------------------------- |
 
 ![lightdashboard](pictures/lightdash.png)
+![newBarThingy](pictures/barArt.png)
 
 
 ### old pistachio theme available in installer
@@ -219,20 +220,6 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 </details>
 
 
-#### Color-scheme for nvim:
-
-
-##### rumda light
-<img src="pictures/rll.png">
-
-#### experimental themes:
-haven't refined those yet..
-<details>
-<summary>dark, warm, extra-warm</summary>
-<img src="pictures/rd.png">
-<img src="pictures/rw.png">
-<img src="pictures/rew.png">
-</details>
 
 ---
 
