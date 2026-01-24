@@ -22,6 +22,7 @@
 > if you would like to try it
 > see [installation](#installation).
 >
+> **for config and some issues**, [check this](#config)
 > 
 > you can also check: [Gallery](#gallery)  -  [Keybinds](#keybinds) - [Misc](#misc)
 >
@@ -29,8 +30,6 @@
 ---
 
 >  Big thanks to xfcasio, as this was based on his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
->
-> for config and some issues, [check this](#config)
 >
 
 
