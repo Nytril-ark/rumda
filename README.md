@@ -41,7 +41,7 @@
 
 
 
-![1](pictures/dark.png)
+![1](pictures/darkPixel.png)
 
 
 | ![discord](pictures/discord.png) | ![lightdashboard](pictures/lightPixel.png) |
@@ -50,7 +50,7 @@
 
 ![newBarThingy](pictures/barArt.png)
 
-| ![darkPixel](pictures/darkPixel.png)  | ![weird](pictures/weird.png)    |
+| ![darkPixel](pictures/dark.png)  | ![weird](pictures/weird.png)    |
 | -------------------------------- | ------------------------------- |
 
 
