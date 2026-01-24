@@ -29,6 +29,7 @@ INSTALL_BTOP=true
 INSTALL_YAZI=true
 INSTALL_NEOFETCH=true
 INSTALL_NEOTHEME=true
+INSTALL_MAKO=true
 INSTALL_GHOSTTY=true
 INSTALL_DISCORD=true
 INSTALL_CHADRC=false 
@@ -295,6 +296,11 @@ fi
 # Install neofetch
 if [ "$INSTALL_NEOFETCH" = true ]; then
     install_config "$SOURCE_DIR/common/neofetch" "$DEST_DIR/neofetch" "Neofetch"
+fi
+
+# Install mako theme
+if [ "$INSTALL_MAKO" = true ]; then
+    install_config "$SOURCE_DIR/light-config/mako/config" "$DEST_DIR/mako/config" "mako"
 fi
 
 # Install nvim theme only NOTE: (without chadrc, it might not look as expected)
