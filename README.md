@@ -44,13 +44,13 @@
 ![1](pictures/dark.png)
 
 
-| ![discord](pictures/discord.png) | ![lightdashboard](pictures/lightdash.png) |
+| ![discord](pictures/discord.png) | ![lightdashboard](pictures/lightPixel.png) |
 | -------------------------------- | ----------------------------------------- |
 
 
 ![newBarThingy](pictures/barArt.png)
 
-| ![allwins](pictures/filled.png)  | ![weird](pictures/weird.png)    |
+| ![darkPixel](pictures/darkPixel.png)  | ![weird](pictures/weird.png)    |
 | -------------------------------- | ------------------------------- |
 
 
