@@ -44,7 +44,7 @@
 ![1](pictures/darkPixel.png)
 
 
-| ![discord](pictures/discord.png) | ![lightdashboard](pictures/lightPixel.png) |
+| ![discord](pictures/lightDash.png) | ![lightdashboard](pictures/lightPixel.png) |
 | -------------------------------- | ----------------------------------------- |
 
 
