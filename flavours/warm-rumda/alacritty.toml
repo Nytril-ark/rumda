@@ -1,0 +1,87 @@
+# $HOME/.config/alacritty/alacritty.toml
+# by Rito Ghosh 2023-10-06
+# Alacritty now uses TOML formatting for its config files.
+# This is a simple example.
+# There are the specification here: https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
+# It is not obvious how it translates to TOML. But it is extremely straightforward.
+# example: WINDOW, COLORS, etc. are tables, and should be represented as [window], [colors], respectively.
+# specifics of variables go under them. e.g.- look under "dynamic_padding" under-
+# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd#window
+# write `dynamic_padding = true` (without backticks -`) under the table [window]
+# for variables with multiple values, use "dotted keys". Like setting `padding.x = 5` under [window].
+# This is simple. If not clear, do several trials and errors.
+# Below is my initial set-up. The TOML homepage (https://toml.io/en/v1.0.0) was very helpful in figuring this out. 
+# I put the file alacritty.toml in $HOME/.config/alacritty. However it can be kept anywhere among the places mentioned in
+# https://github.com/alacritty/alacritty/tree/master#configuration
+# noto sans, montserrat, nimbus mono, z003, cartographCF, fira code
+
+[window]
+opacity = 1.0
+dimensions = { columns = 75, lines = 20 }
+blur = true
+padding.x = 7
+padding.y = 8
+decorations = "None"
+decorations_theme_variant = "Dark"
+title = "  "
+
+[font]
+# =======================Terminess
+normal.family = "Terminess Nerd Font"
+normal.style = "Bold"
+
+
+# bold.family = "Hurmit Nerd Font"
+bold.style = "Bold"
+italic.family = "cartographCF"
+bold_italic.family = "cartographCF"
+size = 12.0
+# =======================Dogica
+# normal.family = "Dogica Pixel"
+# size = 7
+# offset.y = 8
+# =============================
+
+
+[cursor]
+style = { shape = "Underline", blinking = "On" }
+
+[colors.primary]
+background = "#F0C997"
+foreground = "#4E2E1F"
+
+[colors.cursor]
+cursor = "#6D4A39"
+text = "#F5DCC6"
+
+[colors.selection]
+text = "#45373c"
+background = "#E6C0A1"
+
+[colors.normal]
+black = "#20111b"
+red = "#be100e"
+green = "#858162"
+yellow = "#d08b30"
+blue = "#426a79"
+magenta = "#97522c"
+cyan = "#989a9c"
+white = "#968c83"
+
+[colors.bright]
+black = "#5e5252"
+red = "#be100e"
+green = "#858162"
+yellow = "#d08b30"
+blue = "#426a79"
+magenta = "#97522c"
+cyan = "#989a9c"
+white = "#F5DCC6"
+
+[terminal]
+[terminal.shell]
+program = "/usr/bin/zsh"
+
+# Tip: for inspiration, look for values in the source code files of your favorite VS Code themes, and use the color picker in
+# Google to test colors before setting a value, or simply using an editor such as VS Code where colors are displayed in a 
+# small box when a HEX is detected by the editor.

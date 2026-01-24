@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="-1 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>play [#1000]</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+  <linearGradient id="purpleBlueGradient" x1="0%" y1="0%" x2="70%" y2="100%">
+    <stop offset="30%" style="stop-color:#C488EC;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#6791C9;stop-opacity:1" />
+  </linearGradient>
+</defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dribbble-Light-Preview" transform="translate(-65.000000, -3803.000000)" fill="#000000">
+            <g id="icons" transform="translate(56.000000, 160.000000)">
+                <path fill="url(#purpleBlueGradient)" d="M18.074,3650.7335 L12.308,3654.6315 C10.903,3655.5815 9,3654.5835 9,3652.8985 L9,3645.1015 C9,3643.4155 10.903,3642.4185 12.308,3643.3685 L18.074,3647.2665 C19.306,3648.0995 19.306,3649.9005 18.074,3650.7335" id="play-[#1000]">
+                </path>
+            </g>
+        </g>
+    </g>
+</svg>

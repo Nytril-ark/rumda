@@ -1,0 +1,226 @@
+import QtQuick.Shapes
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Io
+import Quickshell.Hyprland
+import Qt5Compat.GraphicalEffects
+import Quickshell.Widgets
+import Quickshell.Wayland
+import QtQuick.Window
+import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
+import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
+import qs.dark.barModules
+import qs.dark.widgets
+import qs.dark.config
+import qs.dark.barSections
+
+
+
+
+
+Scope {
+  id: barScope
+  property var shellRoot
+  property int margint: Config.barMarginTop
+  property int marginb: Config.barMarginBottom
+
+
+  // DASHBOARD ==========
+
+  Dashboard {}
+
+  // ===================
+
+
+  signal barLoaded()
+  function initialiseBar() {
+    barRectangle.anchors.topMargin = barScope.margint
+    barRectangle.anchors.bottomMargin = barScope.marginb
+  }
+
+
+  Connections {
+    target: shellRoot
+    function onBarLoaded() {
+      initialiseBar()
+    }
+  }
+
+  signal barDarkAnimate()
+  signal barSignalTheme()
+  function animationTrig() {
+    console.log("Bar animation triggered!")
+      barRectangle.anchors.topMargin = Config.syncTbar
+      barRectangle.anchors.bottomMargin = Config.syncBbar 
+      barSignalTheme()
+  }
+
+  //
+  // Behavior on margint {
+  //   NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
+  // Behavior on marginb {
+  //     NumberAnimation {
+  //     duration: 500
+  //     easing.type: Easing.InOutQuad
+  //   }
+  // }
+  //
+    // Animation functions exposed to parent
+    // Note to self: well.. this works.. 
+    // what I understand is that we're wrapping
+    // the rectangle's function to expose it to the 
+    // parent (aka, shell.qml) because it can't 
+    // access it directly, and rather accesses
+    // this scope
+
+
+
+
+  // ================shadow=======================
+
+  // the old convoluted shadow has been removed
+  // because I'm a dummy who didn't know
+  // DropShadow {} exists in qml
+
+// ==================== MAIN BAR ====================
+
+
+    PopoutVolume {}
+    WlrLayershell {
+      id: bar 
+      anchors { top: true; bottom: true; left: true }
+      layer: WlrLayer.Top
+      implicitWidth: Config.barWidth + Config.barBorderWidth + Config.shadowOffsetX + 4
+      color: "transparent"    
+      margins {
+        left: Config.barMarginLeft
+        right: Config.barMarginRight 
+        top: 0 
+        bottom : 0
+      }
+      MouseArea {
+        anchors.fill: parent
+        onWheel: wheel => {
+          Hyprland.dispatch("workspace 1")
+          // Mpris.players.values.forEach((player, idx) => player.pause())
+          // this ^ pauses on wspace switch, which i dont like
+        }
+      }
+
+
+      // le new simple shadow
+    DropShadow {
+        anchors.fill: barRectangle
+        horizontalOffset: Config.shadowOffsetX
+        verticalOffset: Config.shadowOffsetY
+        radius: 9
+        samples: 29
+        spread: 0.4
+        transparentBorder: true
+        color: Config.enableBarShadow ? Colors.shadowColor : "transparent"
+        source: barRectangle
+    }
+
+     Rectangle {
+        id: barRectangle
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        // anchors.horizontalCenter: parent.horizontalCenter
+        color: Colors.backgroundColor
+        radius: Config.barRadius
+        border.width: Config.barBorderWidth
+        border.color: Colors.borderColor
+        implicitWidth: Config.barWidth + Config.barBorderWidth
+        anchors.topMargin: -Config.syncTbar
+        anchors.bottomMargin: -Config.syncBbar
+
+
+        Behavior on anchors.topMargin {
+          NumberAnimation {
+            duration: 600
+            // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
+          }
+        }
+       Behavior on anchors.bottomMargin {
+          NumberAnimation {
+          duration: 600
+          // easing.type: Easing.InOutBack
+            easing.type: Easing.InOutCubic
+        }
+       }
+
+
+        ColumnLayout {
+          anchors { 
+            fill: parent
+            topMargin: -10
+            bottomMargin: 10
+            leftMargin: 3
+            rightMargin: 3
+          }
+          spacing: 4
+          TopSection {}
+          Image {
+              visible: Config.showArt1
+              Layout.fillWidth: true
+              Layout.topMargin: 30
+              Layout.bottomMargin: 10
+              Layout.leftMargin: 0
+              Layout.rightMargin: 0
+              // source: "file:///home/hexogen/.config/warm-rumda/12.svg"
+              source: `file://${Config.configPath}/../12.svg`
+              fillMode: Image.PreserveAspectCrop
+              antialiasing: true 
+              smooth: true
+              mipmap: true
+          }
+          CenterSection {
+            Layout.topMargin: 130
+          }
+          Image {
+              visible: Config.showArt2
+              Layout.fillWidth: true
+              Layout.topMargin: 20
+              Layout.bottomMargin: -30
+              Layout.leftMargin: 0
+              Layout.rightMargin: 0
+              // source: "file:///home/hexogen/.config/warm-rumda/22.svg"
+              source: `file://${Config.configPath}/../22.svg`
+              fillMode: Image.PreserveAspectCrop
+              antialiasing: true 
+              smooth: true
+              mipmap: true
+          }
+          Image {
+              visible: Config.showArt3
+              Layout.fillWidth: true
+              Layout.topMargin: 3
+              Layout.bottomMargin: 10
+              Layout.leftMargin: 0
+              Layout.rightMargin: 0
+              // source: "file:///home/hexogen/.config/warm-rumda/32.svg"
+              source: `file://${Config.configPath}/../32.svg`
+              fillMode: Image.PreserveAspectCrop
+              antialiasing: true 
+              smooth: true
+              mipmap: true
+          }
+          BottomSection {
+            onBarDarkAnimate: animationTrig()
+          }
+        }
+      }
+    }
+  }
+
+
