@@ -41,10 +41,10 @@
 
 
 
-![1](pictures/darkPixel.png)
+![1](pictures/lightPixel.png)
 
 
-| ![discord](pictures/lightDash.png) | ![lightdashboard](pictures/lightPixel.png) |
+| ![discord](pictures/lightDash.png) | ![lightdashboard](pictures/darkPixel.png) |
 | -------------------------------- | ----------------------------------------- |
 
 
