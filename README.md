@@ -149,6 +149,7 @@ cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chm
 | `$mainMod + P`               | Toggle pseudo layout       |
 | `$mainMod + L`               | Lock screen                |
 | `$mainMod + Shift + Return`  | Open Ghostty terminal      |
+| `$mainMod + shift + T`       | OCR into clipboard         |
 | `$mainMod + Shift + Alt + Q` | Force kill window          |
 | `$mainMod + Alt + Arrows`    | Move focus between windows |
 | `$mainMod + Shift + [0–9]`   | Move window to workspace   |
