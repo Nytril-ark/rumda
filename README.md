@@ -117,7 +117,7 @@ And lastly, something to setup the custom discord theme.
 ### install.sh
 > [!CAUTION]
 > please follow these steps:
-> - make sure you have installed quickshell, hyprland, etc
+> - make sure you have installed quickshell, hyprland, swww etc
 > - don't delete or change the position of the repo after using the following command:
 > 
 > Use this one-liner to clone it and install:
