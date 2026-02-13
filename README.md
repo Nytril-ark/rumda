@@ -124,7 +124,7 @@ And lastly, something to setup the custom discord theme.
 
 
 ```bash
-cd ~/.config && git clone https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
+cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
 ```
 #### note that the installer will let you install either the old pistachio theme or the new beige theme (beige is default)
 > you can also edit the install.sh file to only install what you want by making some vars at the top = false.
