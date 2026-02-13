@@ -27,14 +27,6 @@
 > you can also check: [Gallery](#gallery)  -  [Keybinds](#keybinds) - [Misc](#misc)
 >
 
----
-
->  Big thanks to xfcasio, as this was based on his rice, [Amadeus](https://github.com/xfcasio/amadeus/). 
->
-
-
----
-
 
 ## Gallery
 
