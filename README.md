@@ -141,6 +141,7 @@ cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd ru
 | `$mainMod + R`               | Launch app menu            |
 | `$mainMod + F`               | Open file manager          |
 | `$mainMod + S`               | Full screen screenshot     |
+| `$mainMod + G`               | Toggle compact look        |
 | `$mainMod + shift + S`       | screenshot a region        |
 | `$mainMod + alt + shift S`   | screenshot region + edit   |
 | `$mainMod + C`               | Close focused window       |
