@@ -10,7 +10,7 @@ THEME_CHOICE="light"  # Options: "light" or "pistachio"
 # Installation Configuration (true/false)
 # be aware that anything selected as true
 # will overwrite the config files you have 
-# at .config
+# at .config and save them to backups in place
 #
 #
 DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
@@ -36,14 +36,14 @@ INSTALL_CHADRC=false
 # # chadrc is defaulted as false so as not to 
 # delete your own chadrc. if you don't care about that
 # go ahead and set it to true. Not having my chadrc
-# might make your theme look weird
+# might make your nvim theme look weird
 
 # ============================================
 # PATH CONFIGURATION
 # ============================================
 
 # Make sure you cloned rumda in 
-# /home/.config/rumda
+# ~/.config/rumda
 #
 #
 # DO NOT CHANGE THOSE AT ALL
