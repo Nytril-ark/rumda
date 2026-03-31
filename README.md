@@ -81,7 +81,8 @@
 
 <details>
 <summary>All dependencies</summary>
-        
+
+
 Basic dependencies
 ```
 hyprland
@@ -106,6 +107,7 @@ ghostty  nautilus  btop bpytop obs-studio slurp xdg-desktop-portal-hyprland wl-c
 
 Recommended:
 ```
+Firefox toolbar theme by Looma: https://addons.mozilla.org/en-US/firefox/addon/rumda/ 
 borders-plus-plus hyprland plugin (for the double borders)
 Nvchad (cleanly manage your themes)
 And lastly, something to setup the custom discord theme.
