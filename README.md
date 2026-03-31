@@ -33,6 +33,8 @@
 
 
 
+![1](pictures/A.png)
+![1](pictures/B.png)
 ![1](pictures/lightPixel.png)
 
 
