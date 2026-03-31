@@ -6,12 +6,11 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
-import qs.light.config
+import qs.dark.config
 
 
 Item {
   id: catRoot
-  // Internal state
   property var shellRoot
   property bool catAnimationPlaying: false
   property bool catVisible: true
@@ -27,7 +26,6 @@ Item {
 
 
 
-  // ==================== STATIC CAT WIDGET ====================
   
   Loader {
     active: Config.enableCat && catRoot.catVisible && !catRoot.catAnimationPlaying && !catRoot.catReturning
@@ -78,8 +76,6 @@ Item {
     }
   }
   
-  // ==================== CAT RETURN TRIGGER ====================
-  
   Loader {
     active: Config.enableCat && !catRoot.catVisible
     sourceComponent: WlrLayershell {
@@ -109,7 +105,6 @@ Item {
     }
   }
   
-  // ==================== ANIMATED CAT WIDGET (LEAVING) ====================
   
   Loader {
     active: Config.enableCat && catRoot.catAnimationPlaying
@@ -214,8 +209,6 @@ Item {
       }
     }
   }
-  
-  // ==================== ANIMATED CAT WIDGET (RETURNING) ====================
   
   Loader {
     active: Config.enableCat && catRoot.catReturning

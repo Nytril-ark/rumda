@@ -97,9 +97,9 @@ Singleton {
   // Cat Configuration
   readonly property bool enableCat: Common.cEnableCat // set this to true to have the cat at the top of the bar
   readonly property string catIconPath: configPath + "/dark/icons/catsit.svg"
-  readonly property int catMarginTop: barMarginTop - 57
-  readonly property int catMarginLeft: -15 - barWidth //note: this is hardcoded, bind it to the bar later
-  readonly property int catWidth: 50
+  readonly property int catMarginTop: barMarginTop - 54
+  readonly property int catMarginLeft: -14 - barWidth //note: this is hardcoded, bind it to the bar later
+  readonly property int catWidth: 40
   readonly property int catHeight: 90
   //==============================================================
   // The current animation isn't great, I plan on improving
