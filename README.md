@@ -35,7 +35,6 @@
 
 ![1](pictures/A.png)
 ![1](pictures/B.png)
-![1](pictures/lightPixel.png)
 
 
 | ![discord](pictures/lightDash.png) | ![lightdashboard](pictures/darkPixel.png) |
@@ -47,6 +46,7 @@
 | ![darkPixel](pictures/dark.png)  | ![weird](pictures/weird.png)    |
 | -------------------------------- | ------------------------------- |
 
+![1](pictures/lightPixel.png)
 
 
 ### old pistachio theme available in installer
