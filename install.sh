@@ -163,7 +163,7 @@ else
         2)
             echo -e "${RED}Discarding local changes...${NC}"
             git fetch origin
-            git reset --hard origin/main 2>/dev/null || git reset --hard origin/master 2>/dev/null
+            git reset --hard origin/main 2>/dev/null
             ;;
         *)
             echo -e "${YELLOW}Keeping local changes, skipping update...${NC}"
