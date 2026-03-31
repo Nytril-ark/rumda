@@ -95,7 +95,6 @@ swappy slurp grim
 zathura 
 yazi 
 neovim
-Cartograph-CF font
 ```
 
 Full dependencies: 
