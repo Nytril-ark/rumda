@@ -15,6 +15,24 @@ import qs.dark.config
 // The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {
 
+  MouseArea {
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {
+      pixel.running = true
+    }
+  }
+  
+  Process {
+    id: pixel
+    command: [
+      "bash",
+      "-c",
+      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme.sh dark > /dev/null 2>&1 &) &"
+    ]
+  }
+
+
   Layout.alignment: Qt.AlignHCenter
   width: 28
   height: 35

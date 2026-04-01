@@ -26,16 +26,16 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      pixel.running = true
+      main.running = true
     }
   }
   
   Process {
-    id: pixel
+    id: main
     command: [
       "bash",
       "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme.sh light > /dev/null 2>&1 &) &"
+      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/maintheme.sh light > /dev/null 2>&1 &) &"
     ]
   }
   
