@@ -29,7 +29,7 @@ Rectangle {
     command: [
       "bash",
       "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_nokill.sh light > /dev/null 2>&1 &) &"
+      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_error.sh > /dev/null 2>&1 &) &"
     ]
   }
 
@@ -69,8 +69,8 @@ Rectangle {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      themeDarkChanged()
-      lightConfigScript.running = true
+      // themeDarkChanged()
+      // lightConfigScript.running = true
       lightGlobal.running = true
     }
   } 
