@@ -139,37 +139,38 @@ cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd ru
 
 **Note:** to switch between different 'flavours' hit the internet module on the bar (cat face above the power button)
 
-| **Keys**                     | **Description**            |
-| ---------------------------- | -------------------------- |
-| `$mainMod + W`               | Open Firefox               |
-| `$mainMod + Enter`           | Open terminal              |
-| `$mainMod + R`               | Launch app menu            |
-| `$mainMod + F`               | Open file manager          |
-| `$mainMod + S`               | Full screen screenshot     |
-| `$mainMod + G`               | Toggle compact look        |
-| `$mainMod + shift + S`       | screenshot a region        |
-| `$mainMod + alt + shift S`   | screenshot region + edit   |
-| `$mainMod + C`               | Close focused window       |
-| `$mainMod + M`               | Exit Hyprland              |
-| `$mainMod + V`               | Toggle floating mode       |
-| `$mainMod + P`               | Toggle pseudo layout       |
-| `$mainMod + L`               | Lock screen                |
-| `$mainMod + Shift + Return`  | Open Ghostty terminal      |
-| `$mainMod + shift + T`       | OCR into clipboard         |
-| `$mainMod + Shift + Alt + Q` | Force kill window          |
-| `$mainMod + Alt + Arrows`    | Move focus between windows |
-| `$mainMod + Shift + [0–9]`   | Move window to workspace   |
-| `$mainMod + Scroll / Arrows` | Switch workspace scroll    |
-| `$mainMod + up/down arrows`  | Move or resize window      |
-| `XF86Audio / F-keys`         | Volume and media control   |
-| `$mainMod + TAB`             | Toggle Rumda dashboard     |
-| `$mainMod + ;`               | Shrink split ratio         |
-| `$mainMod + ' `              | Grow split ratio           |
-| `$mainMod + Alt + Space`     | Float/tile                 |
-| `$mainMod + D`               | Maximize window            |
-| `$mainMod + Shift + C`       | Color picker               |
-| `Ctrl + Alt + R`             | Start OBS recording        |
-|**note:**                     | mainmod =      `Super`     |
+| **Keys**                     | **Description**             |
+| ---------------------------- | --------------------------- |
+| `$mainMod + W`               | Open Firefox                |
+| `$mainMod + Enter`           | Open terminal               |
+| `$mainMod + R`               | Launch app menu             |
+| `$mainMod + F`               | Open file manager           |
+| `$mainMod + S`               | Full screen screenshot      |
+| `$mainMod + G`               | Toggle compact look         |
+| `$mainMod + shift + S`       | screenshot a region         |
+| `$mainMod + alt + shift S`   | screenshot region + edit    |
+| `$mainMod + C`               | Close focused window        |
+| `$mainMod + M`               | Exit Hyprland               |
+| `$mainMod + V`               | Toggle floating mode        |
+| `$mainMod + P`               | Toggle pseudo layout        |
+| `$mainMod + L`               | Lock screen                 |
+| `$mainMod + Shift + Return`  | Open Ghostty terminal       |
+| `$mainMod + shift + T`       | OCR into clipboard          |
+| `$mainMod + Shift + Alt + Q` | Force kill window           |
+| `$mainMod + Alt + Arrows`    | Move focus between windows  |
+| `$mainMod + Shift + [0–9]`   | Move window to workspace    |
+| `$mainMod + Scroll / Arrows` | Switch workspace scroll     |
+| `$mainMod + up/down arrows`  | Move or resize window       |
+| `XF86Audio / F-keys`         | Volume and media control    |
+| `$mainMod + TAB`             | Toggle Rumda dashboard      |
+| `$mainMod + ;`               | Shrink split ratio          |
+| `$mainMod + ' `              | Grow split ratio            |
+| `$mainMod + Alt + Space`     | Float/tile                  |
+| `$mainMod + D`               | Maximize window             |
+| `$mainMod + Shift + C`       | Color picker                |
+| `Ctrl + Alt + R`             | Start OBS recording         |
+| `$mainMod + shift + R`       | rofi + random arabic poetry |
+|**note:**                     | mainmod =      `Super`      |
 
 
 
