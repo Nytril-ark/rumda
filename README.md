@@ -137,6 +137,8 @@ cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd ru
 
 ## Keybinds
 
+**Note:** to switch between different 'flavours' hit the internet module on the bar (cat face above the power button)
+
 | **Keys**                     | **Description**            |
 | ---------------------------- | -------------------------- |
 | `$mainMod + W`               | Open Firefox               |
