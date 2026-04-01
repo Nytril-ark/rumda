@@ -11,7 +11,7 @@
 # set zoom-min 10
 # set guioptions ""
 
-set font "Cartograph CF"
+set font "Terminess Nerd Font"
 set default-bg "#1C1612"
 set default-fg "#f0bb90"
 

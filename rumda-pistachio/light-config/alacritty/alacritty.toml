@@ -13,7 +13,6 @@
 # Below is my initial set-up. The TOML homepage (https://toml.io/en/v1.0.0) was very helpful in figuring this out. 
 # I put the file alacritty.toml in $HOME/.config/alacritty. However it can be kept anywhere among the places mentioned in
 # https://github.com/alacritty/alacritty/tree/master#configuration
-# noto sans, montserrat, nimbus mono, z003, cartographCF, fira code
 
 [window]
 opacity = 1.0
@@ -26,10 +25,10 @@ decorations_theme_variant = "Dark"
 title = "  "
 
 [font]
-normal.family = "JetBrains Mono Nerd Font"
-bold.family = "cartographCF"
-italic.family = "cartographCF"
-bold_italic.family = "cartographCF"
+normal.family = "Terminess Nerd Font"
+bold.family = "Terminess Nerd Font"
+italic.family = "Terminess Nerd Font"
+bold_italic.family = "Terminess Nerd Font"
 size = 11.0
 
 [cursor]

@@ -111,9 +111,8 @@ Rectangle {
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
           text: Qt.formatDate(new Date(), "dddd")
-          font.pixelSize: 16
-          font.family: "Cartograph CF"
-          font.italic: true
+          font.pixelSize: 10
+          font.family: "Dogica Pixel"
           font.bold: true
           color: clockColor
         }

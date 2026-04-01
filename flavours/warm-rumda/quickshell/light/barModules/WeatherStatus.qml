@@ -67,7 +67,7 @@ Rectangle {
         anchors.centerIn: parent
         text: `${temperature}°`
         color: Colors.accent2Color 
-        font.family: "Cartograph CF"
+        font.family: "Terminess Nerd Font"
         font.pixelSize: 11
       }
     }

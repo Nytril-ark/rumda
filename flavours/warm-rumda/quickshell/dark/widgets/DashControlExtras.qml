@@ -18,7 +18,7 @@ Item {
   readonly property int pfpSize: 160
   readonly property int buttonsGapFromBottom: 15
   readonly property int buttonFloatAmount: 4
-  readonly property int topMarginOfText: 0 // i aint even got energy to remove this
+  readonly property int topMarginOfText: 10
 
 
 
@@ -29,10 +29,9 @@ Item {
       anchors.topMargin: topMarginOfText
       Text {
         text: "Hello.."
-        font.family: "Cartograph CF"
-        font.italic: true     
+        font.family: "Dogica Pixel"
         color: Colors.accentColor
-        font.pixelSize: 19
+        font.pixelSize: 16
         font.bold: true
       }
     }
@@ -43,10 +42,9 @@ Item {
       anchors.topMargin: topMarginOfText + 20
       Text {
         text: Config.username
-        font.family: "Cartograph CF"
-        font.italic: true     
+        font.family: "Dogica Pixel"
         color: Colors.accentColor
-        font.pixelSize: 24
+        font.pixelSize: 20
         font.bold: true
       }
     }

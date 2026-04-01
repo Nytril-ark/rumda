@@ -43,30 +43,28 @@ Rectangle {
 
     Item {
       Layout.fillWidth: true
-      Layout.topMargin: 10
+      Layout.topMargin: 15
       Layout.preferredHeight: 60
       
       Column {
         anchors.centerIn: parent
-        spacing: 5
+        spacing: 10
         
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
           text: "Hello.."
-          font.family: "Cartograph CF"
-          font.italic: true     
+          font.family: "Dogica Pixel"
           color: Colors.accentColor
-          font.pixelSize: 19
+          font.pixelSize: 12
           font.bold: true
         }
         
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
           text: Config.username
-          font.family: "Cartograph CF"
-          font.italic: true     
+          font.family: "Dogica Pixel"
           color: Colors.accentColor
-          font.pixelSize: 24
+          font.pixelSize: 16
           font.bold: true
         }
       }

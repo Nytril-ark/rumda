@@ -151,22 +151,22 @@ Rectangle {
         id: clockComponent
         ColumnLayout {
         anchors.centerIn: parent
-        spacing: 0
+        spacing: 4
 
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentHours
           color: Colors.accent2Color
-          font.family: "Cartograph CF Heavy"
-          font.pixelSize: 12
+          font.family: "Dogica Pixel"
+          font.pixelSize: 10
         }
 
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMinutes
           color: Colors.accent2Color
-          font.family: "Cartograph CF Heavy"
-          font.pixelSize: 12
+          font.family: "Dogica Pixel"
+          font.pixelSize: 10
         }
       }
     }
@@ -176,22 +176,22 @@ Rectangle {
         ColumnLayout {
 
         anchors.centerIn: parent
-        spacing: 0
+        spacing: 4
 
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentDay
           color: Colors.accent2Color
-          font.family: "Cartograph CF Heavy"
-          font.pixelSize: 12
+          font.family: "Dogica Pixel"
+          font.pixelSize: 10
         }
 
         Text {
           Layout.alignment: Qt.AlignHCenter
           text: currentMonth
           color: Colors.accent2Color
-          font.family: "Cartograph CF Heavy"
-          font.pixelSize: 12
+          font.family: "Dogica Pixel"
+          font.pixelSize: 10
         }
       }
     }
