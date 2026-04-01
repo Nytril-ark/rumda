@@ -42,7 +42,7 @@ Rectangle {
     command: [
       "bash",
       "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme.sh light > /dev/null 2>&1 &) &"
+      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme.sh > /dev/null 2>&1 &) &"
     ]
   }
 
