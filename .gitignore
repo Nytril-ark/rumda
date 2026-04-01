@@ -7,4 +7,5 @@ sshkey.pub
 pictures/drink.jpg
 common/nvim/pack/github/start/copilot.vim
 common/tinkerer/DoNotDeleteMe.txt
-
+light-config/rofi/calligraphy/bg_new.svg
+light-config/rofi/calligraphy/bg_new.png
