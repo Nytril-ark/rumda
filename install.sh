@@ -344,7 +344,6 @@ echo -e "${YELLOW}Note: Original configs (if existent) were backed up with times
 echo -e "${YELLOW}You may need to restart your session for changes to take effect${NC}"
 echo ""
 
-# Apply light theme
 "$HOME/.config/rumda/scripts/hyprtheme.sh" light
 
 killall quickshell 
