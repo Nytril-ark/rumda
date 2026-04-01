@@ -104,6 +104,7 @@ configuration {
 //     //background-image:          linear-gradient(45, cyan, purple, indigo);
 // }
 
+
 window {
     transparency:                "real";
     location:                    center;
@@ -119,9 +120,8 @@ window {
     border:                      0px solid;
     border-radius:               0px;
     cursor:                      "default";
-    background-color:            #8F664A;
+    background-color:            #90664A;
 }
-
 
 mainbox {
     enabled:                     true;
@@ -130,12 +130,13 @@ mainbox {
     padding:                     4px;
     border:                      2px solid;
     border-radius:               0px;
-    border-color:                #8F664A;
+    border-color:                #90664A;
     background-color:            @background-colour;
     children:                    [ "inputbar", "message", "listview" ];
 }
 
-// /*****----- Main Box -----*****/
+//
+//
 // mainbox {
 //     enabled:                     true;
 //     spacing:                     10px;
@@ -147,7 +148,7 @@ mainbox {
 //     background-color:            transparent;
 //     children:                    [ "inputbar", "message", "listview" ];
 // }
-//
+
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
@@ -159,7 +160,7 @@ inputbar {
     border-color:                @background;
     background-color:            transparent;
     text-color:                  @foreground;  // change it to "transparent" if you wanna see it
-    height:                      10px;
+    height:                      12px;
     orientation:                 vertical;
     children:                    [ "textbox-prompt-colon", "entry"]; 
 }
@@ -179,7 +180,7 @@ textbox-prompt-colon {
 }
 entry {
     enabled:                     true;
-    padding:                     0px 10px;
+    padding:                     3px 10px;
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
@@ -225,7 +226,7 @@ listview {
     fixed-columns:               true;
     
     spacing:                     5px;
-    margin:                      0px;
+    margin:                      3px;
     padding:                     4px;
     border:                      0px solid;
     border-radius:               0px;
@@ -244,9 +245,9 @@ scrollbar {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     1px;
+    spacing:                     2px;
     margin:                      5px;
-    padding:                     9px 10px;
+    padding:                     8px 10px;
     border:                      0px solid;
     border-radius:               1px;
     border-color:                @border-colour;

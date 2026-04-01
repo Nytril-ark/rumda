@@ -15,11 +15,11 @@
 
 
 /*---------------
-Custom Rumda colorscheme, by @Nytril-ark:
+Custom Rumda-light colorscheme, by @Nytril-ark:
 ---------------*/
 
 * {
-    background:     #F2D5BB;  /* backgroundColor */
+    background:     #1C1612;  /* backgroundColor */
     background-alt: #f0bb90FF;  /* moduleBG */
     foreground:     #9E6D54FF;  /* shadowColor - dark text */
     selected:       #c47c4fFF;  /* accent2Color */
