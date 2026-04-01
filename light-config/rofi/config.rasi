@@ -95,7 +95,6 @@ configuration {
 //     /* Backgroud Colors */
 //     background-color:            @background-colour;
 //     /* Backgroud Image */
-//     // background-image:          url("/home/hexogen/.config/rumda/rofi/p1.png", none);
 //     /* Simple Linear Gradient */
 //     //background-image:          linear-gradient(red, orange, pink, purple);
 //     /* Directional Linear Gradient */
@@ -103,14 +102,13 @@ configuration {
 //     /* Angle Linear Gradient */
 //     //background-image:          linear-gradient(45, cyan, purple, indigo);
 // }
-
 window {
     transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
     width:                       20%;
-    height:                      30%;
+    height:                      34%;
     x-offset:                    0px;
     y-offset:                    0px;
     enabled:                     true;
@@ -121,7 +119,6 @@ window {
     cursor:                      "default";
     background-color:            #8F664A;
 }
-
 
 mainbox {
     enabled:                     true;
@@ -135,6 +132,37 @@ mainbox {
     children:                    [ "inputbar", "message", "listview" ];
 }
 
+imagebox {
+    enabled:                     true;
+    padding:                     0px;
+    margin:                      0px;
+    border:                      0px solid;
+    background-color:            transparent;
+    text-color:                  transparent;
+    orientation:                 vertical;
+}
+// mainbox {
+//     enabled:                     true;
+//     spacing:                     10px;
+//     margin:                      0px;
+//     padding:                     4px;
+//     border:                      2px solid;
+//     border-radius:               0px;
+//     border-color:                #8F664A;
+//     background-color:            @background-colour;
+//     children:                    [ "imagebox", "inputbar", "message", "listview" ];
+// }
+//
+// imagebox {
+//     enabled:                     true;
+//     padding:                     0px;
+//     margin:                      0px;
+//     border:                      0px solid;
+//     background-color:            transparent;
+//     background-image:            url("/home/hexogen/d-velopment/scripts/bg.svg", width);
+//     text-color:                  transparent;
+//     orientation:                 vertical;
+// }
 // /*****----- Main Box -----*****/
 // mainbox {
 //     enabled:                     true;

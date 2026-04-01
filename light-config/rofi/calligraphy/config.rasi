@@ -72,38 +72,6 @@ configuration {
     alternate-active-foreground: var(background);
 }
 
-// /*****----- Main Window -----*****/
-// window {
-//     /* properties for window widget */
-//     transparency:                "real";
-//     location:                    center;
-//     anchor:                      center;
-//     fullscreen:                  false;
-//     width:                       20%;
-//     height:                      30%;
-//     x-offset:                    0px;
-//     y-offset:                    0px;
-//
-//     /* properties for all widgets */
-//     enabled:                     true;
-//     margin:                      0px;
-//     padding:                     0px;
-//     border:                      2px solid;
-//     border-radius:               0px;
-//     border-color:                @indicator-bg;
-//     cursor:                      "default";
-//     /* Backgroud Colors */
-//     background-color:            @background-colour;
-//     /* Backgroud Image */
-//     // background-image:          url("/home/hexogen/.config/rumda/rofi/p1.png", none);
-//     /* Simple Linear Gradient */
-//     //background-image:          linear-gradient(red, orange, pink, purple);
-//     /* Directional Linear Gradient */
-//     //background-image:          linear-gradient(to bottom, pink, yellow, magenta);
-//     /* Angle Linear Gradient */
-//     //background-image:          linear-gradient(45, cyan, purple, indigo);
-// }
-
 
 window {
     transparency:                "real";
@@ -111,17 +79,18 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       20%;
-    height:                      30%;
+    height:                      34%;
     x-offset:                    0px;
     y-offset:                    0px;
     enabled:                     true;
     margin:                      0px;
-    padding:                     0px 4px 4px 0px;
+    padding:                     0px 6px 6px 0px;
     border:                      0px solid;
     border-radius:               0px;
     cursor:                      "default";
-    background-color:            #784D37;
+    background-color:            #8F664A;
 }
+
 
 mainbox {
     enabled:                     true;
@@ -130,24 +99,21 @@ mainbox {
     padding:                     4px;
     border:                      2px solid;
     border-radius:               0px;
-    border-color:                #784D37;
+    border-color:                #8F664A;
     background-color:            @background-colour;
-    children:                    [ "inputbar", "message", "listview" ];
+    children:                    [ "imagebox", "inputbar", "message", "listview" ];
 }
 
-//
-//
-// mainbox {
-//     enabled:                     true;
-//     spacing:                     10px;
-//     margin:                      0px;
-//     padding:                     4px;
-//     border:                      0px solid;
-//     border-radius:               1px 1px 1px 1px;
-//     border-color:                @border-colour;
-//     background-color:            transparent;
-//     children:                    [ "inputbar", "message", "listview" ];
-// }
+imagebox {
+    enabled:                     true;
+    padding:                     0px;
+    margin:                      0px;
+    border:                      0px solid;
+    background-color:            transparent;
+    background-image: url("bg_new.png", width);
+    text-color:                  transparent;
+    orientation:                 vertical;
+}
 
 /*****----- Inputbar -----*****/
 inputbar {
@@ -159,8 +125,8 @@ inputbar {
     border-radius:               1px;
     border-color:                @background;
     background-color:            transparent;
-    text-color:                  @foreground;
-    height:                      12px;
+    text-color:                  @foreground;  // change it to "transparent" if you wanna see it
+    height:                      10px;
     orientation:                 vertical;
     children:                    [ "textbox-prompt-colon", "entry"]; 
 }
@@ -180,7 +146,7 @@ textbox-prompt-colon {
 }
 entry {
     enabled:                     true;
-    padding:                     3px 10px;
+    padding:                     0px 10px;
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
@@ -226,13 +192,13 @@ listview {
     fixed-columns:               true;
     
     spacing:                     5px;
-    margin:                      3px;
+    margin:                      0px;
     padding:                     4px;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @border-colour;
     background-color:            transparent;
-    text-color:                  #9E6D54;
+    text-color:                  @foreground-colour;
     cursor:                      "default";
 }
 scrollbar {
@@ -245,9 +211,9 @@ scrollbar {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     2px;
+    spacing:                     1px;
     margin:                      5px;
-    padding:                     8px 10px;
+    padding:                     9px 10px;
     border:                      0px solid;
     border-radius:               1px;
     border-color:                @border-colour;
@@ -324,7 +290,7 @@ button {
     border-radius:               1px;
     border-color:                @border-colour;
     background-color:            @alternate-background;
-    text-color:                  #F5DCC6;
+    text-color:                  inherit;
     cursor:                      pointer;
 }
 button selected {
