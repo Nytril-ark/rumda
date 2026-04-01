@@ -19,7 +19,7 @@ Custom Rumda-light colorscheme, by @Nytril-ark:
 ---------------*/
 
 * {
-    background:     #E4C198FF;  /* backgroundColor */
+    background:     #F5DCC6FF;  /* backgroundColor */
     background-alt: #DAB08BFF;  /* moduleBG */
     foreground:     #3A2D26FF;  /* shadowColor - dark text */
     selected:       #9F684CFF;  /* accent2Color */

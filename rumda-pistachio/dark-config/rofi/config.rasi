@@ -89,7 +89,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      2px solid;
-    border-radius:               9px;
+    border-radius:               0px;
     border-color:                @indicator-bg;
     cursor:                      "default";
     /* Backgroud Colors */
@@ -111,7 +111,7 @@ mainbox {
     margin:                      0px;
     padding:                     4px;
     border:                      0px solid;
-    border-radius:               8px 8px 8px 8px;
+    border-radius:               1px 1px 1px 1px;
     border-color:                @border-colour;
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
@@ -124,7 +124,7 @@ inputbar {
     margin:                      0px;
     padding:                     0px;
     border:                      1px solid;
-    border-radius:               7px;
+    border-radius:               1px;
     border-color:                @background;
     background-color:            transparent;
     text-color:                  @foreground;  // change it to "transparent" if you wanna see it
@@ -206,7 +206,7 @@ listview {
 scrollbar {
     handle-width:                5px ;
     handle-color:                @handle-colour;
-    border-radius:               8px;
+    border-radius:               1px;
     background-color:            @alternate-background;
 }
 
@@ -217,7 +217,7 @@ element {
     margin:                      5px;
     padding:                     5px 10px;
     border:                      0px solid;
-    border-radius:               6px;
+    border-radius:               1px;
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
@@ -289,7 +289,7 @@ mode-switcher{
 button {
     padding:                     5px 10px;
     border:                      0px solid;
-    border-radius:               10px;
+    border-radius:               1px;
     border-color:                @border-colour;
     background-color:            @alternate-background;
     text-color:                  inherit;
@@ -314,7 +314,7 @@ message {
 textbox {
     padding:                     8px 10px;
     border:                      0px solid;
-    border-radius:               10px;
+    border-radius:               1px;
     border-color:                @border-colour;
     background-color:            @alternate-background;
     text-color:                  @foreground-colour;
@@ -328,7 +328,7 @@ textbox {
 error-message {
     padding:                     10px;
     border:                      2px solid;
-    border-radius:               10px;
+    border-radius:               1px;
     border-color:                @border-colour;
     background-color:            @background-colour;
     text-color:                  @foreground-colour;
