@@ -2,7 +2,6 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
-import qs.shared
 
 Singleton {
   readonly property bool cShowLightBar: false // change the default bar theme
