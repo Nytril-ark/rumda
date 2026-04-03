@@ -21,8 +21,9 @@ Rectangle {
   property string currentDay: Qt.formatDateTime(new Date(), "dd")
 
   Layout.fillWidth: true
-  Layout.preferredHeight: clockModule.implicitHeight + 12
+  Layout.preferredHeight: Math.min(clockModule.implicitHeight + 30, 280)
   color: "transparent"
+  clip: true
 
   property real innerModulesRadius: 3
   property real cpuUsage: 0.3

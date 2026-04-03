@@ -19,16 +19,14 @@ Rectangle {
     barDarkAnimate();
   }
   Layout.fillWidth: true
-  Layout.preferredHeight: childrenRect.height + 8
+  Layout.preferredHeight: Math.min(childrenRect.height + 8, 220)
   color: "transparent"
+  clip: true
   property real innerModulesRadius: 3
-
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
   property string currentHours: Qt.formatDateTime(new Date(), "hh")
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
-
   property string username: ""
-
   Process {
     command: ["whoami"]
     running: true
@@ -36,7 +34,6 @@ Rectangle {
       onRead: name => username = name
     }
   }
-
   Timer {
     interval: 1000
     running: true
@@ -47,20 +44,17 @@ Rectangle {
       currentMinutes = Qt.formatDateTime(new Date(), "mm");
     }
   }
-
   Behavior on height {
     NumberAnimation {
       duration: 1000
       easing.type: Easing.InOutQuart
     }
   }
-
   ColumnLayout {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 2
     spacing: 6
-
     // onThemeDarkChanged: themeClicked()
     ThemeSwitch {}
     WeatherStatus {}

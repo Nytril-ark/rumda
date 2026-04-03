@@ -122,12 +122,14 @@ Scope {
           leftMargin: 3
           rightMargin: 3
         }
-        spacing: 4
+        spacing: 0
         TopSection {}
+        Item {
+          Layout.fillHeight: true
+        }
         Image {
           visible: Config.showArt1
           Layout.fillWidth: true
-          Layout.topMargin: 30
           Layout.bottomMargin: 10
           Layout.leftMargin: 0
           Layout.rightMargin: 0
@@ -137,14 +139,19 @@ Scope {
           smooth: true
           mipmap: true
         }
-        CenterSection {
-          Layout.topMargin: 130
+        Item {
+          Layout.fillHeight: true
+        }
+        CenterSection {}
+        Item {
+          Layout.fillHeight: true
+        }
+        Item {
+          Layout.fillHeight: true
         }
         Image {
           visible: Config.showArt2
           Layout.fillWidth: true
-          Layout.topMargin: 20
-          Layout.bottomMargin: -30
           Layout.leftMargin: 0
           Layout.rightMargin: 0
           source: `file://${Config.configPath}/../22.svg`
@@ -156,8 +163,7 @@ Scope {
         Image {
           visible: Config.showArt3
           Layout.fillWidth: true
-          Layout.topMargin: 3
-          Layout.bottomMargin: 10
+          Layout.topMargin: 0
           Layout.leftMargin: 0
           Layout.rightMargin: 0
           source: `file://${Config.configPath}/../32.svg`
@@ -165,6 +171,9 @@ Scope {
           antialiasing: true
           smooth: true
           mipmap: true
+        }
+        Item {
+          Layout.fillHeight: true
         }
         BottomSection {
           onBarDarkAnimate: animationTrig()
