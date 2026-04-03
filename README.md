@@ -169,7 +169,7 @@ cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd ru
 | `$mainMod + D`               | Maximize window             |
 | `$mainMod + Shift + C`       | Color picker                |
 | `Ctrl + Alt + R`             | Start OBS recording         |
-| `$mainMod + shift + R`       | rofi + random arabic poetry |
+| `$mainMod + Q`               | rofi + random arabic poetry |
 |**note:**                     | mainmod =      `Super`      |
 
 
