@@ -48,7 +48,6 @@ Scope {
   signal barAnimate()
   signal barSignalTheme()
   function animationTrig() {
-    console.log("Bar animation triggered!")
       barRectangle.anchors.topMargin = Config.syncTbar
       barRectangle.anchors.bottomMargin = Config.syncBbar 
       barSignalTheme()

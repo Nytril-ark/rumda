@@ -350,4 +350,4 @@ killall quickshell
 
 ya pkg marcosvnmelo/kanagawa-dragon > /dev/null 2>&1
 
-cd && quickshell -p .config/rumda/common/quickshell/shell.qml &disown
+cd && quickshell -p ~/.config/rumda/common/quickshell/shell.qml > /dev/null 2>&1 & disown
