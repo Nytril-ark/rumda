@@ -24,13 +24,8 @@ Rectangle {
   readonly property int maskRadius: 8
 
   Process {
-    id: darkConfigScript
-    command: ["bash", "-c", Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh dark &disown"]
-  }
-
-  Process {
-    id: darkGlobal
-    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark > /dev/null 2>&1 &) &"]
+    id: lightGlobal
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_error.sh > /dev/null 2>&1 &) &"]
   }
 
   Layout.alignment: Qt.AlignHCenter
@@ -70,7 +65,6 @@ Rectangle {
     cursorShape: Qt.PointingHandCursor
     onClicked: {
       themeChanged();
-      darkConfigScript.running = true;
       darkGlobal.running = true;
     }
   }

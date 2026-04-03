@@ -15,7 +15,7 @@ import qs.dark.config
 Rectangle {
   id: themeSwitchButton
 
-  readonly property string iconPath: Config.configPath + "/dark/icons"
+  readonly property string iconPath: Config.configPath + "/light/icons"
 
   readonly property int moduleSize: 26
   readonly property int imageSourceSize: 55
@@ -24,13 +24,8 @@ Rectangle {
   readonly property int maskRadius: 8
 
   Process {
-    id: lightConfigScript
-    command: ["bash", "-c", Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh light &disown"]
-  }
-
-  Process {
     id: lightGlobal
-    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh light > /dev/null 2>&1 &) &"]
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_error.sh > /dev/null 2>&1 &) &"]
   }
 
   Layout.alignment: Qt.AlignHCenter
@@ -44,7 +39,7 @@ Rectangle {
   clip: true
 
   Image {
-    id: githubIcon
+    id: themeSwitchIcon
     anchors.fill: parent
     source: "file://" + themeSwitchButton.iconPath + "/themeSwitch.svg"
     sourceSize.width: themeSwitchButton.imageSourceSize
@@ -64,14 +59,13 @@ Rectangle {
     }
   }
 
-  signal themeDarkChanged
+  signal themeChanged
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      themeDarkChanged();
-      lightConfigScript.running = true;
-      lightGlobal.running = true;
+      themeChanged();
+      darkGlobal.running = true;
     }
   }
 }
