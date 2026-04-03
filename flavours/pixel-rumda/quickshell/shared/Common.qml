@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 
 Singleton {
-  readonly property bool cShowLightBar: false // change the default bar theme
+  readonly property bool cShowLightBar: true // change the default bar theme
 
   // User Configuration
   readonly property string cUsername: Quickshell.env("USER") || "user"
@@ -18,7 +18,7 @@ Singleton {
   readonly property string cTerminal: "alacritty" // same thing here
 
   // tweak this if your dashboard has weird proportions because of screen size
-  readonly property int cDashboardWidth: 570
+  readonly property int cDashboardWidth: 580
   readonly property int cDashboardHeight: 500
 
   readonly property bool cEnableCat: false // set this to true to have the cat at the top of the bar

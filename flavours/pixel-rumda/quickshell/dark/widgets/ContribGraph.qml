@@ -168,7 +168,7 @@ Rectangle {
     anchors.fill: parent
     // anchors.leftMargin: 8
     // anchors.rightMargin: 8
-    anchors.topMargin: 14
+    anchors.topMargin: 8
     anchors.bottomMargin: 13
     spacing: 4
 

@@ -46,6 +46,7 @@ Singleton {
   // dashboard size config
   readonly property double dashboardWidth: Common.cDashboardWidth
   readonly property double dashboardHeight: Common.cDashboardHeight
+  readonly property string githubUsername: Common.cGithubUsername
   readonly property double dashTopRowRatio: 0.63
   readonly property double dashProfileColRatio: 0.53
   readonly property double dashControlsColRatio: 0.47
