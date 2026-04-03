@@ -8,10 +8,8 @@ import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
 import qs.light.config
 
-
 Item {
   id: catRoot
-  // Internal state
   property var shellRoot
   property bool catAnimationPlaying: false
   property bool catVisible: true
@@ -20,35 +18,35 @@ Item {
   Connections {
     target: shellRoot
     function onThemeChangedAnimateCat() {
-      console.log("Cat animation triggered from CatAnimation.qml!")
-      catRoot.catAnimationPlaying = true
+      console.log("Cat animation triggered from CatAnimation.qml!");
+      catRoot.catAnimationPlaying = true;
     }
   }
 
-
-
-  // ==================== STATIC CAT WIDGET ====================
-  
+  // static widget
   Loader {
     active: Config.enableCat && catRoot.catVisible && !catRoot.catAnimationPlaying && !catRoot.catReturning
     sourceComponent: Item {
       WlrLayershell {
         id: catsit
-        margins { 
+        margins {
           top: Config.catMarginTop
           left: Config.catMarginLeft
         }
-        anchors { top: true; left: true }
+        anchors {
+          top: true
+          left: true
+        }
         layer: WlrLayer.Top
         implicitWidth: Config.catWidth
         color: "transparent"
-        
+
         Rectangle {
           width: Config.catWidth
           height: Config.catHeight
           color: "transparent"
           clip: true
-          
+
           Image {
             anchors.fill: parent
             source: `file://${Config.catIconPath}`
@@ -56,117 +54,121 @@ Item {
             antialiasing: true
             smooth: true
             mipmap: true
-            
+
             onStatusChanged: {
               if (status === Image.Error) {
-                console.error("Failed to load cat icon from:", Config.catIconPath)
+                console.error("Failed to load cat icon from:", Config.catIconPath);
               }
             }
           }
-          
+
           MouseArea {
             anchors.fill: parent
             anchors.topMargin: 2
-            anchors.bottomMargin: 36  // this makes the cat's tail unclickable, dont wanna interfere with the clock
+            anchors.bottomMargin: 36
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-              catRoot.catAnimationPlaying = true
+              catRoot.catAnimationPlaying = true;
             }
           }
         }
       }
     }
   }
-  
-  // ==================== CAT RETURN TRIGGER ====================
-  
+
+  // cat return trigger
   Loader {
     active: Config.enableCat && !catRoot.catVisible
     sourceComponent: WlrLayershell {
       id: catTrigger
-      margins { 
+      margins {
         top: Config.barMarginTop
         left: -43
       }
-      anchors { top: true; left: true }
+      anchors {
+        top: true
+        left: true
+      }
       layer: WlrLayer.Overlay
       implicitWidth: Config.barWidth
       implicitHeight: 20
       color: "transparent"
-      
+
       Rectangle {
         anchors.fill: parent
         color: "transparent"
-        
+
         MouseArea {
           anchors.fill: parent
           cursorShape: Qt.PointingHandCursor
           onClicked: {
-            catRoot.catReturning = true
+            catRoot.catReturning = true;
           }
         }
       }
     }
   }
-  
-  // ==================== ANIMATED CAT WIDGET (LEAVING) ====================
-  
+
+  // animation for leaving
   Loader {
     active: Config.enableCat && catRoot.catAnimationPlaying
     sourceComponent: Item {
       WlrLayershell {
         id: animatedCat
-        
+
         property int currentFrame: 0
         property var currentConfig: Config.catFrameConfigs[currentFrame] || Config.catFrameConfigs[0]
-        
-        margins { 
+
+        margins {
           top: currentConfig.marginTop
           left: currentConfig.marginLeft
         }
-        anchors { top: true; left: true }
+        anchors {
+          top: true
+          left: true
+        }
         layer: WlrLayer.Overlay
         implicitWidth: currentConfig.width
         color: "transparent"
-        
+
         Behavior on margins.top {
-          NumberAnimation { 
+          NumberAnimation {
             duration: animatedCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
         Behavior on margins.left {
-          NumberAnimation { 
+          NumberAnimation {
             duration: animatedCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
         Behavior on implicitWidth {
-          NumberAnimation { 
+          NumberAnimation {
             duration: animatedCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
-        
+
         Rectangle {
           width: animatedCat.currentConfig.width
           height: animatedCat.currentConfig.height
           color: "transparent"
           clip: true
-          
+
           Behavior on width {
-            NumberAnimation { 
+            NumberAnimation {
               duration: animatedCat.currentConfig.delay
-              easing.type: Easing.Linear 
+              easing.type: Easing.Linear
             }
           }
           Behavior on height {
-            NumberAnimation { 
+            NumberAnimation {
               duration: animatedCat.currentConfig.delay
-              easing.type: Easing.Linear 
+              easing.type: Easing.Linear
             }
           }
-          
+
           Image {
             id: animatedImage
             anchors.fill: parent
@@ -174,38 +176,37 @@ Item {
             antialiasing: true
             smooth: true
             mipmap: true
-            rotation: animatedCat.currentConfig.rotation || 0  
+            rotation: animatedCat.currentConfig.rotation || 0
             Behavior on rotation {
-              NumberAnimation { 
+              NumberAnimation {
                 duration: animatedCat.currentConfig.delay
-                easing.type: Easing.Linear 
+                easing.type: Easing.Linear
               }
             }
-
 
             source: `file://${Config.catAnimationFolder}/f${animatedCat.currentFrame}.png`
-            
+
             onStatusChanged: {
               if (status === Image.Error) {
-                console.error("Failed to load animation frame:", source)
+                console.error("Failed to load animation frame:", source);
               }
             }
-            
+
             Timer {
               id: animationTimer
               interval: animatedCat.currentConfig.delay
               running: true
               repeat: false
-              
+
               onTriggered: {
-                animatedCat.currentFrame++
-                
+                animatedCat.currentFrame++;
+
                 if (animatedCat.currentFrame >= Config.catAnimationFrames) {
-                  catRoot.catAnimationPlaying = false
-                  catRoot.catVisible = false
+                  catRoot.catAnimationPlaying = false;
+                  catRoot.catVisible = false;
                 } else {
-                  animationTimer.interval = animatedCat.currentConfig.delay
-                  animationTimer.restart()
+                  animationTimer.interval = animatedCat.currentConfig.delay;
+                  animationTimer.restart();
                 }
               }
             }
@@ -214,65 +215,67 @@ Item {
       }
     }
   }
-  
-  // ==================== ANIMATED CAT WIDGET (RETURNING) ====================
-  
+
+  // animation for returning
   Loader {
     active: Config.enableCat && catRoot.catReturning
     sourceComponent: Item {
       WlrLayershell {
         id: returningCat
-        
+
         property int currentFrame: Config.catAnimationFrames - 1
         property var currentConfig: Config.catFrameConfigs[currentFrame] || Config.catFrameConfigs[Config.catAnimationFrames - 1]
-        
-        margins { 
+
+        margins {
           top: currentConfig.marginTop
           left: currentConfig.marginLeft
         }
-        anchors { top: true; left: true }
+        anchors {
+          top: true
+          left: true
+        }
         layer: WlrLayer.Overlay
         implicitWidth: currentConfig.width
         color: "transparent"
-        
+
         Behavior on margins.top {
-          NumberAnimation { 
+          NumberAnimation {
             duration: returningCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
         Behavior on margins.left {
-          NumberAnimation { 
+          NumberAnimation {
             duration: returningCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
         Behavior on implicitWidth {
-          NumberAnimation { 
+          NumberAnimation {
             duration: returningCat.currentConfig.delay
-            easing.type: Easing.Linear 
+            easing.type: Easing.Linear
           }
         }
-        
+
         Rectangle {
           width: returningCat.currentConfig.width
           height: returningCat.currentConfig.height
           color: "transparent"
           clip: true
-          
+
           Behavior on width {
-            NumberAnimation { 
+            NumberAnimation {
               duration: returningCat.currentConfig.delay
-              easing.type: Easing.Linear 
+              easing.type: Easing.Linear
             }
           }
           Behavior on height {
-            NumberAnimation { 
+            NumberAnimation {
               duration: returningCat.currentConfig.delay
-              easing.type: Easing.Linear 
+              easing.type: Easing.Linear
             }
           }
-          
+
           Image {
             id: returningImage
             anchors.fill: parent
@@ -280,38 +283,37 @@ Item {
             antialiasing: true
             smooth: true
             mipmap: true
-            rotation: returningCat.currentConfig.rotation || 0 
+            rotation: returningCat.currentConfig.rotation || 0
             Behavior on rotation {
-              NumberAnimation { 
+              NumberAnimation {
                 duration: returningCat.currentConfig.delay
-                easing.type: Easing.Linear 
+                easing.type: Easing.Linear
               }
             }
-
 
             source: `file://${Config.catAnimationFolder}/f${returningCat.currentFrame}.png`
-            
+
             onStatusChanged: {
               if (status === Image.Error) {
-                console.error("Failed to load animation frame:", source)
+                console.error("Failed to load animation frame:", source);
               }
             }
-            
+
             Timer {
               id: returnTimer
               interval: returningCat.currentConfig.delay
               running: true
               repeat: false
-              
+
               onTriggered: {
-                returningCat.currentFrame--
-                
+                returningCat.currentFrame--;
+
                 if (returningCat.currentFrame < 0) {
-                  catRoot.catReturning = false
-                  catRoot.catVisible = true
+                  catRoot.catReturning = false;
+                  catRoot.catVisible = true;
                 } else {
-                  returnTimer.interval = returningCat.currentConfig.delay
-                  returnTimer.restart()
+                  returnTimer.interval = returningCat.currentConfig.delay;
+                  returnTimer.restart();
                 }
               }
             }

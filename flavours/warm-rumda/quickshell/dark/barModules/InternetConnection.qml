@@ -14,6 +14,20 @@ import qs.dark.config
 
 // The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {
+
+  MouseArea {
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {
+      pixel.running = true;
+    }
+  }
+
+  Process {
+    id: pixel
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme.sh dark > /dev/null 2>&1 &) &"]
+  }
+
   Layout.alignment: Qt.AlignHCenter
   width: 28
   height: 35
@@ -21,30 +35,9 @@ Rectangle {
   radius: 7
   border.width: 1
   border.color: Colors.borderColor
-  
-
-  MouseArea {
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      main.running = true
-    }
-  }
-  
-  Process {
-    id: main
-    command: [
-      "bash",
-      "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/maintheme.sh light > /dev/null 2>&1 &) &"
-    ]
-  }
-
-  
   ColumnLayout {
     anchors.centerIn: parent
     spacing: 0
-    // Internet Module
     QtObject {
       id: internetModule
       property bool internetConnected: false
@@ -56,19 +49,19 @@ Rectangle {
       Process {
         id: internetProcess
         running: true
-        command: [ "ping", "-c1", "1.0.0.1" ]
+        command: ["ping", "-c1", "1.0.0.1"]
         property string fullOutput: ""
         stdout: SplitParser {
           onRead: out => {
-            internetProcess.fullOutput += out + "\n"
-            if (out.includes("0% packet loss")) internetModule.internetConnected = true
+            internetProcess.fullOutput += out + "\n";
+            if (out.includes("0% packet loss"))
+              internetModule.internetConnected = true;
           }
         }
         onExited: {
-          internetModule.internetConnected = fullOutput.includes("0% packet loss")
-          fullOutput = ""
-          // Restart the timer after this check completes
-          updateTimer.restart()
+          internetModule.internetConnected = fullOutput.includes("0% packet loss");
+          fullOutput = "";
+          updateTimer.restart();
         }
       }
       Timer {
@@ -77,8 +70,8 @@ Rectangle {
         running: true
         repeat: true
         onTriggered: {
-          internetModule.internetConnected = false
-          internetProcess.running = true
+          internetModule.internetConnected = false;
+          internetProcess.running = true;
         }
       }
       Image {
@@ -87,7 +80,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 32
         height: 32
-        source: `file://${Config.configPath}/light/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
+        source: `file://${Config.configPath}/dark/icons/${internetModule.internetConnected ? 'connected' : 'disconnected'}.svg`
         antialiasing: true
         smooth: true
         mipmap: true

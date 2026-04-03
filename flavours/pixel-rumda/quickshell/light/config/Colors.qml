@@ -4,20 +4,20 @@ import QtQuick
 
 Singleton {
   property color backgroundColor: "#f0c997"  //bar color
-  property color indicatorBGColor: "#dba380" 
-  property color borderColor: "#f2bc88" 
-  property color moduleBG: "#f0bb90" 
-  property color accentColor: "#a1694d" 
-  property color accent2Color: "#c47c4f" 
+  property color indicatorBGColor: "#dba380"
+  property color borderColor: "#f2bc88"
+  property color moduleBG: "#f0bb90"
+  property color accentColor: "#a1694d"
+  property color accent2Color: "#c47c4f"
   property color gradientAccent2Color: "#a87358"  //bottom/right of volume bar
-  property color errorColor: "#9A4235" 
-  property color shadowColor: "#AA784d37" 
+  property color errorColor: "#9A4235"
+  property color shadowColor: "#AA784d37"
   property color shadowColorBM: "#d19f77"
   property color shadowColorDS: "#d19f77"
   property color shadowColorCSquare: "#a1694d"
 
   // dashboard related colors
-  property color dashBGColor: "#F5DCC6"        
+  property color dashBGColor: "#F5DCC6"
   property color dashModulesColor: "#f2cdac"  // color of the inner modules / rectangles
   property color dashBorderColor: "#f2bc88"     // this is used in the borders / border circle around pfp
   property color dashPFPColor: "#F5DCC6"   // circle around pfp
@@ -32,5 +32,3 @@ Singleton {
   //========================================
   property color dashAccentColor: "#f2bc88" // ignore this
 }
-
-

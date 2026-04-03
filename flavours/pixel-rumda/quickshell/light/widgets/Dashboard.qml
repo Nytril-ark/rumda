@@ -1,4 +1,3 @@
-// Dashboard.qml
 import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts
@@ -63,7 +62,6 @@ Scope {
     }
     layer: WlrLayer.Overlay
     visible: false
-    // color: Colors.shadowColor
     color: "transparent"
     keyboardFocus: WlrKeyboardFocus.Exclusive
 

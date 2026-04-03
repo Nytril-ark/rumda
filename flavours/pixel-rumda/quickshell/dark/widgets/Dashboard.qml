@@ -1,4 +1,3 @@
-// Dashboard.qml
 import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts

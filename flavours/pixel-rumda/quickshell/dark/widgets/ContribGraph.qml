@@ -21,7 +21,7 @@ Rectangle {
     color: Colors.shadowColorDS
     radius: Config.innerDSRadius
   }
-  property string username: Config.githubUsername  // obviously, if you aren't me, which you aren't, just change this into you github username
+  property string username: Config.githubUsername
   property var contributionData: [] // this is fetched, but organised chronologically, so we need to create the following bit..
   property var gridData: []  // < which is this. gotta organise them into weeks
 
@@ -35,7 +35,7 @@ Rectangle {
   }
   implicitWidth: {
     let weeks = Math.ceil(gridData.length / 7);
-    return weeks * (Config.commitSquareSize + 3) + 44;  // +44 for margins
+    return weeks * (Config.commitSquareSize + 3) + 44;
   }
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
@@ -55,7 +55,6 @@ Rectangle {
           let today = new Date();
           today.setHours(0, 0, 0, 0);
 
-          // Calculate one year ago more carefully
           let oneYearAgo = new Date(today);
           oneYearAgo.setFullYear(today.getFullYear() - 1);
           oneYearAgo.setHours(0, 0, 0, 0);
@@ -65,7 +64,6 @@ Rectangle {
 
           contributionData = [];
           contributionData = response.contributions.filter(day => {
-            // Parse date string directly to avoid timezone issues
             let parts = day.date.split('-');
             let dayDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
 
@@ -104,7 +102,6 @@ Rectangle {
     gridData = sorted;
   }
 
-  // this is set to auto-refresh every hour
   Timer {
     interval: 3600000
     running: true
@@ -141,7 +138,6 @@ Rectangle {
         border.color: Colors.borderColor
         border.width: 1
 
-        // Tooltip arrow
         Rectangle {
           width: 8
           height: 8
@@ -166,13 +162,10 @@ Rectangle {
 
   ColumnLayout {
     anchors.fill: parent
-    // anchors.leftMargin: 8
-    // anchors.rightMargin: 8
     anchors.topMargin: 8
     anchors.bottomMargin: 13
     spacing: 4
 
-    // // Header   // above graph ========
     RowLayout {
       Layout.fillWidth: true
 
@@ -187,7 +180,6 @@ Rectangle {
       }
 
       Item {
-        // spacer between the 2 texts
         Layout.fillWidth: true
       }
 
@@ -201,8 +193,6 @@ Rectangle {
         Layout.alignment: Qt.AlignBottom
       }
     }
-    // ======================================
-
     Grid {
       id: contributionGrid
       columns: Math.ceil(gridData.length / 7)
@@ -240,12 +230,6 @@ Rectangle {
                 return Colors.level0Contribr;
               }
             }
-            // color: {
-            //   switch (day.level) {
-            //     case 0: return "transparent"
-            //     default: return Colors.shadowColorCSquare
-            //   }
-            // }
             radius: 1
           }
 
@@ -276,7 +260,6 @@ Rectangle {
             }
           }
 
-          // Hover tooltip
           MouseArea {
             id: hoverArea
             anchors.fill: parent

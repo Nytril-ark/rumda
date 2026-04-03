@@ -11,4 +11,3 @@ Singleton {
   readonly property int screenHeight: Screen.height
   readonly property int screenWidth: 1920
 }
-

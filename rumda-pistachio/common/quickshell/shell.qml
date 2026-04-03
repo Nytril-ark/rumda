@@ -23,7 +23,7 @@ import Quickshell.Services.Mpris
 // import qs.dark.barSections
 // import qs.dark.config
 // import qs.dark.widgets
-// light bar imports 
+// light bar imports
 // import qs.light.barModules
 // import qs.light.barSections
 //
@@ -35,8 +35,8 @@ import qs.dark.bar
 
 ShellRoot {
   id: root
-  signal themeChangedAnimateCat()
-  signal barLoaded()
+  signal themeChangedAnimateCat
+  signal barLoaded
 
   //==============================================================
   // The current animation isn't great, I plan on improving
@@ -47,54 +47,47 @@ ShellRoot {
   //
   // NOTE TO SELF: the paths for the frames have changed
   CatAnimation {
-    shellRoot: root  
+    shellRoot: root
   }
-  
-
-
 
   Loader {
     id: barLoader
     readonly property Component lightBar: Qt.createComponent("light/bar/LightBar.qml")
     readonly property Component darkBar: Qt.createComponent("dark/bar/DarkBar.qml")
     sourceComponent: Config.showLightBar ? lightBar : darkBar
-  
+
     // ==================================
     // ==================================
     // NOTE to self:
-    // use bezier curve in hypr window 
+    // use bezier curve in hypr window
     // out animation and use a different
     // easing for the bar
     // ==================================
     // ==================================
-    
+
     onLoaded: {
-      console.log("Bar created:", barLoader.item)
-      barLoader.item.shellRoot = root
-      barLoaded()
+      console.log("Bar created:", barLoader.item);
+      barLoader.item.shellRoot = root;
+      barLoaded();
     }
 
-
     Connections {
-        target: barLoader.item
-        function onBarSignalTheme() { 
-          Qt.callLater(() => {
-            // root.themeChangedAnimateCat()
-          })
-          delayTimer.start()
-        }
+      target: barLoader.item
+      function onBarSignalTheme() {
+        Qt.callLater(() => {
+        // root.themeChangedAnimateCat()
+        });
+        delayTimer.start();
+      }
     }
 
     Timer {
       id: delayTimer
-      interval: 950 
+      interval: 950
       repeat: false
       onTriggered: Qt.callLater(() => {
-        Config.showLightBar = !Config.showLightBar
+        Config.showLightBar = !Config.showLightBar;
       })
     }
-
-
   }
 }
-

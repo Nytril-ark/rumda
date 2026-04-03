@@ -37,19 +37,20 @@ Rectangle {
       Process {
         id: internetProcess
         running: true
-        command: [ "ping", "-c1", "1.0.0.1" ]
+        command: ["ping", "-c1", "1.0.0.1"]
         property string fullOutput: ""
         stdout: SplitParser {
           onRead: out => {
-            internetProcess.fullOutput += out + "\n"
-            if (out.includes("0% packet loss")) internetModule.internetConnected = true
+            internetProcess.fullOutput += out + "\n";
+            if (out.includes("0% packet loss"))
+              internetModule.internetConnected = true;
           }
         }
         onExited: {
-          internetModule.internetConnected = fullOutput.includes("0% packet loss")
-          fullOutput = ""
+          internetModule.internetConnected = fullOutput.includes("0% packet loss");
+          fullOutput = "";
           // Restart the timer after this check completes
-          updateTimer.restart()
+          updateTimer.restart();
         }
       }
       Timer {
@@ -58,8 +59,8 @@ Rectangle {
         running: true
         repeat: true
         onTriggered: {
-          internetModule.internetConnected = false
-          internetProcess.running = true
+          internetModule.internetConnected = false;
+          internetProcess.running = true;
         }
       }
       Image {

@@ -18,25 +18,16 @@ Rectangle {
   readonly property int iconSizes: 27
   readonly property int buttonFloatAmount: 6
 
-  
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
 
-
-
-
-
-
-
-
-// contains header for controls + the controls themselves
+  // contains header for controls + the controls themselves
   ColumnLayout {
     anchors.fill: parent
-    anchors.margins: 20 
-    spacing: 12           
-
+    anchors.margins: 20
+    spacing: 12
 
     // // Header
     // Row {
@@ -58,22 +49,21 @@ Rectangle {
     //   // }
     // }
 
-
-  // ==========================
-  // NOTE TO SELF: in GridLayout, things are 0-indexed.
+    // ==========================
+    // NOTE TO SELF: in GridLayout, things are 0-indexed.
     GridLayout {
       Layout.fillWidth: true
       Layout.fillHeight: true
-      columns: 9  
-      rows: 5     
+      columns: 9
+      rows: 5
       columnSpacing: 10
       rowSpacing: 10
-      
+
       Item {
         Layout.row: 0
         Layout.column: 0
-        Layout.rowSpan: 4     
-        Layout.columnSpan: 8  
+        Layout.rowSpan: 4
+        Layout.columnSpan: 8
         Layout.fillWidth: true
         Layout.fillHeight: true
         anchors.verticalCenter: parent.verticalCenter
@@ -86,8 +76,8 @@ Rectangle {
       }
 
       Item {
-        Layout.row: 4     
-        Layout.column: 0        
+        Layout.row: 4
+        Layout.column: 0
         Layout.columnSpan: 8
         Layout.rowSpan: 1
         Layout.fillWidth: true
@@ -96,13 +86,12 @@ Rectangle {
           anchors.centerIn: parent
           width: dashPlayButtonsCol.width
           height: dashPlayButtonsCol.height
-          
+
           DashPlayButtons {
             id: dashPlayButtonsCol
           }
         }
       }
-
     } // end of grid layout
   } // end of columnLayout
 

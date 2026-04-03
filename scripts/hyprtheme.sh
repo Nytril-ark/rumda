@@ -9,17 +9,11 @@ TINKERER_FLAG="$HOME/.config/rumda/common/tinkerer/DoNotDeleteMe.txt"
 TINKERER_MD="$HOME/.config/rumda/common/tinkerer/tinkerer.md"
 COMMON_FILE="$HOME/.config/hypr/hyprland.conf"
 
-# ==================================================
-# CHECK FOR TINKERER MODE (WAS INSTALL SCRIPT USED?)
-# =================================================
 
 if [[ ! -f "$TINKERER_FLAG" ]]; then
     echo "Creating backup of your configs..."
-    
-    # Create tinkerer directory and flag file
     echo "Hello Tinkerer. Do not delete this file. For more info, check the tinkerer.md file in this same directory." > "$TINKERER_FLAG"
     
-    # Backup function
     backup_config() {
         local config_path="$1"
         local config_name="$2"
@@ -31,7 +25,6 @@ if [[ ! -f "$TINKERER_FLAG" ]]; then
         fi
     }
     
-    # Backup all configs that will be affected
     backup_config "$HOME/.config/hypr/hyprland.conf" "Hyprland"
     backup_config "$HOME/.config/alacritty/alacritty.toml" "Alacritty"
     backup_config "$HOME/.config/yazi/theme.toml" "Yazi"
@@ -41,10 +34,8 @@ if [[ ! -f "$TINKERER_FLAG" ]]; then
     
     echo "Backups created successfully!"
     
-    # Notify user and open tinkerer.md
     notify-send "Rumda:" "If you are seeing this then you didnt use the install script. Dont worry though. Your configs have been backed up." &
     
-    # Open tinkerer.md by trying different terminals. yes, this might be a bit stupid or repetitive but it works..
     open_editor() {
         nohup "$@" > /dev/null 2>&1 &
         disown
@@ -67,9 +58,13 @@ if [[ ! -f "$TINKERER_FLAG" ]]; then
     sleep 2
 fi
 
-# ============================================
-# NORMAL THEME SWITCH
-# ============================================
+
+
+
+
+
+
+# =====================================================================================
 
 case "$THEME" in
   light)
@@ -93,15 +88,12 @@ sleep 0.9
 rm -f "$COMMON_FILE"
 ln -fs "$SRC" "$COMMON_FILE"
 
-# Call other theme scripts
 /home/$USER/.config/rumda/scripts/alacrittytheme.sh "$THEME"
 /home/$USER/.config/rumda/scripts/yazitheme.sh "$THEME"
 /home/$USER/.config/rumda/scripts/zathuratheme.sh "$THEME"
 /home/$USER/.config/rumda/scripts/makotheme.sh "$THEME"
 /home/$USER/.config/rumda/scripts/locktheme.sh "$THEME"
 
-
-# YOU CAN COMMENT OUT THE BELOW LINE TO DISABLE NOTIFICATION ON THEME SWITCH 
 notify-send "Rumda:" "switched to '$THEME' theme" &
 
 hyprctl reload >/dev/null 2>&1 || true

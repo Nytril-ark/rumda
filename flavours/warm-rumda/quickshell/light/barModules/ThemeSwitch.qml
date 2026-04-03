@@ -16,33 +16,33 @@ Rectangle {
   id: themeSwitchButton
 
   readonly property string iconPath: Config.configPath + "/light/icons"
-  
+
   readonly property int moduleSize: 26
   readonly property int imageSourceSize: 55
   readonly property int maskWidth: 20
   readonly property int maskHeight: 18
-  readonly property int maskRadius: 8 
+  readonly property int maskRadius: 8
 
   Process {
-    id: lightGlobal
-    command: [
-      "bash",
-      "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_error.sh > /dev/null 2>&1 &) &"
-    ]
+    id: darkConfigScript
+    command: ["bash", "-c", Quickshell.env("HOME") + "/.config/rumda/scripts/wall.sh dark &disown"]
   }
 
+  Process {
+    id: darkGlobal
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/hyprtheme.sh dark > /dev/null 2>&1 &) &"]
+  }
 
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
   Layout.bottomMargin: 2
-  
+
   width: moduleSize
   height: moduleSize
   radius: innerModulesRadius
   color: "transparent"
   clip: true
-  
+
   Image {
     id: themeSwitchIcon
     anchors.fill: parent
@@ -51,7 +51,7 @@ Rectangle {
     sourceSize.height: themeSwitchButton.imageSourceSize
     fillMode: Image.PreserveAspectCrop
     scale: 1.0
-    antialiasing: true 
+    antialiasing: true
     smooth: true
     mipmap: true
     layer.enabled: true
@@ -63,14 +63,15 @@ Rectangle {
       }
     }
   }
-  
-  signal themeChanged()
+
+  signal themeChanged
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      themeChanged()
-      darkGlobal.running = true
+      themeChanged();
+      darkConfigScript.running = true;
+      darkGlobal.running = true;
     }
-  } 
+  }
 }

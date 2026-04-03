@@ -12,12 +12,11 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 import qs.dark.barModules
 
-
 Rectangle {
   id: root
-  signal barDarkAnimate()
+  signal barDarkAnimate
   function themeClicked() {
-    barDarkAnimate()
+    barDarkAnimate();
   }
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
@@ -34,7 +33,9 @@ Rectangle {
   Process {
     command: ["whoami"]
     running: true
-    stdout: SplitParser { onRead: name => username = name }
+    stdout: SplitParser {
+      onRead: name => username = name
+    }
   }
 
   Timer {
@@ -42,9 +43,9 @@ Rectangle {
     running: true
     repeat: true
     onTriggered: {
-      currentTime = Qt.formatDateTime(new Date(), "hh:mm")
-      currentHours = Qt.formatDateTime(new Date(), "hh")
-      currentMinutes = Qt.formatDateTime(new Date(), "mm")
+      currentTime = Qt.formatDateTime(new Date(), "hh:mm");
+      currentHours = Qt.formatDateTime(new Date(), "hh");
+      currentMinutes = Qt.formatDateTime(new Date(), "mm");
     }
   }
 
@@ -69,4 +70,3 @@ Rectangle {
     Power {}
   }
 }
-

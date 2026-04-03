@@ -86,7 +86,6 @@ Singleton {
   // its smoothness soon. I shall keep it like this for now
   // as a placeholder
   //
-  // Cat jump out Animation Configuration
   property string catAnimationFolder: configPath + "/light/gato-jump"
   property int catAnimationFrames: 9
   property var catFrameConfigs: [

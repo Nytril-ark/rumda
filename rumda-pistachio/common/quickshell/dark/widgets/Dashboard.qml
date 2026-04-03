@@ -21,103 +21,103 @@ Scope {
   id: dashboardScope
   property int closeDuration: Config.dashAnimDuration
 
-
   Timer {
     id: closeTimer
     interval: dashboardScope.closeDuration
     repeat: false
     onTriggered: {
-      dashboard.visible = false
+      dashboard.visible = false;
     }
   }
 
   function closeDashboard() {
-    dashboardBGRect.anchors.topMargin = dashboard.height
-    dashboardBGRect.anchors.bottomMargin = -dashboard.height
-    closeTimer.start()
+    dashboardBGRect.anchors.topMargin = dashboard.height;
+    dashboardBGRect.anchors.bottomMargin = -dashboard.height;
+    closeTimer.start();
   }
-
 
   WlrLayershell {
     id: dashboard
-    anchors { top: true; bottom: true; left: true; right: true}
+    anchors {
+      top: true
+      bottom: true
+      left: true
+      right: true
+    }
     layer: WlrLayer.Overlay
     visible: false
     // color: Colors.shadowColor
     color: "transparent"
     keyboardFocus: WlrKeyboardFocus.Exclusive
 
-
-    onVisibleChanged: {  
+    onVisibleChanged: {
       if (visible) {
-        dashboardBGRect.anchors.topMargin = Config.dashMarginTop
-        dashboardBGRect.anchors.bottomMargin = Config.dashMarginBottom          
+        dashboardBGRect.anchors.topMargin = Config.dashMarginTop;
+        dashboardBGRect.anchors.bottomMargin = Config.dashMarginBottom;
       } else {
-        dashboardBGRect.anchors.topMargin = dashboard.height  
-        dashboardBGRect.anchors.bottomMargin = -dashboard.height  
+        dashboardBGRect.anchors.topMargin = dashboard.height;
+        dashboardBGRect.anchors.bottomMargin = -dashboard.height;
       }
     }
-    
+
     Process {
       id: commandListener
       command: ["bash", "-c", "rm -f /tmp/qs-dashboard.fifo; mkfifo /tmp/qs-dashboard.fifo; while true; do cat /tmp/qs-dashboard.fifo; done"]
       running: true
-      
+
       stdout: SplitParser {
         onRead: data => {
           if (data.includes("toggle")) {
             if (!dashboard.visible) {
-              dashboardBGRect.anchors.topMargin = dashboard.height  
-              dashboardBGRect.anchors.bottomMargin = -dashboard.height
-              dashboard.visible = !dashboard.visible
+              dashboardBGRect.anchors.topMargin = dashboard.height;
+              dashboardBGRect.anchors.bottomMargin = -dashboard.height;
+              dashboard.visible = !dashboard.visible;
             } else {
-              dashboardScope.closeDashboard()
+              dashboardScope.closeDashboard();
             }
           }
         }
       }
     }
 
-
-    FocusScope {  
+    FocusScope {
       anchors.fill: parent
       focus: true
-      Keys.onPressed: event => { 
+      Keys.onPressed: event => {
         if (event.key === Qt.Key_Escape) {
-          dashboardScope.closeDashboard()
-          event.accepted = true         
+          dashboardScope.closeDashboard();
+          event.accepted = true;
         }
       }
 
       MouseArea {
-        anchors.fill: parent 
+        anchors.fill: parent
         onClicked: dashboardScope.closeDashboard()
 
-         // le new simple shadow
+        // le new simple shadow
         DropShadow {
-            anchors.fill: dashboardBGRect
-            horizontalOffset: Config.dashShadowOffsetX
-            verticalOffset: Config.dashShadowOffsetY
-            radius: 5
-            samples: 29
-            spread: 0.73
-            transparentBorder: true
-            color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
-            source: dashboardBGRect
+          anchors.fill: dashboardBGRect
+          horizontalOffset: Config.dashShadowOffsetX
+          verticalOffset: Config.dashShadowOffsetY
+          radius: 5
+          samples: 29
+          spread: 0.73
+          transparentBorder: true
+          color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
+          source: dashboardBGRect
         }
-
 
         Rectangle {
           id: dashboardBGRect
           anchors.top: parent.top
-          anchors.bottom: parent.bottom 
-          anchors.left: parent.left 
-          anchors.right: parent.right 
+          anchors.bottom: parent.bottom
+          anchors.left: parent.left
+          anchors.right: parent.right
 
-          anchors.rightMargin: Config.dashMarginRight 
-          anchors.leftMargin: Config.dashMarginLeft 
-          anchors.topMargin: dashboard.height  
-          anchors.bottomMargin: -dashboard.height  
+          anchors.rightMargin: Config.dashMarginRight
+          anchors.leftMargin: Config.dashMarginLeft
+          anchors.topMargin: dashboard.height
+          anchors.bottomMargin: -dashboard.height
 
           color: Colors.dashBGColor
           radius: Config.dashRadius
@@ -142,12 +142,11 @@ Scope {
             }
           }
 
-
           Rectangle {
             id: dashInnerWrapper
             anchors.fill: parent
             anchors.leftMargin: Config.dashInnerPadding
-            anchors.rightMargin: Config.dashInnerPadding 
+            anchors.rightMargin: Config.dashInnerPadding
             anchors.topMargin: Config.dashInnerPadding
             anchors.bottomMargin: Config.dashInnerPadding
 
@@ -155,15 +154,15 @@ Scope {
             radius: Config.dashRadius
             color: Colors.dashBGColor
             border.width: Config.dashBorderWidth
-            border.color: Colors.dashBorderColor            
+            border.color: Colors.dashBorderColor
             GridLayout {
               id: dashInnerGrid
               columns: 3
-              rows: 2   
+              rows: 2
               anchors.fill: parent
 
               anchors.leftMargin: Config.dashInnerPadding
-              anchors.rightMargin: Config.dashInnerPadding 
+              anchors.rightMargin: Config.dashInnerPadding
               anchors.topMargin: Config.dashInnerPadding
               anchors.bottomMargin: Config.dashInnerPadding
 
@@ -186,16 +185,13 @@ Scope {
                 Layout.minimumHeight: Config.profileAndControlsMinHeight
               }
 
-
               DashBrightnessControl {
-                Layout.row: 0     
+                Layout.row: 0
                 Layout.column: 2
-                Layout.fillHeight: true     
+                Layout.fillHeight: true
                 Layout.minimumHeight: Config.profileAndControlsMinHeight
                 Layout.minimumWidth: 56
               }
-
-
 
               ContribGraph {
                 Layout.row: 1
@@ -205,11 +201,8 @@ Scope {
                 Layout.fillHeight: true
                 Layout.minimumHeight: Config.contribGraphMinHeight
               }
-
             } // end of gridLayout
           }
-
-
         } // end of dashboardBGRect
       }
     }

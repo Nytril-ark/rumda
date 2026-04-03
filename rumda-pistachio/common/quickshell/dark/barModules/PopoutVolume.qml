@@ -8,55 +8,55 @@ import qs.dark.config
 
 Scope {
   id: root
-  
+
   // Audio state
   readonly property PwNode sink: Pipewire.defaultAudioSink
   readonly property bool muted: sink?.audio?.muted ?? false
   readonly property real volume: sink?.audio?.volume ?? 0
   property bool shouldShowOsd: false
   property real lastVolume: 0
-  
+
   // OSD dimensions
   readonly property int osdWidth: 200
   readonly property int osdHeight: 36
   readonly property int osdRadius: 7
   readonly property int osdBorderWidth: 2
-  
+
   // Animation timings
   readonly property int hideDelay: 1000
   readonly property int showDuration: 400
   readonly property int hideDuration: 300
   readonly property int volumeAnimDuration: 150
-  
+
   // Track audio volume
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink]
   }
-  
+
   // Show OSD when volume changes
   Connections {
     target: Pipewire.defaultAudioSink?.audio
     function onVolumeChanged() {
-      root.shouldShowOsd = true
-      hideTimer.restart()
+      root.shouldShowOsd = true;
+      hideTimer.restart();
     }
   }
-  
+
   // Auto-hide timer
   Timer {
     id: hideTimer
     interval: root.hideDelay
     onTriggered: root.shouldShowOsd = false
   }
-  
+
   // Bounce animation trigger
   onVolumeChanged: {
     if (Math.abs(volume - lastVolume) > 0.01) {
-      bounceAnimation.start()
-      lastVolume = volume
+      bounceAnimation.start();
+      lastVolume = volume;
     }
   }
-  
+
   // Bounce animation sequence
   SequentialAnimation {
     id: bounceAnimation
@@ -96,12 +96,12 @@ Scope {
       easing.type: Easing.OutElastic
     }
   }
-  
+
   // OSD window (lazy loaded)
   LazyLoader {
     id: popoutVolume
     active: root.shouldShowOsd
-    
+
     PanelWindow {
       exclusionMode: ExclusionMode.Ignore  // Don't push windows away!
       anchors.bottom: true
@@ -109,24 +109,25 @@ Scope {
       implicitWidth: root.osdWidth
       implicitHeight: root.osdHeight
       color: "transparent"
-      
+
       // Volume control interactions
       MouseArea {
         anchors.fill: parent
-        
+
         onClicked: {
-          if (sink) sink.audio.muted = !root.muted
+          if (sink)
+            sink.audio.muted = !root.muted;
         }
-        
+
         onWheel: wheel => {
           if (sink && !root.muted) {
-            const delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1
-            const newVolume = Math.max(0, Math.min(1, root.volume + delta))
-            sink.audio.volume = newVolume
+            const delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1;
+            const newVolume = Math.max(0, Math.min(1, root.volume + delta));
+            sink.audio.volume = newVolume;
           }
         }
       }
-      
+
       // OSD container
       Rectangle {
         id: osdContainer
@@ -135,7 +136,7 @@ Scope {
         color: Colors.backgroundColor
         border.width: root.osdBorderWidth
         border.color: Colors.borderColor
-        
+
         // Show/hide animations
         transform: [
           Scale {
@@ -144,7 +145,7 @@ Scope {
             origin.y: osdContainer.height / 2
             xScale: root.shouldShowOsd ? 1.0 : 0.4
             yScale: root.shouldShowOsd ? 1.0 : 0.4
-            
+
             Behavior on xScale {
               PropertyAnimation {
                 duration: root.shouldShowOsd ? root.showDuration : root.hideDuration
@@ -161,7 +162,7 @@ Scope {
           Translate {
             id: translateTransform
             y: root.shouldShowOsd ? 0 : 100
-            
+
             Behavior on y {
               PropertyAnimation {
                 duration: root.shouldShowOsd ? root.showDuration : root.hideDuration
@@ -170,17 +171,19 @@ Scope {
             }
           }
         ]
-        
+
         // End wiggle animation
         SequentialAnimation {
           id: endWiggle
           running: false
-          
-          PauseAnimation { duration: 450 }
-          
+
+          PauseAnimation {
+            duration: 450
+          }
+
           SequentialAnimation {
             loops: 2
-            
+
             PropertyAnimation {
               target: scaleTransform
               properties: "xScale,yScale"
@@ -188,7 +191,7 @@ Scope {
               duration: 100
               easing.type: Easing.InOutSine
             }
-            
+
             PropertyAnimation {
               target: scaleTransform
               properties: "xScale,yScale"
@@ -198,13 +201,13 @@ Scope {
             }
           }
         }
-        
+
         onVisibleChanged: {
           if (visible && root.shouldShowOsd) {
-            endWiggle.start()
+            endWiggle.start();
           }
         }
-        
+
         // OSD content layout
         RowLayout {
           anchors {
@@ -212,14 +215,14 @@ Scope {
             leftMargin: 10
             rightMargin: 15
           }
-          
+
           // Speaker icon
           IconImage {
             implicitSize: 20
             source: `file://${Config.configPath}/dark/icons/${root.muted ? 'speaker-dark' : 'speaker'}.svg`
             opacity: root.muted ? 0.6 : 1.0
           }
-          
+
           // Volume bar background
           Rectangle {
             id: volumeBarBg
@@ -227,7 +230,7 @@ Scope {
             Layout.fillWidth: true
             implicitHeight: 10
             radius: 2
-            
+
             // Volume bar fill
             Rectangle {
               id: volumeBarFill
@@ -237,18 +240,24 @@ Scope {
                 top: parent.top
                 bottom: parent.bottom
               }
-              
+
               gradient: Gradient {
                 orientation: Gradient.Horizontal
-                GradientStop { position: 0; color: Colors.accentColor }
-                GradientStop { position: 1; color: Colors.accent2Color }
+                GradientStop {
+                  position: 0
+                  color: Colors.accentColor
+                }
+                GradientStop {
+                  position: 1
+                  color: Colors.accent2Color
+                }
               }
-              
+
               width: {
-                const volumeWidth = root.muted ? 1 : volumeBarBg.width * root.volume
-                return Math.min(volumeWidth, volumeBarBg.width)
+                const volumeWidth = root.muted ? 1 : volumeBarBg.width * root.volume;
+                return Math.min(volumeWidth, volumeBarBg.width);
               }
-              
+
               Behavior on width {
                 PropertyAnimation {
                   duration: root.volumeAnimDuration
