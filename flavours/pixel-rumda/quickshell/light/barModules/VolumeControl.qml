@@ -30,10 +30,10 @@ Rectangle {
   width: 30
   height: 78
   radius: config.innerBModulesRadius
-  color: Colors.moduleBG 
+  color: Colors.moduleBG
 
   border.width: 1
-  border.color: Colors.borderColor 
+  border.color: Colors.borderColor
 
   readonly property PwNode sink: Pipewire.defaultAudioSink
 
@@ -42,7 +42,6 @@ Rectangle {
   property real currentVolume: 0.5
   property real lastVolume: 0
 
-  
   PwObjectTracker {
     id: pwObjectTracker
     objects: [Pipewire.defaultAudioSink, Pipewire.defaultAudioSource]
@@ -89,8 +88,8 @@ Rectangle {
 
   onVolumeChanged: {
     if (Math.abs(volume - lastVolume) > 0.01) {
-      bounceAnimation.start()
-      lastVolume = volume
+      bounceAnimation.start();
+      lastVolume = volume;
     }
   }
 
@@ -98,7 +97,6 @@ Rectangle {
     anchors.centerIn: parent
     spacing: 6
 
-    // Speaker icon
     Rectangle {
       Layout.alignment: Qt.AlignHCenter
       width: 14
@@ -116,14 +114,13 @@ Rectangle {
       }
     }
 
-    // Volume bar (vertical)
     Rectangle {
       id: volumeBar
       Layout.alignment: Qt.AlignHCenter
       Layout.bottomMargin: 4
       width: 8
       height: 46
-      color:  Colors.indicatorBGColor
+      color: Colors.indicatorBGColor
       radius: innerBModulesRadius
 
       Rectangle {
@@ -137,8 +134,14 @@ Rectangle {
         radius: innerBModulesRadius
         gradient: Gradient {
           orientation: Gradient.Vertical
-          GradientStop { position: 0; color: Colors.accent2Color }
-          GradientStop { position: 1; color: Colors.gradientAccent2Color }
+          GradientStop {
+            position: 0
+            color: Colors.accent2Color
+          }
+          GradientStop {
+            position: 1
+            color: Colors.gradientAccent2Color
+          }
         }
 
         Behavior on height {
@@ -154,14 +157,16 @@ Rectangle {
   MouseArea {
     anchors.fill: parent
 
-    onClicked: { sink.audio.muted = !muted; }
+    onClicked: {
+      sink.audio.muted = !muted;
+    }
 
     onWheel: wheel => {
       if (sink && !muted) {
-        let delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1
-        let newVolume = volume + delta
-        newVolume = Math.max(0, Math.min(1, newVolume))
-        sink.audio.volume = newVolume
+        let delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1;
+        let newVolume = volume + delta;
+        newVolume = Math.max(0, Math.min(1, newVolume));
+        sink.audio.volume = newVolume;
       }
     }
   }

@@ -12,61 +12,53 @@ import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 import qs.dark.barModules
 
-
 Rectangle {
   id: root
-  signal barDarkAnimate()
+  signal barDarkAnimate
   function themeClicked() {
-    barDarkAnimate()
+    barDarkAnimate();
   }
   Layout.fillWidth: true
-  Layout.preferredHeight: childrenRect.height + 8
+  Layout.preferredHeight: Math.min(childrenRect.height + 8, 220)
   color: "transparent"
+  clip: true
   property real innerModulesRadius: 3
-
-  // Date/time formatting
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
   property string currentHours: Qt.formatDateTime(new Date(), "hh")
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
-
   property string username: ""
-
   Process {
     command: ["whoami"]
     running: true
-    stdout: SplitParser { onRead: name => username = name }
+    stdout: SplitParser {
+      onRead: name => username = name
+    }
   }
-
   Timer {
     interval: 1000
     running: true
     repeat: true
     onTriggered: {
-      currentTime = Qt.formatDateTime(new Date(), "hh:mm")
-      currentHours = Qt.formatDateTime(new Date(), "hh")
-      currentMinutes = Qt.formatDateTime(new Date(), "mm")
+      currentTime = Qt.formatDateTime(new Date(), "hh:mm");
+      currentHours = Qt.formatDateTime(new Date(), "hh");
+      currentMinutes = Qt.formatDateTime(new Date(), "mm");
     }
   }
-
   Behavior on height {
     NumberAnimation {
       duration: 1000
       easing.type: Easing.InOutQuart
     }
   }
-
   ColumnLayout {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 2
     spacing: 6
-
-    ThemeSwitch {
-      onThemeDarkChanged: themeClicked()
-    }
+    // onThemeDarkChanged: themeClicked()
+    ThemeSwitch {}
     WeatherStatus {}
     InternetConnection {}
     Power {}
   }
 }
-

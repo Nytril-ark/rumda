@@ -5,13 +5,13 @@ import QtQuick
 Singleton {
 
   property color backgroundColor: "#1c1612"  //bar color
-  property color indicatorBGColor: "#DAB08B" 
-  property color borderColor: "#3A2D22" 
-  property color moduleBG: "#3A2D26" 
-  property color accentColor: "#9F684C" 
-  property color accent2Color: "#9F684C" 
+  property color indicatorBGColor: "#DAB08B"
+  property color borderColor: "#3A2D22"
+  property color moduleBG: "#3A2D26"
+  property color accentColor: "#9F684C"
+  property color accent2Color: "#9F684C"
   property color gradientAccent2Color: "#AF8C65"  //bottom / right of volume bar
-  property color errorColor: "#9A4235" 
+  property color errorColor: "#9A4235"
   property color shadowColor: "#CC3A2D26"  // this applies to the dashboard shadow as well. you can disable shadow from config
 
   // dashboard related colors
@@ -30,5 +30,3 @@ Singleton {
   //========================================
   property color dashAccentColor: "#3A2D00"  // ignore this
 }
-
-

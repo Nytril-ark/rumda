@@ -1,11 +1,8 @@
-
 #!/bin/bash
 
 
 MODE="$1"
 WALLDIR="/home/$USER/.config/rumda/pictures"
-
-# Pick wallpaper based on mode
 
 case "$MODE" in
 dark)
@@ -20,8 +17,6 @@ exit 1
 ;;
 esac
 
-# Try adding image extensions automatically
-
 if [[ ! -f "$IMG" ]]; then
 if [[ -f "$IMG.png" ]]; then
 IMG="$IMG.png"
@@ -32,8 +27,6 @@ echo "Error: wallpaper not found for mode '$MODE'."
 exit 1
 fi
 fi
-
-# Ensure daemon is running
 
 if ! pgrep -x "swww-daemon" >/dev/null; then
 echo "Starting swww-daemon..."

@@ -14,16 +14,15 @@ import qs.light.barModules
 
 Rectangle {
   id: root
-  signal barAnimate()
+  signal barAnimate
   function themeClicked() {
-    barAnimate()
+    barAnimate();
   }
   Layout.fillWidth: true
   Layout.preferredHeight: childrenRect.height + 8
   color: "transparent"
   property real innerModulesRadius: 3
 
-  // Date/time formatting
   property string currentTime: Qt.formatDateTime(new Date(), "hh:mm")
   property string currentHours: Qt.formatDateTime(new Date(), "hh")
   property string currentMinutes: Qt.formatDateTime(new Date(), "mm")
@@ -33,7 +32,9 @@ Rectangle {
   Process {
     command: ["whoami"]
     running: true
-    stdout: SplitParser { onRead: name => username = name }
+    stdout: SplitParser {
+      onRead: name => username = name
+    }
   }
 
   Timer {
@@ -41,9 +42,9 @@ Rectangle {
     running: true
     repeat: true
     onTriggered: {
-      currentTime = Qt.formatDateTime(new Date(), "hh:mm")
-      currentHours = Qt.formatDateTime(new Date(), "hh")
-      currentMinutes = Qt.formatDateTime(new Date(), "mm")
+      currentTime = Qt.formatDateTime(new Date(), "hh:mm");
+      currentHours = Qt.formatDateTime(new Date(), "hh");
+      currentMinutes = Qt.formatDateTime(new Date(), "mm");
     }
   }
 

@@ -11,7 +11,7 @@ import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
 import qs.dark.barModules
-import qs.dark.config 
+import qs.dark.config
 
 Rectangle {
   Layout.fillHeight: true

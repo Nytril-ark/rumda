@@ -1,22 +1,16 @@
 #!/bin/bash
 
 # ============================================
-# RUMDA DOTFILES INSTALLER (LIGHT)
+# RUMDA DOTFILES INSTALLER
 # ============================================
-
-# Theme Selection
-THEME_CHOICE="light"  # Options: "light" or "pistachio"
 
 # Installation Configuration (true/false)
 # be aware that anything selected as true
-# will overwrite the config files you have 
-# at .config and save them to backups in place
-#
-#
-DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
-#
-#
+# will move the stuff you have at .config into
+# backups and push the new rumda files in place
 
+
+DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
 
 # (installs full thing but chadrc optional)
 INSTALL_HYPRLAND=true
@@ -38,11 +32,18 @@ INSTALL_CHADRC=false
 # go ahead and set it to true. Not having my chadrc
 # might make your nvim theme look weird
 
-# ============================================
-# PATH CONFIGURATION
-# ============================================
 
-# Make sure you cloned rumda in 
+
+
+
+
+
+
+THEME_CHOICE="light"  # Options: "light" or "pistachio" (pistachio no longer supported well)
+# ============================================
+# PATH CONFIG
+# ============================================
+# Please make sure you cloned rumda in 
 # ~/.config/rumda
 #
 #
@@ -77,14 +78,12 @@ echo "      じしf_,)ノ"
 echo "============================================"
 echo -e "${NC}"
 
-# Check if source directory exists
 if [ ! -d "$SOURCE_DIR" ]; then
     echo -e "${RED}Error: Source directory not found at ${SOURCE_DIR}${NC}"
     echo -e "${YELLOW}Please clone the repository to ~/.config/rumda first${NC}"
     exit 1
 fi
 
-# Ask user which theme to install
 echo -e "${CYAN}Which theme would you like to install?${NC}"
 echo -e "${YELLOW}1) Rumda Light (recommended)${NC}"
 echo -e "${MAGENTA}2) Rumda Pistachio${NC}"
@@ -103,19 +102,17 @@ case $theme_input in
 esac
 
 # ============================================
-# HANDLE PISTACHIO THEME
+# PISTACHIO THEME
 # ============================================
 
 if [ "$THEME_CHOICE" = "pistachio" ]; then
     echo -e "${MAGENTA}Installing Rumda Pistachio...${NC}"
     
-    # Check if pistachio subdirectory exists
     if [ ! -d "$SOURCE_DIR/rumda-pistachio" ]; then
         echo -e "${RED}Error: Pistachio theme not found at ${SOURCE_DIR}/rumda-pistachio${NC}"
         exit 1
     fi
     
-    # Copy rumda-pistachio to .config/rumda-pistachio
     echo -e "${YELLOW}Copying Rumda Pistachio to ~/.config/rumda-pistachio...${NC}"
     
     if [ -d "$HOME/.config/rumda-pistachio" ]; then
@@ -125,10 +122,8 @@ if [ "$THEME_CHOICE" = "pistachio" ]; then
     
     cp -r "$SOURCE_DIR/rumda-pistachio" "$HOME/.config/rumda-pistachio"
     
-    # Make pistachio install script executable
     chmod +x "$HOME/.config/rumda-pistachio/install.sh"
     
-    # Launch pistachio installer and disown
     echo -e "${MAGENTA}Launching Pistachio installer...${NC}"
     cd "$HOME/.config/rumda-pistachio"
     exec ./install.sh
@@ -137,23 +132,19 @@ if [ "$THEME_CHOICE" = "pistachio" ]; then
 fi
 
 # ============================================
-# CONTINUE WITH LIGHT THEME INSTALLATION
+# LIGHT THEME INSTALLATION
 # ============================================
 
 echo -e "${YELLOW}Installing Rumda Light...${NC}"
 echo ""
 
-# Git pull to get latest version
 echo -e "${CYAN}Updating repository to latest version...${NC}"
 cd "$SOURCE_DIR"
 
-# Check if there are uncommitted changes
 if git diff-index --quiet HEAD --; then
-    # No local changes, safe to pull
     echo -e "${CYAN}Updating repository to latest version...${NC}"
     git pull origin main 2>/dev/null || git pull origin master 2>/dev/null
 else
-    # Has local changes, offer choice
     echo -e "${YELLOW}Warning: You have local changes in the repository.${NC}"
     echo -e "${CYAN}1) Keep local changes and skip update${NC}"
     echo -e "${CYAN}2) Discard local changes and update${NC}"
@@ -185,9 +176,12 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
-# ============================================
-# HELPER FUNCTION
-# ============================================
+
+
+
+
+
+
 
 install_config() {
     local source="$1"
@@ -196,18 +190,15 @@ install_config() {
     
     echo -e "${YELLOW}Installing ${name}...${NC}"
     
-    # Check if source exists
     if [ ! -d "$source" ] && [ ! -f "$source" ]; then
         echo -e "${RED}> Failed: Source not found at ${source}${NC}"
         echo -e "${RED}Are you sure you cloned to the right location? ${NC}"
         return 1
     fi
     
-    # Create destination parent directory if it doesn't exist
     local dest_parent=$(dirname "$dest")
     mkdir -p "$dest_parent"
     
-    # Backup existing config if it exists
     if [ -e "$dest" ]; then
         if [ "$DISABLE_BACKUP" = false ]; then
             local backup_name="${dest}.backup.$(date +%Y%m%d_%H%M%S)"
@@ -219,12 +210,9 @@ install_config() {
         fi
     fi
     
-    # If source is a directory, copy its contents (not the directory itself)
     if [ -d "$source" ]; then
-        # Create destination directory
         mkdir -p "$dest"
         
-        # Copy contents, not the folder itself
         if cp -r "$source/"* "$dest/" 2>/dev/null; then
             echo -e "${GREEN}> Successfully installed ${name} to ${dest}${NC}"
             return 0
@@ -233,7 +221,6 @@ install_config() {
             return 1
         fi
     else
-        # If source is a file, copy it directly
         if cp "$source" "$dest"; then
             echo -e "${GREEN}> Successfully installed ${name} to ${dest}${NC}"
             return 0
@@ -248,79 +235,62 @@ install_config() {
 # MAIN INSTALLATION
 # ============================================
 
-# Install Hyprland
 if [ "$INSTALL_HYPRLAND" = true ]; then
     install_config "$SOURCE_DIR/light-config/hypr" "$DEST_DIR/hypr" "Hyprland"
 fi
 
-# Install Quickshell
 if [ "$INSTALL_QUICKSHELL" = true ]; then
     install_config "$SOURCE_DIR/common/quickshell" "$DEST_DIR/quickshell" "Quickshell"
 fi
 
-# Install Alacritty
 if [ "$INSTALL_ALACRITTY" = true ]; then
     install_config "$SOURCE_DIR/light-config/alacritty" "$DEST_DIR/alacritty" "Alacritty"
 fi
 
-# Install Ghostty
 if [ "$INSTALL_GHOSTTY" = true ]; then
     install_config "$SOURCE_DIR/light-config/ghostty" "$DEST_DIR/ghostty" "Ghostty"
 fi
 
-# Install ZATHURA
 if [ "$INSTALL_ZATHURA" = true ]; then
     install_config "$SOURCE_DIR/light-config/zathura" "$DEST_DIR/zathura" "Zathura"
 fi
 
-# Install Rofi
 if [ "$INSTALL_ROFI" = true ]; then
     install_config "$SOURCE_DIR/light-config/rofi" "$DEST_DIR/rofi" "Rofi"
 fi
 
-# Install bpytop
 if [ "$INSTALL_BPYTOP" = true ]; then
     install_config "$SOURCE_DIR/common/bpytop" "$DEST_DIR/bpytop" "Bpytop"
 fi
 
-# Install btop
 if [ "$INSTALL_BTOP" = true ]; then
     install_config "$SOURCE_DIR/light-config/btop" "$DEST_DIR/btop" "Btop"
 fi
 
-# Install yazi
 if [ "$INSTALL_YAZI" = true ]; then
     install_config "$SOURCE_DIR/light-config/yazi" "$DEST_DIR/yazi" "Yazi"
 fi
 
-# Install neofetch
 if [ "$INSTALL_NEOFETCH" = true ]; then
     install_config "$SOURCE_DIR/common/neofetch" "$DEST_DIR/neofetch" "Neofetch"
 fi
 
-# Install mako theme
 if [ "$INSTALL_MAKO" = true ]; then
     install_config "$SOURCE_DIR/light-config/mako/config" "$DEST_DIR/mako/config" "mako"
 fi
 
-# Install nvim theme only NOTE: (without chadrc, it might not look as expected)
 if [ "$INSTALL_NEOTHEME" = true ]; then
     install_config "$SOURCE_DIR/common/nvim/lua/themes" "$DEST_DIR/nvim/lua/themes" "editor_theme"
 fi
 
-# Install discord theme
 if [ "$INSTALL_DISCORD" = true ]; then
     install_config "$SOURCE_DIR/common/vencord" "$DEST_DIR/Vencord/themes" "discord_theme"
 fi
 
-# Install chadrc 
 if [ "$INSTALL_CHADRC" = true ]; then
     install_config "$SOURCE_DIR/common/nvim/lua/chadrc.lua" "$DEST_DIR/nvim/lua/chadrc.lua" "chadrc"
 fi
 
-
-
-# Run the font install script
 /home/$USER/.config/rumda/scripts/installFonts.sh
 echo -e "${GREEN}> Successfully installed fonts to /usr/share/fonts"
 

@@ -30,22 +30,21 @@ Rectangle {
   property string iconName: "power"
   property int moduleSize: 30
   property int iconSize: 20
-  
+
   Layout.alignment: Qt.AlignHCenter
-  
+
   height: moduleSize
   width: moduleSize
   radius: config.innerBModulesRadius
   color: Colors.moduleBG
   border.width: 1
   border.color: Colors.borderColor
-  
+
   Process {
     id: openDashboard
-    command: ["bash", "-c", "echo 'toggle' > /tmp/qs-dashboard.fifo",] 
+    command: ["bash", "-c", "echo 'toggle' > /tmp/qs-dashboard.fifo",]
   }
-      
-  // Icon
+
   Image {
     id: icon
     anchors.centerIn: parent
@@ -56,7 +55,7 @@ Rectangle {
     antialiasing: true
     smooth: true
     mipmap: true
-    rotation: 0 
+    rotation: 0
 
     Behavior on rotation {
       NumberAnimation {
@@ -65,15 +64,13 @@ Rectangle {
       }
     }
   }
-  
-  // Click handler
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
-    
+
     onClicked: {
-      openDashboard.running = true
-      icon.rotation = icon.rotation + 360
+      openDashboard.running = true;
+      icon.rotation = icon.rotation + 360;
     }
   }
 }

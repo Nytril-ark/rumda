@@ -14,7 +14,6 @@ import Qt5Compat.GraphicalEffects
 import qs.light.config
 import qs.light.widgets
 
-
 Rectangle {
   id: profileAndPowerRect
   Rectangle {
@@ -41,23 +40,20 @@ Rectangle {
   readonly property int centerButtonCircularOffset: 0
   // =============================================================================
 
-
   color: Colors.dashModulesColor
   border.width: Config.dashInnerModuleBorderWidth
   border.color: Colors.borderColor
   radius: Config.dashInnerModuleRadius
-  
 
   GridLayout {
     anchors.fill: parent
-    anchors.topMargin: 10 
+    anchors.topMargin: 10
     anchors.leftMargin: 10
     anchors.bottomMargin: 53
     columns: 2
     rowSpacing: 0
     columnSpacing: 0
 
-  // PFP and its circular border
     Item {
       Layout.row: 0
       Layout.column: 0
@@ -65,12 +61,11 @@ Rectangle {
       Layout.preferredWidth: pfpSize + 0
       Layout.preferredHeight: pfpSize + 0
       Layout.alignment: Qt.AlignTop
-      
+
       Item {
         width: pfpSize + 40
         height: pfpSize + 40
-        
-        // bottom circle (behind pfp)
+
         Rectangle {
           Rectangle {
             anchors.top: parent.top
@@ -85,44 +80,38 @@ Rectangle {
           anchors.centerIn: parent
           width: pfpSize + 40
           height: pfpSize + 40
-          radius: Config.dashInnerModuleRadius // width / 2
+          radius: Config.dashInnerModuleRadius
           color: Colors.dashPFPColor
         }
-        
-        // border circle
+
         Rectangle {
           anchors.centerIn: parent
           width: pfpSize + 23
           height: pfpSize + 23
-          radius: Config.dashInnerModuleRadius // width / 2
+          radius: Config.dashInnerModuleRadius
           color: "transparent"
           border.width: 3
           border.color: Colors.dashBorderColor
         }
-        
-        // Profile pic
+
         ClippingWrapperRectangle {
           anchors.centerIn: parent
           radius: pfpRadius
           width: pfpSize
           height: pfpSize
-          
+
           Image {
             source: Config.profilePath
             sourceSize.width: pfpSize
             sourceSize.height: pfpSize
-            anchors.fill: parent 
+            anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            antialiasing: true 
+            antialiasing: true
             smooth: true
           }
         }
       }
     }
-
-
-
-// POWER BUTTONS ======================================
 
     ColumnLayout {
       Layout.row: 0
@@ -130,12 +119,11 @@ Rectangle {
       Layout.leftMargin: 35
       Layout.topMargin: -13
       spacing: buttonSpacing
-      
-      // Square Button 1
+
       Item {
         width: buttonSizes + buttonFloatAmount + allButtonsOffset
-        height: buttonSizes 
-        
+        height: buttonSizes
+
         Rectangle {
           id: powerButton
           Rectangle {
@@ -154,28 +142,32 @@ Rectangle {
           anchors.left: parent.left
           anchors.leftMargin: mouseArea1.containsMouse ? buttonFloatAmount : allButtonsOffset
           radius: Config.dashInnerModuleRadius
-          color: mouseArea1.containsMouse ? Colors.accentColor : Colors.powerButtons 
+          color: mouseArea1.containsMouse ? Colors.accentColor : Colors.powerButtons
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
 
           Behavior on color {
-            ColorAnimation { duration: 200 }
+            ColorAnimation {
+              duration: 200
+            }
           }
-          
+
           Behavior on anchors.leftMargin {
-            NumberAnimation { duration: 200 }
+            NumberAnimation {
+              duration: 200
+            }
           }
-          
+
           MouseArea {
             id: mouseArea1
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
             onClicked: {
-              process5.running = true
+              process5.running = true;
             }
           }
-          
+
           Process {
             id: process5
             command: ["/bin/sh", "-c", "shutdown && notify-send 'Rumda' 'Shutting down in 1 minute'"]
@@ -196,13 +188,10 @@ Rectangle {
         }
       }
 
-
-
-      // Square Button 2
       Item {
-        width: buttonSizes + buttonFloatAmount  + middleButtonsCircularOffset + allButtonsOffset
-        height: buttonSizes 
-        
+        width: buttonSizes + buttonFloatAmount + middleButtonsCircularOffset + allButtonsOffset
+        height: buttonSizes
+
         Rectangle {
           Rectangle {
             anchors.top: parent.top
@@ -223,25 +212,29 @@ Rectangle {
           color: mouseArea2.containsMouse ? Colors.accentColor : Colors.powerButtons
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
-          
+
           Behavior on color {
-            ColorAnimation { duration: 200 }
+            ColorAnimation {
+              duration: 200
+            }
           }
-          
+
           Behavior on anchors.leftMargin {
-            NumberAnimation { duration: 200 }
+            NumberAnimation {
+              duration: 200
+            }
           }
-          
+
           MouseArea {
             id: mouseArea2
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
             onClicked: {
-              process6.running = true
+              process6.running = true;
             }
           }
-          
+
           Process {
             id: process6
             command: ["/bin/sh", "-c", "loginctl terminate-user $USER"]
@@ -251,7 +244,7 @@ Rectangle {
           Image {
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: 2
-            width: iconSizes  - 2
+            width: iconSizes - 2
             height: iconSizes - 2
             source: `file://${Config.configPath}/light/icons/logoutPix.svg`
             fillMode: Image.PreserveAspectFit
@@ -262,17 +255,10 @@ Rectangle {
         }
       }
 
-      // middle button here ====================
-
-      // REMOVED
-
-      // =======================================
-
-      // Square Button 4
       Item {
-        width: buttonSizes + buttonFloatAmount  + middleButtonsCircularOffset + allButtonsOffset
-        height: buttonSizes 
-        
+        width: buttonSizes + buttonFloatAmount + middleButtonsCircularOffset + allButtonsOffset
+        height: buttonSizes
+
         Rectangle {
           Rectangle {
             anchors.top: parent.top
@@ -293,25 +279,29 @@ Rectangle {
           color: mouseArea3.containsMouse ? Colors.accentColor : Colors.powerButtons
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
-          
+
           Behavior on color {
-            ColorAnimation { duration: 200 }
+            ColorAnimation {
+              duration: 200
+            }
           }
-          
+
           Behavior on anchors.leftMargin {
-            NumberAnimation { duration: 200 }
+            NumberAnimation {
+              duration: 200
+            }
           }
-          
+
           MouseArea {
             id: mouseArea3
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
             onClicked: {
-              process7.running = true
+              process7.running = true;
             }
           }
-          
+
           Process {
             id: process7
             command: ["bash", "-c", "hyprlock"]
@@ -330,12 +320,11 @@ Rectangle {
           }
         }
       }
-      
-      // Square Button 5
+
       Item {
         width: buttonSizes + buttonFloatAmount + allButtonsOffset
-        height: buttonSizes 
-        
+        height: buttonSizes
+
         Rectangle {
           Rectangle {
             anchors.top: parent.top
@@ -350,31 +339,35 @@ Rectangle {
           width: buttonSizes
           height: buttonSizes
           anchors.bottom: parent.bottom
-          anchors.left: parent.left 
+          anchors.left: parent.left
           anchors.leftMargin: mouseArea4.containsMouse ? buttonFloatAmount : allButtonsOffset
           radius: Config.dashInnerModuleRadius
           color: mouseArea4.containsMouse ? Colors.accentColor : Colors.powerButtons
           border.width: buttonBorderWidth
           border.color: Colors.borderColor
-          
+
           Behavior on color {
-            ColorAnimation { duration: 200 }
+            ColorAnimation {
+              duration: 200
+            }
           }
-          
+
           Behavior on anchors.leftMargin {
-            NumberAnimation { duration: 200 }
+            NumberAnimation {
+              duration: 200
+            }
           }
-          
+
           MouseArea {
             id: mouseArea4
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
             onClicked: {
-              process8.running = true
+              process8.running = true;
             }
           }
-          
+
           Process {
             id: process8
             command: ["bash", "-c", "zathura ~/.config/rumda/pictures/keybinds.pdf &disown"]
@@ -383,8 +376,8 @@ Rectangle {
 
           Image {
             anchors.centerIn: parent
-            width: iconSizes 
-            height: iconSizes 
+            width: iconSizes
+            height: iconSizes
             source: `file://${Config.configPath}/light/icons/readmePix.svg`
             fillMode: Image.PreserveAspectFit
             antialiasing: true
@@ -405,6 +398,5 @@ Rectangle {
         id: dashControlExtras
       }
     }
-
   } // end of GridLayout
 }  // end of rectangle that contains this whole module (the bg rectangle)

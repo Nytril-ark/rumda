@@ -1,4 +1,3 @@
-// Dashboard.qml
 import QtQuick.Shapes
 import QtQuick
 import QtQuick.Layouts
@@ -20,104 +19,103 @@ import qs.dark.widgets
 Scope {
   id: dashboardScope
   property int closeDuration: Config.dashAnimDuration
-  property int dashboardVerticalGap: dashboard.implicitHeight * (1 / Config.dashboardHeight)
+  readonly property int dashWidth: Config.dashboardWidth
+  readonly property int dashHeight: Config.dashboardHeight
 
   Timer {
     id: closeTimer
     interval: dashboardScope.closeDuration
     repeat: false
     onTriggered: {
-      dashboard.visible = false
+      dashboard.visible = false;
+      dashboardBGRect.visible = false;
+      dashboardBGRect.animating = false;
     }
+  }
+
+  function openDashboard() {
+    dashboardBGRect.animating = false;
+    dashboardBGRect.y = dashboard.screenH;
+    dashboardBGRect.visible = true;
+    dashboard.visible = true;
+    Qt.callLater(() => {
+      dashboardBGRect.animating = true;
+      dashboardBGRect.y = (dashboard.screenH - dashboardScope.dashHeight) * 0.5;
+    });
   }
 
   function closeDashboard() {
-    dashboardBGRect.anchors.topMargin = dashboard.height
-    dashboardBGRect.anchors.bottomMargin = -dashboard.height
-    closeTimer.start()
+    dashboardBGRect.animating = true;
+    dashboardBGRect.y = dashboard.screenH;
+    closeTimer.start();
   }
-
 
   WlrLayershell {
     id: dashboard
-    anchors { top: true; bottom: true; left: true; right: true}
+    readonly property int screenW: Screen.width
+    readonly property int screenH: Screen.height
+    anchors {
+      top: true
+      bottom: true
+      left: true
+      right: true
+    }
     layer: WlrLayer.Overlay
+    // exclusiveZone: -1
     visible: false
-    // color: Colors.shadowColor
     color: "transparent"
     keyboardFocus: WlrKeyboardFocus.Exclusive
 
-
-    onVisibleChanged: {  
-      if (visible) {
-        dashboardBGRect.anchors.topMargin = dashboardVerticalGap
-        dashboardBGRect.anchors.bottomMargin = dashboardVerticalGap
-      } else {
-        dashboardBGRect.anchors.topMargin = dashboard.height
-        dashboardBGRect.anchors.bottomMargin = -dashboard.height
-      }
-    }
-    
     Process {
       id: commandListener
       command: ["bash", "-c", "rm -f /tmp/qs-dashboard.fifo; mkfifo /tmp/qs-dashboard.fifo; while true; do cat /tmp/qs-dashboard.fifo; done"]
       running: true
-      
       stdout: SplitParser {
         onRead: data => {
           if (data.includes("toggle")) {
             if (!dashboard.visible) {
-              dashboardBGRect.anchors.topMargin = dashboardVerticalGap
-              dashboardBGRect.anchors.bottomMargin = dashboardVerticalGap
-              dashboard.visible = !dashboard.visible
+              dashboardScope.openDashboard();
             } else {
-              dashboardScope.closeDashboard()
+              dashboardScope.closeDashboard();
             }
           }
         }
       }
     }
 
-
-    FocusScope {  
+    FocusScope {
       anchors.fill: parent
       focus: true
-      Keys.onPressed: event => { 
+      Keys.onPressed: event => {
         if (event.key === Qt.Key_Escape) {
-          dashboardScope.closeDashboard()
-          event.accepted = true         
+          dashboardScope.closeDashboard();
+          event.accepted = true;
         }
       }
 
       MouseArea {
-        anchors.fill: parent 
+        anchors.fill: parent
         onClicked: dashboardScope.closeDashboard()
 
-         // le new simple shadow
         DropShadow {
-            anchors.fill: dashboardBGRect
-            horizontalOffset: Config.dashShadowOffsetX
-            verticalOffset: Config.dashShadowOffsetY
-            radius: 5
-            samples: 29
-            spread: 0.73
-            transparentBorder: true
-            color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
-            source: dashboardBGRect
+          anchors.fill: dashboardBGRect
+          horizontalOffset: Config.dashShadowOffsetX
+          verticalOffset: Config.dashShadowOffsetY
+          radius: 5
+          samples: 29
+          spread: 0.73
+          transparentBorder: true
+          color: Config.enableDashShadow ? Colors.shadowColor : "transparent"
+          source: dashboardBGRect
         }
-
 
         Rectangle {
           id: dashboardBGRect
-          anchors.top: parent.top
-          anchors.bottom: parent.bottom 
-          anchors.left: parent.left 
-          anchors.right: parent.right 
-
-          anchors.rightMargin: dashboard.width / Config.dashboardWidth
-          anchors.leftMargin: dashboard.width / Config.dashboardWidth
-          anchors.topMargin: dashboard.height / Config.dashboardHeight
-          anchors.bottomMargin: dashboard.height / Config.dashboardHeight
+          width: dashboardScope.dashWidth
+          height: dashboardScope.dashHeight
+          anchors.horizontalCenter: parent.horizontalCenter
+          y: 0
+          visible: false
 
           color: Colors.dashBGColor
           radius: Config.dashRadius
@@ -126,91 +124,61 @@ Scope {
             anchors.fill: parent
           }
 
-          Behavior on anchors.topMargin {
+          property bool animating: false
+
+          Behavior on y {
+            enabled: dashboardBGRect.animating
             NumberAnimation {
               duration: dashboardScope.closeDuration
-              // easing.type: Easing.InOutBack
               easing.type: Easing.InOutCubic
             }
           }
-
-          Behavior on anchors.bottomMargin {
-            NumberAnimation {
-              duration: dashboardScope.closeDuration
-              // easing.type: Easing.InOutBack
-              easing.type: Easing.InOutCubic
-            }
-          }
-
 
           Rectangle {
             id: dashInnerWrapper
             anchors.fill: parent
-            anchors.leftMargin: Config.dashInnerPadding
-            anchors.rightMargin: Config.dashInnerPadding 
-            anchors.topMargin: Config.dashInnerPadding
-            anchors.bottomMargin: Config.dashInnerPadding
-
-            anchors.centerIn: parent
+            anchors.margins: Config.dashInnerPadding
             radius: Config.dashRadius
             color: Colors.dashBGColor
             border.width: Config.dashBorderWidth
             border.color: Colors.dashBorderColor
-            GridLayout {
-              id: dashInnerGrid
-              columns: 3
-              rows: 2   
+
+            ColumnLayout {
               anchors.fill: parent
+              anchors.margins: Config.dashInnerPadding
+              spacing: Config.dashInnerPadding
 
-              anchors.leftMargin: Config.dashInnerPadding
-              anchors.rightMargin: Config.dashInnerPadding 
-              anchors.topMargin: Config.dashInnerPadding
-              anchors.bottomMargin: Config.dashInnerPadding
-
-              columnSpacing: Config.dashInnerPadding
-              rowSpacing: Config.dashInnerPadding
-
-              ProfileAndPower {
-                Layout.row: 0
-                Layout.column: 0
-                Layout.fillHeight: true
-                Layout.minimumHeight: Config.profileAndControlsMinHeight
-                Layout.minimumWidth: 344
-              }
-
-              DashBoardControls {
-                Layout.row: 0
-                Layout.column: 1
+              RowLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumHeight: Config.profileAndControlsMinHeight
+                Layout.preferredHeight: parent.height * Config.dashTopRowRatio
+                spacing: Config.dashInnerPadding
+
+                ProfileAndPower {
+                  Layout.fillHeight: true
+                  Layout.fillWidth: true
+                }
+
+                DashBoardControls {
+                  Layout.fillHeight: true
+                  Layout.fillWidth: true
+                }
+
+                DashBrightnessControl {
+                  Layout.fillHeight: true
+                  Layout.minimumWidth: 65
+                  Layout.maximumWidth: 80
+                }
               }
-
-
-              DashBrightnessControl {
-                Layout.row: 0     
-                Layout.column: 2
-                Layout.fillHeight: true     
-                Layout.minimumHeight: Config.profileAndControlsMinHeight
-                Layout.minimumWidth: 56
-              }
-
-
 
               ContribGraph {
-                Layout.row: 1
-                Layout.column: 0
-                Layout.columnSpan: 3
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumHeight: Config.contribGraphMinHeight
+                Layout.preferredHeight: parent.height * (1.0 - Config.dashTopRowRatio)
               }
-
-            } // end of gridLayout
+            }
           }
-
-
-        } // end of dashboardBGRect
+        }
       }
     }
   }

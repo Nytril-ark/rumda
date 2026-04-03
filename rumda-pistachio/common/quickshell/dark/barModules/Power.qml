@@ -14,27 +14,27 @@ import qs.dark.config
 
 Rectangle {
   id: root
-  
+
   property string iconName: "power"
   property int moduleSize: 28
   property int iconSize: 20
   property int moduleRadius: 7
-  
+
   Layout.alignment: Qt.AlignHCenter
   Layout.topMargin: 4
-  
+
   height: moduleSize
   width: moduleSize
   radius: moduleRadius
   color: Colors.moduleBG
   border.width: 1
   border.color: Colors.borderColor
-  
+
   Process {
     id: openDashboard
-    command: ["bash", "-c", "echo 'toggle' > /tmp/qs-dashboard.fifo",] 
+    command: ["bash", "-c", "echo 'toggle' > /tmp/qs-dashboard.fifo",]
   }
-  
+
   Image {
     id: icon
     anchors.centerIn: parent
@@ -45,23 +45,23 @@ Rectangle {
     antialiasing: true
     smooth: true
     mipmap: true
-    rotation: 0 
+    rotation: 0
 
     Behavior on rotation {
       NumberAnimation {
         duration: 800
         easing.type: Easing.OutBack
       }
-    }    
+    }
   }
-  
+
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
-    
+
     onClicked: {
-      openDashboard.running = true
-      icon.rotation = icon.rotation + 360
+      openDashboard.running = true;
+      icon.rotation = icon.rotation + 360;
     }
   }
 }

@@ -21,7 +21,7 @@ Rectangle {
     anchors.left: themeSwitchButton.left
     anchors.rightMargin: Config.innerBMSoffsetX
     anchors.bottomMargin: -Config.innerBMSoffsetY
-    implicitWidth: themeSwitchButton.implicitWidth + Config.innerBMSoffsetX 
+    implicitWidth: themeSwitchButton.implicitWidth + Config.innerBMSoffsetX
     z: -99
     color: Colors.shadowColorBM
     radius: Config.innerBMSRadius
@@ -40,17 +40,13 @@ Rectangle {
   readonly property int imageSourceSize: 30
   readonly property int maskWidth: 20
   readonly property int maskHeight: 18
-  readonly property int maskRadius: 8 
-  
+  readonly property int maskRadius: 8
+
   Process {
     id: darkGlobal
-    command: [
-      "bash",
-      "-c",
-      "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme_nokill.sh light > /dev/null 2>&1 &) &"
-    ]
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme_nokill.sh light > /dev/null 2>&1 &) &"]
   }
-  
+
   Image {
     id: themeSwitchIcon
     anchors.fill: parent
@@ -71,14 +67,14 @@ Rectangle {
       }
     }
   }
-  
-  signal themeChanged()
+
+  signal themeChanged
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      themeChanged()
-      darkGlobal.running = true
+      themeChanged();
+      darkGlobal.running = true;
     }
-  } 
+  }
 }

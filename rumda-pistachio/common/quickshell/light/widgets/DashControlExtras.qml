@@ -20,312 +20,311 @@ Item {
   readonly property int buttonFloatAmount: 4
   readonly property int topMarginOfText: 14
 
+  // text
+  Row {
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: topMarginOfText
+    Text {
+      text: "Hello.."
+      font.family: "Dogica Pixel"
+      font.italic: true
+      color: Colors.accentColor
+      font.pixelSize: 16
+      font.bold: true
+    }
+  }
 
+  Row {
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: topMarginOfText + 20
+    Text {
+      text: Config.username
+      font.family: "Dogica Pixel"
+      font.italic: true
+      color: Colors.accentColor
+      font.pixelSize: 20
+      font.bold: true
+    }
+  }
 
-// text
-    Row {
-      anchors.horizontalCenter: parent.horizontalCenter
-      anchors.top: parent.top
-      anchors.topMargin: topMarginOfText
-      Text {
-        text: "Hello.."
-        font.family: "Dogica Pixel"
-        font.italic: true     
-        color: Colors.accentColor
-        font.pixelSize: 16
-        font.bold: true
+  Row {
+    anchors.centerIn: parent
+    spacing: rowSpacing
+
+    // folder button ==============================================
+    Item {
+      width: buttonSizes + buttonFloatAmount
+      height: buttonSizes + buttonFloatAmount
+
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        anchors.verticalCenter: parent.verticalCenter
+        radius: Config.dashInnerModuleRadius
+        color: mouseArea1.containsMouse ? Colors.accentColor : Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        scale: mouseArea1.containsMouse ? 0.95 : 1.0
+
+        Behavior on scale {
+          NumberAnimation {
+            duration: 200
+          }
+        }
+
+        Behavior on color {
+          ColorAnimation {
+            duration: 200
+          }
+        }
+
+        Process {
+          id: process1
+          command: ["bash", "-c", `${Config.fileManager} &disown`]
+          running: false
+        }
+
+        MouseArea {
+          id: mouseArea1
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          hoverEnabled: true
+          onClicked: process1.running = true
+        }
+
+        Image {
+          anchors.centerIn: parent
+          width: iconSizes
+          height: iconSizes
+          source: `file://${Config.configPath}/light/icons/dashboard/folder.svg`
+          fillMode: Image.PreserveAspectFit
+          antialiasing: true
+          smooth: true
+          mipmap: true
+        }
       }
     }
 
-    Row {
-      anchors.horizontalCenter: parent.horizontalCenter
-      anchors.top: parent.top 
-      anchors.topMargin: topMarginOfText + 20
-      Text {
-        text: Config.username
-        font.family: "Dogica Pixel"
-        font.italic: true     
-        color: Colors.accentColor
-        font.pixelSize: 20
-        font.bold: true
+    // browser button ==============================================
+    Item {
+      width: buttonSizes + buttonFloatAmount
+      height: buttonSizes + buttonFloatAmount
+
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        anchors.verticalCenter: parent.verticalCenter
+        radius: Config.dashInnerModuleRadius
+        color: mouseArea2.containsMouse ? Colors.accentColor : Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        scale: mouseArea2.containsMouse ? 0.95 : 1.0
+
+        Behavior on scale {
+          NumberAnimation {
+            duration: 200
+          }
+        }
+
+        Behavior on color {
+          ColorAnimation {
+            duration: 200
+          }
+        }
+
+        Process {
+          id: process2
+          command: ["/bin/sh", "-c", `${Config.browser} &disown`]   // note to self: maybe this should be auto-read from hyprland.conf later
+          running: false
+        }
+
+        MouseArea {
+          id: mouseArea2
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          hoverEnabled: true
+          onClicked: process2.running = true
+        }
+
+        Image {
+          anchors.centerIn: parent
+          width: iconSizes
+          height: iconSizes
+          source: `file://${Config.configPath}/light/icons/dashboard/search.svg`
+          fillMode: Image.PreserveAspectFit
+          antialiasing: true
+          smooth: true
+          mipmap: true
+        }
       }
     }
 
+    // screenshot button ==============================================
+    Item {
+      width: buttonSizes + buttonFloatAmount
+      height: buttonSizes + buttonFloatAmount
 
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        anchors.verticalCenter: parent.verticalCenter
+        radius: Config.dashInnerModuleRadius
+        color: mouseArea3.containsMouse ? Colors.accentColor : Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        scale: mouseArea3.containsMouse ? 0.95 : 1.0
 
-
-
-    Row {
-      anchors.centerIn: parent
-      spacing: rowSpacing
-
-      // folder button ==============================================
-      Item {
-        width: buttonSizes + buttonFloatAmount
-        height: buttonSizes + buttonFloatAmount
-        
-        Rectangle {
-          width: buttonSizes
-          height: buttonSizes
-          anchors.verticalCenter: parent.verticalCenter
-          radius: Config.dashInnerModuleRadius
-          color: mouseArea1.containsMouse ? Colors.accentColor : Colors.powerButtons 
-          border.width: buttonBorderWidth
-          border.color: Colors.borderColor
-          scale: mouseArea1.containsMouse ? 0.95 : 1.0
-             
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }       
-          
-          Behavior on color {
-            ColorAnimation { duration: 200 }
-          }
-
-
-          Process {
-            id: process1
-            command: ["bash", "-c", `${Config.fileManager} &disown`]
-            running: false
-          }
-          
-          MouseArea {
-            id: mouseArea1
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onClicked: process1.running = true
-          }
-          
-          Image {
-            anchors.centerIn: parent
-            width: iconSizes
-            height: iconSizes
-            source: `file://${Config.configPath}/light/icons/dashboard/folder.svg`
-            fillMode: Image.PreserveAspectFit
-            antialiasing: true
-            smooth: true
-            mipmap: true
+        Behavior on scale {
+          NumberAnimation {
+            duration: 200
           }
         }
-      }
 
-
-      // browser button ==============================================
-      Item {
-        width: buttonSizes + buttonFloatAmount
-        height: buttonSizes + buttonFloatAmount
-        
-        Rectangle {
-          width: buttonSizes
-          height: buttonSizes
-          anchors.verticalCenter: parent.verticalCenter
-          radius: Config.dashInnerModuleRadius
-          color: mouseArea2.containsMouse ? Colors.accentColor : Colors.powerButtons 
-          border.width: buttonBorderWidth
-          border.color: Colors.borderColor
-          scale: mouseArea2.containsMouse ? 0.95 : 1.0
-             
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }       
-          
-          Behavior on color {
-            ColorAnimation { duration: 200 }
-          }
-
-
-          Process {
-            id: process2
-            command: ["/bin/sh", "-c", `${Config.browser} &disown`]   // note to self: maybe this should be auto-read from hyprland.conf later
-            running: false
-          }
-
-          
-          MouseArea {
-            id: mouseArea2
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onClicked: process2.running = true
-          }
-          
-          Image {
-            anchors.centerIn: parent
-            width: iconSizes
-            height: iconSizes
-            source: `file://${Config.configPath}/light/icons/dashboard/search.svg`
-            fillMode: Image.PreserveAspectFit
-            antialiasing: true
-            smooth: true
-            mipmap: true
+        Behavior on color {
+          ColorAnimation {
+            duration: 200
           }
         }
-      }
 
+        Process {
+          id: process3
+          command: ["bash", "-c", ".config/rumda/scripts/delayedScreenshot.sh &disown"]
+          running: false
+        }
 
-      // screenshot button ==============================================
-      Item {
-        width: buttonSizes + buttonFloatAmount
-        height: buttonSizes + buttonFloatAmount
-        
-        Rectangle {
-          width: buttonSizes
-          height: buttonSizes
-          anchors.verticalCenter: parent.verticalCenter
-          radius: Config.dashInnerModuleRadius
-          color: mouseArea3.containsMouse ? Colors.accentColor : Colors.powerButtons 
-          border.width: buttonBorderWidth
-          border.color: Colors.borderColor
-          scale: mouseArea3.containsMouse ? 0.95 : 1.0
-             
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }       
-          
-          Behavior on color {
-            ColorAnimation { duration: 200 }
-          }
+        MouseArea {
+          id: mouseArea3
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          hoverEnabled: true
+          onClicked: process3.running = true
+        }
 
-
-
-          Process {
-            id: process3
-            command: ["bash", "-c", ".config/rumda/scripts/delayedScreenshot.sh &disown"] 
-            running: false
-          }
-          
-          MouseArea {
-            id: mouseArea3
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onClicked: process3.running = true
-          }
-          
-          Image {
-            anchors.centerIn: parent
-            width: iconSizes
-            height: iconSizes
-            source: `file://${Config.configPath}/light/icons/dashboard/screenshot.svg`
-            fillMode: Image.PreserveAspectFit
-            antialiasing: true
-            smooth: true
-            mipmap: true
-          }
+        Image {
+          anchors.centerIn: parent
+          width: iconSizes
+          height: iconSizes
+          source: `file://${Config.configPath}/light/icons/dashboard/screenshot.svg`
+          fillMode: Image.PreserveAspectFit
+          antialiasing: true
+          smooth: true
+          mipmap: true
         }
       }
+    }
 
+    // terminal button ==============================================
+    Item {
+      width: buttonSizes + buttonFloatAmount
+      height: buttonSizes + buttonFloatAmount
 
-      // terminal button ==============================================
-      Item {
-        width: buttonSizes + buttonFloatAmount
-        height: buttonSizes + buttonFloatAmount
-        
-        Rectangle {
-          width: buttonSizes
-          height: buttonSizes
-          anchors.verticalCenter: parent.verticalCenter
-          radius: Config.dashInnerModuleRadius
-          color: mouseArea4.containsMouse ? Colors.accentColor : Colors.powerButtons 
-          border.width: buttonBorderWidth
-          border.color: Colors.borderColor
-          scale: mouseArea4.containsMouse ? 0.95 : 1.0
-             
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }       
-          
-          Behavior on color {
-            ColorAnimation { duration: 200 }
-          }
-          
-          
-          Process {
-            id: process4
-            command: ["/bin/sh", "-c", `${Config.terminal} &disown`]
-            running: false
-          }
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        anchors.verticalCenter: parent.verticalCenter
+        radius: Config.dashInnerModuleRadius
+        color: mouseArea4.containsMouse ? Colors.accentColor : Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        scale: mouseArea4.containsMouse ? 0.95 : 1.0
 
-
-          MouseArea {
-            id: mouseArea4
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onClicked: process4.running = true
-          }
-          
-          Image {
-            anchors.centerIn: parent
-            width: iconSizes
-            height: iconSizes
-            source: `file://${Config.configPath}/light/icons/dashboard/terminal.svg`
-            fillMode: Image.PreserveAspectFit
-            antialiasing: true
-            smooth: true
-            mipmap: true
+        Behavior on scale {
+          NumberAnimation {
+            duration: 200
           }
         }
-      }
 
-
-
-      // bluetooth button ==============================================
-      Item {                              // PLEASE note that I do not use bluetooth nor have it as a feature on my pc 
-                                          // so I have no idea whether or not this works.. sorry
-        width: buttonSizes + buttonFloatAmount
-        height: buttonSizes + buttonFloatAmount
-        
-        Rectangle {
-          width: buttonSizes
-          height: buttonSizes
-          anchors.verticalCenter: parent.verticalCenter
-          radius: Config.dashInnerModuleRadius
-          color: mouseArea5.containsMouse ? Colors.accentColor : Colors.powerButtons
-          border.width: buttonBorderWidth
-          border.color: Colors.borderColor
-          scale: mouseArea5.containsMouse ? 0.95 : 1.0
-             
-          Behavior on scale {
-            NumberAnimation { duration: 200 }
-          }       
-          
-          Behavior on color {
-            ColorAnimation { duration: 200 }
+        Behavior on color {
+          ColorAnimation {
+            duration: 200
           }
-          
-          MouseArea {
-            id: mouseArea5
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-            onClicked: {
-              if (Bluetooth.adapter) {
-                Bluetooth.adapter.powered = !Bluetooth.adapter.powered
-              } else {
-                console.error("No bluetooth adapter found")
-              }
+        }
+
+        Process {
+          id: process4
+          command: ["/bin/sh", "-c", `${Config.terminal} &disown`]
+          running: false
+        }
+
+        MouseArea {
+          id: mouseArea4
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          hoverEnabled: true
+          onClicked: process4.running = true
+        }
+
+        Image {
+          anchors.centerIn: parent
+          width: iconSizes
+          height: iconSizes
+          source: `file://${Config.configPath}/light/icons/dashboard/terminal.svg`
+          fillMode: Image.PreserveAspectFit
+          antialiasing: true
+          smooth: true
+          mipmap: true
+        }
+      }
+    }
+
+    // bluetooth button ==============================================
+    Item {
+      // PLEASE note that I do not use bluetooth nor have it as a feature on my pc
+      // so I have no idea whether or not this works.. sorry
+      width: buttonSizes + buttonFloatAmount
+      height: buttonSizes + buttonFloatAmount
+
+      Rectangle {
+        width: buttonSizes
+        height: buttonSizes
+        anchors.verticalCenter: parent.verticalCenter
+        radius: Config.dashInnerModuleRadius
+        color: mouseArea5.containsMouse ? Colors.accentColor : Colors.powerButtons
+        border.width: buttonBorderWidth
+        border.color: Colors.borderColor
+        scale: mouseArea5.containsMouse ? 0.95 : 1.0
+
+        Behavior on scale {
+          NumberAnimation {
+            duration: 200
+          }
+        }
+
+        Behavior on color {
+          ColorAnimation {
+            duration: 200
+          }
+        }
+
+        MouseArea {
+          id: mouseArea5
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          hoverEnabled: true
+          onClicked: {
+            if (Bluetooth.adapter) {
+              Bluetooth.adapter.powered = !Bluetooth.adapter.powered;
+            } else {
+              console.error("No bluetooth adapter found");
             }
           }
-          
-          Image {
-            anchors.centerIn: parent
-            width: iconSizes
-            height: iconSizes
-            source: Bluetooth.adapter?.powered ? 
-              `file://${Config.configPath}/light/icons/dashboard/bluetooth.svg` :
-              `file://${Config.configPath}/light/icons/dashboard/bluetoothOff.svg`
-            fillMode: Image.PreserveAspectFit
-            antialiasing: true
-            smooth: true
-            mipmap: true
-          }
+        }
+
+        Image {
+          anchors.centerIn: parent
+          width: iconSizes
+          height: iconSizes
+          source: Bluetooth.adapter?.powered ? `file://${Config.configPath}/light/icons/dashboard/bluetooth.svg` : `file://${Config.configPath}/light/icons/dashboard/bluetoothOff.svg`
+          fillMode: Image.PreserveAspectFit
+          antialiasing: true
+          smooth: true
+          mipmap: true
         }
       }
-
-
-    }   // row 1 ends here
+    }
+  }   // row 1 ends here
 
 } // end of column that contains the 2 rows of buttons
 
