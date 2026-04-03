@@ -24,7 +24,7 @@ Rectangle {
   readonly property int maskRadius: 8
 
   Process {
-    id: lightGlobal
+    id: darkGlobal
     command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/warmtheme_error.sh > /dev/null 2>&1 &) &"]
   }
 

@@ -61,9 +61,8 @@ Rectangle {
     anchors.bottomMargin: 2
     spacing: 6
 
-    ThemeSwitch {
-      onThemeDarkChanged: themeClicked()
-    }
+    // onThemeDarkChanged: themeClicked()
+    ThemeSwitch {}
     WeatherStatus {}
     InternetConnection {}
     Power {}
