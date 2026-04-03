@@ -14,20 +14,6 @@ import qs.light.config
 
 // The cat above the power button frowns if you're disconnected, and smiles when you're connected. :)
 Rectangle {
-
-  MouseArea {
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      pixel.running = true;
-    }
-  }
-
-  Process {
-    id: pixel
-    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/pixeltheme.sh light > /dev/null 2>&1 &) &"]
-  }
-
   Layout.alignment: Qt.AlignHCenter
   width: 28
   height: 35
@@ -35,6 +21,20 @@ Rectangle {
   radius: 7
   border.width: 1
   border.color: Colors.borderColor
+
+  MouseArea {
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {
+      main.running = true;
+    }
+  }
+
+  Process {
+    id: main
+    command: ["bash", "-c", "(nohup " + Quickshell.env("HOME") + "/.config/rumda/scripts/maintheme.sh light > /dev/null 2>&1 &) &"]
+  }
+
   ColumnLayout {
     anchors.centerIn: parent
     spacing: 0
