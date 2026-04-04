@@ -6,7 +6,7 @@ if [ -f "$STATE_FILE" ]; then
     hyprctl keyword decoration:shadow:enabled true
     rm "$STATE_FILE"
 else
-    hyprctl keyword general:gaps_out "5,5,5,5"
+    hyprctl keyword general:gaps_out "5,5,5,13"
     hyprctl keyword general:gaps_in "1"
     hyprctl keyword decoration:shadow:enabled false
     touch "$STATE_FILE"

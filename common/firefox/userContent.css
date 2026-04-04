@@ -16,21 +16,6 @@
     margin-top: 250px !important;
   }
 
-  .logo-and-wordmark-wrapper::after {
-    content: "" !important;
-    position: absolute !important;
-    bottom: -407px !important;
-    left: 1616px !important;
-    width: 110px !important;
-    height: 110px !important;
-    background-image: url("https://nytril-ark.github.io/bird.png") !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    pointer-events: none !important;
-    z-index: 2000 !important;
-    display: block !important;
-  }
-
   .search-inner-wrapper::after {
     content: "" !important;
     position: absolute !important;
@@ -43,41 +28,6 @@
     background-size: contain !important;
     background-repeat: no-repeat !important;
     transform: scaleX(-1);
-    pointer-events: none !important;
-    z-index: 2000 !important;
-    display: block !important;
-  }
-
-  .search-inner-wrapper::before {
-    content: "" !important;
-    position: absolute !important;
-    top: -390px !important;
-    right: 1121px !important;
-    width: 120px !important;
-    height: 120px !important;
-    background-image: url("https://nytril-ark.github.io/chop.png") !important;
-    transform: scaleX(-1);
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    pointer-events: none !important;
-    z-index: 2000 !important;
-    display: block !important;
-  }
-
-  .non-collapsible-section {
-    position: relative !important;
-  }
-
-  .non-collapsible-section::before {
-    content: "" !important;
-    position: absolute !important;
-    top: 580px !important;
-    right: 1520px !important;
-    width: 205px !important;
-    height: 205px !important;
-    background-image: url("https://nytril-ark.github.io/threads.png") !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
     pointer-events: none !important;
     z-index: 2000 !important;
     display: block !important;
