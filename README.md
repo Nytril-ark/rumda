@@ -79,9 +79,6 @@
 > If you don't want to eyeball them, check the following:
 >
 
-<details>
-<summary>All dependencies</summary>
-
 
 Basic dependencies
 ```
@@ -112,7 +109,6 @@ Nvchad (cleanly manage your themes)
 And lastly, something to setup the custom discord theme.
 ```
 
-</details>
 
 ---
 
