@@ -72,7 +72,6 @@ Singleton {
 
   // ============================================
 
-
   // Cat Configuration
   readonly property bool enableCat: false // note: I disabled le cat momentarily because it looks weird when I switch themes
   readonly property string catIconPath: configPath + "/light/icons/catsit.svg"
