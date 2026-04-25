@@ -26,6 +26,8 @@
 > 
 > you can also check: [Gallery](#gallery)  -  [Keybinds](#keybinds) - [Misc](#misc)
 >
+> Build after the goat'ed Amadeus: https://github.com/xfcasio/amadeus
+>
 
 
 ## Gallery
