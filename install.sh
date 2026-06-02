@@ -314,10 +314,12 @@ echo -e "${YELLOW}Note: Original configs (if existent) were backed up with times
 echo -e "${YELLOW}You may need to restart your session for changes to take effect${NC}"
 echo ""
 
-"$HOME/.config/rumda/scripts/hyprtheme.sh" light
+if [ "$INSTALL_HYPRLAND" = true ]; then
+    "$HOME/.config/rumda/scripts/hyprtheme.sh" light
+fi
 
-killall quickshell 
-
-ya pkg marcosvnmelo/kanagawa-dragon > /dev/null 2>&1
-
-cd && quickshell -p ~/.config/rumda/common/quickshell/shell.qml > /dev/null 2>&1 & disown
+if [ "$INSTALL_QUICKSHELL" = true ]; then
+    killall quickshell
+    ya pkg marcosvnmelo/kanagawa-dragon > /dev/null 2>&1
+    cd && quickshell -p ~/.config/rumda/common/quickshell/shell.qml > /dev/null 2>&1 & disown
+fi
