@@ -28,13 +28,13 @@ exit 1
 fi
 fi
 
-if ! pgrep -x "swww-daemon" >/dev/null; then
-echo "Starting swww-daemon..."
-swww-daemon &
+if ! pgrep -x "awww-daemon" >/dev/null; then
+echo "Starting awww-daemon..."
+awww-daemon &
 sleep 1
 fi
 
-swww img "$IMG" \
+awww img "$IMG" \
   --transition-type grow \
   --transition-pos top-right \
   --transition-duration 1 \

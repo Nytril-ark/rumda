@@ -11,7 +11,12 @@ if [ "$1" != "dark" ] && [ "$1" != "light" ]; then
 fi
 
 
-swww img /$HOME/.config/rumda/pictures/light-wallpaper.png \
+if ! pgrep -x "awww-daemon" >/dev/null; then
+awww-daemon &
+sleep 1
+fi
+
+awww img /$HOME/.config/rumda/pictures/light-wallpaper.png \
   --transition-type grow \
   --transition-pos bottom-left \
   --transition-duration 1 \

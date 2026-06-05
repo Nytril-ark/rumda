@@ -1,6 +1,13 @@
 #!/bin/bash
 
-swww img /$HOME/.config/rumda/pictures/nazhim-warm.png  \
+
+if ! pgrep -x "awww-daemon" >/dev/null; then
+awww-daemon &
+sleep 1
+fi
+
+
+awww img /$HOME/.config/rumda/pictures/nazhim-warm.png  \
   --transition-type grow \
   --transition-pos bottom-left \
   --transition-duration 1 \

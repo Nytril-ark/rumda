@@ -15,8 +15,13 @@ if [ "$1" = "light" ]; then
 else
   WALLPAPER="$HOME/.config/rumda/pictures/wallpaper-warm.png"
 fi
- 
-swww img "$WALLPAPER" \
+
+if ! pgrep -x "awww-daemon" >/dev/null; then
+awww-daemon &
+sleep 1
+fi
+
+awww img "$WALLPAPER" \
   --transition-type grow \
   --transition-pos bottom-left \
   --transition-duration 1 \

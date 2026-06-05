@@ -11,7 +11,7 @@ if [ "$1" != "dark" ] && [ "$1" != "light" ]; then
 fi
 
 
-swww img /$HOME/.config/rumda/pictures/nazhim-pixel.png \
+awww img /$HOME/.config/rumda/pictures/nazhim-pixel.png \
   --transition-type grow \
   --transition-pos bottom-left \
   --transition-duration 1 \
