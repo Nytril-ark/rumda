@@ -34,8 +34,6 @@
 ![1](pictures/B.png)
 
 
-| ![discord](pictures/lightDash.png) | ![lightdashboard](pictures/darkPixel.png) |
-| -------------------------------- | ----------------------------------------- |
 
 
 ![newBarThingy](pictures/barArt.png)
@@ -44,6 +42,9 @@
 | -------------------------------- | ------------------------------- |
 
 ![1](pictures/lightPixel.png)
+![discord](pictures/lightDash.png) 
+![lightdashboard](pictures/darkPixel.png)
+
 
 
 ### old pistachio theme available in installer
