@@ -47,8 +47,8 @@
 
 
 ### old pistachio theme available in installer
-<details>
-  <summary>Rumda-pistachio</summary>
+
+ Rumda-pistachio
 
   ![1](pictures/1.png)
 
@@ -57,8 +57,6 @@
 
   ![image3](pictures/4.png)  
   ![image4](pictures/triplewindows.png)
-
-</details>
 
 
 ---
