@@ -53,8 +53,6 @@
   ![1](pictures/1.png)
 
   ![image1](pictures/discordl.png)  
-  ![image2](pictures/3.png)
-
   ![image3](pictures/4.png)  
   ![image4](pictures/triplewindows.png)
 
