@@ -28,12 +28,8 @@
 ## Gallery
 
 
-
-
 ![1](pictures/A.png)
 ![1](pictures/B.png)
-
-
 
 
 ![newBarThingy](pictures/barArt.png)
