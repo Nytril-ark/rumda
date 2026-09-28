@@ -15,6 +15,9 @@ Singleton {
 
   // Bar Configuration
   property bool showLightBar: Common.cShowLightBar
+  readonly property bool showArt1: false
+  readonly property bool showArt2: true
+  readonly property bool showArt3: true
   readonly property int barMarginTop: 80
   readonly property int barMarginBottom: 80
   readonly property int barMarginLeft: 18

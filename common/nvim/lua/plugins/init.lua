@@ -12,6 +12,19 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+
+  {
+    "vyfor/cord.nvim",
+    build = "./build || .\\build",
+    event = "VeryLazy",
+    ---@type CordConfig
+    opts = {
+      display = {
+        theme = "minecraft"
+      }
+    }
+  },
 -- discord presence
 -- {'andweeb/presence.nvim', lazy = false, },
   -- {

@@ -1,13 +1,17 @@
--- Setup default root markers
-vim.lsp.config('*', {
-  root_markers = {'.git'},
-})
+local lspconfig = require('lspconfig')
+
+-- Get NvChad's default on_attach and capabilities if available
+local status, nvchad_lsp = pcall(require, "nvchad.configs.lspconfig")
+local on_attach = status and nvchad_lsp.on_attach or function() end
+local capabilities = status and nvchad_lsp.capabilities or vim.lsp.protocol.make_client_capabilities()
 
 -- Python (pyright)
-vim.lsp.config('pyright', {
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },
-  root_markers = { '.git', 'pyproject.toml', 'setup.py' },
+  root_dir = lspconfig.util.root_pattern('.git', 'pyproject.toml', 'setup.py'),
   settings = {
     python = {
       analysis = {
@@ -16,31 +20,41 @@ vim.lsp.config('pyright', {
     },
   },
 })
-vim.lsp.enable('pyright')
 
 -- HTML
-vim.lsp.config('html', {
+lspconfig.html.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { 'vscode-html-language-server', '--stdio' },
   filetypes = { 'html' },
-  root_markers = { '.git', 'package.json' },
+  root_dir = lspconfig.util.root_pattern('.git', 'package.json'),
 })
-vim.lsp.enable('html')
 
 -- CSS
-vim.lsp.config('cssls', {
+lspconfig.cssls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { 'vscode-css-language-server', '--stdio' },
   filetypes = { 'css', 'scss', 'less' },
-  root_markers = { '.git', 'package.json' },
+  root_dir = lspconfig.util.root_pattern('.git', 'package.json'),
 })
-vim.lsp.enable('cssls')
+
+-- Force line comments for C/C++ files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp' },
+  callback = function()
+    vim.bo.commentstring = '// %s'
+  end,
+})
 
 -- C/C++ (clangd)
-vim.lsp.config('clangd', {
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = { "clangd", "--completion-style=detailed", "--background-index" },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-  root_markers = { '.git', 'compile_commands.json', '.clangd' },
+  root_dir = lspconfig.util.root_pattern('.git', 'compile_commands.json', '.clangd'),
 })
-vim.lsp.enable('clangd')
 
 -- LSP Keybindings (when LSP attaches to buffer)
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -59,4 +73,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-

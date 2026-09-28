@@ -21,8 +21,8 @@ body {
 
     /* sizes */
     --gap: 12px; /* spacing between panels */
-    --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
-    --border-thickness: 3px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+    --divider-thickness: 2px; /* thickness of unread messages divider and highlighted message borders */
+    --border-thickness: 0px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
 
     /* animation/transition options */
     --animations: on; /* off: disable animations/transitions, on: enable animations/transitions */
@@ -118,4 +118,10 @@ body {
     --border: #F2BC88; /* general normal border color */
     --border-hover: #F2BC88; /* border color of panels when hovered */
     --button-border: #F2BC88; /* neutral border color of buttons */
+}
+
+*,
+*::before,
+*::after {
+    border-radius: 0 !important;
 }

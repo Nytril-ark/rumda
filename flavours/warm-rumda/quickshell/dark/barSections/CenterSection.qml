@@ -25,6 +25,5 @@ Rectangle {
     spacing: 6
     y: (bar.height - height) / 12
 
-    Workspaces {}
   }
 }

@@ -12,6 +12,21 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+
+
+
+local original_notify = vim.notify
+vim.notify = function(msg, level, opts)
+  if type(msg) == "string" and msg:match("nvim%-lspconfig") then
+    return
+  end
+  
+  if original_notify then
+    return original_notify(msg, level, opts)
+  end
+end
+
+
 -- load plugins
 require("lazy").setup({
   {
@@ -20,17 +35,17 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
-  {
-    "IogaMaster/neocord",
-    event = "VeryLazy",
-    config = {
-      main_image = "language",
-      show_time = true,
-      workspace_text = function()
-        return "using NvChad"
-      end,
-    },
-  },
+  -- {
+  --   "IogaMaster/neocord",
+  --   event = "VeryLazy",
+  --   config = {
+  --     main_image = "language",
+  --     show_time = true,
+  --     workspace_text = function()
+  --       return "using NvChad"
+  --     end,
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -50,6 +65,10 @@ vim.cmd([[
 ]])
 vim.api.nvim_set_keymap('n', '<leader>l', '@a', { noremap = true, silent = true })
 -- Markdown formatting keymaps (accessed via <Leader>w)
+-- normal
+vim.keymap.set('n', '<Leader>1', 'rx', { desc = 'Replace character with x' })
+vim.keymap.set('n', '<Leader>2', 'r ', { desc = 'Replace character with space' })
+-- visual
 vim.keymap.set('v', '<Leader>wb', 'c**<C-r>"**<Esc>', { desc = 'Bold selection' })
 vim.keymap.set('v', '<Leader>wi', 'c*<C-r>"*<Esc>', { desc = 'Italic selection' })
 vim.keymap.set('v', '<Leader>wu', 'c_<C-r>"_<Esc>', { desc = 'Underline/emphasis selection' })
@@ -80,7 +99,7 @@ vim.keymap.set('v', '<Leader>wD', 'c<details><CR><summary>collapsible</summary><
 vim.keymap.set('n', '<leader>tn', ':set relativenumber!<CR>', { desc = 'Toggle relative numbers on lines' })
 vim.opt.number = true         -- Show absolute line number on current line
 vim.opt.relativenumber = false -- show relative nums for other lines
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 4
 
 
 
