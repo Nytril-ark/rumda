@@ -5,7 +5,6 @@
 # source ~/.config/zshrc.d/dots-hyprland.zsh
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -62,13 +61,18 @@ export ZSH="$HOME/.oh-my-zsh"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd/mm/yyyy"
+HISTFILE=~/.zsh_history
+HISTSIZE=100000000000
+SAVEHIST=100000000000
+setopt SHARE_HISTORY
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 plugins=(
   git
   zsh-shift-select
+  common-aliases
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -292,7 +296,7 @@ PS1="[$C_USER$USER$C_AT@$C_HOST$HOST $C_ERR%3~%(0?..$C_ERR%?)%{${fg[blue]}%} $RE
 export PATH="$HOME/.cargo/bin/:$HOME/.local/bin/:$PATH"
 export RUSTC_WRAPPER=sccache
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
 
 # bun completions
 [ -s "/home/hexogen/.bun/_bun" ] && source "/home/hexogen/.bun/_bun"
