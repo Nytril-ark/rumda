@@ -23,6 +23,7 @@ awww img /$HOME/.config/rumda/pictures/light-wallpaper.png \
   --transition-bezier 0.4,0.0,0.2,1.0 \
 
 /$HOME/.config/rumda/scripts/hyprtheme.sh $1
+hyprctl reload
 
 killall quickshell
 quickshell -p ~/.config/rumda/common/quickshell/shell.qml > /dev/null 2>&1 & disown
