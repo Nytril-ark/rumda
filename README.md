@@ -59,7 +59,7 @@
 
 
 
-## Installation
+## Installation (Fedora)
 
 > [!NOTE]
 > If you're on Fedora, you could let my installer get all the packages automatically.
@@ -78,7 +78,16 @@ cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd ru
 and you'll be done!
 
 
-> In case you're on a different OS, or you want to do it manually, or in case a package fails to install, here are the names:
+
+---
+---
+---
+
+
+
+## For other distros 
+
+> In case you're on a different distro, or you want to do it manually, or in case a package fails to install, here are the names:
 
 
 ```
