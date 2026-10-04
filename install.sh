@@ -293,7 +293,6 @@ if [ "$INSTALL_CHADRC" = true ]; then
 fi
 
 if [ "$INSTALL_GTK" = true ]; then
-    sudo dnf install -y adw-gtk3-theme papirus-icon-theme dconf
     install_config "$SOURCE_DIR/light-config/gtk-4.0" "$DEST_DIR/gtk-4.0" "GTK4"
     install_config "$SOURCE_DIR/light-config/gtk-3.0" "$DEST_DIR/gtk-3.0" "GTK3"
     ln -sf "$DEST_DIR/gtk-4.0/gtk.css" "$DEST_DIR/gtk-3.0/gtk.css"
@@ -304,7 +303,6 @@ if [ "$INSTALL_GTK" = true ]; then
 fi
 
 if [ "$INSTALL_QT" = true ]; then
-    sudo dnf install -y qt5ct qt6ct
     install_config "$SOURCE_DIR/light-config/qt6ct" "$DEST_DIR/qt6ct" "qt6ct"
     install_config "$SOURCE_DIR/light-config/qt5ct" "$DEST_DIR/qt5ct" "qt5ct"
     sed -i "s|/home/[^/]*/|$HOME/|g" "$DEST_DIR/qt6ct/qt6ct.conf" "$DEST_DIR/qt5ct/qt5ct.conf"
@@ -324,7 +322,6 @@ if [ "$INSTALL_SWAPPY" = true ]; then
 fi
 
 if [ "$INSTALL_PORTALS" = true ]; then
-    sudo dnf install -y xdg-desktop-portal-gtk xdg-desktop-portal-hyprland
     install_config "$SOURCE_DIR/common/xdg-desktop-portal" "$DEST_DIR/xdg-desktop-portal" "xdg-desktop-portal"
 fi
 
