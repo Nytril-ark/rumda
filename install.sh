@@ -13,7 +13,6 @@
 DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
 # ============================================
 # ============================================
-INSTALL_PACKAGES=false
 # ============================================
 
 INSTALL_HYPRLAND=true
@@ -46,6 +45,7 @@ INSTALL_CHADRC=false
 
 
 THEME_CHOICE="light"  # Options: "light" or "pistachio" (pistachio no longer supported well)
+INSTALL_PACKAGES=false # false by default. you can set choose to install them when you run ./install.sh
 # ============================================
 # PATH CONFIG
 # ============================================
@@ -241,7 +241,7 @@ install_config() {
 # MAIN INSTALLATION
 # ============================================
 
-if [ "$INSTALL_PACKAGES" = true ]; then
+if [ "$INSTALL_PACKAGES" = false ]; then
     read -p "Install required packages with dnf? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -365,11 +365,11 @@ echo -e "${YELLOW}You may need to restart your session for changes to take effec
 echo ""
 
 if [ "$INSTALL_HYPRLAND" = true ]; then
-    "$HOME/.config/rumda/scripts/hyprtheme.sh" light
+    "$HOME/.config/rumda/scripts/hyprtheme.sh" light > /dev/null 2>&1
 fi
 
 if [ "$INSTALL_QUICKSHELL" = true ]; then
-    killall quickshell
+    killall quickshell > /dev/null 2>&1
     ya pkg marcosvnmelo/kanagawa-dragon > /dev/null 2>&1
     cd && quickshell -p ~/.config/rumda/common/quickshell/shell.qml > /dev/null 2>&1 & disown
 fi

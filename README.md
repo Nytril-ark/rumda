@@ -47,8 +47,8 @@
 
   <details>
   <summary>Rumda-pistachio</summary>
-  ![1](pictures/1.png)
 
+  ![1](pictures/1.png)
   ![image1](pictures/discordl.png)  
   ![image3](pictures/4.png)  
   ![image4](pictures/triplewindows.png)
