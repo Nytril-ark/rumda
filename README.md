@@ -34,11 +34,11 @@
 
 ![newBarThingy](pictures/barArt.png)
 
-| ![darkPixel](pictures/dark.png)  | ![weird](pictures/lightDash.png)    |
+| ![darkPixel](pictures/dark.png)  | ![weird](pictures/plc.png)    |
 | -------------------------------- | ------------------------------- |
 
-![1](pictures/thunar.png)
-![discord](pictures/lightDash.png) 
+![1](pictures/plc.png)
+![discord](pictures/plc.png) 
 ![lightdashboard](pictures/darkPixel.png)
 
 
