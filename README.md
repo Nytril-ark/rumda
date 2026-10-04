@@ -203,15 +203,7 @@ And lastly, something to setup the custom discord theme.
 
 
 
----
-
-### Rumda the cat
-
-Rumda the cat should be the main feature in these dotfiles. Sadly however, I am stuck with many side-projects, so I can't fully finish this widget yet. Here, Rumda is stuck too:
-
-![rumda-trapped](pictures/RumdaIsTrapped.gif)
-![kickoffthecat](/pictures/themeswitchsmooth.gif)
-
+[☕ Support this project](https://paypal.me/0xAmmen)
 The cat widget ~might~ will (insha'allah) be able to get out soon. We'll see! 
 
 PS: the cat face at the bottom of the bar is an internet widget. If it's smiling, you're connected :)
