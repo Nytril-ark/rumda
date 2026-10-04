@@ -66,26 +66,6 @@
 > 
 > If you're on Fedora, you could let my installer get all the packages automatically.
 >
-
-> In case you're on a different OS, or you want to do it manually, or in case a package fails to install, here are the names:
-
-
-
-```
-hyprland quickshell rofi alacritty awww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
-ghostty  nautilus  btop bpytop obs-studio slurp xdg-desktop-portal-hyprland wl-clipboard git\
- jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
-```
-
-Recommended:
-```
-Firefox toolbar theme by Looma: https://addons.mozilla.org/en-US/firefox/addon/rumda/ 
-borders-plus-plus hyprland plugin (for the double borders)
-Nvchad (cleanly manage your themes)
-And lastly, something to setup the custom discord theme.
-```
-
-
 ---
 
 
@@ -101,10 +81,28 @@ And lastly, something to setup the custom discord theme.
 ```bash
 cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
 ```
-#### note that the installer will let you install either the old pistachio theme or the new beige theme (beige is default)
-> you can also edit the install.sh file to only install what you want by making some vars at the top = false.
+and you'll be done!
 
 
+> In case you're on a different OS, or you want to do it manually, or in case a package fails to install, here are the names:
+
+
+```
+hyprland quickshell rofi alacritty awww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
+ghostty  nautilus  btop bpytop obs-studio slurp xdg-desktop-portal-hyprland wl-clipboard git\
+ jq lz4-devel lua python3 brightnessctl playerctl wpctl pipewire wireplumber
+```
+
+Recommended:
+```
+Firefox toolbar theme by Looma: https://addons.mozilla.org/en-US/firefox/addon/rumda/ 
+Nvchad (cleanly manage your themes)
+borders-plus-plus hyprland plugin (for the double borders)
+And lastly, something to setup the custom discord theme.
+```
+
+> you can also edit the install.sh file to only install replace the configs you want, by making some vars at the top = false.
+> and you can edit it to install the old pistachio theme, though it's unmaintained, so I don't recommend that.
 
 
 ## Keybinds
