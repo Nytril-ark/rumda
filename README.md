@@ -61,22 +61,16 @@
 
 ## Installation
 
-
 > [!NOTE]
-> 
 > If you're on Fedora, you could let my installer get all the packages automatically.
 >
----
 
 
-### install.sh
 > [!CAUTION]
-> please follow these steps:
-> - make sure you have installed quickshell, hyprland, swww etc
-> - don't delete or change the position of the repo after using the following command:
-> 
-> Use this one-liner to clone it and install:
-
+> \[don't delete or change the position of the repo after using the following command\]
+>
+> Use this one-liner to clone and install:
+>
 
 ```bash
 cd ~/.config && git clone --depth=1 https://github.com/Nytril-ark/rumda && cd rumda && chmod +x install.sh && ./install.sh
@@ -164,7 +158,8 @@ And lastly, something to setup the custom discord theme.
 
 <details>
 <summary>Things that may cause issues</summary>
-
+> If something isn't working, make sure you have installed quickshell, hyprland, awww, and other dependencies correctly
+>
 > you can go to rumda/common/quickshell/shared/Common.qml to change things like dashboard pfp, github account name (for the dashboard), as well as default bar theme. 
 >
 >MORE IMPORTANTLY if your dashboard has weird sizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
