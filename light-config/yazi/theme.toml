@@ -1,2 +1,53 @@
 [flavor]
 dark = "kanagawa-dragon"
+
+[icon]
+prepend_dirs = [
+    { name = "Desktop", text = "\uF108", fg = "#426a79" },
+    { name = "Documents", text = "\uF15C", fg = "#426a79" },
+    { name = "Downloads", text = "\uF019", fg = "#426a79" },
+    { name = "Pictures", text = "\uF03E", fg = "#426a79" },
+    { name = "Videos", text = "\uF03D", fg = "#426a79" },
+    { name = "Music", text = "\uF001", fg = "#426a79" },
+    { name = "Audio", text = "\uF025", fg = "#426a79" },
+    { name = "Public", text = "\uF0AC", fg = "#426a79" },
+    { name = "Templates", text = "\uF0C5", fg = "#426a79" },
+    { name = "Packages", text = "\uF487", fg = "#426a79" },
+    { name = "Games", text = "\uF11B", fg = "#426a79" },
+    { name = "Projects", text = "\uF121", fg = "#426a79" },
+    { name = ".config", text = "\uE5FC", fg = "#426a79" },
+    { name = ".git", text = "\uE5FB", fg = "#426a79" },
+    { name = ".github", text = "\uE5FD", fg = "#426a79" },
+]
+
+prepend_conds = [
+    { if = "dir & hovered", text = "\uF07C", fg = "#426a79" },
+    { if = "dir", text = "\uF07B", fg = "#426a79" },
+]
+
+
+# [icon]
+# prepend_dirs = [
+#     { name = "Desktop", text = "\uF108 ", fg = "#426a79" },
+#     { name = "Documents", text = "\uF15C ", fg = "#426a79" },
+#     { name = "Downloads", text = "\uF019 ", fg = "#426a79" },
+#     { name = "Pictures", text = "\uF03E ", fg = "#426a79" },
+#     { name = "Video", text = "\uF03D ", fg = "#426a79" },
+#     { name = "Videos", text = "\uF03D ", fg = "#426a79" },
+#     { name = "Music", text = "\uF001 ", fg = "#426a79" },
+#     { name = "Audio", text = "\uF025 ", fg = "#426a79" },
+#     { name = "Public", text = "\uF0AC ", fg = "#426a79" },
+#     { name = "Templates", text = "\uF0C5 ", fg = "#426a79" },
+#     { name = "Packages", text = "\uF487 ", fg = "#426a79" },
+#     { name = "Games", text = "\uF11B ", fg = "#426a79" },
+#     { name = "Projects", text = "\uF121 ", fg = "#426a79" },
+#     { name = "d-velopment", text = "\uF121 ", fg = "#426a79" },
+#     { name = ".config", text = "\uE5FC ", fg = "#426a79" },
+#     { name = ".git", text = "\uE5FB ", fg = "#426a79" },
+#     { name = ".github", text = "\uE5FD ", fg = "#426a79" },
+# ]
+#
+# prepend_conds = [
+#     { if = "dir & hovered", text = "\uF07C ", fg = "#426a79" },
+#     { if = "dir", text = "\uF07B ", fg = "#426a79" },
+# ]

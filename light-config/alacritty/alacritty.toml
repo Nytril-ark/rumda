@@ -26,11 +26,10 @@ title = "  "
 
 [font]
 # =======================Terminess
+# bold.family = "Hurmit Nerd Font"
 normal.family = "Terminess Nerd Font"
 normal.style = "Bold"
 
-
-# bold.family = "Hurmit Nerd Font"
 bold.style = "Bold"
 italic.family = "Terminess Nerd Font"
 bold_italic.family = "Terminess Nerd Font"
