@@ -119,3 +119,11 @@ body {
     --border-hover: #F2BC88; /* border color of panels when hovered */
     --button-border: #F2BC88; /* neutral border color of buttons */
 }
+
+/**/
+/* *, */
+/* *::before, */
+/* *::after { */
+/*     border-radius: 0 !important; */
+/* } */
+/**/
