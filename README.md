@@ -204,7 +204,3 @@ And lastly, something to setup the custom discord theme.
 
 
 [☕ Support this project](https://paypal.me/0xAmmen)
-The cat widget ~might~ will (insha'allah) be able to get out soon. We'll see! 
-
-PS: the cat face at the bottom of the bar is an internet widget. If it's smiling, you're connected :)
-
