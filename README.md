@@ -14,7 +14,7 @@
 
 > [!IMPORTANT]
 > if you would like to try it
-> see [installation](#installation).
+> see [installation](#installation-fedora).
 >
 > **for config and some issues**, [check this](#config)
 > 
@@ -85,7 +85,7 @@ and you'll be done!
 
 
 
-## Other_distros 
+## For other distros
 
 > In case you're on a different distro, or you want to do it manually, or in case a package fails to install, here are the names:
 
@@ -169,7 +169,7 @@ And lastly, something to setup the custom discord theme.
 <summary>Things that may cause issues</summary>
 
         
-> If something isn't working, make sure you have installed quickshell, hyprland, awww, and other dependencies correctly. it could also be that you're missing one of the recommended dependencies [here](#Other_distros).
+> If something isn't working, make sure you have installed quickshell, hyprland, awww, and other dependencies correctly. it could also be that you're missing one of the recommended dependencies [here](#for-other-distros).
 >
 > 
 >
