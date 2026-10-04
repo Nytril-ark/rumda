@@ -1,0 +1,86 @@
+filenames:
+  Desktop:
+    icon:
+      glyph: "\uF108"
+      style:
+        foreground: "#426a79"
+  Documents:
+    icon:
+      glyph: "\uF15C"
+      style:
+        foreground: "#426a79"
+  Downloads:
+    icon:
+      glyph: "\uF019"
+      style:
+        foreground: "#426a79"
+  Pictures:
+    icon:
+      glyph: "\uF03E"
+      style:
+        foreground: "#426a79"
+  Video:
+    icon:
+      glyph: "\uF03D"
+      style:
+        foreground: "#426a79"
+  Videos:
+    icon:
+      glyph: "\uF03D"
+      style:
+        foreground: "#426a79"
+  Music:
+    icon:
+      glyph: "\uF001"
+      style:
+        foreground: "#426a79"
+  Audio:
+    icon:
+      glyph: "\uF025"
+      style:
+        foreground: "#426a79"
+  Public:
+    icon:
+      glyph: "\uF0AC"
+      style:
+        foreground: "#426a79"
+  Templates:
+    icon:
+      glyph: "\uF0C5"
+      style:
+        foreground: "#426a79"
+  Packages:
+    icon:
+      glyph: "\uF487"
+      style:
+        foreground: "#426a79"
+  Games:
+    icon:
+      glyph: "\uF11B"
+      style:
+        foreground: "#426a79"
+  Projects:
+    icon:
+      glyph: "\uF121"
+      style:
+        foreground: "#426a79"
+  d-velopment:
+    icon:
+      glyph: "\uF121"
+      style:
+        foreground: "#426a79"
+  .config:
+    icon:
+      glyph: "\uE5FC"
+      style:
+        foreground: "#426a79"
+  .git:
+    icon:
+      glyph: "\uE5FB"
+      style:
+        foreground: "#426a79"
+  .github:
+    icon:
+      glyph: "\uE5FD"
+      style:
+        foreground: "#426a79"
