@@ -81,6 +81,35 @@ Singleton {
 
   readonly property int contribMaxCols: 30
 
+
+
+  
+  // notifications
+  readonly property int notifImageMaxHeight: 60
+  readonly property int notifShotHeight: 100
+  readonly property bool notifDynamicWidth: false
+  readonly property int notifMinWidth: 220
+  readonly property int notifWidth: 360
+  readonly property int notifTimeout: 10000
+  readonly property int notifIconSize: 56
+  readonly property int notifButtonHeight: 22
+  readonly property int notifSlideDuration: 250
+  readonly property int notifBarHeight: 3
+  readonly property int notifBarTopMargin: 8
+  readonly property int notifShadowOffsetX: 9
+  readonly property int notifShadowOffsetY: 8
+  readonly property int notifRadius: 0
+  readonly property int notifBorderWidth: 1
+  readonly property int notifMarginTop: 20
+  readonly property int notifMarginRight: 15
+  readonly property int notifSpacing: 10
+  readonly property int notifPadding: 12
+  readonly property int notifMaxVisible: 5
+  readonly property string notifFont: "Terminess Nerd Font"
+
+
+
+
   // ============================================
 
   // Cat Configuration

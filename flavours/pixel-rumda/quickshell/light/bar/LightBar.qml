@@ -25,6 +25,7 @@ Scope {
   property int marginb: Config.barMarginBottom
 
   Dashboard {}
+  Notifications {}
 
   signal barLoaded
   function initialiseBar() {
