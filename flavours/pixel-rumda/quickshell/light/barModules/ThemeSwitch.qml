@@ -33,7 +33,7 @@ Rectangle {
   color: Colors.moduleBG
   width: 30
   height: 30
-  radius: innerModulesRadius
+  radius: Config.innerBModulesRadius
   readonly property string iconPath: Config.configPath + "/light/icons"
   readonly property int imageSourceSize: 30
   readonly property int maskWidth: 20

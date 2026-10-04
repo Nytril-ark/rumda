@@ -39,7 +39,7 @@ Rectangle {
   Layout.alignment: Qt.AlignHCenter
   implicitHeight: childrenRect.height + 19
   width: moduleWidth
-  radius: config.innerBModulesRadius
+  radius: Config.innerBModulesRadius
   color: Colors.moduleBG
   border.width: moduleBorderWidth
   border.color: Colors.borderColor

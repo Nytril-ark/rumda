@@ -29,7 +29,7 @@ Rectangle {
   Layout.alignment: Qt.AlignHCenter
   width: 30
   height: 78
-  radius: config.innerBModulesRadius
+  radius: Config.innerBModulesRadius
   color: Colors.moduleBG
 
   border.width: 1
@@ -121,7 +121,7 @@ Rectangle {
       width: 8
       height: 46
       color: Colors.indicatorBGColor
-      radius: innerBModulesRadius
+      radius: Config.innerBModulesRadius
 
       Rectangle {
         anchors.bottom: parent.bottom
@@ -131,7 +131,7 @@ Rectangle {
           let len = muted ? 1 : parent.height * volume;
           return (len > 42) ? 42 : len;
         }
-        radius: innerBModulesRadius
+        radius: Config.innerBModulesRadius
         gradient: Gradient {
           orientation: Gradient.Vertical
           GradientStop {

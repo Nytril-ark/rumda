@@ -45,7 +45,7 @@ Rectangle {
   width: 30
   height: 35
   color: Colors.moduleBG
-  radius: config.innerBModulesRadius
+  radius: Config.innerBModulesRadius
   border.width: 1
   border.color: Colors.borderColor
   ColumnLayout {
