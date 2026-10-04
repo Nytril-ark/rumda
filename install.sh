@@ -45,7 +45,6 @@ INSTALL_CHADRC=false
 
 
 THEME_CHOICE="light"  # Options: "light" or "pistachio" (pistachio no longer supported well)
-INSTALL_PACKAGES=false # false by default. you can set choose to install them when you run ./install.sh
 # ============================================
 # PATH CONFIG
 # ============================================
@@ -90,22 +89,6 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-echo -e "${CYAN}Which theme would you like to install?${NC}"
-echo -e "${YELLOW}1) Rumda Light (recommended)${NC}"
-echo -e "${MAGENTA}2) Rumda Pistachio${NC}"
-echo ""
-echo -e "${MAGENTA}NOTE: rumda-pistachio is unmaintained and doesn't recieve updates, sadly.${NC}"
-echo ""
-read -p "Enter choice (1 or 2, default: 1): " theme_input
-
-case $theme_input in
-    2)
-        THEME_CHOICE="pistachio"
-        ;;
-    *)
-        THEME_CHOICE="light"
-        ;;
-esac
 
 # ============================================
 # PISTACHIO THEME
@@ -241,14 +224,13 @@ install_config() {
 # MAIN INSTALLATION
 # ============================================
 
-if [ "$INSTALL_PACKAGES" = false ]; then
-    read -p "Install required packages with dnf? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        bash "$SOURCE_DIR/scripts/install_packages.sh"
-    else
-        echo -e "${YELLOW}Skipping package installation${NC}"
-    fi
+echo
+read -p "Install required packages with dnf? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    bash "$SOURCE_DIR/scripts/install_packages.sh"
+else
+    echo -e "${YELLOW}Skipping package installation${NC}"
 fi
 
 if [ "$INSTALL_HYPRLAND" = true ]; then
