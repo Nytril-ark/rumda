@@ -11,7 +11,7 @@ Singleton {
   property color accent2Color: "#c47c4f"
   property color gradientAccent2Color: "#a87358"  //bottom/right of volume bar
   property color errorColor: "#9A4235"
-  property color shadowColor: "#AA784d37"
+  property color shadowColor: "#9b7159"
   property color shadowColorBM: "#d19f77"
   property color shadowColorDS: "#d19f77"
   property color shadowColorCSquare: "#a1694d"

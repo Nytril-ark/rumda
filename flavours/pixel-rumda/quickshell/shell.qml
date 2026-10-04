@@ -25,6 +25,7 @@ ShellRoot {
   signal themeChangedAnimateCat
   signal barLoaded
 
+  Notifications {}
   //==============================================================
   // The current animation isn't great, I plan on improving
   // its smoothness soon. I shall keep it like this for now
@@ -54,6 +55,7 @@ ShellRoot {
         delayTimer.start();
       }
     }
+
 
     Timer {
       id: delayTimer
