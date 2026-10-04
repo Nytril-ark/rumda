@@ -62,27 +62,14 @@
 
 
 > [!NOTE]
-> the installation assumes you have all the dependencies
 > 
-> If you're on Fedora, you could let my installer get them all automatically.
-> 
+> If you're on Fedora, you could let my installer get all the packages automatically.
+>
+
+> In case you're on a different OS, or you want to do it manually, or in case a package fails to install, here are the names:
 
 
-Basic dependencies
-```
-hyprland
-quickshell
-rofi
-alacritty
-awww 
-neofetch 
-swappy slurp grim 
-zathura 
-yazi 
-neovim
-```
 
-Full dependencies: 
 ```
 hyprland quickshell rofi alacritty awww thunar neofetch swappy grim zathura yazi jetbrains-mono-fonts mako hyprpicker neovim \
 ghostty  nautilus  btop bpytop obs-studio slurp xdg-desktop-portal-hyprland wl-clipboard git\
