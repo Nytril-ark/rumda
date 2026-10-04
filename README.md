@@ -85,7 +85,7 @@ and you'll be done!
 
 
 
-## For other distros 
+## Other_distros 
 
 > In case you're on a different distro, or you want to do it manually, or in case a package fails to install, here are the names:
 
@@ -167,12 +167,17 @@ And lastly, something to setup the custom discord theme.
 
 <details>
 <summary>Things that may cause issues</summary>
-> If something isn't working, make sure you have installed quickshell, hyprland, awww, and other dependencies correctly
+
+        
+> If something isn't working, make sure you have installed quickshell, hyprland, awww, and other dependencies correctly. it could also be that you're missing one of the recommended dependencies [here](#Other_distros).
+>
+> 
 >
 > you can go to rumda/common/quickshell/shared/Common.qml to change things like dashboard pfp, github account name (for the dashboard), as well as default bar theme. 
 >
 >MORE IMPORTANTLY if your dashboard has weird sizes because of the difference between my screen size and yours, you can tweak the dashboardWidth / height values in that same Common.qml file.
 >
+> 
 </details>
 
 
