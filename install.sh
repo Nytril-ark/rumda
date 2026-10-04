@@ -9,10 +9,13 @@
 # will move the stuff you have at .config into
 # backups and push the new rumda files in place
 
-
+# ============================================
 DISABLE_BACKUP=false  # Set to true to skip backing up your current configs (NOT RECOMMENDED)
+# ============================================
+# ============================================
+INSTALL_PACKAGES=false
+# ============================================
 
-# (installs full thing but chadrc optional)
 INSTALL_HYPRLAND=true
 INSTALL_QUICKSHELL=true
 INSTALL_ALACRITTY=true
@@ -26,17 +29,19 @@ INSTALL_NEOTHEME=true
 INSTALL_MAKO=true
 INSTALL_GHOSTTY=true
 INSTALL_DISCORD=true
-INSTALL_CHADRC=false 
-# # chadrc is defaulted as false so as not to 
-# delete your own chadrc. if you don't care about that
-# go ahead and set it to true. Not having my chadrc
-# might make your nvim theme look weird
 INSTALL_GTK=true
 INSTALL_QT=true
 INSTALL_EZA=true
 INSTALL_FONTCONFIG=true
 INSTALL_SWAPPY=true
 INSTALL_PORTALS=true
+
+INSTALL_CHADRC=false 
+# chadrc is defaulted as false so as not to 
+# delete your own chadrc. if you don't care about that
+# go ahead and set it to true. Not having my chadrc
+# might make your nvim theme look weird
+
 
 
 
@@ -235,6 +240,10 @@ install_config() {
 # ============================================
 # MAIN INSTALLATION
 # ============================================
+
+if [ "$INSTALL_PACKAGES" = true ]; then
+    bash "$SOURCE_DIR/scripts/install_packages.sh"
+fi
 
 if [ "$INSTALL_HYPRLAND" = true ]; then
     install_config "$SOURCE_DIR/light-config/hypr" "$DEST_DIR/hypr" "Hyprland"
