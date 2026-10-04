@@ -64,10 +64,8 @@
 > [!NOTE]
 > the installation assumes you have all the dependencies
 > 
-> you could eyeball what dependencies to install if you want.
+> If you're on Fedora, you could let my installer get them all automatically.
 > 
-> If you don't want to eyeball them, check the following:
->
 
 
 Basic dependencies
