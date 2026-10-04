@@ -242,7 +242,13 @@ install_config() {
 # ============================================
 
 if [ "$INSTALL_PACKAGES" = true ]; then
-    bash "$SOURCE_DIR/scripts/install_packages.sh"
+    read -p "Install required packages with dnf? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        bash "$SOURCE_DIR/scripts/install_packages.sh"
+    else
+        echo -e "${YELLOW}Skipping package installation${NC}"
+    fi
 fi
 
 if [ "$INSTALL_HYPRLAND" = true ]; then
