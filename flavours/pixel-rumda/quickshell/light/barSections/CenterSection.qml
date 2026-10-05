@@ -16,6 +16,7 @@ Rectangle {
   Layout.fillHeight: true
   Layout.fillWidth: true
   color: "transparent"
+  Layout.rightMargin: 1
 
   ColumnLayout {
     anchors.horizontalCenter: parent.horizontalCenter

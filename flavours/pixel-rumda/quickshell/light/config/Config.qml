@@ -21,9 +21,9 @@ Singleton {
   readonly property int barMarginLeft: 18
   readonly property int barMarginRight: 1
   readonly property int barWidth: 48
-  readonly property int barRadius: 2
+  readonly property int barRadius: 0
   readonly property int innerBModulesRadius: 3
-  readonly property int barBorderWidth: 0
+  readonly property int barBorderWidth: 1
   readonly property int innerBMSoffsetX: 32
   readonly property int innerBMSoffsetY: 2
   readonly property int innerBMSRadius: 1
@@ -95,6 +95,9 @@ Singleton {
   readonly property int notifPadding: 12
   readonly property int notifMaxVisible: 5
   readonly property string notifFont: "Terminess Nerd Font"
+
+  readonly property int popoutVolShadowOffsetX: 4
+  readonly property int popoutVolShadowOffsetY: 4
 
 
 

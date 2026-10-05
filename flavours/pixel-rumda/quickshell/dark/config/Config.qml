@@ -107,6 +107,9 @@ Singleton {
   readonly property int notifMaxVisible: 5
   readonly property string notifFont: "Terminess Nerd Font"
 
+  readonly property int popoutVolShadowOffsetX: 4
+  readonly property int popoutVolShadowOffsetY: 4
+
 
 
 

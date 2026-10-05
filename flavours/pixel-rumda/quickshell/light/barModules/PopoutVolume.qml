@@ -3,26 +3,40 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
-import Quickshell.Io
 import qs.light.config
 
 Scope {
   id: root
+
   readonly property PwNode sink: Pipewire.defaultAudioSink
   readonly property bool muted: sink?.audio?.muted ?? false
   readonly property real volume: sink?.audio?.volume ?? 0
   property bool shouldShowOsd: false
-  property real lastVolume: 0
+  property bool windowActive: false
 
   readonly property int osdWidth: 200
   readonly property int osdHeight: 36
-  readonly property int osdRadius: 7
-  readonly property int osdBorderWidth: 2
+  readonly property int osdRadius: 0
+  readonly property int osdBorderWidth: 1
+  readonly property int osdPad: 8
+
+  readonly property real startScale: 0.7
+  readonly property real overshoot: 0.0
+  readonly property real wiggleScale: 1.0
 
   readonly property int hideDelay: 1000
   readonly property int showDuration: 400
   readonly property int hideDuration: 300
   readonly property int volumeAnimDuration: 150
+
+  onShouldShowOsdChanged: {
+    if (shouldShowOsd) {
+      unloadTimer.stop()
+      windowActive = true
+    } else {
+      unloadTimer.restart()
+    }
+  }
 
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink]
@@ -30,9 +44,15 @@ Scope {
 
   Connections {
     target: Pipewire.defaultAudioSink?.audio
+
     function onVolumeChanged() {
-      root.shouldShowOsd = true;
-      hideTimer.restart();
+      root.shouldShowOsd = true
+      hideTimer.restart()
+    }
+
+    function onMutedChanged() {
+      root.shouldShowOsd = true
+      hideTimer.restart()
     }
   }
 
@@ -42,115 +62,129 @@ Scope {
     onTriggered: root.shouldShowOsd = false
   }
 
-  onVolumeChanged: {
-    if (Math.abs(volume - lastVolume) > 0.01) {
-      lastVolume = volume;
-    }
+  Timer {
+    id: unloadTimer
+    interval: root.hideDuration + 50
+    onTriggered: root.windowActive = false
   }
 
   LazyLoader {
-    id: popoutVolume
-    active: root.shouldShowOsd
+    active: root.windowActive
 
     PanelWindow {
+      id: win
+
+      property bool shown: false
+
+      readonly property int fullWidth: root.osdWidth + Config.popoutVolShadowOffsetX + root.osdPad * 2
+      readonly property int fullHeight: root.osdHeight + Config.popoutVolShadowOffsetY + root.osdPad * 2
+
       exclusionMode: ExclusionMode.Ignore
       anchors.bottom: true
-      margins.bottom: screen.height / 12
-      implicitWidth: root.osdWidth
-      implicitHeight: root.osdHeight
+      margins.bottom: shown ? screen.height / 12 - root.osdPad : -fullHeight - 20
+
+      Behavior on margins.bottom {
+        PropertyAnimation {
+          duration: win.shown ? root.showDuration : root.hideDuration
+          easing.type: win.shown ? Easing.OutCubic : Easing.InCubic
+        }
+      }
+
+      implicitWidth: fullWidth
+      implicitHeight: fullHeight
       color: "transparent"
 
+      Component.onCompleted: Qt.callLater(() => {
+        win.shown = Qt.binding(() => root.shouldShowOsd)
+      })
+
+      onShownChanged: {
+        if (shown) endWiggle.restart()
+        else endWiggle.stop()
+      }
+
       MouseArea {
-        anchors.fill: parent
+        anchors.fill: osdContainer
 
         onClicked: {
-          if (sink)
-            sink.audio.muted = !root.muted;
+          if (root.sink)
+            root.sink.audio.muted = !root.muted
         }
 
         onWheel: wheel => {
-          if (sink && !root.muted) {
-            const delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1;
-            const newVolume = Math.max(0, Math.min(1, root.volume + delta));
-            sink.audio.volume = newVolume;
+          if (root.sink && !root.muted) {
+            const delta = wheel.angleDelta.y > 0 ? 0.1 : -0.1
+            root.sink.audio.volume = Math.max(0, Math.min(1, root.volume + delta))
           }
         }
       }
 
       Rectangle {
         id: osdContainer
-        anchors.fill: parent
+        x: root.osdPad
+        y: root.osdPad
+        width: root.osdWidth
+        height: root.osdHeight
         radius: root.osdRadius
         color: Colors.backgroundColor
         border.width: root.osdBorderWidth
-        border.color: Colors.borderColor
+        border.color: Colors.shadowColor
 
-        transform: [
-          Scale {
-            id: scaleTransform
-            origin.x: osdContainer.width / 2
-            origin.y: osdContainer.height / 2
-            xScale: root.shouldShowOsd ? 1.0 : 0.4
-            yScale: root.shouldShowOsd ? 1.0 : 0.4
+        Rectangle {
+          x: Config.popoutVolShadowOffsetX
+          y: Config.popoutVolShadowOffsetY
+          width: parent.width
+          height: parent.height
+          radius: root.osdRadius
+          color: Colors.shadowColor
+          z: -1
+        }
 
-            Behavior on xScale {
-              PropertyAnimation {
-                duration: root.shouldShowOsd ? root.showDuration : root.hideDuration
-                easing.type: root.shouldShowOsd ? Easing.OutBack : Easing.InBack
-              }
-            }
-            Behavior on yScale {
-              PropertyAnimation {
-                duration: root.shouldShowOsd ? root.showDuration : root.hideDuration
-                easing.type: root.shouldShowOsd ? Easing.OutBack : Easing.InBack
-              }
-            }
-          },
-          Translate {
-            id: translateTransform
-            y: root.shouldShowOsd ? 0 : 100
+        transform: Scale {
+          id: scaleTransform
+          origin.x: osdContainer.width / 2
+          origin.y: osdContainer.height / 2
+          xScale: win.shown ? 1.0 : root.startScale
+          yScale: win.shown ? 1.0 : root.startScale
 
-            Behavior on y {
-              PropertyAnimation {
-                duration: root.shouldShowOsd ? root.showDuration : root.hideDuration
-                easing.type: root.shouldShowOsd ? Easing.OutBack : Easing.InBack
-              }
+          Behavior on xScale {
+            PropertyAnimation {
+              duration: win.shown ? root.showDuration : root.hideDuration
+              easing.type: win.shown ? Easing.OutBack : Easing.InBack
+              easing.overshoot: root.overshoot
             }
           }
-        ]
+
+          Behavior on yScale {
+            PropertyAnimation {
+              duration: win.shown ? root.showDuration : root.hideDuration
+              easing.type: win.shown ? Easing.OutBack : Easing.InBack
+              easing.overshoot: root.overshoot
+            }
+          }
+        }
 
         SequentialAnimation {
           id: endWiggle
-          running: false
 
           PauseAnimation {
             duration: 450
           }
 
-          SequentialAnimation {
-            loops: 2
-
-            PropertyAnimation {
-              target: scaleTransform
-              properties: "xScale,yScale"
-              to: 1.05
-              duration: 100
-              easing.type: Easing.InOutSine
-            }
-
-            PropertyAnimation {
-              target: scaleTransform
-              properties: "xScale,yScale"
-              to: 1.0
-              duration: 100
-              easing.type: Easing.InOutSine
-            }
+          PropertyAnimation {
+            target: scaleTransform
+            properties: "xScale,yScale"
+            to: root.wiggleScale
+            duration: 120
+            easing.type: Easing.InOutSine
           }
-        }
 
-        onVisibleChanged: {
-          if (visible && root.shouldShowOsd) {
-            endWiggle.start();
+          PropertyAnimation {
+            target: scaleTransform
+            properties: "xScale,yScale"
+            to: 1.0
+            duration: 120
+            easing.type: Easing.InOutSine
           }
         }
 
@@ -172,11 +206,11 @@ Scope {
             color: Colors.indicatorBGColor
             Layout.fillWidth: true
             implicitHeight: 10
-            radius: 2
+            radius: root.osdRadius
 
             Rectangle {
               id: volumeBarFill
-              radius: 2
+              radius: 0
               anchors {
                 left: parent.left
                 top: parent.top
@@ -196,8 +230,8 @@ Scope {
               }
 
               width: {
-                const volumeWidth = root.muted ? 1 : volumeBarBg.width * root.volume;
-                return Math.min(volumeWidth, volumeBarBg.width);
+                const volumeWidth = root.muted ? 1 : volumeBarBg.width * root.volume
+                return Math.min(volumeWidth, volumeBarBg.width)
               }
 
               Behavior on width {

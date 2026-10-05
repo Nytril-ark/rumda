@@ -121,7 +121,7 @@ Rectangle {
       width: 8
       height: 46
       color: Colors.indicatorBGColor
-      radius: Config.innerBModulesRadius
+      radius: 0
 
       Rectangle {
         anchors.bottom: parent.bottom
@@ -131,7 +131,7 @@ Rectangle {
           let len = muted ? 1 : parent.height * volume;
           return (len > 42) ? 42 : len;
         }
-        radius: Config.innerBModulesRadius
+        radius: 0
         gradient: Gradient {
           orientation: Gradient.Vertical
           GradientStop {

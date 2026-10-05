@@ -67,11 +67,12 @@ Scope {
     MouseArea {
       anchors.fill: parent
       onWheel: wheel => {
-        Hyprland.dispatch("workspace 1");
-      // Mpris.players.values.forEach((player, idx) => player.pause())
-      // this ^ pauses on wspace switch, which i dont like
+        // Hyprland.dispatch("workspace 1");
+        // Mpris.players.values.forEach((player, idx) => player.pause())
+        // this ^ pauses on wspace switch, which i dont like
       }
     }
+
 
     Rectangle {
       id: shadowRect
@@ -98,6 +99,7 @@ Scope {
       }
     }
 
+
     Rectangle {
       id: barRectangle
       anchors.top: parent.top
@@ -107,7 +109,7 @@ Scope {
       color: Colors.backgroundColor
       radius: Config.barRadius
       border.width: Config.barBorderWidth
-      border.color: Colors.borderColor
+      border.color: Colors.shadowColor
       implicitWidth: Config.barWidth + Config.barBorderWidth
       anchors.topMargin: -Config.syncTbar
       anchors.bottomMargin: -Config.syncBbar

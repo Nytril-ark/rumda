@@ -170,7 +170,7 @@ Rectangle {
 
           Process {
             id: process5
-            command: ["/bin/sh", "-c", "shutdown && notify-send 'Rumda' 'Shutting down in 1 minute'"]
+            command: ["/bin/sh", "-c", "shutdown && notify-send -t 15000 'Rumda' 'Shutting down in 1 minute'"]
             running: false
           }
 

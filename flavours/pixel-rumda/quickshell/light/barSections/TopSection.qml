@@ -21,6 +21,7 @@ Rectangle {
   property string currentDay: Qt.formatDateTime(new Date(), "dd")
 
   Layout.fillWidth: true
+  Layout.rightMargin: 1
   Layout.preferredHeight: clockModule.implicitHeight + 12
   color: "transparent"
 

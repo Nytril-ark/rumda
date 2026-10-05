@@ -19,6 +19,7 @@ Rectangle {
     barAnimate();
   }
   Layout.fillWidth: true
+  Layout.rightMargin: 1
   Layout.preferredHeight: childrenRect.height + 8
   color: "transparent"
 
